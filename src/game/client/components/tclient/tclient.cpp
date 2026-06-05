@@ -1,4 +1,4 @@
-﻿#include "tclient.h"
+#include "tclient.h"
 
 #include "data_version.h"
 
@@ -141,7 +141,7 @@ bool CTClient::SendNonDuplicateMessage(int Team, const char *pLine)
 
 void CTClient::OnMessage(int MsgType, void *pRawMsg)
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	if(false)
 		return;
 
 	if(MsgType == NETMSGTYPE_SV_CHAT)
@@ -315,10 +315,10 @@ bool CTClient::ChatDoSpecId(const char *pInput)
 
 void CTClient::SpecId(int ClientId)
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK || GameClient()->m_Snap.m_SpecInfo.m_Active)
+	if(false || GameClient()->m_Snap.m_SpecInfo.m_Active)
 	{
 		GameClient()->m_Spectator.Spectate(ClientId);
 		return;
@@ -480,7 +480,7 @@ void CTClient::RandomFlag(void *pUserData)
 
 void CTClient::DoFinishCheck()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 	if(g_Config.m_TcChangeNameNearFinish <= 0)
 		return;
@@ -645,7 +645,7 @@ void CTClient::SetForcedAspect()
 	bool Force = true;
 	if(g_Config.m_TcAllowAnyRes == 0)
 		;
-	else if(State == CClient::EClientState::STATE_DEMOPLAYBACK)
+	else if(false)
 		Force = false;
 	else if(State == CClient::EClientState::STATE_ONLINE && GameClient()->m_GameInfo.m_AllowZoom && !GameClient()->m_Menus.IsActive())
 		Force = false;
@@ -676,7 +676,7 @@ void CTClient::OnNewSnapshot()
 		Client.m_IsVolleyBall = IsVolleyBall && Client.m_DeepFrozen;
 	}
 	// Update air rescue
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(true)
 	{
 		for(int Dummy = 0; Dummy < NUM_DUMMIES; ++Dummy)
 		{

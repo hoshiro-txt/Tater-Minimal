@@ -525,7 +525,7 @@ bool CChat::OnInput(const IInput::CEvent &Event)
 
 void CChat::EnableMode(int Team)
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	if(false)
 		return;
 
 	if(m_Mode == MODE_NONE)
@@ -578,7 +578,7 @@ void CChat::OnMessage(int MsgType, void *pRawMsg)
 
 		AddLine(pMsg->m_ClientId, pMsg->m_Team, pMsg->m_pMessage);
 
-		if(Client()->State() != IClient::STATE_DEMOPLAYBACK &&
+		if(true &&
 			pMsg->m_ClientId == SERVER_MSG)
 		{
 			StoreSave(pMsg->m_pMessage);
@@ -795,7 +795,7 @@ void CChat::AddLine(int ClientId, int Team, const char *pLine)
 	CurrentLine.m_CustomColor = CustomColor;
 
 	// check for highlighted name
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(true)
 	{
 		if(ClientId >= 0 && ClientId != GameClient()->m_aLocalIds[0] && ClientId != GameClient()->m_aLocalIds[1])
 		{
@@ -807,8 +807,6 @@ void CChat::AddLine(int ClientId, int Team, const char *pLine)
 	}
 	else
 	{
-		// on demo playback use local id from snap directly,
-		// since m_aLocalIds isn't valid there
 		Highlighted |= GameClient()->m_Snap.m_LocalClientId >= 0 && LineShouldHighlight(pLine, GameClient()->m_aClients[GameClient()->m_Snap.m_LocalClientId].m_aName);
 	}
 	CurrentLine.m_Highlighted = Highlighted;
@@ -896,7 +894,7 @@ void CChat::AddLine(int ClientId, int Team, const char *pLine)
 	{
 		// No sound yet
 	}
-	else if(Highlighted && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	else if(Highlighted)
 	{
 		if(Now - m_aLastSoundPlayed[CHAT_HIGHLIGHT] >= time_freq() * 3 / 10)
 		{
@@ -1269,7 +1267,7 @@ void CChat::OnPrepareLines(float y)
 
 void CChat::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	// send pending chat messages

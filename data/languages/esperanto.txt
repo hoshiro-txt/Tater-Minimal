@@ -555,9 +555,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == Ne eblis konekti pupon
 
-Error playing demo
-== Eraris ludante demon
-
 Successfully saved the replay!
 == Sukcese konservis la revidigon!
 
@@ -578,15 +575,6 @@ Error saving settings
 
 Replay feature is disabled!
 == Revidiga funkcio estas malŝaltita!
-
-No demo with this filename exists
-== Neekzistas demo kun tiu dosiernomo
-
-Preparing demo playback
-== Preparado de ludado de demo
-
-Loading demo file from storage
-== Ŝargado de demo-dosiero el konservejo
 
 Some fonts could not be loaded. Check the local console for details.
 == Kelkaj tiparoj ne povis esti ŝargitaj. Kontrolu la lokan konzolon por detaloj.
@@ -695,20 +683,11 @@ Loading menu themes
 Reset
 == Restarigi
 
-Demos
-== Demoj
-
 Main menu
 == Ĉefa menuo
 
 Rename folder
 == Alinomi dosierujon
-
-Rename demo
-== Alinomi demon
-
-Render demo
-== Bildigi demon
 
 Render complete
 == Bildigo finita
@@ -728,17 +707,11 @@ Continue anyway?
 This name cannot be used for files and folders
 == Ĉi tiu nomo ne povas esti uzita por dosieroj kaj dosierujoj
 
-A demo with this name already exists
-== Demo kun tiu nomo jam ekzistas
-
 A folder with this name already exists
 == Dosierujo kun tiu nomo jam ekzistas
 
 Unable to rename the folder
 == Neeblas alinomi la dosierujon
-
-Unable to rename the demo
-== Neeblas alinomi la demon
 
 File '%s' already exists, do you want to overwrite it?
 == Dosiero '%s' jam ekzistas, ĉu vi volas anstataŭigi ĝin?
@@ -772,9 +745,6 @@ UDP seems to be filtered.
 
 No answer from server yet.
 == Ankoraŭ neniu respondo de servilo.
-
-Error loading demo
-== Eraris ŝargante demon
 
 Reset filter
 == Restarigi filtrilon
@@ -825,46 +795,20 @@ Server filter
 Friends
 == Amikoj
 
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sek.
-
-Close the demo player
-== Fermi la demo-ludilon
-
-Demofile: %s
-== Demo-dosiero: %s
-
 Please use a different filename
 == Bonvolu uzi alian dosiernomon
 
 File already exists, do you want to overwrite it?
 == Dosiero jam ekzistas, ĉu vi volas anstataŭigi ĝin?
 
-Loading demo files
-== Ŝargado de demo-dosieroj
-
-Demo
-== Demo
-
 Date
 == Dato
-
-No demo selected
-== Neniu demo elektita
 
 Parent Folder
 == Patra dosierujo
 
 Folder Link
 == Dosiera ligilo
-
-Invalid Demo
-== Nevalida demo
 
 Created
 == Kreita
@@ -875,32 +819,17 @@ Size
 Map size
 == Mapa grando
 
-Demos directory
-== Dosierujo de demoj
-
-Open the directory that contains the demo files
-== Malfermi la dosierujon enhavatan la demo-dosierojn
-
 Are you sure that you want to delete the folder '%s'?
 == Ĉu vi certas ke vi volas forigi la dosierujon '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Ĉu vi certas ke vi volas forigi la demon '%s'?
-
 Delete folder
 == Forigi dosierujon
-
-Delete demo
-== Forigi demon
 
 Dummy is not allowed on this server
 == Pupo ne estas permesata ĉe ĉi tiu servilo
 
 Please wait…
 == Bonvolu atendi…
-
-Record demo
-== Registri demon
 
 Unsaved changes
 == Nekonservitaj ŝanĝoj
@@ -1149,10 +1078,6 @@ Dummy Allowed
 Dummy Connected
 == Pupo konektita
 
-[Touch button visibilities]
-Demo Player
-== Demo-ludilo
-
 [Predefined touch button behaviors]
 Ingame Menu
 == Enluda menuo
@@ -1199,12 +1124,6 @@ Themes directory
 
 Open the directory to add custom themes
 == Malfermi la dosierujon por aldoni proprajn etosojn
-
-Automatically record demos
-== Aŭtomate registri demojn
-
-Max demos
-== Maksimume demoj
 
 Automatically take game over screenshot
 == Aŭtomate fari ekrankopion je luda fino
@@ -1932,23 +1851,6 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
 == 
 
@@ -1970,28 +1872,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -2021,17 +1911,7 @@ Length
 Netversion
 == 
 
-[Demo details]
-map not included
-== 
-
 Fetch Info
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -2237,9 +2117,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2520,9 +2397,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Save the best demo of each race
-== 
-
 Enable replays
 == 
 
@@ -2625,9 +2499,6 @@ Controller jitter tolerance
 Aim bind
 == 
 
-Loading race demo files
-== 
-
 Super
 == 
 
@@ -2650,4 +2521,4 @@ Spree
 == 
 
 Best
-== 
+==

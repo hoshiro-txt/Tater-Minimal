@@ -70,10 +70,8 @@ CMenus::CMenus()
 	m_MenuActive = true;
 	m_ShowStart = true;
 
-	str_copy(m_aCurrentDemoFolder, "demos");
-	m_DemolistStorageType = IStorage::TYPE_ALL;
 
-	m_DemoPlayerState = DEMOPLAYER_NONE;
+
 	m_Dummy = false;
 
 	for(SUIAnimator &Animator : m_aAnimatorsSettingsTab)
@@ -552,12 +550,6 @@ void CMenus::RenderMenubar(CUIRect Box, IClient::EClientState ClientState)
 	{
 		Box.VSplitRight(10.0f, &Box, nullptr);
 		Box.VSplitRight(33.0f, &Box, &Button);
-		static CButtonContainer s_DemoButton;
-		if(DoButton_MenuTab(&s_DemoButton, FontIcon::CLAPPERBOARD, ActivePage == PAGE_DEMOS, &Button, IGraphics::CORNER_T, &m_aAnimatorsSmallPage[SMALL_TAB_DEMOBUTTON]))
-		{
-			NewPage = PAGE_DEMOS;
-		}
-		GameClient()->m_Tooltips.DoToolTip(&s_DemoButton, &Button, Localize("Demos"));
 		Box.VSplitRight(10.0f, &Box, nullptr);
 
 		Box.VSplitLeft(33.0f, &Button, &Box);
@@ -717,12 +709,6 @@ void CMenus::RenderMenubar(CUIRect Box, IClient::EClientState ClientState)
 
 			Box.VSplitRight(10.0f, &Box, nullptr);
 			Box.VSplitRight(33.0f, &Box, &Button);
-			static CButtonContainer s_DemoButton;
-			if(DoButton_MenuTab(&s_DemoButton, FontIcon::CLAPPERBOARD, ActivePage == PAGE_DEMOS, &Button, IGraphics::CORNER_T, &m_aAnimatorsSmallPage[SMALL_TAB_DEMOBUTTON]))
-			{
-				NewPage = PAGE_DEMOS;
-			}
-			GameClient()->m_Tooltips.DoToolTip(&s_DemoButton, &Button, Localize("Demos"));
 			Box.VSplitRight(10.0f, &Box, nullptr);
 
 			TextRender()->SetRenderFlags(0);
@@ -898,9 +884,6 @@ void CMenus::OnInit()
 	Console()->Chain("cl_asset_hud", ConchainAssetHud, this);
 	Console()->Chain("cl_asset_extras", ConchainAssetExtras, this);
 
-	Console()->Chain("demo_play", ConchainDemoPlay, this);
-	Console()->Chain("demo_speed", ConchainDemoSpeed, this);
-
 	m_TextureBlob = Graphics()->LoadTexture("blob.png", IStorage::TYPE_ALL);
 
 	// setup load amount
@@ -1058,7 +1041,7 @@ void CMenus::Render()
 	// while rendering which causes frames with broken user interface.
 	const IClient::EClientState ClientState = Client()->State();
 
-	if(ClientState == IClient::STATE_ONLINE || ClientState == IClient::STATE_DEMOPLAYBACK)
+	if(ClientState == IClient::STATE_ONLINE)
 	{
 		ms_ColorTabbarInactive = ms_ColorTabbarInactiveIngame;
 		ms_ColorTabbarActive = ms_ColorTabbarActiveIngame;
@@ -1076,7 +1059,7 @@ void CMenus::Render()
 	}
 
 	CUIRect Screen = *Ui()->Screen();
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK || m_Popup != POPUP_NONE)
+	if(true || m_Popup != POPUP_NONE)
 	{
 		Screen.Margin(10.0f, &Screen);
 	}
@@ -1117,10 +1100,6 @@ void CMenus::Render()
 			else if(m_MenuPage >= PAGE_INTERNET && m_MenuPage <= PAGE_FAVORITE_COMMUNITY_5)
 			{
 				RenderServerbrowser(MainView);
-			}
-			else if(m_MenuPage == PAGE_DEMOS)
-			{
-				RenderDemoBrowser(MainView);
 			}
 			else if(m_MenuPage == PAGE_SETTINGS)
 			{
@@ -1170,10 +1149,6 @@ void CMenus::Render()
 			{
 				RenderServerControl(MainView);
 			}
-			else if(m_GamePage == PAGE_DEMOS)
-			{
-				RenderDemoBrowser(MainView);
-			}
 			else if(m_GamePage == PAGE_SETTINGS)
 			{
 				RenderSettings(MainView);
@@ -1184,17 +1159,6 @@ void CMenus::Render()
 			}
 
 			RenderMenubar(TabBar, ClientState);
-		}
-		break;
-
-	case IClient::STATE_DEMOPLAYBACK:
-		if(m_Popup != POPUP_NONE)
-		{
-			RenderPopupFullscreen(Screen);
-		}
-		else
-		{
-			RenderDemoPlayer(Screen);
 		}
 		break;
 	}
@@ -1242,21 +1206,6 @@ void CMenus::RenderPopupFullscreen(CUIRect Screen)
 			pButtonText = Localize("Abort");
 		}
 	}
-	else if(m_Popup == POPUP_RENAME_DEMO)
-	{
-		dbg_assert(m_DemolistSelectedIndex >= 0, "m_DemolistSelectedIndex invalid for POPUP_RENAME_DEMO");
-		pTitle = m_vpFilteredDemos[m_DemolistSelectedIndex]->m_IsDir ? Localize("Rename folder") : Localize("Rename demo");
-	}
-#if defined(CONF_VIDEORECORDER)
-	else if(m_Popup == POPUP_RENDER_DEMO)
-	{
-		pTitle = Localize("Render demo");
-	}
-	else if(m_Popup == POPUP_RENDER_DONE)
-	{
-		pTitle = Localize("Render complete");
-	}
-#endif
 	else if(m_Popup == POPUP_PASSWORD)
 	{
 		pTitle = Localize("Password incorrect");
@@ -1527,231 +1476,6 @@ void CMenus::RenderPopupFullscreen(CUIRect Screen)
 		if(DoButton_Menu(&s_Button, Localize("Ok"), 0, &Button) || Ui()->ConsumeHotkey(CUi::HOTKEY_ESCAPE) || Ui()->ConsumeHotkey(CUi::HOTKEY_ENTER) || Activated)
 			m_Popup = POPUP_FIRST_LAUNCH;
 	}
-	else if(m_Popup == POPUP_RENAME_DEMO)
-	{
-		CUIRect Label, TextBox, Ok, Abort;
-
-		Box.HSplitBottom(20.f, &Box, &Part);
-		Box.HSplitBottom(24.f, &Box, &Part);
-		Part.VMargin(80.0f, &Part);
-
-		Part.VSplitMid(&Abort, &Ok);
-
-		Ok.VMargin(20.0f, &Ok);
-		Abort.VMargin(20.0f, &Abort);
-
-		static CButtonContainer s_ButtonAbort;
-		if(DoButton_Menu(&s_ButtonAbort, Localize("Abort"), 0, &Abort) || Ui()->ConsumeHotkey(CUi::HOTKEY_ESCAPE))
-			m_Popup = POPUP_NONE;
-
-		static CButtonContainer s_ButtonOk;
-		if(DoButton_Menu(&s_ButtonOk, Localize("Ok"), 0, &Ok) || Ui()->ConsumeHotkey(CUi::HOTKEY_ENTER))
-		{
-			m_Popup = POPUP_NONE;
-			// rename demo
-			char aBufOld[IO_MAX_PATH_LENGTH];
-			str_format(aBufOld, sizeof(aBufOld), "%s/%s", m_aCurrentDemoFolder, m_vpFilteredDemos[m_DemolistSelectedIndex]->m_aFilename);
-			char aBufNew[IO_MAX_PATH_LENGTH];
-			str_format(aBufNew, sizeof(aBufNew), "%s/%s", m_aCurrentDemoFolder, m_DemoRenameInput.GetString());
-			if(!m_vpFilteredDemos[m_DemolistSelectedIndex]->m_IsDir && !str_endswith(aBufNew, ".demo"))
-				str_append(aBufNew, ".demo");
-
-			if(str_comp(aBufOld, aBufNew) == 0)
-			{
-				// Nothing to rename, also same capitalization
-			}
-			else if(!str_valid_filename(m_DemoRenameInput.GetString()))
-			{
-				PopupMessage(Localize("Error"), Localize("This name cannot be used for files and folders"), Localize("Ok"), POPUP_RENAME_DEMO);
-			}
-			else if(str_utf8_comp_nocase(aBufOld, aBufNew) != 0 && // Allow renaming if it only changes capitalization to support case-insensitive filesystems
-				Storage()->FileExists(aBufNew, m_vpFilteredDemos[m_DemolistSelectedIndex]->m_StorageType))
-			{
-				PopupMessage(Localize("Error"), Localize("A demo with this name already exists"), Localize("Ok"), POPUP_RENAME_DEMO);
-			}
-			else if(Storage()->FolderExists(aBufNew, m_vpFilteredDemos[m_DemolistSelectedIndex]->m_StorageType))
-			{
-				PopupMessage(Localize("Error"), Localize("A folder with this name already exists"), Localize("Ok"), POPUP_RENAME_DEMO);
-			}
-			else if(Storage()->RenameFile(aBufOld, aBufNew, m_vpFilteredDemos[m_DemolistSelectedIndex]->m_StorageType))
-			{
-				str_copy(m_aCurrentDemoSelectionName, m_DemoRenameInput.GetString());
-				if(!m_vpFilteredDemos[m_DemolistSelectedIndex]->m_IsDir)
-					fs_split_file_extension(m_DemoRenameInput.GetString(), m_aCurrentDemoSelectionName, sizeof(m_aCurrentDemoSelectionName));
-				DemolistPopulate();
-				DemolistOnUpdate(false);
-			}
-			else
-			{
-				PopupMessage(Localize("Error"), m_vpFilteredDemos[m_DemolistSelectedIndex]->m_IsDir ? Localize("Unable to rename the folder") : Localize("Unable to rename the demo"), Localize("Ok"), POPUP_RENAME_DEMO);
-			}
-		}
-
-		Box.HSplitBottom(60.f, &Box, &Part);
-		Box.HSplitBottom(24.f, &Box, &Part);
-
-		Part.VSplitLeft(60.0f, nullptr, &Label);
-		Label.VSplitLeft(120.0f, nullptr, &TextBox);
-		TextBox.VSplitLeft(20.0f, nullptr, &TextBox);
-		TextBox.VSplitRight(60.0f, &TextBox, nullptr);
-		Ui()->DoLabel(&Label, Localize("New name:"), 18.0f, TEXTALIGN_ML);
-		Ui()->DoEditBox(&m_DemoRenameInput, &TextBox, 12.0f);
-	}
-#if defined(CONF_VIDEORECORDER)
-	else if(m_Popup == POPUP_RENDER_DEMO)
-	{
-		CUIRect Row, Ok, Abort;
-		Box.VMargin(60.0f, &Box);
-		Box.HMargin(20.0f, &Box);
-		Box.HSplitBottom(24.0f, &Box, &Row);
-		Box.HSplitBottom(40.0f, &Box, nullptr);
-		Row.VMargin(40.0f, &Row);
-		Row.VSplitMid(&Abort, &Ok, 40.0f);
-
-		static CButtonContainer s_ButtonAbort;
-		if(DoButton_Menu(&s_ButtonAbort, Localize("Abort"), 0, &Abort) || Ui()->ConsumeHotkey(CUi::HOTKEY_ESCAPE))
-		{
-			m_DemoRenderInput.Clear();
-			m_Popup = POPUP_NONE;
-		}
-
-		static CButtonContainer s_ButtonOk;
-		if(DoButton_Menu(&s_ButtonOk, Localize("Ok"), 0, &Ok) || Ui()->ConsumeHotkey(CUi::HOTKEY_ENTER))
-		{
-			m_Popup = POPUP_NONE;
-			// render video
-			char aVideoPath[IO_MAX_PATH_LENGTH];
-			str_format(aVideoPath, sizeof(aVideoPath), "videos/%s", m_DemoRenderInput.GetString());
-			if(!str_endswith(aVideoPath, ".mp4"))
-				str_append(aVideoPath, ".mp4");
-
-			if(!str_valid_filename(m_DemoRenderInput.GetString()))
-			{
-				PopupMessage(Localize("Error"), Localize("This name cannot be used for files and folders"), Localize("Ok"), POPUP_RENDER_DEMO);
-			}
-			else if(Storage()->FolderExists(aVideoPath, IStorage::TYPE_SAVE))
-			{
-				PopupMessage(Localize("Error"), Localize("A folder with this name already exists"), Localize("Ok"), POPUP_RENDER_DEMO);
-			}
-			else if(Storage()->FileExists(aVideoPath, IStorage::TYPE_SAVE))
-			{
-				char aMessage[128 + IO_MAX_PATH_LENGTH];
-				str_format(aMessage, sizeof(aMessage), Localize("File '%s' already exists, do you want to overwrite it?"), m_DemoRenderInput.GetString());
-				PopupConfirm(Localize("Replace video"), aMessage, Localize("Yes"), Localize("No"), &CMenus::PopupConfirmDemoReplaceVideo, POPUP_NONE, &CMenus::DefaultButtonCallback, POPUP_RENDER_DEMO);
-			}
-			else
-			{
-				PopupConfirmDemoReplaceVideo();
-			}
-		}
-
-		CUIRect ShowChatCheckbox, UseSoundsCheckbox;
-		Box.HSplitBottom(20.0f, &Box, &Row);
-		Box.HSplitBottom(10.0f, &Box, nullptr);
-		Row.VSplitMid(&ShowChatCheckbox, &UseSoundsCheckbox, 20.0f);
-
-		if(DoButton_CheckBox(&g_Config.m_ClVideoShowChat, Localize("Show chat"), g_Config.m_ClVideoShowChat, &ShowChatCheckbox))
-			g_Config.m_ClVideoShowChat ^= 1;
-
-		if(DoButton_CheckBox(&g_Config.m_ClVideoSndEnable, Localize("Use sounds"), g_Config.m_ClVideoSndEnable, &UseSoundsCheckbox))
-			g_Config.m_ClVideoSndEnable ^= 1;
-
-		CUIRect ShowHudButton;
-		Box.HSplitBottom(20.0f, &Box, &Row);
-		Row.VSplitMid(&Row, &ShowHudButton, 20.0f);
-
-		if(DoButton_CheckBox(&g_Config.m_ClVideoShowhud, Localize("Show ingame HUD"), g_Config.m_ClVideoShowhud, &ShowHudButton))
-			g_Config.m_ClVideoShowhud ^= 1;
-
-		// slowdown
-		CUIRect SlowDownButton;
-		Row.VSplitLeft(20.0f, &SlowDownButton, &Row);
-		Row.VSplitLeft(5.0f, nullptr, &Row);
-		static CButtonContainer s_SlowDownButton;
-		if(Ui()->DoButton_FontIcon(&s_SlowDownButton, FontIcon::BACKWARD, 0, &SlowDownButton, BUTTONFLAG_LEFT))
-			m_Speed = std::clamp(m_Speed - 1, 0, (int)(std::size(DEMO_SPEEDS) - 1));
-
-		// paused
-		CUIRect PausedButton;
-		Row.VSplitLeft(20.0f, &PausedButton, &Row);
-		Row.VSplitLeft(5.0f, nullptr, &Row);
-		static CButtonContainer s_PausedButton;
-		if(Ui()->DoButton_FontIcon(&s_PausedButton, FontIcon::PAUSE, 0, &PausedButton, BUTTONFLAG_LEFT))
-			m_StartPaused ^= 1;
-
-		// fastforward
-		CUIRect FastForwardButton;
-		Row.VSplitLeft(20.0f, &FastForwardButton, &Row);
-		Row.VSplitLeft(8.0f, nullptr, &Row);
-		static CButtonContainer s_FastForwardButton;
-		if(Ui()->DoButton_FontIcon(&s_FastForwardButton, FontIcon::FORWARD, 0, &FastForwardButton, BUTTONFLAG_LEFT))
-			m_Speed = std::clamp(m_Speed + 1, 0, (int)(std::size(DEMO_SPEEDS) - 1));
-
-		// speed meter
-		char aBuffer[128];
-		const char *pPaused = m_StartPaused ? Localize("(paused)") : "";
-		str_format(aBuffer, sizeof(aBuffer), "%s: ×%g %s", Localize("Speed"), DEMO_SPEEDS[m_Speed], pPaused);
-		Ui()->DoLabel(&Row, aBuffer, 12.8f, TEXTALIGN_ML);
-		Box.HSplitBottom(16.0f, &Box, nullptr);
-		Box.HSplitBottom(24.0f, &Box, &Row);
-
-		CUIRect Label, TextBox;
-		Row.VSplitLeft(110.0f, &Label, &TextBox);
-		TextBox.VSplitLeft(10.0f, nullptr, &TextBox);
-		Ui()->DoLabel(&Label, Localize("Video name:"), 12.8f, TEXTALIGN_ML);
-		Ui()->DoEditBox(&m_DemoRenderInput, &TextBox, 12.8f);
-
-		// Warn about disconnect if online
-		if(Client()->State() == IClient::STATE_ONLINE)
-		{
-			Box.HSplitBottom(10.0f, &Box, nullptr);
-			Box.HSplitBottom(20.0f, &Box, &Row);
-			SLabelProperties LabelProperties;
-			LabelProperties.SetColor(ColorRGBA(1.0f, 0.0f, 0.0f));
-			Ui()->DoLabel(&Row, Localize("You will be disconnected from the server."), 12.8f, TEXTALIGN_MC, LabelProperties);
-		}
-	}
-	else if(m_Popup == POPUP_RENDER_DONE)
-	{
-		CUIRect Ok, OpenFolder;
-
-		char aFilePath[IO_MAX_PATH_LENGTH];
-		char aSaveFolder[IO_MAX_PATH_LENGTH];
-		Storage()->GetCompletePath(IStorage::TYPE_SAVE, "videos", aSaveFolder, sizeof(aSaveFolder));
-		str_format(aFilePath, sizeof(aFilePath), "%s/%s.mp4", aSaveFolder, m_DemoRenderInput.GetString());
-
-		Box.HSplitBottom(20.f, &Box, &Part);
-		Box.HSplitBottom(24.f, &Box, &Part);
-		Part.VMargin(80.0f, &Part);
-
-		Part.VSplitMid(&OpenFolder, &Ok);
-
-		Ok.VMargin(20.0f, &Ok);
-		OpenFolder.VMargin(20.0f, &OpenFolder);
-
-		static CButtonContainer s_ButtonOpenFolder;
-		if(DoButton_Menu(&s_ButtonOpenFolder, Localize("Videos directory"), 0, &OpenFolder))
-		{
-			Client()->ViewFile(aSaveFolder);
-		}
-
-		static CButtonContainer s_ButtonOk;
-		if(DoButton_Menu(&s_ButtonOk, Localize("Ok"), 0, &Ok) || Ui()->ConsumeHotkey(CUi::HOTKEY_ENTER))
-		{
-			m_Popup = POPUP_NONE;
-			m_DemoRenderInput.Clear();
-		}
-
-		Box.HSplitBottom(160.f, &Box, &Part);
-		Part.VMargin(20.0f, &Part);
-
-		str_format(aBuf, sizeof(aBuf), Localize("Video was saved to '%s'"), aFilePath);
-
-		SLabelProperties MessageProps;
-		MessageProps.m_MaxWidth = (int)Part.w;
-		Ui()->DoLabel(&Part, aBuf, 18.0f, TEXTALIGN_TL, MessageProps);
-	}
-#endif
 	else if(m_Popup == POPUP_FIRST_LAUNCH)
 	{
 		CUIRect Label, TextBox, Skip, Join;
@@ -2226,9 +1950,6 @@ void CMenus::RenderPopupLoading(CUIRect Screen)
 		case IClient::LOADING_STATE_DETAIL_LOADING_MAP:
 			str_copy(aLabel1, Localize("Loading map file from storage"));
 			break;
-		case IClient::LOADING_STATE_DETAIL_LOADING_DEMO:
-			str_copy(aLabel1, Localize("Loading demo file from storage"));
-			break;
 		case IClient::LOADING_STATE_DETAIL_SENDING_READY:
 			str_copy(aLabel1, Localize("Requesting to join the game"));
 			break;
@@ -2288,26 +2009,6 @@ void CMenus::RenderPopupLoading(CUIRect Screen)
 		RefreshBrowserTab(true);
 	}
 }
-
-#if defined(CONF_VIDEORECORDER)
-void CMenus::PopupConfirmDemoReplaceVideo()
-{
-	char aBuf[IO_MAX_PATH_LENGTH];
-	str_format(aBuf, sizeof(aBuf), "%s/%s.demo", m_aCurrentDemoFolder, m_aCurrentDemoSelectionName);
-	char aVideoName[IO_MAX_PATH_LENGTH];
-	str_copy(aVideoName, m_DemoRenderInput.GetString());
-	const char *pError = Client()->DemoPlayer_Render(aBuf, m_DemolistStorageType, aVideoName, m_Speed, m_StartPaused);
-	m_Speed = DEMO_SPEED_INDEX_DEFAULT;
-	m_StartPaused = false;
-	m_LastPauseChange = -1.0f;
-	m_LastSpeedChange = -1.0f;
-	if(pError)
-	{
-		m_DemoRenderInput.Clear();
-		PopupMessage(Localize("Error loading demo"), pError, Localize("Ok"));
-	}
-}
-#endif
 
 void CMenus::RenderThemeSelection(CUIRect MainView)
 {
@@ -2408,7 +2109,7 @@ void CMenus::SetActive(bool Active)
 			GameClient()->OnRelease();
 		}
 	}
-	else if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	else if(false)
 	{
 		GameClient()->OnRelease();
 	}
@@ -2476,7 +2177,7 @@ void CMenus::OnStateChange(int NewState, int OldState)
 		m_DownloadLastCheckSize = 0;
 		m_DownloadSpeed = 0.0f;
 	}
-	else if(NewState == IClient::STATE_ONLINE || NewState == IClient::STATE_DEMOPLAYBACK)
+	else if(NewState == IClient::STATE_ONLINE)
 	{
 		if(m_Popup != POPUP_WARNING)
 		{
@@ -2493,7 +2194,7 @@ void CMenus::OnWindowResize()
 
 void CMenus::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		SetActive(true);
 
 	if(Client()->State() == IClient::STATE_ONLINE && GameClient()->m_ServerMode == CGameClient::SERVERMODE_PUREMOD)
@@ -2509,7 +2210,7 @@ void CMenus::OnRender()
 		{
 			SetActive(true);
 		}
-		else if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		else if(true)
 		{
 			Ui()->ClearHotkeys();
 			return;

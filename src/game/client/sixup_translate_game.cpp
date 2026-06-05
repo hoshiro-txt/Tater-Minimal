@@ -222,7 +222,7 @@ void *CGameClient::TranslateGameMsg(int *pMsgId, CUnpacker *pUnpacker, int Conn)
 	{
 		protocol7::CNetMsg_Sv_Team *pMsg7 = (protocol7::CNetMsg_Sv_Team *)pRawMsg;
 
-		if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		if(true)
 		{
 			m_aClients[pMsg7->m_ClientId].m_Team = pMsg7->m_Team;
 			m_pClient->m_TranslationContext.m_aClients[pMsg7->m_ClientId].m_Team = pMsg7->m_Team;

@@ -43,7 +43,7 @@ MACRO_CONFIG_INT(ClNamePlatesIdsSize, cl_nameplates_ids_size, 50, -50, 100, CFGF
 MACRO_CONFIG_INT(ClNamePlatesIdsSeparateLine, cl_nameplates_ids_seperate_line, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show client IDs on a separate line in name plates")
 MACRO_CONFIG_INT(ClNamePlatesOffset, cl_nameplates_offset, 30, 10, 50, CFGFLAG_CLIENT | CFGFLAG_SAVE, "The size of the gap between the tee and the name plate")
 
-MACRO_CONFIG_INT(ClNamePlatesOwn, cl_nameplates_own, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show own name plate (useful for demo recording)")
+MACRO_CONFIG_INT(ClNamePlatesOwn, cl_nameplates_own, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show own name plate")
 MACRO_CONFIG_INT(ClNamePlatesFriendMark, cl_nameplates_friendmark, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show friend mark (♥) in name plates")
 MACRO_CONFIG_INT(ClNamePlatesStrong, cl_nameplates_strong, 0, 0, 2, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show strong/weak in name plates (0 - off, 1 - icons, 2 - icons + numbers)")
 MACRO_CONFIG_INT(ClNamePlatesStrongSize, cl_nameplates_strong_size, 30, -50, 100, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Size of strong/weak state icons and numbers")
@@ -299,7 +299,6 @@ MACRO_CONFIG_INT(SvRescueDelay, sv_rescue_delay, 1, 0, 1000, CFGFLAG_SERVER, "Nu
 MACRO_CONFIG_INT(SvPractice, sv_practice, 1, 0, 1, CFGFLAG_SERVER, "Enable practice mode for teams. Means you can use /rescue, but in turn your rank doesn't count.")
 MACRO_CONFIG_INT(SvPracticeByDefault, sv_practice_by_default, 0, 0, 1, CFGFLAG_SERVER, "Enable use of practice commands by default. Requires sv_test_cmds 1.")
 
-MACRO_CONFIG_INT(ClVideoPauseWithDemo, cl_video_pausewithdemo, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Pause video rendering when demo playing pause")
 MACRO_CONFIG_INT(ClVideoShowhud, cl_video_showhud, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show ingame HUD when rendering video")
 MACRO_CONFIG_INT(ClVideoShowChat, cl_video_showchat, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show chat when rendering video")
 MACRO_CONFIG_INT(ClVideoSndEnable, cl_video_sound_enable, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Use sound when rendering video")
@@ -336,9 +335,6 @@ MACRO_CONFIG_INT(ClEditor, cl_editor, 0, 0, 1, CFGFLAG_CLIENT, "Open the map edi
 MACRO_CONFIG_STR(ClSkinFilterString, cl_skin_filter_string, 25, "", CFGFLAG_SAVE | CFGFLAG_CLIENT, "Skin filtering string")
 MACRO_CONFIG_INT(ClEditorMaxHistory, cl_editor_max_history, 50, 1, 500, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Maximum number of undo actions in the editor history (not shared between editor, envelope editor and server settings editor)")
 
-MACRO_CONFIG_INT(ClAutoDemoRecord, cl_auto_demo_record, 1, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Automatically record demos")
-MACRO_CONFIG_INT(ClAutoDemoOnConnect, cl_auto_demo_on_connect, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "If 1, start recording a demo automatically only once when connecting. If 0, also restart automatic demo recording after every game over")
-MACRO_CONFIG_INT(ClAutoDemoMax, cl_auto_demo_max, 10, 0, 1000, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Maximum number of automatically recorded demos (0 = no limit)")
 MACRO_CONFIG_INT(ClAutoScreenshot, cl_auto_screenshot, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Automatically take game over screenshot")
 MACRO_CONFIG_INT(ClAutoScreenshotMax, cl_auto_screenshot_max, 10, 0, 1000, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Maximum number of automatically created screenshots (0 = no limit)")
 MACRO_CONFIG_INT(ClAutoCSV, cl_auto_csv, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Automatically create game over csv")
@@ -379,9 +375,6 @@ MACRO_CONFIG_INT(BrSort, br_sort, 4, 0, 256, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sor
 MACRO_CONFIG_INT(BrSortOrder, br_sort_order, 2, 0, 2, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sorting order in server browser")
 MACRO_CONFIG_INT(BrMaxRequests, br_max_requests, 100, 0, 1000, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Number of concurrent requests to use when refreshing server browser")
 
-MACRO_CONFIG_INT(BrDemoSort, br_demo_sort, 0, 0, 3, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sorting column in demo browser")
-MACRO_CONFIG_INT(BrDemoSortOrder, br_demo_sort_order, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sorting order in demo browser")
-MACRO_CONFIG_INT(BrDemoFetchInfo, br_demo_fetch_info, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Whether to auto fetch demo infos on refresh")
 
 MACRO_CONFIG_INT(GhSort, gh_sort, 1, 0, 2, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sorting column in ghost list")
 MACRO_CONFIG_INT(GhSortOrder, gh_sort_order, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Sorting order in ghost list")
@@ -476,8 +469,6 @@ MACRO_CONFIG_STR(SvRconModPassword, sv_rcon_mod_password, 128, "", CFGFLAG_SERVE
 MACRO_CONFIG_STR(SvRconHelperPassword, sv_rcon_helper_password, 128, "", CFGFLAG_SERVER | CFGFLAG_NONTEEHISTORIC, "Remote console password for helpers (limited access)")
 MACRO_CONFIG_INT(SvRconMaxTries, sv_rcon_max_tries, 30, 0, 100, CFGFLAG_SERVER, "Maximum number of tries for remote console authentication")
 MACRO_CONFIG_INT(SvRconBantime, sv_rcon_bantime, 5, 0, 1440, CFGFLAG_SERVER, "The time a client gets banned if remote console authentication fails. 0 makes it just use kick")
-MACRO_CONFIG_INT(SvAutoDemoRecord, sv_auto_demo_record, 0, 0, 1, CFGFLAG_SERVER, "Automatically record demos")
-MACRO_CONFIG_INT(SvAutoDemoMax, sv_auto_demo_max, 10, 0, 1000, CFGFLAG_SERVER, "Maximum number of automatically recorded demos (0 = no limit)")
 MACRO_CONFIG_INT(SvTeeHistorian, sv_tee_historian, 0, 0, 1, CFGFLAG_SERVER, "Activate the tee historian that writes complete gameplay data to disk (WARNING: This will use a lot of disk space)")
 MACRO_CONFIG_INT(SvVanillaAntiSpoof, sv_vanilla_antispoof, 1, 0, 1, CFGFLAG_SERVER, "Enable vanilla Antispoof")
 MACRO_CONFIG_INT(SvDnsbl, sv_dnsbl, 0, 0, 1, CFGFLAG_SERVER, "Enable DNSBL (DNS-based Blackhole List)")
@@ -489,8 +480,6 @@ MACRO_CONFIG_STR(SvDnsblBanReason, sv_dnsbl_ban_reason, 128, "VPN detected, try 
 MACRO_CONFIG_INT(SvDnsblChat, sv_dnsbl_chat, 0, 0, 1, CFGFLAG_SERVER, "Don't allow chat from blacklisted addresses")
 MACRO_CONFIG_INT(SvRconVote, sv_rcon_vote, 0, 0, 1, CFGFLAG_SERVER, "Only allow authed clients to call votes")
 
-MACRO_CONFIG_INT(SvPlayerDemoRecord, sv_player_demo_record, 0, 0, 1, CFGFLAG_SERVER, "Automatically record a demo when a player sets a new personal best time.")
-MACRO_CONFIG_INT(SvDemoChat, sv_demo_chat, 0, 0, 1, CFGFLAG_SERVER, "Record chat for demos")
 MACRO_CONFIG_INT(SvServerInfoPerSecond, sv_server_info_per_second, 50, 0, 10000, CFGFLAG_SERVER, "Maximum number of complete server info responses that are sent out per second (0 for no limit)")
 MACRO_CONFIG_INT(SvVanConnPerSecond, sv_van_conn_per_second, 10, 0, 10000, CFGFLAG_SERVER, "Antispoof specific ratelimit (0 for no limit)")
 MACRO_CONFIG_INT(SvSixup, sv_sixup, 1, 0, 1, CFGFLAG_SERVER, "Enable sixup connections")
@@ -632,11 +621,6 @@ MACRO_CONFIG_INT(ConnTimeout, conn_timeout, 100, 5, 1000, CFGFLAG_SAVE | CFGFLAG
 MACRO_CONFIG_INT(ConnTimeoutProtection, conn_timeout_protection, 1000, 5, 10000, CFGFLAG_SERVER, "Network timeout protection")
 MACRO_CONFIG_INT(ClShowIds, cl_show_ids, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Whether to show client IDs in scoreboard, chat and spectator menu")
 MACRO_CONFIG_INT(ClScoreboardOnDeath, cl_scoreboard_on_death, 1, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Whether to show scoreboard after death or not")
-MACRO_CONFIG_INT(ClAutoRaceRecord, cl_auto_race_record, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Save the best demo of each race")
-MACRO_CONFIG_INT(ClReplays, cl_replays, 0, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Enable/disable replays")
-MACRO_CONFIG_INT(ClReplayLength, cl_replay_length, 30, 10, 0, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Set the default length of the replays")
-MACRO_CONFIG_INT(ClRaceRecordServerControl, cl_race_record_server_control, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Let the server start the race recorder")
-MACRO_CONFIG_INT(ClDemoName, cl_demo_name, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Save the player name within the demo")
 MACRO_CONFIG_INT(ClRaceGhost, cl_race_ghost, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Enable ghost")
 MACRO_CONFIG_INT(ClRaceGhostServerControl, cl_race_ghost_server_control, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Let the server start the ghost")
 MACRO_CONFIG_INT(ClRaceShowGhost, cl_race_show_ghost, 1, 0, 1, CFGFLAG_CLIENT | CFGFLAG_SAVE, "Show ghost")
@@ -738,13 +722,6 @@ MACRO_CONFIG_STR(ClTimeoutSeed, cl_timeout_seed, 64, "", CFGFLAG_SAVE | CFGFLAG_
 MACRO_CONFIG_STR(ClInputFifo, cl_input_fifo, 128, "", CFGFLAG_SAVE | CFGFLAG_CLIENT, "Fifo file (non-Windows) or Named Pipe (Windows) to use as input for client console")
 MACRO_CONFIG_INT(ClConfigVersion, cl_config_version, 0, 0, 0, CFGFLAG_CLIENT | CFGFLAG_SAVE, "The config version. Helps newer clients fix bugs with older configs.")
 
-// demo editor
-MACRO_CONFIG_INT(ClDemoSliceBegin, cl_demo_slice_begin, -1, 0, 0, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Begin marker for demo slice")
-MACRO_CONFIG_INT(ClDemoSliceEnd, cl_demo_slice_end, -1, 0, 0, CFGFLAG_SAVE | CFGFLAG_CLIENT, "End marker for demo slice")
-MACRO_CONFIG_INT(ClDemoShowSpeed, cl_demo_show_speed, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Show speed meter on change")
-MACRO_CONFIG_INT(ClDemoShowPause, cl_demo_show_pause, 1, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Show pause/play indicator on change")
-MACRO_CONFIG_INT(ClDemoKeyboardShortcuts, cl_demo_keyboard_shortcuts, 1, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Enable keyboard shortcuts in demo player")
-
 // graphic library
 #if !defined(CONF_ARCH_IA32) && !defined(CONF_PLATFORM_MACOS)
 MACRO_CONFIG_INT(GfxGLMajor, gfx_gl_major, 1, 1, 10, CFGFLAG_SAVE | CFGFLAG_CLIENT, "Graphic library major version")
@@ -781,4 +758,4 @@ MACRO_CONFIG_INT(GfxRenderThreadCount, gfx_render_thread_count, 3, 0, 0, CFGFLAG
 
 MACRO_CONFIG_INT(GfxDriverIsBlocked, gfx_driver_is_blocked, 0, 0, 1, CFGFLAG_SAVE | CFGFLAG_CLIENT, "If 1, the current driver is in a blocked error state.")
 
-MACRO_CONFIG_INT(ClVideoRecorderFPS, cl_video_recorder_fps, 60, 1, 1000, CFGFLAG_SAVE | CFGFLAG_CLIENT, "At which FPS the videorecorder should record demos.")
+MACRO_CONFIG_INT(ClVideoRecorderFPS, cl_video_recorder_fps, 60, 1, 1000, CFGFLAG_SAVE | CFGFLAG_CLIENT, "At which FPS the videorecorder should run.")

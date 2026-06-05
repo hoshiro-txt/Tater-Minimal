@@ -21,7 +21,7 @@ void CMod::OnConsoleInit()
 
 void CMod::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	float ScreenX0, ScreenY0, ScreenX1, ScreenY1;

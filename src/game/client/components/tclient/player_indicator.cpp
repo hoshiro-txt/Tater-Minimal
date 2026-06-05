@@ -23,8 +23,7 @@ void CPlayerIndicator::OnRender()
 	if(GameClient()->m_Snap.m_LocalClientId == -1 || !GameClient()->m_Snap.m_aCharacters[GameClient()->m_Snap.m_LocalClientId].m_Active)
 		return;
 
-	// Don't render if not race gamemode or in demo
-	if(!GameClient()->m_GameInfo.m_Race || Client()->State() == IClient::STATE_DEMOPLAYBACK || !GameClient()->m_Camera.ZoomAllowed())
+	if(!GameClient()->m_GameInfo.m_Race || !GameClient()->m_Camera.ZoomAllowed())
 		return;
 
 	vec2 Position = GameClient()->m_aClients[GameClient()->m_Snap.m_LocalClientId].m_RenderPos;

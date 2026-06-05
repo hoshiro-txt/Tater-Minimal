@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Вы сапраўды жадаеце выйсці?
 
-Automatically record demos
-== Аўтаматычна запісваць дэма
-
 Automatically take game over screenshot
 == Аўтаматычна рабіць здымак вынікаў гульні
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Выдаліць
 
-Delete demo
-== Выдаліць дэма
-
-Demofile: %s
-== Дэма: %s
-
-Demos
-== Дэма
-
 Disconnect
 == Адлучыцца
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Памылка
-
-Error loading demo
-== Памылка пры загрузцы дэма
 
 Favorite
 == Любімы
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Крук
-
-Invalid Demo
-== Несапраўднае дэма
 
 Join blue
 == За сініх
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Выдаліць сябра
 
-Rename demo
-== Пераназваць дэма
-
 Reset filter
 == Скінуць фільтр
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Тып
 
-Unable to rename the demo
-== Немагчыма пераназваць дэма
-
 Use sounds
 == Выкарыстоўваць гукі
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Інтэрнэт
 
-Max demos
-== Максімальная колькасць дэма
-
 News
 == Навіны
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Адценне
-
-Record demo
-== Запісаць дэма
 
 Your skin
 == Ваш скін
@@ -523,9 +493,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 
 The format of texture %s is not RGBA which will cause visual bugs.
 == Фармат тэкстуры %s не адпавядае RGBA, што можа выклікаць візуальныя багі.
-
-Preparing demo playback
-== Падрыхтоўка прайгравання дэма
 
 Connected
 == Падлучана
@@ -607,9 +574,6 @@ Requesting to join the game
 
 Reconnect in %d sec
 == Перападлучэнне праз %d сек.
-
-Render demo
-== Рэндэр дэма
 
 Welcome to DDNet
 == Запрашаем у DDNet
@@ -749,29 +713,11 @@ File already exists, do you want to overwrite it?
 Remove chat
 == Прыбраць чат
 
-Play the current demo
-== Прайграць бягучае дэма
-
-Pause the current demo
-== Прыпыніць бягучае дэма
-
-Stop the current demo
-== Спыніць бягучае дэма
-
 Go back one tick
 == Пераматаць назад на адзін цік
 
 Go forward one tick
 == Пераматаць наперад на адзін цік
-
-Slow down the demo
-== Запаволіць дэма
-
-Speed up the demo
-== Паскорыць дэма
-
-Export cut as a separate demo
-== Экспартаваць адрэзак як асобнае дэма
 
 Go back one marker
 == Пераматаць назад на адну пазнаку
@@ -782,17 +728,11 @@ Go forward one marker
 Toggle keyboard shortcuts
 == Уключыць гарачыя клавішы
 
-Loading demo files
-== Загрузка дэма файлаў
-
 %.2f MiB
 == %.2f МіБ
 
 %.2f KiB
 == %.2f КіБ
-
-Demo
-== Дэма
 
 Markers
 == Пазнакі
@@ -805,18 +745,6 @@ Date
 
 Fetch Info
 == Атрымаць інфа.
-
-Demos directory
-== Тэчка дэма
-
-Open the directory that contains the demo files
-== Адкрыць тэчку, якая ўтрымвае файлы дэма
-
-Are you sure that you want to delete the demo '%s'?
-== Вы ўпэўненыя, што хочаце выдаліць дэма '%s'?
-
-Unable to delete the demo '%s'
-== Немагчыма выдаліць дэма '%s'
 
 Are you sure that you want to disconnect?
 == Вы ўпэўненыя, што хочаце адлучыцца?
@@ -1249,9 +1177,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Зрабіць усё як у вінтоўкі
 
-Save the best demo of each race
-== Захоўваць лепшае дэма кожнага забегу
-
 Enable replays
 == Уключыць запісы
 
@@ -1412,9 +1337,6 @@ Update failed! Check log…
 Restart
 == Перазапуск
 
-Loading race demo files
-== Загрузка дэма файлаў забегаў
-
 Super
 == Супер
 
@@ -1475,9 +1397,6 @@ Grabs
 9+ new mentions
 == 9+ новых згадак
 
-A demo with this name already exists
-== Дэма з такой назвай ужо існуе
-
 No server selected
 == Сервер не абраны
 
@@ -1502,12 +1421,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == Пазначыць канец адрэзка (правая кнопка мышы для скіду)
-
-Close the demo player
-== Закрыць прайгравальнік дэма
-
-Export demo cut
-== Экспартаваць адрэзак дэма
 
 Cut interval
 == Інтэрвал адрэзка
@@ -1545,14 +1458,6 @@ Unable to rename the folder
 Go back the specified duration
 == Назад на выбраную працягласць
 
-[Demo player duration]
-%s min.
-== %s хв.
-
-[Demo player duration]
-%s sec.
-== %s сек.
-
 Change the skip duration
 == Змяніць працягласць пропуску
 
@@ -1580,9 +1485,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Moved ingame
 == Перамешчаны ў гульні
 
-Error playing demo
-== Памылка прайгравання дэма
-
 Some map images could not be loaded. Check the local console for details.
 == Некаторыя відарысы карты немагчыма спампаваць. Для атрымання дэталей праверце лакальную кансоль.
 
@@ -1601,18 +1503,11 @@ Videos directory
 Video was saved to '%s'
 == Відэа было захавана ў '%s'
 
-No demo selected
-== Дэма не выбрана
-
 Created
 == Створана
 
 Netversion
 == Сеткавая версія
-
-[Demo details]
-map not included
-== карта не ўключана
 
 Ghosts directory
 == Тэчка прывідаў
@@ -1659,9 +1554,6 @@ Saving settings to '%s' failed
 
 Error saving settings
 == Памылка захавання налад
-
-Loading demo file from storage
-== Загрузка файла дэма са сховішча
 
 Searching
 == Пошук
@@ -1810,9 +1702,6 @@ Connect address error
 
 Could not connect dummy
 == Не атрымалася падлучыць даммі
-
-No demo with this filename exists
-== Дэма з такім імем файла не існуе
 
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == "%s" не сумяшчальный з pnglite и не можа быць загружаны старымі версіямі DDNet
@@ -2251,17 +2140,6 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Save all changes before turning off the editor?
 == 
 
@@ -2469,10 +2347,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2573,9 +2447,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 
 
-Demo player is currently active.
-== 
-
 The extra menu with the given number is activated.
 == 
 
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

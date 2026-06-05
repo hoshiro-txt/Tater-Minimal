@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Tens a certeza que queres sair?
 
-Automatically record demos
-== Gravar demos automaticamente
-
 Automatically take game over screenshot
 == Capturar o ecrã de fim de jogo automaticamente
 
@@ -85,18 +82,6 @@ Custom colors
 Delete
 == Eliminar
 
-Delete demo
-== Eliminar demo
-
-Demo
-== Demo
-
-Demofile: %s
-== Demo: %s
-
-Demos
-== Demos
-
 Disconnect
 == Desconectar
 
@@ -117,9 +102,6 @@ Emoticon
 
 Error
 == Erro
-
-Error loading demo
-== Erro a carregar a demo
 
 Favorite
 == Favorito
@@ -183,9 +165,6 @@ High Detail
 
 Hook
 == Gancho
-
-Invalid Demo
-== Demo inválida
 
 Join blue
 == Juntar à azul
@@ -304,9 +283,6 @@ Remove
 Remove friend
 == Remover amigo
 
-Rename demo
-== Renomear demo
-
 Reset
 == Reiniciar
 
@@ -409,9 +385,6 @@ Try again
 Type
 == Tipo
 
-Unable to rename the demo
-== Não foi possível renomear a demo
-
 Use sounds
 == Usar sons
 
@@ -454,9 +427,6 @@ You must restart the game for all settings to take effect.
 Internet
 == Internet
 
-Max demos
-== Máximo de demos
-
 News
 == Notícias
 
@@ -474,9 +444,6 @@ Sound volume
 
 Max Screenshots
 == Máximo de capturas de ecrã
-
-Record demo
-== Gravar demo
 
 FSAA samples
 == Amostras FSAA
@@ -576,9 +543,6 @@ Team message
 
 Automatically create statboard csv
 == Criar statboard csv automaticamente
-
-Save the best demo of each race
-== Guardar a melhor demo de cada corrida
 
 Are you sure that you want to disconnect?
 == Tens a certeza que te queres desconectar?
@@ -873,9 +837,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == Não foi possível conectar o dummy
 
-Error playing demo
-== Erro a reproduzir a demo
-
 Successfully saved the replay!
 == A gravação da repetição foi bem sucedida!
 
@@ -900,17 +861,11 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == O formato da textura %s não é RGBA, o que causará bugs visuais.
 
-Preparing demo playback
-== A preparar a reprodução da demo
-
 Connected
 == Conectado
 
 Loading map file from storage
 == A carregar o ficheiro do mapa do armazenamento
-
-Loading demo file from storage
-== A carregar o ficheiro da demo do armazenamento
 
 Some fonts could not be loaded. Check the local console for details.
 == Algumas fontes não puderam ser carregadas. Verifica a consola local para mais detalhes.
@@ -1022,9 +977,6 @@ Main menu
 Rename folder
 == Renomear pasta
 
-Render demo
-== Renderizar demo
-
 Render complete
 == Renderização completa
 
@@ -1048,9 +1000,6 @@ There's an unsaved map in the editor, you might want to save it.
 
 Continue anyway?
 == Continuar mesmo assim?
-
-A demo with this name already exists
-== Já existe uma demo com este nome
 
 A folder with this name already exists
 == Já existe uma pasta com este nome
@@ -1203,25 +1152,8 @@ Server filter
 Friends
 == Amigos
 
-Play the current demo
-== Reproduzir a demo
-
-Pause the current demo
-== Pausar a demo
-
-Stop the current demo
-== Parar a demo
-
 Go back the specified duration
 == Retroceder a duração especificada
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s seg.
 
 Change the skip duration
 == Mudar a duração de salto
@@ -1241,32 +1173,17 @@ Go back one marker
 Go forward one marker
 == Avançar um marcador
 
-Slow down the demo
-== Abrandar a demo
-
-Speed up the demo
-== Acelerar a demo
-
 Mark the beginning of a cut (right click to reset)
 == Marcar o início de um corte (clica com o botão direito para reiniciar)
 
 Mark the end of a cut (right click to reset)
 == Marcar o fim de um corte (clica com o botão direito para reiniciar)
 
-Export cut as a separate demo
-== Exportar corte como uma demo separada
-
-Close the demo player
-== Fechar a reprodução da demo
-
 Toggle keyboard shortcuts
 == Ativar/desativar atalhos de teclado
 
 Toggle auto camera
 == Ativar/desativar câmara automática
-
-Export demo cut
-== Exportar corte da demo
 
 Cut interval
 == Intervalo do corte
@@ -1280,17 +1197,11 @@ Render cut to video
 Please use a different filename
 == Por favor usa um nome de ficheiro diferente
 
-Loading demo files
-== A carregar ficheiros de demo
-
 All combined
 == Todos combinados
 
 Length
 == Duração
-
-No demo selected
-== Nenhuma demo selecionada
 
 Folder Link
 == Link da Pasta
@@ -1304,10 +1215,6 @@ Markers
 Netversion
 == Versão da rede
 
-[Demo details]
-map not included
-== mapa não incluído
-
 %.2f MiB
 == %.2f MiB
 
@@ -1317,23 +1224,11 @@ map not included
 Fetch Info
 == Obter Informação
 
-Demos directory
-== Diretório de demos
-
-Open the directory that contains the demo files
-== Abrir o diretório que contém os ficheiros de demo
-
 Are you sure that you want to delete the folder '%s'?
 == Tens a certeza que queres eliminar a pasta '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Tens a certeza que queres eliminar a demo '%s'?
-
 Delete folder
 == Eliminar pasta
-
-Unable to delete the demo '%s'
-== Não foi possível eliminar a demo '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Não foi possível eliminar a pasta '%s'. Certifica-te que está vazia primeiro.
@@ -1905,9 +1800,6 @@ Server could not be started. Make sure to grant the notification permission in t
 Server executable not found, can't run server
 == Executável do servidor não encontrado, não é possível executar o servidor
 
-Loading race demo files
-== A carregar ficheiros da demo de corrida
-
 Round %d/%d
 == Ronda %d/%d
 
@@ -2012,9 +1904,6 @@ Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom
 == 
 
 Press Ctrl+Shift+G to disable debug graphs.
-== 
-
-No demo with this filename exists
 == 
 
 Team save in progress. You'll be able to load with '/load %s'
@@ -2141,18 +2030,7 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Map size
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2395,10 +2273,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2497,9 +2371,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Mute emoticons
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

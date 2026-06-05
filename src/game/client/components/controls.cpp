@@ -365,7 +365,7 @@ int CControls::SnapInput(int *pData)
 
 void CControls::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(g_Config.m_ClAutoswitchWeaponsOutOfAmmo && !GameClient()->m_GameInfo.m_UnlimitedAmmo && GameClient()->m_Snap.m_pLocalCharacter)

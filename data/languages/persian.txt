@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == ؟ﺪﯾﻮﺷ ﺝﺭﺎﺧ ﺪﯿﻫﺍﻮﺧ ﯽﻣ ﻪﻛ ﺪﯿﺘﺴﻫ ﻦﺌﻤﻄﻣ ﺎﯾﺁ
 
-Automatically record demos
-== ﺭﺎﻛﺩﻮﺧ ﺕﺭﻮﺻ ﻪﺑ ﻮﻣﺩ ﻂﺒﺿ
-
 Automatically take game over screenshot
 == ﺭﺎﻛﺩﻮﺧ ﺕﺭﻮﺻ ﻪﺑ ىﺯﺎﺑ ﺯﺍ ﺲﻜﻋ ﻦﺘﻓﺮﮔ
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == ﻥﺩﺮﻛ کﺎﭘ
 
-Delete demo
-== ﻮﻣﺩ ﻥﺩﺮﻛ کﺎﭘ
-
-Demofile: %s
-== %s :ﻮﻣﺩ ﻞﯾﺎﻓ
-
-Demos
-== ﺎﻫ ﻮﻣﺩ
-
 Disconnect
 == ﯼﺯﺎﺑ ﺯﺍ ﺝﻭﺮﺧ
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == ﺎﻄﺧ
-
-Error loading demo
-== ﻮﻣﺩ ىﺭﺍﺬﮔﺭﺎﺑ ﺭﺩ ﺎﻄﺧ
 
 Favorite
 == ﺪﻨﻣ ﻪﻗﻼﻋ
@@ -180,9 +165,6 @@ High Detail
 
 Hook
 == ﺏﻼﻗ
-
-Invalid Demo
-== ﺖﺳﺍ ﺮﺒﺘﻌﻣﺎﻧ ﻮﻣﺩ
 
 Join blue
 == ﯽﺑﺁ ﻢﯿﺗ ﻪﺑ ﺩﻭﺭﻭ
@@ -325,12 +307,6 @@ Loading DDNet Client
 Reconnect in %d sec
 == ﻪﯿﻧﺎﺛ %d ﺭﺩ ﻩﺭﺎﺑﻭﺩ ﻝﺎﺼﺗﺍ
 
-Rename demo
-== ﻮﻣﺩ ﻡﺎﻧ ﺮﯿﯿﻐﺗ
-
-Render demo
-== ﻮﻣﺩ ﺭﺪﻧﺭ
-
 Replace video
 == ﻮﯾﺪﯾﻭ ﻥﺩﺮﮐ ﻦﯾﺰﮕﯾﺎﺟ
 
@@ -378,9 +354,6 @@ Are you sure that you want to disconnect and switch to a different server?
 
 Yes
 == ﻪﻠﺑ
-
-Unable to rename the demo
-== ﺩﺭﺍﺪﻧ ﺩﻮﺟﻭ ﻮﻣﺩ ﻡﺎﻧ ﺮﯿﯿﻐﺗ ﻥﺎﮑﻣﺍ
 
 New name:
 == ﺪﯾﺪﺟ ﻢﺳﺍ
@@ -472,9 +445,6 @@ Remove
 Remove chat
 == ﺖﭼ ﻥﺩﺮﮐ کﺎﭘ
 
-Demo
-== ﻮﻣﺩ
-
 Markers
 == ﺎﻫ ﺮﮕﻧﺎﺸﻧ
 
@@ -484,9 +454,6 @@ Length
 Date
 == ﺦﯾﺭﺎﺗ
 
-Demos directory
-== ﺎﻫﻮﻣﺩ ﻪﺷﻮﭘ
-
 Connect Dummy
 == ﯽﻣﺍﺩ ﻝﺎﺼﺗﺍ
 
@@ -495,9 +462,6 @@ Connecting dummy
 
 Stop record
 == ﻂﺒﺿ ﻒﻗﻮﺗ
-
-Record demo
-== ﻮﻣﺩ ﻂﺒﺿ
 
 Join game
 == ﯼﺯﺎﺑ ﻪﺑ ﺩﻭﺭﻭ
@@ -549,9 +513,6 @@ Show only chat messages from friends
 
 Skip the main menu
 == ﯽﻠﺻﺍ ىﻮﻨﻣ ﺯﺍ ﻥﺪﺷ ﺩﺭ
-
-Max demos
-== ﺎﻫﻮﻣﺩ ﺮﺜﮐﺍﺪﺣ
 
 Max Screenshots
 == ﺎﻫ ﺕﺎﺷ ﻦﯾﺮﮑﺳﺍ ﺮﺜﮐﺍﺪﺣ
@@ -800,9 +761,6 @@ Failed to swap framebuffers. Try to update your GPU drivers.
 Unknown error. Try to change gfx_backend to OpenGL or Vulkan in settings_ddnet.cfg in the config directory and try again.
 == .ﺪﯿﻨﮐ ﺵﻼﺗ ﻩﺭﺎﺑﻭﺩ ﻭ ﺪﯿﻫﺩ ﺮﯿﯿﻐﺗ Vulkan ﺎﯾ OpenGL ﻪﺑ ﺍﺭ gfx_backend ، settings_ddnet.cfg ﺭﺩ ،ﮓﯿﻔﻧﺎﮐ ﻪﺷﻮﭘ ﺭﺩ ﺪﯿﻨﮐ ﯽﻌﺳ .ﺺﺨﺸﻣﺎﻧ ﯼﺎﻄﺧ
 
-Preparing demo playback
-== ﻮﻣﺩ ﺶﺨﭘ ﯼﺯﺎﺳ ﻩﺩﺎﻣﺁ ﻝﺎﺣ ﺭﺩ
-
 Connected
 == ﻞﺼﺘﻣ
 
@@ -920,29 +878,11 @@ Are you sure that you want to remove the player '%s' from your friends list?
 Are you sure that you want to remove the clan '%s' from your friends list?
 == ؟ﺪﯿﻨﮐ ﻑﺬﺣ ﺩﻮﺧ ﻥﺎﺘﺳﻭﺩ ﺖﺴﯿﻟ ﺯﺍ ﺍﺭ '%s' ﻦﻠﮐ ﺪﯿﻫﺍﻮﺧ ﯽﻣ ﻪﮐ ﺪﯿﺘﺴﻫ ﻦﺌﻤﻄﻣ ﺎﯾﺁ
 
-Play the current demo
-== ﯽﻠﻌﻓ ﯼ ﻮﻣﺩ ﺶﺨﭘ
-
-Pause the current demo
-== ﺚﮑﻣ
-
-Stop the current demo
-== ﻒﻗﻮﺗ
-
 Go back one tick
 == ﺩﺮﮔﺮﺑ ﺐﻘﻋ ﻪﺑ ﮏﯿﺗ ﮏﯾ
 
 Go forward one tick
 == ﻭﺮﺑ ﻮﻠﺟ ﮏﯿﺗ ﮏﯾ
-
-Slow down the demo
-== ﻮﻣﺩ ﺖﻋﺮﺳ ﻥﺩﺮﮐ ﻢﮐ
-
-Speed up the demo
-== ﻮﻣﺩ ﺖﻋﺮﺳ ﻥﺩﺮﮐ ﺩﺎﯾﺯ
-
-Export cut as a separate demo
-== ﻦﻛ ﺭﺩﺎﺻ ﻪﻧﺎﮔﺍﺪﺟ ﻮﻣﺩ ﻚﯾ ﻥﺍﻮﻨﻋﻪﺑ ﺍﺭ ﺵﺮﺑ
 
 Go back one marker
 == ﺩﺮﮔﺮﺑ ﺐﻘﻋ ﻪﺑ ﺮﮕﻧﺎﺸﻧ ﮏﯾ
@@ -953,9 +893,6 @@ Go forward one marker
 Toggle keyboard shortcuts
 == ﺪﯿﻠﮐ ﻪﺤﻔﺻ ﺮﺒﻧﺎﯿﻣ ﯼﺎﻫﺪﯿﻠﮐ ﺮﯿﯿﻐﺗ
 
-Loading demo files
-== ﻮﻣﺩ ﯼﺎﻫ ﻞﯾﺎﻓ ﻥﺩﺮﮐ ﻩﺩﺎﻣﺁ ﻝﺎﺣ ﺭﺩ
-
 %.2f MiB
 == %.2f MiB
 
@@ -964,15 +901,6 @@ Loading demo files
 
 Fetch Info
 == ﺕﺎﻋﻼﻃﺍ ﯽﺸﮐﺍﻭ
-
-Open the directory that contains the demo files
-== ﺪﯿﻨﮐ ﺯﺎﺑ ﺍﺭ ﺖﺴﻫ ﻮﻣﺩ ﯼﺎﻫ ﻞﯾﺎﻓ ﻞﻣﺎﺷ ﻪﮐ ﯼﺍ ﻪﺷﻮﭘ
-
-Are you sure that you want to delete the demo '%s'?
-== ؟ﺪﯿﻨﮐ ﻑﺬﺣ ﺍﺭ '%s' ﻮﻣﺩ ﺪﯿﻫﺍﻮﺧ ﯽﻣ ﻪﮐ ﺪﯿﺘﺴﻫ ﻦﺌﻤﻄﻣ ﺎﯾﺁ
-
-Unable to delete the demo '%s'
-== ﺩﺭﺍﺪﻧ ﺩﻮﺟﻭ '%s' ﻮﻣﺩ ﻑﺬﺣ ﻥﺎﮑﻣﺍ
 
 Loading ghost files
 == ﺡﻭﺭ ﯼﺎﻫ ﻞﯾﺎﻓ ﻥﺩﺮﮐ ﻩﺩﺎﻣﺁ ﻝﺎﺣ ﺭﺩ
@@ -1300,9 +1228,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == ﯼﺭﺰﯿﻟ ﮓﻨﻔﺗ ﯼﻭﺭ ﻪﻤﻫ ﻢﯿﻈﻨﺗ
 
-Save the best demo of each race
-== ﻪﻘﺑﺎﺴﻣ ﺮﻫ ﻮﻣﺩ ﻦﯾﺮﺘﻬﺑ ﻩﺮﯿﺧﺫ
-
 Default length
 == ﺽﺮﻓ‌ﺶﯿﭘ ﻝﻮﻃ
 
@@ -1399,9 +1324,6 @@ Server executable not found, can't run server
 DDNet %s is out!
 == !ﺪﺷ ﺮﺸﺘﻨﻣ %s ﺖﻨﯾﺪﯾﺩ
 
-Loading race demo files
-== ﻪﻘﺑﺎﺴﻣ ﯽﺸﯾﺎﻣﺯﺁ ﯼﺎﻫ ﻞﯾﺎﻓ ﻥﺩﺮﮐ ﻩﺩﺎﻣﺁ ﻝﺎﺣ ﺭﺩ
-
 Time limit: %d min
 == ﻪﻘﯿﻗﺩ %d :ﯽﻧﺎﻣﺯ ﺖﯾﺩﻭﺪﺤﻣ
 
@@ -1470,9 +1392,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == ﺪﺸﻧ ﻞﺼﺘﻣ ﯽﻣﺍﺩ
 
-Error playing demo
-== ﻮﻣﺩ ﻥﺩﺮﻛ ﺍﺮﺟﺍ ﺭﺩ ﺎﻄﺧ
-
 Failed saving the replay!
 == !ﺩﻮﺑ ﻖﻓﻮﻣﺎﻧ ﺩﺪﺠﻣ ﺶﺨﭘ ﻥﺩﺮﻛ ﻩﺮﯿﺧﺫ
 
@@ -1484,9 +1403,6 @@ Error saving settings
 
 The format of texture %s is not RGBA which will cause visual bugs.
 == .ﺩﻮﺷ ﯽﻣ ىﺮﻫﺎﻇ  ﻝﺎﻜﺷﺍ ﺩﺎﺠﯾﺍ ﺚﻋﺎﺑ ﻪﻛ ﺖﺴﯿﻧ %s RGBA ﯽﻜﯿﻓﺍﺮﮔ ﺖﻟﺎﺣ ﺖﻣﺮﻓ
-
-Loading demo file from storage
-== ﻪﻈﻓﺎﺣ ﺯﺍ ﻮﻣﺩ ﻞﯾﺎﻓ ىﺮﯿﮔﺭﺎﺑ ﻝﺎﺣ ﺭﺩ
 
 Initializing map logic
 == ﭗﻣ ﻖﻄﻨﻣ ىﺯﺍﺪﻧﺍ ﻩﺍﺭ
@@ -1570,9 +1486,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == ؟ﺪﯿﻫﺩ ﻪﻣﺍﺩﺍ ﻝﺎﺣ ﺮﻫ ﻪﺑ
 
-A demo with this name already exists
-== ﺩﺭﺍﺩ ﺩﻮﺟﻭ ﻞﺒﻗ ﺯﺍ ﻡﺎﻧ ﻦﯾﺍ ﺎﺑ ﻮﻣﺩ ﻚﯾ
-
 A folder with this name already exists
 == ﺩﺭﺍﺩ ﺩﻮﺟﻭ ﻞﺒﻗ ﺯﺍ ﻡﺎﻧ ﻦﯾﺍ ﺎﺑ ﻪﺷﻮﭘ ﻚﯾ
 
@@ -1640,14 +1553,6 @@ Friends
 Go back the specified duration
 == ﺪﯿﻧﺍﺩﺮﮔﺮﺑ ﺐﻘﻋ ﻪﺑ ﺍﺭ ﻩﺪﺷ ﺺﺨﺸﻣ ﻥﺎﻣﺯ ﺕﺪﻣ
 
-[Demo player duration]
-%s min.
-== ﻪﻘﯿﻗﺩ %s
-
-[Demo player duration]
-%s sec.
-== ﻪﯿﻧﺎﺛ %s
-
 Change the skip duration
 == ﻩﺪﺷ ﭗﯿﻜﺳﺍ ﻥﺎﻣﺯ ﺕﺪﻣ ﺮﯿﯿﻐﺗ
 
@@ -1659,12 +1564,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == (ﺪﯿﻨﻛ ﺖﺳﺍﺭ ﻚﯿﻠﻛ ﺩﺪﺠﻣ ﻢﯿﻈﻨﺗ ىﺍﺮﺑ) ﺪﯿﻧﺰﺑ ﺖﻣﻼﻋ ﺍﺭ ﺵﺮﺑ ﻚﯾ ىﺎﻬﺘﻧﺍ
-
-Close the demo player
-== ﺪﯾﺪﻨﺒﺑ ﺍﺭ ﻮﻣﺩ ﻩﺪﻨﻨﻛ ﺶﺨﭘ
-
-Export demo cut
-== ﻦﻛ ﺭﺩﺎﺻ ﺍﺭ ﻮﻣﺩ ﺵﺮﺑ
 
 Cut interval
 == ﺵﺮﺑ ﻪﻠﺻﺎﻓ
@@ -1681,9 +1580,6 @@ Please use a different filename
 All combined
 == ﺪﯿﻨﻛ ﻩﺩﺎﻔﺘﺳﺍ ىﺮﮕﯾﺩ ﻞﯾﺎﻓ ﻡﺎﻧ ﺯﺍ ﺎﻔﻄﻟ
 
-No demo selected
-== ﺖﺳﺍ ﻩﺪﺸﻧ ﺏﺎﺨﺘﻧﺍ ىﺍ ﻮﻣﺩ ﭻﯿﻫ
-
 Folder Link
 == ﻪﺷﻮﭘ ﻚﻨﯿﻟ
 
@@ -1692,10 +1588,6 @@ Created
 
 Netversion
 == ﺖﻧ ﻪﺨﺴﻧ
-
-[Demo details]
-map not included
-== ﺖﺳﺍ ﻩﺪﺸﻧ ﻩﺪﻧﺎﺠﻨﮔ ﭗﻣ
 
 Are you sure that you want to delete the folder '%s'?
 == ؟ﺪﯿﻨﻛ ﻑﺬﺣ ﺍﺭ '%s' ﻪﺷﻮﭘ ﺪﯿﻫﺍﻮﺧ ﯽﻣ ﻪﻛ ﺪﯿﺘﺴﻫ ﻦﺌﻤﻄﻣ ﺎﯾﺁ
@@ -2014,9 +1906,6 @@ Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom
 Press Ctrl+Shift+G to disable debug graphs.
 == 
 
-No demo with this filename exists
-== 
-
 Team save in progress. You'll be able to load with '/load %s'
 == 
 
@@ -2141,18 +2030,7 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Map size
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2395,10 +2273,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2497,9 +2371,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Mute emoticons
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

@@ -110,17 +110,9 @@ enum
 	 */
 	MSGFLAG_FLUSH = 1 << 1,
 	/**
-	 * Don't write message to demo recorders. This flag is server-side only, where sent messages are recorded by default.
+	 * Don't send the message to client/server.
 	 */
-	MSGFLAG_NORECORD = 1 << 2,
-	/**
-	 * Write message to demo recorders. This flag is client-side only, where sent messages are not recorded by default.
-	 */
-	MSGFLAG_RECORD = 1 << 3,
-	/**
-	 * Don't send the message to client/server. Useful combined with @link MSGFLAG_RECORD @endlink to record a message without sending it.
-	 */
-	MSGFLAG_NOSEND = 1 << 4,
+	MSGFLAG_NOSEND = 1 << 2,
 };
 
 enum

@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Kas olete kindel, et tahate lahkuda?
 
-Automatically record demos
-== Automaatselt lindista demosid
-
 Automatically take game over screenshot
 == Automaatselt tee mängu lõpu ekraanipilt.
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Kustuta
 
-Delete demo
-== Kustuta demo
-
-Demofile: %s
-== Demo fail: %s
-
-Demos
-== Demod
-
 Disconnect
 == Katkesta ühendus
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Rike
-
-Error loading demo
-== Rike demo laadimisega
 
 Favorite
 == Lemmik
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Konks
-
-Invalid Demo
-== Kehtetu Demo
 
 Join blue
 == Liitu sinisega
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Eemalda sõber
 
-Rename demo
-== Nimeta demo ümber
-
 Reset filter
 == Lähtesta filter
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Tüüp
 
-Unable to rename the demo
-== Demot ei saa ümber nimetada
-
 Use sounds
 == Kasuta heli
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Demode maksimaalne arv
-
 News
 == Uudised
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Värvitoon
-
-Record demo
-== Lindista demo
 
 Your skin
 == Teie välimus
@@ -531,9 +501,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Taasühendamine %d sekundi pärast
-
-Render demo
-== Renderda demo
 
 Replace video
 == Asenda video
@@ -658,9 +625,6 @@ Remove chat
 %.2f KiB
 == %.2f KiB
 
-Demo
-== Demo
-
 Markers
 == Markerid
 
@@ -672,9 +636,6 @@ Date
 
 Fetch Info
 == Hangi Info
-
-Demos directory
-== Demode asukoht
 
 Connecting dummy
 == Ühendan dummyga
@@ -868,9 +829,6 @@ Client message
 Preview
 == Eelvaade
 
-Save the best demo of each race
-== Salvesta iga võistluse parim demo
-
 Default length
 == Vaikepikkus
 
@@ -1054,9 +1012,6 @@ Could not initialize the given graphics backend, this is probably because you di
 Could not save downloaded map. Try manually deleting this file: %s
 == Ei suutnud salvestada allalaaditud kaarti. Proovi käsitsi kustutada seda faili: %s
 
-Error playing demo
-== Rike demo mängimisel
-
 Failed saving the replay!
 == Ei suutnud salvestada kordust!
 
@@ -1068,9 +1023,6 @@ Error saving settings
 
 The format of texture %s is not RGBA which will cause visual bugs.
 == Tekstuuri %s vorming ei ole RGBA, mis põhjustab visuaalseid vigu.
-
-Preparing demo playback
-== Demo taasesituse ettevalmistamine
 
 Connected
 == Ühendatud
@@ -1198,9 +1150,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Jätka igatahes?
 
-A demo with this name already exists
-== Demo sellise nimega on juba olemas
-
 A folder with this name already exists
 == Kaust sellise nimega on juba olemas
 
@@ -1268,25 +1217,8 @@ Server filter
 Friends
 == Sõbrad
 
-Play the current demo
-== Mängi praegust demo
-
-Pause the current demo
-== Peata praegune demo
-
-Stop the current demo
-== Katkesta praegune demo
-
 Go back the specified duration
 == Mine tagasi määratud kestus
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sek.
 
 Change the skip duration
 == Muuda vahelejätmise kestust
@@ -1306,29 +1238,14 @@ Go back one marker
 Go forward one marker
 == Mine edasi üks marker
 
-Slow down the demo
-== Aeglusta demo
-
-Speed up the demo
-== Kiirenda demo
-
 Mark the beginning of a cut (right click to reset)
 == Märgi lõike algus (parem klick lähtestamiseks)
 
 Mark the end of a cut (right click to reset)
 == Märgi lõike lõpp (parem klick lähtestamiseks)
 
-Export cut as a separate demo
-== Ekspordi lõik eraldi demona
-
-Close the demo player
-== Sulge demo mängija
-
 Toggle keyboard shortcuts
 == Lülita klaviatuuri otseteed
-
-Export demo cut
-== Ekspordi demo lõik
 
 Cut interval
 == Lõigu ajavahemik
@@ -1342,14 +1259,8 @@ Render cut to video
 Please use a different filename
 == Palun kasutage teistsugust faili nime
 
-Loading demo files
-== Demo failide laadimine
-
 All combined
 == Kõik koos
-
-No demo selected
-== Demo pole valitud
 
 Folder Link
 == Kausta Side
@@ -1360,24 +1271,11 @@ Created
 Netversion
 == Netversioon
 
-[Demo details]
-map not included
-== kaart pole kaasas
-
-Open the directory that contains the demo files
-== Ava demo failide asukoht
-
 Are you sure that you want to delete the folder '%s'?
 == Kas olete kindel, et soovite kustutada kausta '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Kas olete kindel, et soovite kustutada demo '%s'?
-
 Delete folder
 == Kustuta kaust
-
-Unable to delete the demo '%s'
-== Ei saa kustutada demo '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Ei saa kustutada kausta '%s'. Tehke kindlaks et see on tühi.
@@ -1714,9 +1612,6 @@ Tutorial
 Server executable not found, can't run server
 == Serveri käivitaja faili ei leitud, serverit ei saa käivitada
 
-Loading race demo files
-== Võistluste demofailide laadimine
-
 Super
 == Super
 
@@ -1734,9 +1629,6 @@ Grabs
 
 Moved ingame
 == Mängusisene liikumine
-
-Loading demo file from storage
-== Demofaili laadimine mälust
 
 No login required
 == Sisse pole vaja logida
@@ -1813,9 +1705,6 @@ Press Ctrl+Shift+G to disable debug graphs.
 == 
 
 Could not connect dummy
-== 
-
-No demo with this filename exists
 == 
 
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
@@ -1982,21 +1871,10 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Toggle auto camera
 == 
 
 Map size
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Dummy is not allowed on this server
@@ -2316,10 +2194,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2418,9 +2292,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Active: Hook
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

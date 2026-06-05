@@ -24,16 +24,6 @@
 class IMap;
 struct SWarning;
 
-enum
-{
-	RECORDER_MANUAL = 0,
-	RECORDER_AUTO = 1,
-	RECORDER_RACE = 2,
-	RECORDER_REPLAYS = 3,
-	RECORDER_MAX = 4,
-};
-
-typedef bool (*CLIENTFUNC_FILTER)(const void *pData, int DataSize, void *pUser);
 struct CChecksumData;
 
 class IClient : public IInterface
@@ -45,7 +35,6 @@ public:
 		STATE_CONNECTING - The client is trying to connect to a server.
 		STATE_LOADING - The client has connected to a server and is loading resources.
 		STATE_ONLINE - The client is connected to a server and running the game.
-		STATE_DEMOPLAYBACK - The client is playing a demo
 		STATE_QUITTING - The client is quitting.
 	*/
 
@@ -55,7 +44,6 @@ public:
 		STATE_CONNECTING,
 		STATE_LOADING,
 		STATE_ONLINE,
-		STATE_DEMOPLAYBACK,
 		STATE_QUITTING,
 		STATE_RESTARTING,
 	};
@@ -68,7 +56,6 @@ public:
 	{
 		LOADING_STATE_DETAIL_INITIAL,
 		LOADING_STATE_DETAIL_LOADING_MAP,
-		LOADING_STATE_DETAIL_LOADING_DEMO,
 		LOADING_STATE_DETAIL_SENDING_READY,
 		LOADING_STATE_DETAIL_GETTING_READY,
 	};
@@ -76,7 +63,6 @@ public:
 	enum ELoadingCallbackDetail
 	{
 		LOADING_CALLBACK_DETAIL_MAP,
-		LOADING_CALLBACK_DETAIL_DEMO,
 	};
 	typedef std::function<void(ELoadingCallbackDetail Detail)> TLoadingCallback;
 	CTranslationContext m_TranslationContext;
@@ -200,14 +186,6 @@ public:
 
 	virtual void Restart() = 0;
 	virtual void Quit() = 0;
-	virtual const char *DemoPlayer_Play(const char *pFilename, int StorageType) = 0;
-#if defined(CONF_VIDEORECORDER)
-	virtual const char *DemoPlayer_Render(const char *pFilename, int StorageType, const char *pVideoName, int SpeedIndex, bool StartPaused = false) = 0;
-#endif
-	virtual void DemoRecorder_Start(const char *pFilename, bool WithTimestamp, int Recorder) = 0;
-	virtual void DemoRecorder_HandleAutoStart() = 0;
-	virtual void DemoRecorder_UpdateReplayRecorder() = 0;
-	virtual class IDemoRecorder *DemoRecorder(int Recorder) = 0;
 	virtual void AutoScreenshot_Start() = 0;
 	virtual void AutoStatScreenshot_Start() = 0;
 	virtual void AutoCSV_Start() = 0;
@@ -306,14 +284,6 @@ public:
 	void SetReconnectTime(int64_t ReconnectTime) { m_ReconnectTime = ReconnectTime; }
 
 	virtual bool IsSixup() const = 0;
-
-	virtual void RaceRecord_Start(const char *pFilename) = 0;
-	virtual void RaceRecord_Stop() = 0;
-	virtual bool RaceRecord_IsRecording() = 0;
-
-	virtual void DemoSliceBegin() = 0;
-	virtual void DemoSliceEnd() = 0;
-	virtual void DemoSlice(const char *pDstPath, CLIENTFUNC_FILTER pfnFilter, void *pUser) = 0;
 
 	enum class EInfoState
 	{
@@ -425,9 +395,7 @@ public:
 	virtual int ClientVersion7() const = 0;
 
 	virtual void ApplySkin7InfoFromSnapObj(const protocol7::CNetObj_De_ClientInfo *pObj, int ClientId) = 0;
-	virtual int OnDemoRecSnap7(class CSnapshot *pFrom, class CSnapshot *pTo, int Conn) = 0;
 	virtual int TranslateSnap(class CSnapshot *pSnapDstSix, class CSnapshot *pSnapSrcSeven, int Conn, bool Dummy) = 0;
-	virtual void ProcessDemoSnapshot(class CSnapshot *pSnap) = 0;
 
 	virtual void InitializeLanguage() = 0;
 

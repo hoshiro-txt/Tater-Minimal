@@ -666,14 +666,13 @@ def open_editor(test_env):
 @test
 def smoke_test(test_env):
 	client1 = test_env.client(["logfile client1.log", "player_name client1", "cl_save_settings 1"])
-	server = test_env.server(["logfile server.log", "sv_demo_chat 1", "sv_map coverage", "sv_tee_historian 1"])
+	server = test_env.server(["logfile server.log", "sv_map coverage", "sv_tee_historian 1"])
 	wait_for_startup([client1, server])
 	# Start client2 after client1 to avoid fetching resources twice.
 	# Wait for both clients to start to avoid flaky behavior due time required for the client to launch.
 	client2 = test_env.client(["logfile client2.log", "player_name client2"])
 	wait_for_startup([client2])
 
-	server.command("record server")
 	client1.command("debug 1")
 	client1.command("stdout_output_level 2; loglevel 2")
 	client1.command(f"connect localhost:{server.port}")
@@ -681,7 +680,6 @@ def smoke_test(test_env):
 	client1.wait_for_log_exact("client: state change. last=2 current=3", timeout=15)
 	client1.command("stdout_output_level 0; loglevel 0")
 	client1.command("debug 0")
-	client1.command("record client1")
 
 	client2.command(f"connect localhost:{server.port}")
 	server.wait_for_log_prefix("server: player has entered the game", timeout=10)
@@ -738,24 +736,12 @@ def smoke_test(test_env):
 	)
 	client1.wait_for_log_exact("chat/server: *** the end", timeout=3)
 
-	server.command("stoprecord")
-	client1.command("stoprecord")
-
 	game_uuid = str(UUID(server.teehistorian_filename.removeprefix("teehistorian/").removesuffix(".teehistorian")))
 
 	client1.command("rcon sv_map Tutorial")
 
 	for _ in range(2):
 		server.wait_for_log_prefix("server: player has entered the game", timeout=10)
-
-	client1.clear_events()
-	client2.clear_events()
-
-	client1.command("play demos/server.demo")
-	client2.command("play demos/client1.demo")
-
-	client1.wait_for_log_prefix("chat/server: *** client1 finished in:", timeout=20)
-	client2.wait_for_log_prefix("chat/server: *** client1 finished in:", timeout=20)
 
 	client1.exit()
 	client2.exit()

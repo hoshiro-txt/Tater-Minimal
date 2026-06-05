@@ -58,7 +58,6 @@
 #include "components/nameplates.h"
 #include "components/particles.h"
 #include "components/players.h"
-#include "components/race_demo.h"
 #include "components/scoreboard.h"
 #include "components/skins.h"
 #include "components/skins7.h"
@@ -207,7 +206,6 @@ public:
 
 	CMapSounds m_MapSounds;
 
-	CRaceDemo m_RaceDemo;
 	CGhost m_Ghost;
 
 	CTooltips m_Tooltips;
@@ -251,7 +249,6 @@ private:
 	class CConfig *m_pConfig;
 	class IConsole *m_pConsole;
 	class IStorage *m_pStorage;
-	class IDemoPlayer *m_pDemoPlayer;
 	class IFavorites *m_pFavorites;
 	class IServerBrowser *m_pServerBrowser;
 	class IEditor *m_pEditor;
@@ -326,8 +323,6 @@ public:
 	class CConfig *Config() const { return m_pConfig; }
 	class IConsole *Console() { return m_pConsole; }
 	class ITextRender *TextRender() const { return m_pTextRender; }
-	class IDemoPlayer *DemoPlayer() const { return m_pDemoPlayer; }
-	class IDemoRecorder *DemoRecorder(int Recorder) const { return Client()->DemoRecorder(Recorder); }
 	class IFavorites *Favorites() const { return m_pFavorites; }
 	class IServerBrowser *ServerBrowser() const { return m_pServerBrowser; }
 	class CRenderTools *RenderTools() { return &m_RenderTools; }
@@ -369,8 +364,6 @@ public:
 	};
 	int m_ServerMode;
 	CGameInfo m_GameInfo;
-
-	int m_DemoSpecId;
 
 	vec2 m_LocalCharacterPos;
 
@@ -447,7 +440,6 @@ public:
 	int m_aExpectingTuningSince[NUM_DUMMIES]; // how many snaps received since tunezone changed
 	CTuningParams m_aTuning[NUM_DUMMIES]; // current local player tuning, only what the player/dummy has
 
-	std::bitset<RECORDER_MAX> m_ActiveRecordings;
 
 	// spectate cursor data
 	class CCursorInfo
@@ -657,7 +649,6 @@ public:
 	template<typename T>
 	void ApplySkin7InfoFromGameMsg(const T *pMsg, int ClientId, int Conn);
 	void ApplySkin7InfoFromSnapObj(const protocol7::CNetObj_De_ClientInfo *pObj, int ClientId) override;
-	int OnDemoRecSnap7(class CSnapshot *pFrom, class CSnapshot *pTo, int Conn) override;
 	void *TranslateGameMsg(int *pMsgId, CUnpacker *pUnpacker, int Conn);
 	int TranslateSnap(CSnapshot *pSnapDstSix, CSnapshot *pSnapSrcSeven, int Conn, bool Dummy) override;
 	void OnMessage(int MsgId, CUnpacker *pUnpacker, int Conn, bool Dummy) override;
@@ -692,7 +683,6 @@ public:
 	void CollectManagedTeeRenderInfos(const std::function<void(const char *pSkinName)> &ActiveSkinAcceptor);
 
 	void RenderShutdownMessage() override;
-	void ProcessDemoSnapshot(CSnapshot *pSnap) override;
 
 	const char *GetItemName(int Type) const override;
 	const char *Version() const override;
@@ -740,9 +730,9 @@ public:
 
 	bool IsTeamPlay() const { return m_Snap.m_pGameInfoObj && m_Snap.m_pGameInfoObj->m_GameFlags & GAMEFLAG_TEAMS; }
 
-	bool AntiPingPlayers() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingPlayers && !m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK; }
-	bool AntiPingGrenade() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingGrenade && !m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK; }
-	bool AntiPingWeapons() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingWeapons && !m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK; }
+	bool AntiPingPlayers() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingPlayers && !m_Snap.m_SpecInfo.m_Active; }
+	bool AntiPingGrenade() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingGrenade && !m_Snap.m_SpecInfo.m_Active; }
+	bool AntiPingWeapons() const { return g_Config.m_ClAntiPing && g_Config.m_ClAntiPingWeapons && !m_Snap.m_SpecInfo.m_Active; }
 	bool AntiPingGunfire() const { return AntiPingGrenade() && AntiPingWeapons() && g_Config.m_ClAntiPingGunfire; }
 	bool Predict() const;
 	bool PredictDummy() const { return g_Config.m_ClPredictDummy && Client()->DummyConnected() && m_Snap.m_LocalClientId >= 0 && m_aLocalIds[!g_Config.m_ClDummy] >= 0 && !m_aClients[m_aLocalIds[!g_Config.m_ClDummy]].m_Paused; }

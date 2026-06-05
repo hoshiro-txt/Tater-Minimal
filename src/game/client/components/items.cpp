@@ -2,7 +2,6 @@
 /* If you are missing that file, acquire a complete release at teeworlds.com.                */
 #include "items.h"
 
-#include <engine/demo.h>
 #include <engine/graphics.h>
 #include <engine/shared/config.h>
 
@@ -65,14 +64,12 @@ void CItems::RenderProjectile(const CProjectileData *pCurrent, int ItemId)
 	{
 		if(Ct > -s_LastGameTickTime / 2)
 		{
-			// Fixup the timing which might be screwed during demo playback because
-			// s_LastGameTickTime depends on the system timer, while the other part
+			// Fixup the timing where s_LastGameTickTime depends on the system timer, while the other part
 			// (Client()->PrevGameTick(g_Config.m_ClDummy) - pCurrent->m_StartTick) / (float)Client()->GameTickSpeed()
 			// is virtually constant (for projectiles fired on the current game tick):
 			// (x - (x+2)) / 50 = -0.04
 			//
 			// We have a strict comparison for the passed time being more than the time between ticks
-			// if(CurtickStart > m_Info.m_CurrentTime) in CDemoPlayer::Update()
 			// so on the practice the typical value of s_LastGameTickTime varies from 0.02386 to 0.03999
 			// which leads to Ct from -0.00001 to -0.01614.
 			// Round up those to 0.0 to fix missing rendering of the projectile.
@@ -103,17 +100,8 @@ void CItems::RenderProjectile(const CProjectileData *pCurrent, int ItemId)
 		static float s_Time = 0.0f;
 		static float s_LastLocalTime = LocalTime();
 
-		if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-		{
-			const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-			if(!pInfo->m_Paused)
-				s_Time += (LocalTime() - s_LastLocalTime) * pInfo->m_Speed;
-		}
-		else
-		{
-			if(GameClient()->m_Snap.m_pGameInfoObj && !(GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED))
-				s_Time += LocalTime() - s_LastLocalTime;
-		}
+		if(GameClient()->m_Snap.m_pGameInfoObj && !(GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED))
+			s_Time += LocalTime() - s_LastLocalTime;
 
 		Graphics()->QuadsSetRotation(s_Time * pi * 2 * 2 + ItemId);
 		s_LastLocalTime = LocalTime();
@@ -209,17 +197,8 @@ void CItems::RenderPickup(const CNetObj_Pickup *pPrev, const CNetObj_Pickup *pCu
 	static float s_Time = 0.0f;
 	static float s_LastLocalTime = LocalTime();
 	float Offset = Pos.y / 32.0f + Pos.x / 32.0f;
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-		if(!pInfo->m_Paused)
-			s_Time += (LocalTime() - s_LastLocalTime) * pInfo->m_Speed;
-	}
-	else
-	{
-		if(GameClient()->m_Snap.m_pGameInfoObj && !(GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED))
-			s_Time += LocalTime() - s_LastLocalTime;
-	}
+	if(GameClient()->m_Snap.m_pGameInfoObj && !(GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED))
+		s_Time += LocalTime() - s_LastLocalTime;
 	Pos += direction(s_Time * 2.0f + Offset) * 2.5f;
 	s_LastLocalTime = LocalTime();
 
@@ -465,7 +444,7 @@ void CItems::RenderLaser(vec2 From, vec2 Pos, ColorRGBA OuterColor, ColorRGBA In
 
 void CItems::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	bool IsSuper = GameClient()->IsLocalCharSuper();

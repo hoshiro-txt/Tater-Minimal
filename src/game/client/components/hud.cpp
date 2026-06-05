@@ -564,7 +564,7 @@ void CHud::RenderTextInfo()
 			TextRender()->RenderTextContainer(m_FPSTextContainerIndex, TextRender()->DefaultTextColor(), TextRender()->DefaultTextOutlineColor());
 		}
 	}
-	if(g_Config.m_ClShowpred && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(g_Config.m_ClShowpred)
 	{
 		char aBuf[64];
 		str_format(aBuf, sizeof(aBuf), "%d", Client()->GetPredictionTime());
@@ -813,7 +813,7 @@ void CHud::RenderCursor()
 	Graphics()->MapScreenToWorld(Center.x, Center.y, 100.0f, 100.0f, 100.0f, 0, 0, Graphics()->ScreenAspect(), 1.0f, aPoints);
 	Graphics()->MapScreen(aPoints[0], aPoints[1], aPoints[2], aPoints[3]);
 
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_pLocalCharacter)
+	if(GameClient()->m_Snap.m_pLocalCharacter)
 	{
 		// Render local cursor
 		CurWeapon = maximum(0, GameClient()->m_aClients[GameClient()->m_Snap.m_LocalClientId].m_Predicted.m_ActiveWeapon);
@@ -825,7 +825,7 @@ void CHud::RenderCursor()
 		if(!g_Config.m_ClSpecCursor || !GameClient()->m_CursorInfo.IsAvailable())
 			return;
 
-		bool RenderSpecCursor = (GameClient()->m_Snap.m_SpecInfo.m_Active && GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != SPEC_FREEVIEW) || Client()->State() == IClient::STATE_DEMOPLAYBACK;
+		bool RenderSpecCursor = (GameClient()->m_Snap.m_SpecInfo.m_Active && GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != SPEC_FREEVIEW) || false;
 
 		if(!RenderSpecCursor)
 			return;
@@ -1892,7 +1892,7 @@ void CHud::RenderSpectatorHud()
 	TextRender()->Text(m_Width - 174.0f, AdjustedHeight - 15.0f + (15.f - 8.f) / 2.f, 8.0f, aBuf, -1.0f);
 
 	// draw the camera info
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK && GameClient()->m_Camera.SpectatingPlayer() && GameClient()->m_Camera.CanUseAutoSpecCamera() && g_Config.m_ClSpecAutoSync)
+	if(GameClient()->m_Camera.SpectatingPlayer() && GameClient()->m_Camera.CanUseAutoSpecCamera() && g_Config.m_ClSpecAutoSync)
 	{
 		bool AutoSpecCameraEnabled = GameClient()->m_Camera.m_AutoSpecCamera;
 		const char *pLabelText = Localize("AUTO", "Spectating Camera Mode Icon");
@@ -1933,7 +1933,7 @@ void CHud::RenderLocalTime(float x)
 
 void CHud::OnNewSnapshot()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 	if(!GameClient()->m_Snap.m_pGameInfoObj)
 		return;
@@ -1979,7 +1979,7 @@ void CHud::OnNewSnapshot()
 
 void CHud::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!GameClient()->m_Snap.m_pGameInfoObj)
@@ -2039,7 +2039,7 @@ void CHud::OnRender()
 		RenderTextInfo();
 		GameClient()->m_TClient.RenderCenterLines();
 		RenderLocalTime((m_Width / 7) * 3);
-		if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		if(true)
 			RenderConnectionWarning();
 		RenderTeambalanceWarning();
 		GameClient()->m_Voting.Render();

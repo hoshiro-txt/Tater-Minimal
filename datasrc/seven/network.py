@@ -194,7 +194,7 @@ Objects = [
 		NetIntAny("m_Y"),
 	]),
 
-	## Demo
+	## Extended client data
 
 	NetObject("De_ClientInfo", [
 		NetBool("m_Local"),
@@ -378,7 +378,7 @@ Messages = [
 
 	NetMessage("Sv_GameMsg", []),
 
-	## Demo messages
+	## Extended client messages
 	NetMessage("De_ClientEnter", [
 		NetStringStrict("m_pName"),
 		NetIntRange("m_ClientId", -1, 'MAX_CLIENTS-1'),

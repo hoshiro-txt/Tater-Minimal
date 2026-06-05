@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == 确定要退出吗？
 
-Automatically record demos
-== 自动录制回放
-
 Automatically take game over screenshot
 == 自动对游戏结束画面截图
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == 删除
 
-Delete demo
-== 删除回放
-
-Demofile: %s
-== 回放文件：%s
-
-Demos
-== 回放
-
 Disconnect
 == 断开连接
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == 错误
-
-Error loading demo
-== 回放加载错误
 
 Favorite
 == 收藏
@@ -180,9 +165,6 @@ High Detail
 
 Hook
 == 钩索
-
-Invalid Demo
-== 回放文件无效或已损坏
 
 Join blue
 == 加入蓝队
@@ -322,9 +304,6 @@ Remove
 Remove friend
 == 删除好友
 
-Rename demo
-== 重命名回放
-
 Reset filter
 == 重置筛选
 
@@ -430,9 +409,6 @@ Try again
 Type
 == 模式
 
-Unable to rename the demo
-== 无法重命名这个回放
-
 Use sounds
 == 开启声音
 
@@ -475,9 +451,6 @@ Yes
 You must restart the game for all settings to take effect.
 == 你需要重启游戏来使新设置生效。
 
-Demo
-== 回放
-
 Reset
 == 重置
 
@@ -495,9 +468,6 @@ Miscellaneous
 
 Internet
 == 互联网
-
-Max demos
-== 最大回放数
 
 News
 == 新闻
@@ -522,9 +492,6 @@ Laser
 
 Hue
 == 色调
-
-Record demo
-== 录制回放
 
 Your skin
 == 你的皮肤
@@ -582,9 +549,6 @@ Normal message
 
 Friend message
 == 好友消息
-
-Save the best demo of each race
-== 保存每场游戏最佳记录的回放
 
 Ghost
 == 影子
@@ -895,9 +859,6 @@ Learn
 Personal best:
 == 个人最佳：
 
-Render demo
-== 渲染回放
-
 Replace video
 == 替换视频
 
@@ -988,9 +949,6 @@ Theme
 
 %d player
 == %d 在线玩家
-
-Demos directory
-== 回放目录
 
 Smooth Dynamic Camera
 == 平滑动态视野
@@ -1255,9 +1213,6 @@ Highlight Color
 Extras
 == 其他
 
-Preparing demo playback
-== 正在准备回放
-
 Connected
 == 连接成功
 
@@ -1290,9 +1245,6 @@ Requesting to join the game
 
 Loading menu images
 == 正在加载主菜单图片
-
-Loading demo files
-== 正在加载回放文件
 
 Loading ghost files
 == 正在加载影子文件
@@ -1336,29 +1288,8 @@ Your movements are not taken into account when calculating the line colors
 Loading assets
 == 正在加载资源
 
-Loading race demo files
-== 正在加载回放文件
-
 Loading sound files
 == 正在加载声音文件
-
-Play the current demo
-== 播放回放
-
-Pause the current demo
-== 暂停回放
-
-Stop the current demo
-== 结束回放
-
-Slow down the demo
-== 减慢播放速度
-
-Speed up the demo
-== 加快播放速度
-
-Export cut as a separate demo
-== 另存为新回放文件
 
 Toggle keyboard shortcuts
 == 启用/禁用键盘快捷键
@@ -1420,12 +1351,6 @@ Go back one marker
 Go forward one marker
 == 跳至下一个标记
 
-Are you sure that you want to delete the demo '%s'?
-== 确定要删除回放文件 "%s" ？
-
-Unable to delete the demo '%s'
-== 无法删除回放文件 "%s"
-
 Reset controls
 == 恢复默认设置
 
@@ -1459,9 +1384,6 @@ Unknown error. Try to change gfx_backend to OpenGL or Vulkan in settings_ddnet.c
 [Graphics error]
 Could not initialize the given graphics backend, reverting to the default backend now.
 == 无法初始化当前配置的图形后端，正在将配置回退至默认图形后端。
-
-Open the directory that contains the demo files
-== 打开存有回放文件的文件夹路径
 
 Open the settings file
 == 打开设置文件
@@ -1513,9 +1435,6 @@ Click to remove this player from your friends list.
 Click to remove this clan from your friends list.
 == 单击以从你的好友列表移除此战队。
 
-A demo with this name already exists
-== 已经存在同名回放
-
 No server selected
 == 未选择服务器
 
@@ -1524,12 +1443,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == 标记裁剪终点 (右键重置)
-
-Close the demo player
-== 关闭回放
-
-Export demo cut
-== 另存裁剪部分
 
 Cut interval
 == 裁剪区间
@@ -1582,9 +1495,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Moved ingame
 == 游戏内移动
 
-Error playing demo
-== 回放播放错误
-
 Some map images could not be loaded. Check the local console for details.
 == 未能加载某些地图图片。检查本地控制台以获取详情。
 
@@ -1606,14 +1516,6 @@ Video was saved to '%s'
 Go back the specified duration
 == 快退指定时长
 
-[Demo player duration]
-%s min.
-== %s 分
-
-[Demo player duration]
-%s sec.
-== %s 秒
-
 Change the skip duration
 == 变更指定时长
 
@@ -1623,18 +1525,11 @@ Go forward the specified duration
 Render cut to video
 == 渲染裁剪部分
 
-No demo selected
-== 未选择回放
-
 Created
 == 创建日期
 
 Netversion
 == 网络协议版本
-
-[Demo details]
-map not included
-== 未包含地图
 
 Ghosts directory
 == 影子目录
@@ -1746,9 +1641,6 @@ Friends
 
 Loading…
 == 正在加载…
-
-Loading demo file from storage
-== 正在从硬盘中加载回放文件
 
 No login required
 == 无需登录
@@ -2105,9 +1997,6 @@ English translation by the DDNet Team
 Show spectator cursor
 == 显示旁观者光标
 
-No demo with this filename exists
-== 此回放文件不存在
-
 Map size
 == 地图占用空间
 
@@ -2195,14 +2084,6 @@ Server could not be started
 
 Could not get server list from master server
 == 无法从主服务器获取服务器列表
-
-[Demo playback]
-Live
-== 实时
-
-[Demo playback]
-Go to Live
-== 跳转到实时
 
 Save all changes before turning off the editor?
 == 是否在关闭编辑器前保存更改？
@@ -2393,10 +2274,6 @@ Rcon Authed
 == 登入管理员
 
 [Touch button visibilities]
-Demo Player
-== 播放回放时
-
-[Touch button visibilities]
 Extra Menu
 == 额外菜单
 
@@ -2476,9 +2353,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == 你即将从服务器断开连接。
-
-Are you sure that you want to disconnect and play this demo?
-== 确定要断开连接并播放此回放吗？
 
 Show background quads
 == 显示背景贴图
@@ -2585,9 +2459,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 玩家已登入管理员。
 
-Demo player is currently active.
-== 回放播放器正在运行。
-
 The extra menu with the given number is activated.
 == 指定编号的额外菜单已激活。
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

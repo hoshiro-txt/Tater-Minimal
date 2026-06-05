@@ -420,14 +420,14 @@ void IGameController::OnPlayerConnect(CPlayer *pPlayer)
 			Msg.m_MatchNum = 0;
 			Msg.m_ScoreLimit = 0;
 			Msg.m_TimeLimit = 0;
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 		}
 
 		// /team is essential
 		{
 			protocol7::CNetMsg_Sv_CommandInfoRemove Msg;
 			Msg.m_pName = "team";
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 		}
 	}
 }
@@ -506,7 +506,6 @@ void IGameController::StartRound()
 	m_SuddenDeath = 0;
 	m_GameOverTick = -1;
 	SetGamePaused(false);
-	Server()->DemoRecorder_HandleAutoStart();
 	char aBuf[256];
 	str_format(aBuf, sizeof(aBuf), "start round type='%s' teamplay='%d'", m_pGameType, m_GameFlags & GAMEFLAG_TEAMS);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
@@ -616,7 +615,7 @@ void IGameController::Snap(int SnappingClient)
 	pGameInfoObj->m_RoundCurrent = m_RoundCount + 1;
 
 	CCharacter *pChr;
-	CPlayer *pPlayer = SnappingClient != SERVER_DEMO_CLIENT ? GameServer()->m_apPlayers[SnappingClient] : nullptr;
+	CPlayer *pPlayer = GameServer()->m_apPlayers[SnappingClient];
 	CPlayer *pPlayer2;
 
 	if(pPlayer && (pPlayer->m_TimerType == CPlayer::TIMERTYPE_GAMETIMER || pPlayer->m_TimerType == CPlayer::TIMERTYPE_GAMETIMER_AND_BROADCAST) && pPlayer->GetClientVersion() >= VERSION_DDNET_GAMETICK)

@@ -407,7 +407,7 @@ bool CBgDraw::Save(const char *pFilename, bool Verbose)
 
 bool CBgDraw::Load(const char *pFilename, bool Verbose)
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return false;
 	IOHANDLE Handle = BgDrawOpenFile(*GameClient(), pFilename, IOFLAG_READ);
 	if(!Handle)
@@ -488,7 +488,7 @@ void CBgDraw::OnConsoleInit()
 
 void CBgDraw::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	Graphics()->TextureClear();
@@ -592,14 +592,14 @@ void CBgDraw::OnMapLoad()
 
 void CBgDraw::OnStateChange(int NewState, int OldState)
 {
-	if(OldState == IClient::STATE_ONLINE || OldState == IClient::STATE_DEMOPLAYBACK)
+	if(OldState == IClient::STATE_ONLINE)
 	{
 		if(g_Config.m_TcBgDrawAutoSaveLoad > 0)
 			Save(nullptr, false);
 	}
 	Reset();
 	m_NextAutoSave = AUTO_SAVE_INTERVAL;
-	if(NewState == IClient::STATE_ONLINE || OldState == IClient::STATE_DEMOPLAYBACK)
+	if(NewState == IClient::STATE_ONLINE)
 	{
 		if(g_Config.m_TcBgDrawAutoSaveLoad > 0)
 			Load(nullptr, false);

@@ -54,7 +54,7 @@ void CEnvelopeState::EnvelopeEval(int TimeOffsetMillis, int EnvelopeIndex, Color
 			// get the lerp of the current tick and prev
 			int EnvelopeTick;
 			double TickRatio;
-			if(Client()->State() == IClient::STATE_DEMOPLAYBACK || !g_Config.m_ClPredict ||
+			if(false || !g_Config.m_ClPredict ||
 				(GameClient()->m_Snap.m_SpecInfo.m_Active && GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != SPEC_FREEVIEW))
 			{
 				EnvelopeTick = Client()->PrevGameTick(g_Config.m_ClDummy) - GameClient()->m_Snap.m_pGameInfoObj->m_RoundStartTick;

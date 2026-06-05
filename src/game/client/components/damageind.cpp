@@ -4,7 +4,6 @@
 
 #include <base/color.h>
 
-#include <engine/demo.h>
 #include <engine/graphics.h>
 
 #include <generated/client_data.h>
@@ -33,27 +32,16 @@ void CDamageInd::Create(vec2 Pos, vec2 Dir, float Alpha)
 
 void CDamageInd::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	static float s_LastLocalTime = LocalTime();
 	float LifeAdjustment;
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-		if(pInfo->m_Paused)
-			LifeAdjustment = 0.0f;
-		else
-			LifeAdjustment = (LocalTime() - s_LastLocalTime) * pInfo->m_Speed;
-	}
+	const auto &pGameInfoObj = GameClient()->m_Snap.m_pGameInfoObj;
+	if(pGameInfoObj && pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
+		LifeAdjustment = 0.0f;
 	else
-	{
-		const auto &pGameInfoObj = GameClient()->m_Snap.m_pGameInfoObj;
-		if(pGameInfoObj && pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
-			LifeAdjustment = 0.0f;
-		else
-			LifeAdjustment = LocalTime() - s_LastLocalTime;
-	}
+		LifeAdjustment = LocalTime() - s_LastLocalTime;
 	s_LastLocalTime = LocalTime();
 
 	Graphics()->TextureSet(GameClient()->m_GameSkin.m_aSpriteStars[0]);

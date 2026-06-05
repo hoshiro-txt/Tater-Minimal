@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Você tem certeza que deseja sair?
 
-Automatically record demos
-== Gravar demos automaticamente
-
 Automatically take game over screenshot
 == Capturar tela final de jogo automaticamente
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Deletar
 
-Delete demo
-== Deletar demo
-
-Demofile: %s
-== Demo: %s
-
-Demos
-== Demos
-
 Disconnect
 == Desconectar
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Erro
-
-Error loading demo
-== Erro ao carregar demo
 
 Favorite
 == Favorito
@@ -180,9 +165,6 @@ High Detail
 
 Hook
 == Gancho (hook)
-
-Invalid Demo
-== Demo inválida
 
 Join blue
 == Azul
@@ -298,9 +280,6 @@ Remove
 Remove friend
 == Deletar amigo
 
-Rename demo
-== Renomear demo
-
 Reset filter
 == Redefinir filtro
 
@@ -397,9 +376,6 @@ Try again
 Type
 == Tipo
 
-Unable to rename the demo
-== Não foi possível renomear a demo
-
 Use sounds
 == Usar sons
 
@@ -439,9 +415,6 @@ Yes
 You must restart the game for all settings to take effect.
 == Você deve reiniciar o jogo para que todas as alterações tenham efeito.
 
-Demo
-== Demo
-
 Laser
 == Laser
 
@@ -456,9 +429,6 @@ New name:
 
 Ratio
 == Proporção
-
-Max demos
-== Máximo de demos
 
 AntiPing
 == AntiPing
@@ -559,9 +529,6 @@ Enable gun sound
 Team message
 == Mensagem do time
 
-Save the best demo of each race
-== Salvar a melhor demo de cada corrida
-
 Show tiles layers from BG map
 == Mostrar camadas de tiles de mapas
 
@@ -630,9 +597,6 @@ New random timeout code
 
 Suicides
 == Suicídios
-
-Record demo
-== Gravar demo
 
 Net
 == Net
@@ -880,9 +844,6 @@ Personal best:
 Learn
 == Aprender
 
-Render demo
-== Renderizar demo
-
 Replace video
 == Substituir vídeo
 
@@ -961,9 +922,6 @@ Play
 
 Theme
 == Tema
-
-Demos directory
-== Diretório de demos
 
 Themes directory
 == Diretório de temas
@@ -1249,9 +1207,6 @@ Highlight Color
 Extras
 == Extras
 
-Preparing demo playback
-== Preparando reprodução da demo
-
 Connected
 == Conectado
 
@@ -1284,9 +1239,6 @@ Requesting to join the game
 
 Loading menu images
 == Carregando imagens de menu
-
-Loading demo files
-== Carregando arquivos de demo
 
 Loading ghost files
 == Carregando arquivos de fantasma
@@ -1327,29 +1279,8 @@ Your movements are not taken into account when calculating the line colors
 Loading assets
 == Carregando recursos
 
-Loading race demo files
-== Carregando arquivos de demo de corrida
-
 Loading sound files
 == Carregando arquivos de som
-
-Play the current demo
-== Assistir a demo atual
-
-Pause the current demo
-== Pausar a demo atual
-
-Stop the current demo
-== Parar a demo atual
-
-Slow down the demo
-== Desacelerar a demo
-
-Speed up the demo
-== Acelerar a demo
-
-Export cut as a separate demo
-== Exportar corte como uma demo separada
 
 Toggle keyboard shortcuts
 == Ativar atalhos de teclado
@@ -1411,12 +1342,6 @@ Go back one marker
 Go forward one marker
 == Avançar um marcador
 
-Are you sure that you want to delete the demo '%s'?
-== Tem certeza que deseja excluir a demo "%s"?
-
-Unable to delete the demo '%s'
-== Não foi possível excluir a demo "%s"
-
 Reset controls
 == Redefinir controles
 
@@ -1450,9 +1375,6 @@ Unknown error. Try to change gfx_backend to OpenGL or Vulkan in settings_ddnet.c
 [Graphics error]
 Could not initialize the given graphics backend, reverting to the default backend now.
 == Não foi possível inicializar o backend gráfico fornecido, revertendo para o backend padrão agora.
-
-Open the directory that contains the demo files
-== Abre o diretório que contém os arquivos de demonstração
 
 Open the settings file
 == Abre o arquivo de configurações
@@ -1488,9 +1410,6 @@ Copy info
 Create a random skin
 == Criar uma skin aleatória
 
-A demo with this name already exists
-== Uma demo com este nome já existe
-
 No server selected
 == Nenhum serviço selecionado
 
@@ -1515,12 +1434,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == Marcar o fim de um corte (clique direito para redefinir)
-
-Close the demo player
-== Fechar o reprodutor de demo
-
-Export demo cut
-== Exportar corte de demo
 
 Cut interval
 == Intervalo de corte
@@ -1576,14 +1489,6 @@ Moved ingame
 Go back the specified duration
 == Voltar na duração especificada
 
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s seg.
-
 Change the skip duration
 == Alterar a duração de pulo
 
@@ -1592,9 +1497,6 @@ Go forward the specified duration
 
 Render cut to video
 == Renderizar corte do vídeo
-
-Error playing demo
-== Erro ao reproduzir demo
 
 Some map images could not be loaded. Check the local console for details.
 == Algumas imagens de mapa não puderam ser carregadas. Verifique o console local para detalhes.
@@ -1614,18 +1516,11 @@ Videos directory
 Video was saved to '%s'
 == O vídeo foi salvo em "%s"
 
-No demo selected
-== Nenhuma demo selecionada
-
 Created
 == Criada
 
 Netversion
 == Netversion
-
-[Demo details]
-map not included
-== mapa não incluído
 
 Ghosts directory
 == Diretório de fantasmas
@@ -1737,9 +1632,6 @@ Friends
 
 Loading…
 == Carregando…
-
-Loading demo file from storage
-== Carregando arquivo de demo do armazenamento
 
 No login required
 == Nenhum login exigido
@@ -2084,9 +1976,6 @@ English translation by the DDNet Team
 Show spectator cursor
 == Mostrar cursor do observador
 
-No demo with this filename exists
-== Não existe nnhuma demo com esse nome
-
 Map size
 == Tamanho do mapa
 
@@ -2195,14 +2084,6 @@ Server could not be started
 
 Could not get server list from master server
 == Não foi possível obter a lista de servidores do servidor mestre
-
-[Demo playback]
-Live
-== Ao vivo
-
-[Demo playback]
-Go to Live
-== Ir para ao vivo
 
 Save all changes before turning off the editor?
 == Salvar todas as alterações antes de desligar o editor?
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Rcon autenticado
 
 [Touch button visibilities]
-Demo Player
-== Reprodutor de demo
-
-[Touch button visibilities]
 Extra Menu
 == Menu extra
 
@@ -2476,9 +2353,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == Você será desconectado do servidor.
-
-Are you sure that you want to disconnect and play this demo?
-== Tem certeza de que deseja se desconectar e reproduzir esta demo?
 
 Show background quads
 == Mostrar quads de fundo
@@ -2585,9 +2459,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == Jogador está atualmente autenticado no rcon.
 
-Demo player is currently active.
-== O reprodutor de demos está atualmente ativo.
-
 The extra menu with the given number is activated.
 == O menu extra com o número fornecido está ativo.
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

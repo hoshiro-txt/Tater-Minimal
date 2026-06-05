@@ -38,7 +38,7 @@ void CTrails::OnRender()
 	if(!g_Config.m_TcTeeTrail)
 		return;
 
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!GameClient()->m_Snap.m_pGameInfoObj)

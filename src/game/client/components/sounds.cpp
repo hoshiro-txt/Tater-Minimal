@@ -132,7 +132,7 @@ void CSounds::OnReset()
 
 void CSounds::OnStateChange(int NewState, int OldState)
 {
-	if(NewState == IClient::STATE_ONLINE || NewState == IClient::STATE_DEMOPLAYBACK)
+	if(NewState == IClient::STATE_ONLINE)
 		OnReset();
 }
 
@@ -186,13 +186,6 @@ void CSounds::Enqueue(int Channel, int SetId)
 
 void CSounds::PlayAndRecord(int Channel, int SetId, float Volume, vec2 Position)
 {
-	// TODO: Volume and position are currently not recorded for sounds played with this function
-	// TODO: This also causes desync sounds during demo playback of demos recorded on high ping servers:
-	//       https://github.com/ddnet/ddnet/issues/1282
-	CNetMsg_Sv_SoundGlobal Msg;
-	Msg.m_SoundId = SetId;
-	Client()->SendPackMsgActive(&Msg, MSGFLAG_NOSEND | MSGFLAG_RECORD);
-
 	PlayAt(Channel, SetId, Volume, Position);
 }
 

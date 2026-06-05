@@ -10,7 +10,6 @@
 #include <base/system.h>
 
 #include <engine/console.h>
-#include <engine/demo.h>
 #include <engine/favorites.h>
 #include <engine/font_icons.h>
 #include <engine/friends.h>
@@ -120,18 +119,6 @@ void CMenus::RenderGame(CUIRect MainView)
 				SetActive(false);
 			}
 		}
-	}
-
-	ButtonBar.VSplitRight(5.0f, &ButtonBar, nullptr);
-	ButtonBar.VSplitRight(140.0f, &ButtonBar, &Button);
-	static CButtonContainer s_DemoButton;
-	const bool Recording = DemoRecorder(RECORDER_MANUAL)->IsRecording();
-	if(DoButton_Menu(&s_DemoButton, Recording ? Localize("Stop record") : Localize("Record demo"), 0, &Button))
-	{
-		if(!Recording)
-			Client()->DemoRecorder_Start(GameClient()->Map()->BaseName(), true, RECORDER_MANUAL);
-		else
-			Client()->DemoRecorder(RECORDER_MANUAL)->Stop(IDemoRecorder::EStopMode::KEEP_FILE);
 	}
 
 	bool Paused = false;
@@ -316,7 +303,6 @@ void CMenus::RenderGame(CUIRect MainView)
 			}
 			if(m_MenusIngameTouchControls.m_FirstEnter)
 			{
-				m_MenusIngameTouchControls.m_aCachedVisibilities[(int)CTouchControls::EButtonVisibility::DEMO_PLAYER] = CMenusIngameTouchControls::EVisibilityType::EXCLUDE;
 				m_MenusIngameTouchControls.m_ColorActive = color_cast<ColorHSLA>(GameClient()->m_TouchControls.BackgroundColorActive()).Pack(true);
 				m_MenusIngameTouchControls.m_ColorInactive = color_cast<ColorHSLA>(GameClient()->m_TouchControls.BackgroundColorInactive()).Pack(true);
 				m_MenusIngameTouchControls.m_FirstEnter = false;

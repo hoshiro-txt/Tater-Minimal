@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Ești sigur că vrei să ieși?
 
-Automatically record demos
-== Înregistrează automat demo-uri
-
 Automatically take game over screenshot
 == Fă automat o captură de ecran la final
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Șterge
 
-Delete demo
-== Șterge demo-ul
-
-Demofile: %s
-== Fișier demo: %s
-
-Demos
-== Demo-uri
-
 Disconnect
 == Deconectare
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Eroare
-
-Error loading demo
-== Eroare la încărcarea demo-ului
 
 Favorite
 == Favorit
@@ -180,9 +165,6 @@ High Detail
 
 Hook
 == Cârlig
-
-Invalid Demo
-== Demo nevalid
 
 Join blue
 == Intră la albaștri
@@ -298,9 +280,6 @@ Remove
 Remove friend
 == Șterge prieten
 
-Rename demo
-== Redenumește demo
-
 Reset filter
 == Resetează filtrul
 
@@ -397,9 +376,6 @@ Try again
 Type
 == Tip
 
-Unable to rename the demo
-== Nu se poate redenumi demo-ul
-
 Use sounds
 == Folosește sunete
 
@@ -451,9 +427,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Număr maxim de demo-uri
-
 News
 == Știri
 
@@ -474,9 +447,6 @@ Laser
 
 Hue
 == Nuanță
-
-Record demo
-== Înreg. demo
 
 Your skin
 == Costumul tău
@@ -543,9 +513,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == Nu s-a putut conecta manechinul
 
-Error playing demo
-== Eroare la redarea demo-ului
-
 Successfully saved the replay!
 == Reluare salvată cu succes!
 
@@ -567,17 +534,11 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == Formatul texturii %s nu este RGBA, ceea ce va cauza erori vizuale.
 
-Preparing demo playback
-== Se pregătește redarea demo-ului
-
 Connected
 == Conectat
 
 Loading map file from storage
 == Se încarcă fișierul de hartă din stocare
-
-Loading demo file from storage
-== Se încarcă fișierul demo din stocare
 
 Some fonts could not be loaded. Check the local console for details.
 == Unele fonturi nu au putut fi încărcate. Verificați consola pentru detalii.
@@ -712,9 +673,6 @@ Reconnect in %d sec
 Rename folder
 == Redenumește dosarul
 
-Render demo
-== Randează demo
-
 Render complete
 == Randare completă
 
@@ -759,9 +717,6 @@ There's an unsaved map in the editor, you might want to save it.
 
 Continue anyway?
 == Continui oricum?
-
-A demo with this name already exists
-== Un demo cu acest nume există deja
 
 A folder with this name already exists
 == Un dosar cu acest nume există deja
@@ -950,25 +905,8 @@ Server filter
 Friends
 == Prieteni
 
-Play the current demo
-== Redă demo-ul curent
-
-Pause the current demo
-== Pune pe pauză demo-ul curent
-
-Stop the current demo
-== Oprește demo-ul curent
-
 Go back the specified duration
 == Mergi înapoi cu durata specificată
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sec.
 
 Change the skip duration
 == Schimbă durata de sărire
@@ -988,29 +926,14 @@ Go back one marker
 Go forward one marker
 == Mergi înainte un marcaj
 
-Slow down the demo
-== Încetinește demo-ul
-
-Speed up the demo
-== Accelerează demo-ul
-
 Mark the beginning of a cut (right click to reset)
 == Marchează începutul unei secțiuni (clic dreapta pentru resetare)
 
 Mark the end of a cut (right click to reset)
 == Marchează sfârșitul unei secțiuni (clic dreapta pentru resetare)
 
-Export cut as a separate demo
-== Exportă secțiunea ca un demo separat
-
-Close the demo player
-== Închide player-ul demo
-
 Toggle keyboard shortcuts
 == Comutează scurtăturile de tastatură
-
-Export demo cut
-== Exportă secțiunea demo
 
 Cut interval
 == Interval de tăiere
@@ -1030,23 +953,14 @@ Please use a different filename
 File already exists, do you want to overwrite it?
 == Fișierul există deja, vrei să-l suprascrii?
 
-Loading demo files
-== Se încarcă fișierele demo
-
 All combined
 == Toate combinate
-
-Demo
-== Demo
 
 Length
 == Lungime
 
 Date
 == Dată
-
-No demo selected
-== Niciun demo selectat
 
 Folder Link
 == Link folder
@@ -1063,10 +977,6 @@ Netversion
 Size
 == Dimensiune
 
-[Demo details]
-map not included
-== harta nu este inclusă
-
 %.2f MiB
 == %.2f MiB
 
@@ -1076,23 +986,11 @@ map not included
 Fetch Info
 == Preia informații
 
-Demos directory
-== Dosar demo-uri
-
-Open the directory that contains the demo files
-== Deschide dosarul care conține fișierele demo
-
 Are you sure that you want to delete the folder '%s'?
 == Ești sigur că vrei să ștergi folderul '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Ești sigur că vrei să ștergi demo-ul '%s'?
-
 Delete folder
 == Șterge folderul
-
-Unable to delete the demo '%s'
-== Nu se poate șterge demo-ul '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Nu se poate șterge folderul '%s'. Asigură-te mai întâi că este gol.
@@ -1687,9 +1585,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Setează toate pe Pușcă
 
-Save the best demo of each race
-== Salvează cel mai bun demo al fiecărei curse
-
 Enable replays
 == Activează reluările
 
@@ -1864,9 +1759,6 @@ Downloading %s:
 
 Update failed! Check log…
 == Actualizarea a eșuat! Verifică jurnalul…
-
-Loading race demo files
-== Se încarcă fișierele demo de cursă
 
 Round %d/%d
 == Runda %d/%d
@@ -2084,9 +1976,6 @@ Renders your frame rate in the top right
 Show spectator cursor
 == Afișează cursor spectator
 
-No demo with this filename exists
-== Nu există niciun demo cu acest nume de fișier
-
 Map size
 == Dimensiunea hărții
 
@@ -2249,17 +2138,6 @@ Add clan
 == 
 
 Add friend
-== 
-
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2469,10 +2347,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2573,9 +2447,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 
 
-Demo player is currently active.
-== 
-
 The extra menu with the given number is activated.
 == 
 
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

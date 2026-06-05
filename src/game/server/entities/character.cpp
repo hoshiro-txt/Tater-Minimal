@@ -53,7 +53,6 @@ CCharacter::CCharacter(CGameWorld *pWorld, CNetObj_PlayerInput LastInput) :
 
 void CCharacter::Reset()
 {
-	StopRecording();
 	Destroy();
 }
 
@@ -107,7 +106,6 @@ bool CCharacter::Spawn(CPlayer *pPlayer, vec2 Pos)
 	GameServer()->SendTuningParams(m_pPlayer->GetCid(), m_TuneZone);
 
 	TrySetRescue(RESCUEMODE_MANUAL);
-	Server()->StartRecord(m_pPlayer->GetCid());
 
 	int Team = GameServer()->m_aTeamMapping[m_pPlayer->GetCid()];
 
@@ -983,26 +981,10 @@ bool CCharacter::IncreaseArmor(int Amount)
 	return true;
 }
 
-void CCharacter::StopRecording()
-{
-	if(Server()->IsRecording(m_pPlayer->GetCid()))
-	{
-		CPlayerData *pData = GameServer()->Score()->PlayerData(m_pPlayer->GetCid());
-
-		if(pData->m_RecordStopTick - Server()->Tick() <= Server()->TickSpeed() && pData->m_RecordStopTick != -1)
-			Server()->SaveDemo(m_pPlayer->GetCid(), pData->m_RecordFinishTime);
-		else
-			Server()->StopRecord(m_pPlayer->GetCid());
-
-		pData->m_RecordStopTick = -1;
-	}
-}
-
 void CCharacter::Die(int Killer, int Weapon, bool SendKillMsg)
 {
 	if(Killer != WEAPON_GAME && m_SetSavePos[RESCUEMODE_AUTO])
 		GetPlayer()->m_LastDeath = m_RescueTee[RESCUEMODE_AUTO];
-	StopRecording();
 	int ModeSpecial = GameServer()->m_pController->OnCharacterDeath(this, GameServer()->m_apPlayers[Killer], Weapon);
 
 	log_info("game", "kill killer='%d:%s' victim='%d:%s' weapon=%d special=%d",
@@ -1126,7 +1108,7 @@ void CCharacter::SnapCharacter(int SnappingClient, int Id)
 		AmmoCount = 10;
 	}
 
-	if(m_pPlayer->GetCid() == SnappingClient || SnappingClient == SERVER_DEMO_CLIENT ||
+	if(m_pPlayer->GetCid() == SnappingClient ||
 		(!g_Config.m_SvStrictSpectateMode && m_pPlayer->GetCid() == GameServer()->m_apPlayers[SnappingClient]->SpectatorId()))
 	{
 		Health = m_Health;
@@ -1195,9 +1177,6 @@ void CCharacter::SnapCharacter(int SnappingClient, int Id)
 
 bool CCharacter::CanSnapCharacter(int SnappingClient)
 {
-	if(SnappingClient == SERVER_DEMO_CLIENT)
-		return true;
-
 	CCharacter *pSnapChar = GameServer()->GetPlayerChar(SnappingClient);
 	CPlayer *pSnapPlayer = GameServer()->m_apPlayers[SnappingClient];
 

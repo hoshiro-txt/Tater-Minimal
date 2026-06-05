@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == 終了してもよろしいですか？
 
-Automatically record demos
-== 自動的にデモを保存する
-
 Automatically take game over screenshot
 == 自動的にスクリーンショットを保存する
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == 削除
 
-Delete demo
-== デモを削除
-
-Demofile: %s
-== デモファイル: %s
-
-Demos
-== デモ録画
-
 Disconnect
 == 切断
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == エラー
-
-Error loading demo
-== デモの読み込みに失敗しました
 
 Favorite
 == お気に入り
@@ -174,9 +159,6 @@ High Detail
 
 Hook
 == フック
-
-Invalid Demo
-== 無効なデモ
 
 Join blue
 == 青チームに参加
@@ -292,9 +274,6 @@ Remove
 Remove friend
 == 友達を削除
 
-Rename demo
-== デモの名前変更
-
 Reset filter
 == フィルタをリセット
 
@@ -388,9 +367,6 @@ Try again
 Type
 == タイプ
 
-Unable to rename the demo
-== デモの名前を変更できません。
-
 Use sounds
 == サウンド全般を使用
 
@@ -433,9 +409,6 @@ You must restart the game for all settings to take effect.
 New name:
 == 新しいファイル名:
 
-Max demos
-== デモの最大数
-
 Internet
 == オンライン
 
@@ -456,9 +429,6 @@ LAN
 
 Sound volume
 == 音量
-
-Record demo
-== デモを録画
 
 Miscellaneous
 == その他
@@ -528,9 +498,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == 再接続まであと %d 秒
-
-Render demo
-== デモを描画
 
 Replace video
 == 動画を変更
@@ -634,9 +601,6 @@ Remove chat
 %.2f KiB
 == %.2f KiB
 
-Demo
-== デモ録画
-
 Markers
 == ブックマーク
 
@@ -648,9 +612,6 @@ Date
 
 Fetch Info
 == デモ情報
-
-Demos directory
-== デモ・ディレクトリー
 
 Connecting dummy
 == ダミーを接続中
@@ -879,9 +840,6 @@ Client message
 
 Preview
 == プレビュー
-
-Save the best demo of each race
-== レースの最高記録のデモを保存
 
 Default length
 == デフォルト長さ
@@ -1146,9 +1104,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1158,25 +1113,16 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == 
 
 The format of texture %s is not RGBA which will cause visual bugs.
 == 
 
-Preparing demo playback
-== 
-
 Connected
 == 
 
 Loading map file from storage
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1369,9 +1315,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 == 
 
 This name cannot be used for files and folders
-== 
-
-A demo with this name already exists
 == 
 
 A folder with this name already exists
@@ -1567,32 +1510,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1613,31 +1531,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
-Close the demo player
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1652,13 +1555,7 @@ Render cut to video
 Please use a different filename
 == 
 
-Loading demo files
-== 
-
 All combined
-== 
-
-No demo selected
 == 
 
 Folder Link
@@ -1673,26 +1570,10 @@ Netversion
 Map size
 == 
 
-[Demo details]
-map not included
-== 
-
-Open the directory that contains the demo files
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Are you sure that you want to delete the folder '%s'?
 == 
 
-Are you sure that you want to delete the demo '%s'?
-== 
-
 Delete folder
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -2036,10 +1917,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2138,9 +2015,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2605,9 +2479,6 @@ Tutorial
 Download
 == 
 
-Loading race demo files
-== 
-
 [Spectators]
 %d others…
 == 
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

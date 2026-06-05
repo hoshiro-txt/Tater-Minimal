@@ -303,7 +303,7 @@ void CProjectile::Snap(int SnappingClient)
 	if(pOwnerChar && pOwnerChar->IsAlive())
 		TeamMask = pOwnerChar->TeamMask();
 
-	if(SnappingClient != SERVER_DEMO_CLIENT && m_Owner != -1 && !TeamMask.test(SnappingClient))
+	if(m_Owner != -1 && !TeamMask.test(SnappingClient))
 		return;
 
 	CNetObj_DDRaceProjectile DDRaceProjectile;

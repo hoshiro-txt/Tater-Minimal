@@ -104,11 +104,6 @@ public:
 
 		static constexpr const char *COMMON_DIRS[] = {
 			"dumps",
-			"demos",
-			"demos/auto",
-			"demos/auto/race",
-			"demos/auto/server",
-			"demos/replays",
 			"editor",
 			"ghosts",
 			"teehistorian"};

@@ -25,7 +25,7 @@ void CEmoticon::ConKeyEmoticon(IConsole::IResult *pResult, void *pUserData)
 	if(pSelf->GameClient()->m_Scoreboard.IsActive())
 		return;
 
-	if(!pSelf->GameClient()->m_Snap.m_SpecInfo.m_Active && pSelf->Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(!pSelf->GameClient()->m_Snap.m_SpecInfo.m_Active && true)
 	{
 		if(pSelf->GameClient()->m_BindWheel.IsActive())
 			pSelf->m_Active = false;
@@ -81,7 +81,7 @@ bool CEmoticon::OnInput(const IInput::CEvent &Event)
 
 void CEmoticon::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	static const auto QuadEaseInOut = [](float t) -> float {

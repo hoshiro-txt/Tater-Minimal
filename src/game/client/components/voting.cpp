@@ -248,7 +248,7 @@ void CVoting::OnConsoleInit()
 
 void CVoting::OnMessage(int MsgType, void *pRawMsg)
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	if(false)
 		return;
 
 	if(MsgType == NETMSGTYPE_SV_VOTESET)

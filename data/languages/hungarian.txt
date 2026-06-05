@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Biztos, hogy ki akarsz lépni?
 
-Automatically record demos
-== Magától rögzítse a demókat
-
 Automatically take game over screenshot
 == Magától készítsen a játék végén képet
 
@@ -85,12 +82,6 @@ Custom colors
 Delete
 == Törlés
 
-Delete demo
-== Demó törlése
-
-Demos
-== Demók
-
 Disconnect
 == Kilépés
 
@@ -111,9 +102,6 @@ Emoticon
 
 Error
 == Hiba
-
-Error loading demo
-== Hiba történt a demó betöltése közben
 
 Favorite
 == Kedvenc
@@ -174,9 +162,6 @@ High Detail
 
 Hook
 == Horog
-
-Invalid Demo
-== Érvénytelen demó
 
 Join blue
 == Kékhez lépés
@@ -286,9 +271,6 @@ Remove
 Remove friend
 == Barát eltávolítása
 
-Rename demo
-== Demó átnevezése
-
 Reset filter
 == Szűrő visszaállítása
 
@@ -373,9 +355,6 @@ Try again
 Type
 == Típus
 
-Unable to rename the demo
-== Nem sikerült átnevezni a demót
-
 Use sounds
 == Hangok használata
 
@@ -424,9 +403,6 @@ Sat.
 Internet
 == Internet
 
-Max demos
-== Maximum Demók
-
 News
 == Hírek
 
@@ -447,9 +423,6 @@ Laser
 
 Miscellaneous
 == Egyéb
-
-Record demo
-== Demó felvétele
 
 Your skin
 == Te Karaktered
@@ -571,9 +544,6 @@ Team message
 Automatically create statboard csv
 == Magától készítsen CSV pontszámtáblát
 
-Save the best demo of each race
-== Mentse el a legjobb demót minden versenynél
-
 Show tiles layers from BG map
 == Blokkok mutatása a háttérben
 
@@ -652,9 +622,6 @@ Show score
 Spree
 == Szorzó
 
-Demofile: %s
-== Demófájl: %s
-
 Max CSVs
 == Maximum CSV-k
 
@@ -714,9 +681,6 @@ Switch weapon when out of ammo
 
 AntiPing: predict grenade paths
 == Antiping: gránátok útjainak előre kiszámolása
-
-Demo
-== Demó
 
 Ratio
 == Érték
@@ -807,9 +771,6 @@ Dummy copy
 
 Enable replays
 == Visszajátszások
-
-Render demo
-== Demó renderelése
 
 Zoom in
 == Nagyítás
@@ -933,9 +894,6 @@ Theme
 
 %d player
 == %d játékos
-
-Demos directory
-== Demók helye
 
 Smooth Dynamic Camera
 == Sima dinamikus kamera
@@ -1237,9 +1195,6 @@ Highlight Color
 Extras
 == Extrák
 
-Preparing demo playback
-== Demó visszajátszás előkészítése
-
 Connected
 == Csatlakozva
 
@@ -1269,9 +1224,6 @@ Requesting to join the game
 
 Loading menu images
 == Menü képek betöltése
-
-Loading demo files
-== Demó filterek betöltése
 
 Loading ghost files
 == Szellem fájlok betöltése
@@ -1320,9 +1272,6 @@ Your movements are not taken into account when calculating the line colors
 
 Loading assets
 == Galléria betöltése
-
-Loading race demo files
-== Verseny demó fájlok betöltése
 
 Loading sound files
 == Hang fájlok betöltése
@@ -1380,29 +1329,11 @@ Are you sure that you want to remove the player '%s' from your friends list?
 Are you sure that you want to remove the clan '%s' from your friends list?
 == Biztos, hogy ki szeretnéd törölni '%s' Klánt a barátlistádból?
 
-Play the current demo
-== Jelenlegi Demó Lejátszása
-
-Pause the current demo
-== Jelenlegi Demó Szüneteltetése
-
-Stop the current demo
-== Jelenlegi Demó Megállítása
-
 Go back one tick
 == Előre menni egy képet
 
 Go forward one tick
 == Vissza menni egy képet
-
-Slow down the demo
-== Demó Lelassítása
-
-Speed up the demo
-== Demó Felgyorsítása
-
-Export cut as a separate demo
-== Exportáld a vágást, mint külön Demó
 
 Go back one marker
 == Előre menni egy jelőlésre
@@ -1412,15 +1343,6 @@ Go forward one marker
 
 Toggle keyboard shortcuts
 == Billentyűs parancsok váltása
-
-Open the directory that contains the demo files
-== Megnyitni a Demó Fáljlok helyét
-
-Are you sure that you want to delete the demo '%s'?
-== Biztos, hogy kiszeretnéd törölni a Demót: '%s'?
-
-Unable to delete the demo '%s'
-== Nem sikerült kitörölni a Demót: '%s'
 
 Menu opened. Press Esc key again to close menu.
 == Menű megnyitva. Az "Esc" gomb megnyomásával kilép a menüből.
@@ -1505,9 +1427,6 @@ Press Ctrl+Shift+G to disable debug graphs.
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1517,16 +1436,10 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 The width of texture %s is not divisible by %d, or the height is not divisible by %d, which might cause visual bugs.
 == 
 
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1688,9 +1601,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 This name cannot be used for files and folders
 == 
 
-A demo with this name already exists
-== 
-
 A folder with this name already exists
 == 
 
@@ -1818,23 +1728,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1849,13 +1743,7 @@ Mark the beginning of a cut (right click to reset)
 Mark the end of a cut (right click to reset)
 == 
 
-Close the demo player
-== 
-
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1873,9 +1761,6 @@ Please use a different filename
 All combined
 == 
 
-No demo selected
-== 
-
 Folder Link
 == 
 
@@ -1886,13 +1771,6 @@ Netversion
 == 
 
 Map size
-== 
-
-[Demo details]
-map not included
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Are you sure that you want to delete the folder '%s'?
@@ -2236,10 +2114,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2338,9 +2212,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

@@ -8,7 +8,7 @@
 
 void CPet::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 	if(g_Config.m_TcPetShow <= 0)
 		return;

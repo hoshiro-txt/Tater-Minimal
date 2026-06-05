@@ -212,8 +212,7 @@ void CDragger::Snap(int SnappingClient)
 	{
 		// Emulate turned off blinking dragger for old clients
 		CCharacter *pChar = GameServer()->GetPlayerChar(SnappingClient);
-		if(SnappingClient != SERVER_DEMO_CLIENT &&
-			(GameServer()->m_apPlayers[SnappingClient]->GetTeam() == TEAM_SPECTATORS ||
+		if((GameServer()->m_apPlayers[SnappingClient]->GetTeam() == TEAM_SPECTATORS ||
 				GameServer()->m_apPlayers[SnappingClient]->IsPaused()) &&
 			GameServer()->m_apPlayers[SnappingClient]->SpectatorId() != SPEC_FREEVIEW)
 			pChar = GameServer()->GetPlayerChar(GameServer()->m_apPlayers[SnappingClient]->SpectatorId());

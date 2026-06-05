@@ -26,12 +26,6 @@
 struct CAntibotRoundData;
 class IMap;
 
-// When recording a demo on the server, the ClientId -1 is used
-enum
-{
-	SERVER_DEMO_CLIENT = -1
-};
-
 class IServer : public IInterface
 {
 	MACRO_INTERFACE("server")
@@ -74,10 +68,9 @@ public:
 	 * Returns the version of the client with the given client ID.
 	 *
 	 * @param ClientId the client Id, which must be between 0 and
-	 * MAX_CLIENTS - 1, or equal to SERVER_DEMO_CLIENT for server demos.
+	 * MAX_CLIENTS - 1.
 	 *
 	 * @return The version of the client with the given client ID.
-	 * For server demos this is always the latest client version.
 	 * On errors, VERSION_NONE is returned.
 	 */
 	virtual int GetClientVersion(int ClientId) const = 0;
@@ -264,15 +257,7 @@ public:
 	virtual void ChangeMap(const char *pMap) = 0;
 	virtual void ReloadMap() = 0;
 
-	virtual void DemoRecorder_HandleAutoStart() = 0;
-
 	// DDRace
-
-	virtual void SaveDemo(int ClientId, float Time) = 0;
-	virtual void StartRecord(int ClientId) = 0;
-	virtual void StopRecord(int ClientId) = 0;
-	virtual bool IsRecording(int ClientId) = 0;
-	virtual void StopDemos() = 0;
 
 	virtual int *GetIdMap(int ClientId) = 0;
 
@@ -317,8 +302,7 @@ public:
 	//
 	// GlobalSnap is true when sending snapshots to all clients,
 	// otherwise only forced high bandwidth clients would receive snap.
-	// RecordingDemo is true when this snapshot will be recorded to a demo.
-	virtual void OnSnap(int ClientId, bool GlobalSnap, bool RecordingDemo) = 0;
+	virtual void OnSnap(int ClientId, bool GlobalSnap) = 0;
 
 	// Called after sending snapshots to all clients.
 	//

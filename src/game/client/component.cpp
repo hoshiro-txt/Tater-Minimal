@@ -75,16 +75,6 @@ class IConsole *CComponentInterfaces::Console() const
 	return m_pClient->Console();
 }
 
-class IDemoPlayer *CComponentInterfaces::DemoPlayer() const
-{
-	return m_pClient->DemoPlayer();
-}
-
-class IDemoRecorder *CComponentInterfaces::DemoRecorder(int Recorder) const
-{
-	return m_pClient->DemoRecorder(Recorder);
-}
-
 class IFavorites *CComponentInterfaces::Favorites() const
 {
 	return m_pClient->Favorites();

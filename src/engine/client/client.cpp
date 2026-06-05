@@ -3,7 +3,6 @@
 
 #include "client.h"
 
-#include "demoedit.h"
 #include "friends.h"
 #include "serverbrowser.h"
 
@@ -39,9 +38,7 @@
 #include <engine/shared/assertion_logger.h>
 #include <engine/shared/compression.h>
 #include <engine/shared/config.h>
-#include <engine/shared/demo.h>
 #include <engine/shared/fifo.h>
-#include <engine/shared/filecollection.h>
 #include <engine/shared/http.h>
 #include <engine/shared/masterserver.h>
 #include <engine/shared/network.h>
@@ -90,20 +87,16 @@ static constexpr ColorRGBA CLIENT_NETWORK_PRINT_COLOR = ColorRGBA(0.7f, 1, 0.7f,
 static constexpr ColorRGBA CLIENT_NETWORK_PRINT_ERROR_COLOR = ColorRGBA(1.0f, 0.25f, 0.25f, 1.0f);
 
 CClient::CClient() :
-	m_DemoPlayer(&m_SnapshotDelta, true, [&]() { UpdateDemoIntraTimers(); }),
 	m_InputtimeMarginGraph(128, 2, true),
 	m_aGametimeMarginGraphs{{128, 2, true}, {128, 2, true}},
 	m_FpsGraph(4096, 0, true)
 {
 	m_StateStartTime = time_get();
-	for(auto &DemoRecorder : m_aDemoRecorder)
-		DemoRecorder = CDemoRecorder(&m_SnapshotDelta);
 	m_LastRenderTime = time_get();
 	mem_zero(m_aInputs, sizeof(m_aInputs));
 	mem_zero(m_aapSnapshots, sizeof(m_aapSnapshots));
 	for(auto &SnapshotStorage : m_aSnapshotStorage)
 		SnapshotStorage.Init();
-	mem_zero(m_aDemorecSnapshotHolders, sizeof(m_aDemorecSnapshotHolders));
 	mem_zero(&m_CurrentServerInfo, sizeof(m_CurrentServerInfo));
 	mem_zero(&m_Checksum, sizeof(m_Checksum));
 	for(auto &GameTime : m_aGameTime)
@@ -190,13 +183,6 @@ int CClient::SendMsg(int Conn, CMsgPacker *pMsg, int Flags)
 		Packet.m_Flags |= NETSENDFLAG_VITAL;
 	if(Flags & MSGFLAG_FLUSH)
 		Packet.m_Flags |= NETSENDFLAG_FLUSH;
-
-	if((Flags & MSGFLAG_RECORD) && Conn == g_Config.m_ClDummy)
-	{
-		for(auto &i : m_aDemoRecorder)
-			if(i.IsRecording())
-				i.RecordMessage(Packet.m_pData, Packet.m_DataSize);
-	}
 
 	if(!(Flags & MSGFLAG_NOSEND))
 	{
@@ -504,9 +490,6 @@ void CClient::OnEnterGame(bool Dummy)
 
 void CClient::EnterGame(int Conn)
 {
-	if(State() == IClient::STATE_DEMOPLAYBACK)
-		return;
-
 	m_aDidPostConnect[Conn] = false;
 
 	// TClient
@@ -746,14 +729,6 @@ void CClient::DisconnectWithReason(const char *pReason)
 	char aBuf[512];
 	str_format(aBuf, sizeof(aBuf), "disconnecting. reason='%s'", pReason ? pReason : "unknown");
 	m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", aBuf, CLIENT_NETWORK_PRINT_COLOR);
-
-	// stop demo playback and recorder
-	// make sure to remove replay tmp demo
-	m_DemoPlayer.Stop();
-	for(int Recorder = 0; Recorder < RECORDER_MAX; Recorder++)
-	{
-		DemoRecorder(Recorder)->Stop(Recorder == RECORDER_REPLAYS ? IDemoRecorder::EStopMode::REMOVE_FILE : IDemoRecorder::EStopMode::KEEP_FILE);
-	}
 
 	m_aRconAuthed[0] = 0;
 	// Make sure to clear credentials completely from memory
@@ -1222,12 +1197,6 @@ const char *CClient::LoadMap(const char *pName, const char *pFilename, const std
 		m_pConsole->Print(IConsole::OUTPUT_LEVEL_ADDINFO, "client", s_aErrorMsg);
 		GameClient()->Map()->Unload();
 		return s_aErrorMsg;
-	}
-
-	// stop demo recording if we loaded a new map
-	for(int Recorder = 0; Recorder < RECORDER_MAX; Recorder++)
-	{
-		DemoRecorder(Recorder)->Stop(Recorder == RECORDER_REPLAYS ? IDemoRecorder::EStopMode::REMOVE_FILE : IDemoRecorder::EStopMode::KEEP_FILE);
 	}
 
 	char aBuf[256];
@@ -2228,36 +2197,6 @@ void CClient::ProcessServerPacket(CNetChunk *pPacket, int Conn, bool Dummy)
 					// add new
 					m_aSnapshotStorage[Conn].Add(GameTick, time_get(), SnapSize, pTmpBuffer3, AltSnapSize, pAltSnapBuffer);
 
-					if(!Dummy)
-					{
-						GameClient()->ProcessDemoSnapshot(pTmpBuffer3);
-
-						unsigned char aSnapSeven[CSnapshot::MAX_SIZE];
-						CSnapshot *pSnapSeven = (CSnapshot *)aSnapSeven;
-						int DemoSnapSize = SnapSize;
-						if(IsSixup())
-						{
-							DemoSnapSize = GameClient()->OnDemoRecSnap7(pTmpBuffer3, pSnapSeven, Conn);
-							if(DemoSnapSize < 0)
-							{
-								dbg_msg("sixup", "demo snapshot failed. error=%d", DemoSnapSize);
-							}
-						}
-
-						if(DemoSnapSize >= 0)
-						{
-							// add snapshot to demo
-							for(auto &DemoRecorder : m_aDemoRecorder)
-							{
-								if(DemoRecorder.IsRecording())
-								{
-									// write snapshot
-									DemoRecorder.RecordSnapshot(GameTick, IsSixup() ? pSnapSeven : pTmpBuffer3, DemoSnapSize);
-								}
-							}
-						}
-					}
-
 					// apply snapshot, cycle pointers
 					m_aReceivedSnapshots[Conn]++;
 
@@ -2296,10 +2235,6 @@ void CClient::ProcessServerPacket(CNetChunk *pPacket, int Conn, bool Dummy)
 							GameClient()->OnNewSnapshot();
 						}
 						SetState(IClient::STATE_ONLINE);
-						if(Conn == CONN_MAIN)
-						{
-							DemoRecorder_HandleAutoStart();
-						}
 					}
 
 					// adjust game time
@@ -2378,13 +2313,6 @@ void CClient::ProcessServerPacket(CNetChunk *pPacket, int Conn, bool Dummy)
 	else if((pPacket->m_Flags & NET_CHUNKFLAG_VITAL) != 0 || Msg == NETMSGTYPE_SV_PREINPUT)
 	{
 		// game message
-		if(!Dummy)
-		{
-			for(auto &DemoRecorder : m_aDemoRecorder)
-				if(DemoRecorder.IsRecording())
-					DemoRecorder.RecordMessage(pPacket->m_pData, pPacket->m_DataSize);
-		}
-
 		GameClient()->OnMessage(Msg, &Unpacker, Conn, Dummy);
 	}
 }
@@ -2630,54 +2558,51 @@ void CClient::PumpNetwork()
 		NetClient.Update();
 	}
 
-	if(State() != IClient::STATE_DEMOPLAYBACK)
+	// check for errors of main and dummy
+	if(State() != IClient::STATE_OFFLINE && State() < IClient::STATE_QUITTING)
 	{
-		// check for errors of main and dummy
-		if(State() != IClient::STATE_OFFLINE && State() < IClient::STATE_QUITTING)
+		if(m_aNetClient[CONN_MAIN].State() == NETSTATE_OFFLINE)
 		{
-			if(m_aNetClient[CONN_MAIN].State() == NETSTATE_OFFLINE)
+			// This will also disconnect the dummy, so the branch below is an `else if`
+			Disconnect();
+			char aBuf[256];
+			str_format(aBuf, sizeof(aBuf), "offline error='%s'", m_aNetClient[CONN_MAIN].ErrorString());
+			m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", aBuf, CLIENT_NETWORK_PRINT_ERROR_COLOR);
+		}
+		else if((DummyConnecting() || DummyConnected()) && m_aNetClient[CONN_DUMMY].State() == NETSTATE_OFFLINE)
+		{
+			const bool WasConnecting = DummyConnecting();
+			DummyDisconnect(nullptr);
+			char aBuf[256];
+			str_format(aBuf, sizeof(aBuf), "offline dummy error='%s'", m_aNetClient[CONN_DUMMY].ErrorString());
+			m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", aBuf, CLIENT_NETWORK_PRINT_ERROR_COLOR);
+			if(WasConnecting)
 			{
-				// This will also disconnect the dummy, so the branch below is an `else if`
-				Disconnect();
-				char aBuf[256];
-				str_format(aBuf, sizeof(aBuf), "offline error='%s'", m_aNetClient[CONN_MAIN].ErrorString());
-				m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", aBuf, CLIENT_NETWORK_PRINT_ERROR_COLOR);
-			}
-			else if((DummyConnecting() || DummyConnected()) && m_aNetClient[CONN_DUMMY].State() == NETSTATE_OFFLINE)
-			{
-				const bool WasConnecting = DummyConnecting();
-				DummyDisconnect(nullptr);
-				char aBuf[256];
-				str_format(aBuf, sizeof(aBuf), "offline dummy error='%s'", m_aNetClient[CONN_DUMMY].ErrorString());
-				m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", aBuf, CLIENT_NETWORK_PRINT_ERROR_COLOR);
-				if(WasConnecting)
-				{
-					str_format(aBuf, sizeof(aBuf), "%s: %s", Localize("Could not connect dummy"), m_aNetClient[CONN_DUMMY].ErrorString());
-					GameClient()->Echo(aBuf);
-				}
+				str_format(aBuf, sizeof(aBuf), "%s: %s", Localize("Could not connect dummy"), m_aNetClient[CONN_DUMMY].ErrorString());
+				GameClient()->Echo(aBuf);
 			}
 		}
+	}
 
-		// check if main was connected
-		if(State() == IClient::STATE_CONNECTING && m_aNetClient[CONN_MAIN].State() == NETSTATE_ONLINE)
-		{
-			// we switched to online
-			m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", "connected, sending info", CLIENT_NETWORK_PRINT_COLOR);
-			SetState(IClient::STATE_LOADING);
-			SetLoadingStateDetail(IClient::LOADING_STATE_DETAIL_INITIAL);
-			SendInfo(CONN_MAIN);
-		}
+	// check if main was connected
+	if(State() == IClient::STATE_CONNECTING && m_aNetClient[CONN_MAIN].State() == NETSTATE_ONLINE)
+	{
+		// we switched to online
+		m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "client", "connected, sending info", CLIENT_NETWORK_PRINT_COLOR);
+		SetState(IClient::STATE_LOADING);
+		SetLoadingStateDetail(IClient::LOADING_STATE_DETAIL_INITIAL);
+		SendInfo(CONN_MAIN);
+	}
 
-		// progress on dummy connect when the connection is online
-		if(m_DummySendConnInfo && m_aNetClient[CONN_DUMMY].State() == NETSTATE_ONLINE)
-		{
-			m_DummySendConnInfo = false;
-			SendInfo(CONN_DUMMY);
-			m_aNetClient[CONN_DUMMY].Update();
-			SendReady(CONN_DUMMY);
-			GameClient()->SendDummyInfo(true);
-			SendEnterGame(CONN_DUMMY);
-		}
+	// progress on dummy connect when the connection is online
+	if(m_DummySendConnInfo && m_aNetClient[CONN_DUMMY].State() == NETSTATE_ONLINE)
+	{
+		m_DummySendConnInfo = false;
+		SendInfo(CONN_DUMMY);
+		m_aNetClient[CONN_DUMMY].Update();
+		SendReady(CONN_DUMMY);
+		GameClient()->SendDummyInfo(true);
+		SendEnterGame(CONN_DUMMY);
 	}
 
 	// process packets
@@ -2703,118 +2628,9 @@ void CClient::PumpNetwork()
 	}
 }
 
-void CClient::OnDemoPlayerSnapshot(void *pData, int Size)
-{
-	// update ticks, they could have changed
-	const CDemoPlayer::CPlaybackInfo *pInfo = m_DemoPlayer.Info();
-	m_aCurGameTick[0] = pInfo->m_Info.m_CurrentTick;
-	m_aPrevGameTick[0] = pInfo->m_PreviousTick;
-
-	// create a verified and unpacked snapshot
-	unsigned char aAltSnapBuffer[CSnapshot::MAX_SIZE];
-	CSnapshot *pAltSnapBuffer = (CSnapshot *)aAltSnapBuffer;
-	int AltSnapSize;
-
-	if(IsSixup())
-	{
-		AltSnapSize = GameClient()->TranslateSnap(pAltSnapBuffer, (CSnapshot *)pData, CONN_MAIN, false);
-		if(AltSnapSize < 0)
-		{
-			dbg_msg("sixup", "failed to translate snapshot. error=%d", AltSnapSize);
-			return;
-		}
-	}
-	else
-	{
-		AltSnapSize = UnpackAndValidateSnapshot((CSnapshot *)pData, pAltSnapBuffer);
-		if(AltSnapSize < 0)
-		{
-			dbg_msg("client", "unpack snapshot and validate failed. error=%d", AltSnapSize);
-			return;
-		}
-	}
-
-	// handle snapshots after validation
-	std::swap(m_aapSnapshots[0][SNAP_PREV], m_aapSnapshots[0][SNAP_CURRENT]);
-	mem_copy(m_aapSnapshots[0][SNAP_CURRENT]->m_pSnap, pData, Size);
-	mem_copy(m_aapSnapshots[0][SNAP_CURRENT]->m_pAltSnap, pAltSnapBuffer, AltSnapSize);
-
-	GameClient()->OnNewSnapshot();
-}
-
-void CClient::OnDemoPlayerMessage(void *pData, int Size)
-{
-	CUnpacker Unpacker;
-	Unpacker.Reset(pData, Size);
-	CMsgPacker Packer(NETMSG_EX, true);
-
-	// unpack msgid and system flag
-	int Msg;
-	bool Sys;
-	CUuid Uuid;
-
-	int Result = UnpackMessageId(&Msg, &Sys, &Uuid, &Unpacker, &Packer);
-	if(Result == UNPACKMESSAGE_ERROR)
-	{
-		return;
-	}
-
-	if(!Sys)
-		GameClient()->OnMessage(Msg, &Unpacker, CONN_MAIN, false);
-}
-
-void CClient::UpdateDemoIntraTimers()
-{
-	// update timers
-	const CDemoPlayer::CPlaybackInfo *pInfo = m_DemoPlayer.Info();
-	m_aCurGameTick[0] = pInfo->m_Info.m_CurrentTick;
-	m_aPrevGameTick[0] = pInfo->m_PreviousTick;
-	m_aGameIntraTick[0] = pInfo->m_IntraTick;
-	m_aGameTickTime[0] = pInfo->m_TickTime;
-	m_aGameIntraTickSincePrev[0] = pInfo->m_IntraTickSincePrev;
-}
-
 void CClient::Update()
 {
-	PumpNetwork();
-
-	if(State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		if(m_DemoPlayer.IsPlaying())
-		{
-#if defined(CONF_VIDEORECORDER)
-			if(IVideo::Current())
-			{
-				IVideo::Current()->NextVideoFrame();
-				IVideo::Current()->NextAudioFrameTimeline([this](short *pFinalOut, unsigned Frames) {
-					Sound()->Mix(pFinalOut, Frames);
-				});
-			}
-#endif
-
-			m_DemoPlayer.Update();
-
-			// update timers
-			const CDemoPlayer::CPlaybackInfo *pInfo = m_DemoPlayer.Info();
-			m_aCurGameTick[0] = pInfo->m_Info.m_CurrentTick;
-			m_aPrevGameTick[0] = pInfo->m_PreviousTick;
-			m_aGameIntraTick[0] = pInfo->m_IntraTick;
-			m_aGameTickTime[0] = pInfo->m_TickTime;
-		}
-		else
-		{
-			// Disconnect when demo playback stopped, either due to playback error
-			// or because the end of the demo was reached when rendering it.
-			DisconnectWithReason(m_DemoPlayer.ErrorMessage());
-			if(m_DemoPlayer.ErrorMessage()[0] != '\0')
-			{
-				SWarning Warning(Localize("Error playing demo"), m_DemoPlayer.ErrorMessage());
-				Warning.m_AutoHide = false;
-				AddWarning(Warning);
-			}
-		}
-	}
-	else if(State() == IClient::STATE_ONLINE)
+	PumpNetwork();\n\tif(State() == IClient::STATE_ONLINE)
 	{
 		if(m_LastDummy != (bool)g_Config.m_ClDummy)
 		{
@@ -3029,34 +2845,7 @@ void CClient::Update()
 		}
 	}
 
-	if(State() == IClient::STATE_ONLINE)
-	{
-		if(!m_EditJobs.empty())
-		{
-			std::shared_ptr<CDemoEdit> pJob = m_EditJobs.front();
-			if(pJob->State() == IJob::STATE_DONE)
-			{
-				char aBuf[IO_MAX_PATH_LENGTH + 64];
-				if(pJob->Success())
-				{
-					str_format(aBuf, sizeof(aBuf), "Successfully saved the replay to '%s'!", pJob->Destination());
-					m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", aBuf);
-
-					GameClient()->Echo(Localize("Successfully saved the replay!"));
-				}
-				else
-				{
-					str_format(aBuf, sizeof(aBuf), "Failed saving the replay to '%s'...", pJob->Destination());
-					m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", aBuf);
-
-					GameClient()->Echo(Localize("Failed saving the replay!"));
-				}
-				m_EditJobs.pop_front();
-			}
-		}
-	}
-
-	// update the server browser
+\n	// update the server browser
 	m_ServerBrowser.Update();
 
 	// update editor/gameclient
@@ -3085,8 +2874,6 @@ void CClient::Update()
 
 void CClient::RegisterInterfaces()
 {
-	Kernel()->RegisterInterface(static_cast<IDemoRecorder *>(&m_aDemoRecorder[RECORDER_MANUAL]), false);
-	Kernel()->RegisterInterface(static_cast<IDemoPlayer *>(&m_DemoPlayer), false);
 	Kernel()->RegisterInterface(static_cast<IGhostRecorder *>(&m_GhostRecorder), false);
 	Kernel()->RegisterInterface(static_cast<IGhostLoader *>(&m_GhostLoader), false);
 	Kernel()->RegisterInterface(static_cast<IServerBrowser *>(&m_ServerBrowser), false);
@@ -3116,8 +2903,6 @@ void CClient::InitInterfaces()
 	m_pSteam = Kernel()->RequestInterface<ISteam>();
 	m_pNotifications = Kernel()->RequestInterface<INotifications>();
 	m_pStorage = Kernel()->RequestInterface<IStorage>();
-
-	m_DemoEditor.Init(&m_SnapshotDelta, m_pConsole, m_pStorage);
 
 	m_ServerBrowser.SetBaseInfo(&m_aNetClient[CONN_CONTACT], m_pGameClient->NetVersion());
 
@@ -3287,15 +3072,6 @@ void CClient::Run()
 			m_aCmdConnect[0] = 0;
 		}
 
-		// handle pending demo play
-		if(m_aCmdPlayDemo[0])
-		{
-			const char *pError = DemoPlayer_Play(m_aCmdPlayDemo, IStorage::TYPE_ALL_OR_ABSOLUTE);
-			if(pError)
-				log_error("demo_player", "playing passed demo file '%s' failed: %s", m_aCmdPlayDemo, pError);
-			m_aCmdPlayDemo[0] = 0;
-		}
-
 		// handle pending map edits
 		if(m_aCmdEditMap[0])
 		{
@@ -3321,8 +3097,6 @@ void CClient::Run()
 		{
 			if(str_startswith(aFile, CONNECTLINK_NO_SLASH))
 				HandleConnectLink(aFile);
-			else if(str_endswith(aFile, ".demo"))
-				HandleDemoPath(aFile);
 			else if(str_endswith(aFile, ".map"))
 				HandleMapPath(aFile);
 		}
@@ -3734,81 +3508,6 @@ void CClient::Con_Screenshot(IConsole::IResult *pResult, void *pUserData)
 	pSelf->Graphics()->TakeScreenshot(nullptr);
 }
 
-#if defined(CONF_VIDEORECORDER)
-
-void CClient::Con_StartVideo(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = static_cast<CClient *>(pUserData);
-
-	if(pResult->NumArguments())
-	{
-		pSelf->StartVideo(pResult->GetString(0), false);
-	}
-	else
-	{
-		pSelf->StartVideo("video", true);
-	}
-}
-
-void CClient::StartVideo(const char *pFilename, bool WithTimestamp)
-{
-	if(State() != IClient::STATE_DEMOPLAYBACK)
-	{
-		log_error("videorecorder", "Video can only be recorded in demo player.");
-		return;
-	}
-
-	if(IVideo::Current())
-	{
-		log_error("videorecorder", "Already recording.");
-		return;
-	}
-
-	char aFilename[IO_MAX_PATH_LENGTH];
-	if(WithTimestamp)
-	{
-		char aTimestamp[20];
-		str_timestamp(aTimestamp, sizeof(aTimestamp));
-		str_format(aFilename, sizeof(aFilename), "videos/%s_%s.mp4", pFilename, aTimestamp);
-	}
-	else
-	{
-		str_format(aFilename, sizeof(aFilename), "videos/%s.mp4", pFilename);
-	}
-
-	// wait for idle, so there is no data race
-	Graphics()->WaitForIdle();
-	// pause the sound device while creating the video instance
-	Sound()->PauseAudioDevice();
-	new CVideo(Graphics(), Sound(), Storage(), Graphics()->ScreenWidth(), Graphics()->ScreenHeight(), aFilename);
-	Sound()->UnpauseAudioDevice();
-	if(!IVideo::Current()->Start())
-	{
-		log_error("videorecorder", "Failed to start recording to '%s'", aFilename);
-		m_DemoPlayer.Stop("Failed to start video recording. See local console for details.");
-		return;
-	}
-	if(m_DemoPlayer.Info()->m_Info.m_Paused)
-	{
-		IVideo::Current()->Pause(true);
-	}
-	log_info("videorecorder", "Recording to '%s'", aFilename);
-}
-
-void CClient::Con_StopVideo(IConsole::IResult *pResult, void *pUserData)
-{
-	if(!IVideo::Current())
-	{
-		log_error("videorecorder", "Not recording.");
-		return;
-	}
-
-	IVideo::Current()->Stop();
-	log_info("videorecorder", "Stopped recording.");
-}
-
-#endif
-
 void CClient::Con_Rcon(IConsole::IResult *pResult, void *pUserData)
 {
 	CClient *pSelf = (CClient *)pUserData;
@@ -3906,347 +3605,6 @@ void CClient::Con_RemoveFavorite(IConsole::IResult *pResult, void *pUserData)
 	NETADDR Addr;
 	if(net_addr_from_str(&Addr, pResult->GetString(0)) == 0)
 		pSelf->m_pFavorites->Remove(&Addr, 1);
-}
-
-void CClient::DemoSliceBegin()
-{
-	const CDemoPlayer::CPlaybackInfo *pInfo = m_DemoPlayer.Info();
-	g_Config.m_ClDemoSliceBegin = pInfo->m_Info.m_CurrentTick;
-}
-
-void CClient::DemoSliceEnd()
-{
-	const CDemoPlayer::CPlaybackInfo *pInfo = m_DemoPlayer.Info();
-	g_Config.m_ClDemoSliceEnd = pInfo->m_Info.m_CurrentTick;
-}
-
-void CClient::Con_DemoSliceBegin(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pSelf->DemoSliceBegin();
-}
-
-void CClient::Con_DemoSliceEnd(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pSelf->DemoSliceEnd();
-}
-
-void CClient::Con_SaveReplay(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	if(pResult->NumArguments())
-	{
-		int Length = pResult->GetInteger(0);
-		if(Length <= 0)
-			pSelf->m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "ERROR: length must be greater than 0 second.");
-		else
-		{
-			if(pResult->NumArguments() >= 2)
-				pSelf->SaveReplay(Length, pResult->GetString(1));
-			else
-				pSelf->SaveReplay(Length);
-		}
-	}
-	else
-		pSelf->SaveReplay(g_Config.m_ClReplayLength);
-}
-
-void CClient::SaveReplay(const int Length, const char *pFilename)
-{
-	if(!g_Config.m_ClReplays)
-	{
-		m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "Feature is disabled. Please enable it via configuration.");
-		GameClient()->Echo(Localize("Replay feature is disabled!"));
-		return;
-	}
-
-	if(!DemoRecorder(RECORDER_REPLAYS)->IsRecording())
-	{
-		m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "ERROR: demorecorder isn't recording. Try to rejoin to fix that.");
-	}
-	else if(DemoRecorder(RECORDER_REPLAYS)->Length() < 1)
-	{
-		m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "ERROR: demorecorder isn't recording for at least 1 second.");
-	}
-	else
-	{
-		char aFilename[IO_MAX_PATH_LENGTH];
-		if(pFilename[0] == '\0')
-		{
-			char aTimestamp[20];
-			str_timestamp(aTimestamp, sizeof(aTimestamp));
-			str_format(aFilename, sizeof(aFilename), "demos/replays/%s_%s_(replay).demo", GameClient()->Map()->BaseName(), aTimestamp);
-		}
-		else
-		{
-			str_format(aFilename, sizeof(aFilename), "demos/replays/%s.demo", pFilename);
-			IOHANDLE Handle = m_pStorage->OpenFile(aFilename, IOFLAG_WRITE, IStorage::TYPE_SAVE);
-			if(!Handle)
-			{
-				m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "ERROR: invalid filename. Try a different one!");
-				return;
-			}
-			io_close(Handle);
-			m_pStorage->RemoveFile(aFilename, IStorage::TYPE_SAVE);
-		}
-
-		// Stop the recorder to correctly slice the demo after
-		DemoRecorder(RECORDER_REPLAYS)->Stop(IDemoRecorder::EStopMode::KEEP_FILE);
-
-		// Slice the demo to get only the last cl_replay_length seconds
-		const char *pSrc = m_aDemoRecorder[RECORDER_REPLAYS].CurrentFilename();
-		const int EndTick = GameTick(g_Config.m_ClDummy);
-		const int StartTick = EndTick - Length * GameTickSpeed();
-
-		m_pConsole->Print(IConsole::OUTPUT_LEVEL_STANDARD, "replay", "Saving replay...");
-
-		// Create a job to do this slicing in background because it can be a bit long depending on the file size
-		std::shared_ptr<CDemoEdit> pDemoEditTask = std::make_shared<CDemoEdit>(GameClient()->NetVersion(), &m_SnapshotDelta, m_pStorage, pSrc, aFilename, StartTick, EndTick);
-		Engine()->AddJob(pDemoEditTask);
-		m_EditJobs.push_back(pDemoEditTask);
-
-		// And we restart the recorder
-		DemoRecorder_UpdateReplayRecorder();
-	}
-}
-
-void CClient::DemoSlice(const char *pDstPath, CLIENTFUNC_FILTER pfnFilter, void *pUser)
-{
-	if(m_DemoPlayer.IsPlaying())
-	{
-		m_DemoEditor.Slice(m_DemoPlayer.Filename(), pDstPath, g_Config.m_ClDemoSliceBegin, g_Config.m_ClDemoSliceEnd, pfnFilter, pUser);
-	}
-}
-
-const char *CClient::DemoPlayer_Play(const char *pFilename, int StorageType)
-{
-	// Don't disconnect unless the file exists (only for play command)
-	if(!Storage()->FileExists(pFilename, StorageType))
-		return Localize("No demo with this filename exists");
-
-	Disconnect();
-	m_aNetClient[CONN_MAIN].ResetErrorString();
-
-	SetState(IClient::STATE_LOADING);
-	SetLoadingStateDetail(IClient::LOADING_STATE_DETAIL_LOADING_DEMO);
-	if((bool)m_LoadingCallback)
-		m_LoadingCallback(IClient::LOADING_CALLBACK_DETAIL_DEMO);
-
-	// try to start playback
-	m_DemoPlayer.SetListener(this);
-	if(m_DemoPlayer.Load(Storage(), m_pConsole, pFilename, StorageType))
-	{
-		DisconnectWithReason(m_DemoPlayer.ErrorMessage());
-		return m_DemoPlayer.ErrorMessage();
-	}
-
-	m_Sixup = m_DemoPlayer.IsSixup();
-
-	// load map
-	const CMapInfo *pMapInfo = m_DemoPlayer.GetMapInfo();
-	const char *pError = LoadMapSearch(pMapInfo->m_aName, pMapInfo->m_Sha256, pMapInfo->m_Crc);
-	if(pError)
-	{
-		if(!m_DemoPlayer.ExtractMap(Storage()))
-		{
-			DisconnectWithReason(pError);
-			return pError;
-		}
-
-		pError = LoadMapSearch(pMapInfo->m_aName, pMapInfo->m_Sha256, pMapInfo->m_Crc);
-		if(pError)
-		{
-			DisconnectWithReason(pError);
-			return pError;
-		}
-	}
-
-	// setup current server info
-	mem_zero(&m_CurrentServerInfo, sizeof(m_CurrentServerInfo));
-	str_copy(m_CurrentServerInfo.m_aMap, pMapInfo->m_aName);
-	m_CurrentServerInfo.m_MapCrc = pMapInfo->m_Crc;
-	m_CurrentServerInfo.m_MapSize = pMapInfo->m_Size;
-
-	// enter demo playback state
-	SetState(IClient::STATE_DEMOPLAYBACK);
-
-	GameClient()->OnConnected();
-
-	// setup buffers
-	mem_zero(m_aaaDemorecSnapshotData, sizeof(m_aaaDemorecSnapshotData));
-
-	for(int SnapshotType = 0; SnapshotType < NUM_SNAPSHOT_TYPES; SnapshotType++)
-	{
-		m_aapSnapshots[0][SnapshotType] = &m_aDemorecSnapshotHolders[SnapshotType];
-		m_aapSnapshots[0][SnapshotType]->m_pSnap = (CSnapshot *)&m_aaaDemorecSnapshotData[SnapshotType][0];
-		m_aapSnapshots[0][SnapshotType]->m_pAltSnap = (CSnapshot *)&m_aaaDemorecSnapshotData[SnapshotType][1];
-		m_aapSnapshots[0][SnapshotType]->m_SnapSize = 0;
-		m_aapSnapshots[0][SnapshotType]->m_AltSnapSize = 0;
-		m_aapSnapshots[0][SnapshotType]->m_Tick = -1;
-	}
-
-	m_DemoPlayer.Play();
-	GameClient()->OnEnterGame();
-
-	return nullptr;
-}
-
-#if defined(CONF_VIDEORECORDER)
-const char *CClient::DemoPlayer_Render(const char *pFilename, int StorageType, const char *pVideoName, int SpeedIndex, bool StartPaused)
-{
-	const char *pError = DemoPlayer_Play(pFilename, StorageType);
-	if(pError)
-		return pError;
-
-	StartVideo(pVideoName, false);
-	m_DemoPlayer.SetSpeedIndex(SpeedIndex);
-	if(StartPaused)
-	{
-		m_DemoPlayer.Pause();
-	}
-	return nullptr;
-}
-#endif
-
-void CClient::Con_Play(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pSelf->HandleDemoPath(pResult->GetString(0));
-}
-
-void CClient::Con_DemoPlay(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	if(pSelf->m_DemoPlayer.IsPlaying())
-	{
-		if(pSelf->m_DemoPlayer.BaseInfo()->m_Paused)
-		{
-			pSelf->m_DemoPlayer.Unpause();
-		}
-		else
-		{
-			pSelf->m_DemoPlayer.Pause();
-		}
-	}
-}
-
-void CClient::Con_DemoSpeed(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pSelf->m_DemoPlayer.SetSpeed(pResult->GetFloat(0));
-}
-
-void CClient::DemoRecorder_Start(const char *pFilename, bool WithTimestamp, int Recorder)
-{
-	dbg_assert(State() == IClient::STATE_ONLINE, "Client must be online to record demo");
-
-	char aFilename[IO_MAX_PATH_LENGTH];
-	if(WithTimestamp)
-	{
-		char aTimestamp[20];
-		str_timestamp(aTimestamp, sizeof(aTimestamp));
-		str_format(aFilename, sizeof(aFilename), "demos/%s_%s.demo", pFilename, aTimestamp);
-	}
-	else
-	{
-		str_format(aFilename, sizeof(aFilename), "demos/%s.demo", pFilename);
-	}
-
-	m_aDemoRecorder[Recorder].Start(
-		Storage(),
-		m_pConsole,
-		aFilename,
-		IsSixup() ? GameClient()->NetVersion7() : GameClient()->NetVersion(),
-		GameClient()->Map()->BaseName(),
-		GameClient()->Map()->Sha256(),
-		GameClient()->Map()->Crc(),
-		"client",
-		GameClient()->Map()->Size(),
-		nullptr,
-		GameClient()->Map()->File(),
-		nullptr,
-		nullptr);
-}
-
-void CClient::DemoRecorder_HandleAutoStart()
-{
-	if(g_Config.m_ClAutoDemoRecord)
-	{
-		DemoRecorder(RECORDER_AUTO)->Stop(IDemoRecorder::EStopMode::KEEP_FILE);
-
-		char aFilename[IO_MAX_PATH_LENGTH];
-		str_format(aFilename, sizeof(aFilename), "auto/%s", GameClient()->Map()->BaseName());
-		DemoRecorder_Start(aFilename, true, RECORDER_AUTO);
-
-		if(g_Config.m_ClAutoDemoMax)
-		{
-			// clean up auto recorded demos
-			CFileCollection AutoDemos;
-			AutoDemos.Init(Storage(), "demos/auto", "" /* empty for wild card */, ".demo", g_Config.m_ClAutoDemoMax);
-		}
-	}
-
-	DemoRecorder_UpdateReplayRecorder();
-}
-
-void CClient::DemoRecorder_UpdateReplayRecorder()
-{
-	if(!g_Config.m_ClReplays && DemoRecorder(RECORDER_REPLAYS)->IsRecording())
-	{
-		DemoRecorder(RECORDER_REPLAYS)->Stop(IDemoRecorder::EStopMode::REMOVE_FILE);
-	}
-
-	if(g_Config.m_ClReplays && !DemoRecorder(RECORDER_REPLAYS)->IsRecording())
-	{
-		char aFilename[IO_MAX_PATH_LENGTH];
-		str_format(aFilename, sizeof(aFilename), "replays/replay_tmp_%s", GameClient()->Map()->BaseName());
-		DemoRecorder_Start(aFilename, true, RECORDER_REPLAYS);
-	}
-}
-
-void CClient::DemoRecorder_AddDemoMarker(int Recorder)
-{
-	m_aDemoRecorder[Recorder].AddDemoMarker();
-}
-
-class IDemoRecorder *CClient::DemoRecorder(int Recorder)
-{
-	return &m_aDemoRecorder[Recorder];
-}
-
-void CClient::Con_Record(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-
-	if(pSelf->State() != IClient::STATE_ONLINE)
-	{
-		log_error("demo_recorder", "Client is not online.");
-		return;
-	}
-	if(pSelf->m_aDemoRecorder[RECORDER_MANUAL].IsRecording())
-	{
-		log_error("demo_recorder", "Demo recorder already recording to '%s'.", pSelf->m_aDemoRecorder[RECORDER_MANUAL].CurrentFilename());
-		return;
-	}
-
-	if(pResult->NumArguments())
-		pSelf->DemoRecorder_Start(pResult->GetString(0), false, RECORDER_MANUAL);
-	else
-		pSelf->DemoRecorder_Start(pSelf->GameClient()->Map()->BaseName(), true, RECORDER_MANUAL);
-}
-
-void CClient::Con_StopRecord(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pSelf->DemoRecorder(RECORDER_MANUAL)->Stop(IDemoRecorder::EStopMode::KEEP_FILE);
-}
-
-void CClient::Con_AddDemoMarker(IConsole::IResult *pResult, void *pUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	for(int Recorder = 0; Recorder < RECORDER_MAX; Recorder++)
-		pSelf->DemoRecorder_AddDemoMarker(Recorder);
 }
 
 void CClient::Con_BenchmarkQuit(IConsole::IResult *pResult, void *pUserData)
@@ -4497,16 +3855,6 @@ void CClient::ConchainPassword(IConsole::IResult *pResult, void *pUserData, ICon
 		pSelf->m_SendPassword = true;
 }
 
-void CClient::ConchainReplays(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
-{
-	CClient *pSelf = (CClient *)pUserData;
-	pfnCallback(pResult, pCallbackUserData);
-	if(pResult->NumArguments() && pSelf->State() == IClient::STATE_ONLINE)
-	{
-		pSelf->DemoRecorder_UpdateReplayRecorder();
-	}
-}
-
 void CClient::ConchainInputFifo(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
 {
 	CClient *pSelf = (CClient *)pUserData;
@@ -4564,34 +3912,18 @@ void CClient::RegisterCommands()
 	m_pConsole->Register("screenshot", "", CFGFLAG_CLIENT | CFGFLAG_STORE, Con_Screenshot, this, "Take a screenshot");
 	m_pConsole->Register("net_reset", "", CFGFLAG_CLIENT, ConNetReset, this, "Rebinds the client's listening address and port");
 
-#if defined(CONF_VIDEORECORDER)
-	m_pConsole->Register("start_video", "?r[file]", CFGFLAG_CLIENT, Con_StartVideo, this, "Start recording a video");
-	m_pConsole->Register("stop_video", "", CFGFLAG_CLIENT, Con_StopVideo, this, "Stop recording a video");
-#endif
-
 	m_pConsole->Register("rcon", "r[rcon-command]", CFGFLAG_CLIENT, Con_Rcon, this, "Send specified command to rcon");
 	m_pConsole->Register("rcon_auth", "r[password]", CFGFLAG_CLIENT, Con_RconAuth, this, "Authenticate to rcon");
 	m_pConsole->Register("rcon_login", "s[username] r[password]", CFGFLAG_CLIENT, Con_RconLogin, this, "Authenticate to rcon with a username");
-	m_pConsole->Register("play", "r[file]", CFGFLAG_CLIENT | CFGFLAG_STORE, Con_Play, this, "Play back a demo");
-	m_pConsole->Register("record", "?r[file]", CFGFLAG_CLIENT, Con_Record, this, "Start recording a demo");
-	m_pConsole->Register("stoprecord", "", CFGFLAG_CLIENT, Con_StopRecord, this, "Stop recording a demo");
-	m_pConsole->Register("add_demomarker", "", CFGFLAG_CLIENT, Con_AddDemoMarker, this, "Add demo timeline marker");
 	m_pConsole->Register("begin_favorite_group", "", CFGFLAG_CLIENT, Con_BeginFavoriteGroup, this, "Use this before `add_favorite` to group favorites. End with `end_favorite_group`");
 	m_pConsole->Register("end_favorite_group", "", CFGFLAG_CLIENT, Con_EndFavoriteGroup, this, "Use this after `add_favorite` to group favorites. Start with `begin_favorite_group`");
 	m_pConsole->Register("add_favorite", "s[host|ip] ?s['allow_ping']", CFGFLAG_CLIENT, Con_AddFavorite, this, "Add a server as a favorite");
 	m_pConsole->Register("remove_favorite", "r[host|ip]", CFGFLAG_CLIENT, Con_RemoveFavorite, this, "Remove a server from favorites");
-	m_pConsole->Register("demo_slice_start", "", CFGFLAG_CLIENT, Con_DemoSliceBegin, this, "Mark the beginning of a demo cut");
-	m_pConsole->Register("demo_slice_end", "", CFGFLAG_CLIENT, Con_DemoSliceEnd, this, "Mark the end of a demo cut");
-	m_pConsole->Register("demo_play", "", CFGFLAG_CLIENT, Con_DemoPlay, this, "Play/pause the current demo");
-	m_pConsole->Register("demo_speed", "f[speed]", CFGFLAG_CLIENT, Con_DemoSpeed, this, "Set current demo speed");
-
-	m_pConsole->Register("save_replay", "?i[length] ?r[filename]", CFGFLAG_CLIENT, Con_SaveReplay, this, "Save a replay of the last defined amount of seconds");
 	m_pConsole->Register("benchmark_quit", "i[seconds] r[file]", CFGFLAG_CLIENT | CFGFLAG_STORE, Con_BenchmarkQuit, this, "Benchmark frame times for number of seconds to file, then quit");
 
 	RustVersionRegister(*m_pConsole);
 
 	m_pConsole->Chain("cl_timeout_seed", ConchainTimeoutSeed, this);
-	m_pConsole->Chain("cl_replays", ConchainReplays, this);
 	m_pConsole->Chain("cl_input_fifo", ConchainInputFifo, this);
 	m_pConsole->Chain("cl_port", ConchainNetReset, this);
 	m_pConsole->Chain("cl_dummy_port", ConchainNetReset, this);
@@ -4659,11 +3991,6 @@ void CClient::HandleConnectLink(const char *pLink)
 		m_aCmdConnect[Length - 1] = '\0';
 }
 
-void CClient::HandleDemoPath(const char *pPath)
-{
-	str_copy(m_aCmdPlayDemo, pPath);
-}
-
 void CClient::HandleMapPath(const char *pPath)
 {
 	str_copy(m_aCmdEditMap, pPath);
@@ -4675,11 +4002,6 @@ static bool UnknownArgumentCallback(const char *pCommand, void *pUser)
 	if(str_startswith(pCommand, CONNECTLINK_NO_SLASH))
 	{
 		pClient->HandleConnectLink(pCommand);
-		return true;
-	}
-	else if(str_endswith(pCommand, ".demo"))
-	{
-		pClient->HandleDemoPath(pCommand);
 		return true;
 	}
 	else if(str_endswith(pCommand, ".map"))
@@ -5131,41 +4453,6 @@ int main(int argc, const char **argv)
 	return 0;
 }
 
-// DDRace
-
-void CClient::RaceRecord_Start(const char *pFilename)
-{
-	dbg_assert(State() == IClient::STATE_ONLINE, "Client must be online to record demo");
-
-	m_aDemoRecorder[RECORDER_RACE].Start(
-		Storage(),
-		m_pConsole,
-		pFilename,
-		IsSixup() ? GameClient()->NetVersion7() : GameClient()->NetVersion(),
-		GameClient()->Map()->BaseName(),
-		GameClient()->Map()->Sha256(),
-		GameClient()->Map()->Crc(),
-		"client",
-		GameClient()->Map()->Size(),
-		nullptr,
-		GameClient()->Map()->File(),
-		nullptr,
-		nullptr);
-}
-
-void CClient::RaceRecord_Stop()
-{
-	if(m_aDemoRecorder[RECORDER_RACE].IsRecording())
-	{
-		m_aDemoRecorder[RECORDER_RACE].Stop(IDemoRecorder::EStopMode::KEEP_FILE);
-	}
-}
-
-bool CClient::RaceRecord_IsRecording()
-{
-	return m_aDemoRecorder[RECORDER_RACE].IsRecording();
-}
-
 void CClient::RequestDDNetInfo()
 {
 	if(m_pDDNetInfoTask && !m_pDDNetInfoTask->Done())
@@ -5396,8 +4683,6 @@ void CClient::ShellRegister()
 		log_error("client", "Failed to register ddnet protocol");
 	if(!windows_shell_register_extension(".map", "Map File", GAME_NAME, aFullPath, &Updated))
 		log_error("client", "Failed to register .map file extension");
-	if(!windows_shell_register_extension(".demo", "Demo File", GAME_NAME, aFullPath, &Updated))
-		log_error("client", "Failed to register .demo file extension");
 	if(!windows_shell_register_application(GAME_NAME, aFullPath, &Updated))
 		log_error("client", "Failed to register application");
 	if(Updated)
@@ -5419,8 +4704,6 @@ void CClient::ShellUnregister()
 		log_error("client", "Failed to unregister ddnet protocol");
 	if(!windows_shell_unregister_class(GAME_NAME ".map", &Updated))
 		log_error("client", "Failed to unregister .map file extension");
-	if(!windows_shell_unregister_class(GAME_NAME ".demo", &Updated))
-		log_error("client", "Failed to unregister .demo file extension");
 	if(!windows_shell_unregister_application(aFullPath, &Updated))
 		log_error("client", "Failed to unregister application");
 	if(Updated)

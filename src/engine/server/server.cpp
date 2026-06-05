@@ -23,10 +23,8 @@
 #include <engine/shared/compression.h>
 #include <engine/shared/config.h>
 #include <engine/shared/console.h>
-#include <engine/shared/demo.h>
 #include <engine/shared/econ.h>
 #include <engine/shared/fifo.h>
-#include <engine/shared/filecollection.h>
 #include <engine/shared/host_lookup.h>
 #include <engine/shared/http.h>
 #include <engine/shared/json.h>
@@ -233,10 +231,6 @@ void CServer::CClient::Reset()
 CServer::CServer()
 {
 	m_pConfig = &g_Config;
-	for(int i = 0; i < MAX_CLIENTS; i++)
-		m_aDemoRecorder[i] = CDemoRecorder(&m_SnapshotDelta, true);
-	m_aDemoRecorder[RECORDER_MANUAL] = CDemoRecorder(&m_SnapshotDelta, false);
-	m_aDemoRecorder[RECORDER_AUTO] = CDemoRecorder(&m_SnapshotDelta, false);
 
 	m_pGameServer = nullptr;
 
@@ -841,10 +835,6 @@ int CServer::DistinctClientCount() const
 
 int CServer::GetClientVersion(int ClientId) const
 {
-	// Assume latest client version for server demos
-	if(ClientId == SERVER_DEMO_CLIENT)
-		return DDNET_VERSION_NUMBER;
-
 	CClientInfo Info;
 	if(GetClientInfo(ClientId, &Info))
 		return Info.m_DDNetVersion;
@@ -919,14 +909,6 @@ int CServer::SendMsg(CMsgPacker *pMsg, int Flags, int ClientId)
 		if(!RepackMsg(pMsg, Pack7, true))
 			return -1;
 
-		// write message to demo recorders
-		if(!(Flags & MSGFLAG_NORECORD))
-		{
-			for(auto &Recorder : m_aDemoRecorder)
-				if(Recorder.IsRecording())
-					Recorder.RecordMessage(Pack6.Data(), Pack6.Size());
-		}
-
 		if(!(Flags & MSGFLAG_NOSEND))
 		{
 			for(int i = 0; i < MAX_CLIENTS; i++)
@@ -961,17 +943,6 @@ int CServer::SendMsg(CMsgPacker *pMsg, int Flags, int ClientId)
 			return 0;
 		}
 
-		// write message to demo recorders
-		if(!(Flags & MSGFLAG_NORECORD))
-		{
-			if(m_aDemoRecorder[ClientId].IsRecording())
-				m_aDemoRecorder[ClientId].RecordMessage(Pack.Data(), Pack.Size());
-			if(m_aDemoRecorder[RECORDER_MANUAL].IsRecording())
-				m_aDemoRecorder[RECORDER_MANUAL].RecordMessage(Pack.Data(), Pack.Size());
-			if(m_aDemoRecorder[RECORDER_AUTO].IsRecording())
-				m_aDemoRecorder[RECORDER_AUTO].RecordMessage(Pack.Data(), Pack.Size());
-		}
-
 		if(!(Flags & MSGFLAG_NOSEND))
 			m_NetServer.Send(&Packet);
 	}
@@ -1002,23 +973,6 @@ void CServer::DoSnapshot()
 {
 	bool IsGlobalSnap = Config()->m_SvHighBandwidth || (m_CurrentGameTick % 2) == 0;
 
-	if(m_aDemoRecorder[RECORDER_MANUAL].IsRecording() || m_aDemoRecorder[RECORDER_AUTO].IsRecording())
-	{
-		// create snapshot for demo recording
-		char aData[CSnapshot::MAX_SIZE];
-
-		// build snap and possibly add some messages
-		m_SnapshotBuilder.Init();
-		GameServer()->OnSnap(-1, IsGlobalSnap, true);
-		int SnapshotSize = m_SnapshotBuilder.Finish(aData);
-
-		// write snapshot
-		if(m_aDemoRecorder[RECORDER_MANUAL].IsRecording())
-			m_aDemoRecorder[RECORDER_MANUAL].RecordSnapshot(Tick(), aData, SnapshotSize);
-		if(m_aDemoRecorder[RECORDER_AUTO].IsRecording())
-			m_aDemoRecorder[RECORDER_AUTO].RecordSnapshot(Tick(), aData, SnapshotSize);
-	}
-
 	// create snapshots for all clients
 	for(int i = 0; i < MaxClients(); i++)
 	{
@@ -1042,18 +996,12 @@ void CServer::DoSnapshot()
 			m_SnapshotBuilder.Init(m_aClients[i].m_Sixup);
 
 			// only snap events on global ticks
-			GameServer()->OnSnap(i, IsGlobalSnap, m_aDemoRecorder[i].IsRecording());
+			GameServer()->OnSnap(i, IsGlobalSnap);
 
 			// finish snapshot
 			char aData[CSnapshot::MAX_SIZE];
 			CSnapshot *pData = (CSnapshot *)aData; // Fix compiler warning for strict-aliasing
 			int SnapshotSize = m_SnapshotBuilder.Finish(pData);
-
-			if(m_aDemoRecorder[i].IsRecording())
-			{
-				// write snapshot
-				m_aDemoRecorder[i].RecordSnapshot(Tick(), aData, SnapshotSize);
-			}
 
 			int Crc = pData->Crc();
 
@@ -1891,7 +1839,7 @@ void CServer::ProcessClientPacket(CNetChunk *pPacket)
 						if(!aPreInputClients[Id])
 							continue;
 
-						SendPackMsg(&PreInput, MSGFLAG_FLUSH | MSGFLAG_NORECORD, Id);
+						SendPackMsg(&PreInput, MSGFLAG_FLUSH, Id);
 					}
 				}
 			}
@@ -3445,9 +3393,7 @@ int CServer::Run()
 			{
 				m_RunServer = STOPPING;
 			}
-			else if(NonActive &&
-				!m_aDemoRecorder[RECORDER_MANUAL].IsRecording() &&
-				!m_aDemoRecorder[RECORDER_AUTO].IsRecording())
+			else if(NonActive)
 			{
 				PacketWaiting = net_socket_read_wait(m_NetServer.Socket(), 1s);
 			}
@@ -3828,139 +3774,6 @@ void CServer::ConShutdown(IConsole::IResult *pResult, void *pUser)
 	{
 		str_copy(pThis->m_aShutdownReason, pReason);
 	}
-}
-
-void CServer::DemoRecorder_HandleAutoStart()
-{
-	if(Config()->m_SvAutoDemoRecord)
-	{
-		m_aDemoRecorder[RECORDER_AUTO].Stop(IDemoRecorder::EStopMode::KEEP_FILE);
-
-		char aTimestamp[20];
-		str_timestamp(aTimestamp, sizeof(aTimestamp));
-		char aFilename[IO_MAX_PATH_LENGTH];
-		str_format(aFilename, sizeof(aFilename), "demos/auto/server/%s_%s.demo", GameServer()->Map()->BaseName(), aTimestamp);
-		m_aDemoRecorder[RECORDER_AUTO].Start(
-			Storage(),
-			m_pConsole,
-			aFilename,
-			GameServer()->NetVersion(),
-			GameServer()->Map()->BaseName(),
-			m_aCurrentMapSha256[MAP_TYPE_SIX],
-			m_aCurrentMapCrc[MAP_TYPE_SIX],
-			"server",
-			m_aCurrentMapSize[MAP_TYPE_SIX],
-			m_apCurrentMapData[MAP_TYPE_SIX],
-			nullptr,
-			nullptr,
-			nullptr);
-
-		if(Config()->m_SvAutoDemoMax)
-		{
-			// clean up auto recorded demos
-			CFileCollection AutoDemos;
-			AutoDemos.Init(Storage(), "demos/auto/server", "", ".demo", Config()->m_SvAutoDemoMax);
-		}
-	}
-}
-
-void CServer::SaveDemo(int ClientId, float Time)
-{
-	if(IsRecording(ClientId))
-	{
-		char aNewFilename[IO_MAX_PATH_LENGTH];
-		str_format(aNewFilename, sizeof(aNewFilename), "demos/%s_%s_%05.2f.demo", GameServer()->Map()->BaseName(), m_aClients[ClientId].m_aName, Time);
-		m_aDemoRecorder[ClientId].Stop(IDemoRecorder::EStopMode::KEEP_FILE, aNewFilename);
-	}
-}
-
-void CServer::StartRecord(int ClientId)
-{
-	if(Config()->m_SvPlayerDemoRecord)
-	{
-		char aFilename[IO_MAX_PATH_LENGTH];
-		str_format(aFilename, sizeof(aFilename), "demos/%s_%d_%d_tmp.demo", GameServer()->Map()->BaseName(), m_NetServer.Address().port, ClientId);
-		m_aDemoRecorder[ClientId].Start(
-			Storage(),
-			Console(),
-			aFilename,
-			GameServer()->NetVersion(),
-			GameServer()->Map()->BaseName(),
-			m_aCurrentMapSha256[MAP_TYPE_SIX],
-			m_aCurrentMapCrc[MAP_TYPE_SIX],
-			"server",
-			m_aCurrentMapSize[MAP_TYPE_SIX],
-			m_apCurrentMapData[MAP_TYPE_SIX],
-			nullptr,
-			nullptr,
-			nullptr);
-	}
-}
-
-void CServer::StopRecord(int ClientId)
-{
-	if(IsRecording(ClientId))
-	{
-		m_aDemoRecorder[ClientId].Stop(IDemoRecorder::EStopMode::REMOVE_FILE);
-	}
-}
-
-bool CServer::IsRecording(int ClientId)
-{
-	return m_aDemoRecorder[ClientId].IsRecording();
-}
-
-void CServer::StopDemos()
-{
-	for(int i = 0; i < NUM_RECORDERS; i++)
-	{
-		if(!m_aDemoRecorder[i].IsRecording())
-			continue;
-
-		m_aDemoRecorder[i].Stop(i < MAX_CLIENTS ? IDemoRecorder::EStopMode::REMOVE_FILE : IDemoRecorder::EStopMode::KEEP_FILE);
-	}
-}
-
-void CServer::ConRecord(IConsole::IResult *pResult, void *pUser)
-{
-	CServer *pServer = (CServer *)pUser;
-
-	if(pServer->IsRecording(RECORDER_MANUAL))
-	{
-		pServer->Console()->Print(IConsole::OUTPUT_LEVEL_STANDARD, "demo_recorder", "Demo recorder already recording");
-		return;
-	}
-
-	char aFilename[IO_MAX_PATH_LENGTH];
-	if(pResult->NumArguments())
-	{
-		str_format(aFilename, sizeof(aFilename), "demos/%s.demo", pResult->GetString(0));
-	}
-	else
-	{
-		char aTimestamp[20];
-		str_timestamp(aTimestamp, sizeof(aTimestamp));
-		str_format(aFilename, sizeof(aFilename), "demos/demo_%s.demo", aTimestamp);
-	}
-	pServer->m_aDemoRecorder[RECORDER_MANUAL].Start(
-		pServer->Storage(),
-		pServer->Console(),
-		aFilename,
-		pServer->GameServer()->NetVersion(),
-		pServer->GameServer()->Map()->BaseName(),
-		pServer->m_aCurrentMapSha256[MAP_TYPE_SIX],
-		pServer->m_aCurrentMapCrc[MAP_TYPE_SIX],
-		"server",
-		pServer->m_aCurrentMapSize[MAP_TYPE_SIX],
-		pServer->m_apCurrentMapData[MAP_TYPE_SIX],
-		nullptr,
-		nullptr,
-		nullptr);
-}
-
-void CServer::ConStopRecord(IConsole::IResult *pResult, void *pUser)
-{
-	((CServer *)pUser)->m_aDemoRecorder[RECORDER_MANUAL].Stop(IDemoRecorder::EStopMode::KEEP_FILE);
 }
 
 void CServer::ConMapReload(IConsole::IResult *pResult, void *pUser)
@@ -4398,9 +4211,6 @@ void CServer::RegisterCommands()
 	Console()->Register("show_ips", "?i[show]", CFGFLAG_SERVER, ConShowIps, this, "Show IP addresses in rcon commands (1 = on, 0 = off)");
 	Console()->Register("hide_auth_status", "?i[hide]", CFGFLAG_SERVER, ConHideAuthStatus, this, "Opt out of spectator count and hide auth status to non-authed players (1 = hidden, 0 = shown)");
 	Console()->Register("force_high_bandwidth_on_spectate", "?i[enable]", CFGFLAG_SERVER, ConForceHighBandwidthOnSpectate, this, "Force high bandwidth mode when spectating (1 = on, 0 = off)");
-
-	Console()->Register("record", "?s[file]", CFGFLAG_SERVER | CFGFLAG_STORE, ConRecord, this, "Record to a file");
-	Console()->Register("stoprecord", "", CFGFLAG_SERVER, ConStopRecord, this, "Stop recording");
 
 	Console()->Register("reload", "", CFGFLAG_SERVER, ConMapReload, this, "Reload the map");
 

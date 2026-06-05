@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Estás seguro de que queres saír?
 
-Automatically record demos
-== Gravar demos automaticamente
-
 Automatically take game over screenshot
 == Captura de pantalla ao final da partida
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Borrar
 
-Delete demo
-== Borrar demo
-
-Demofile: %s
-== Arquivo: %s
-
-Demos
-== Demos
-
 Disconnect
 == Desconectar
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Erro
-
-Error loading demo
-== Erro ao cargar a demo
 
 Favorite
 == Favorito
@@ -180,9 +165,6 @@ High Detail
 
 Hook
 == Gancho
-
-Invalid Demo
-== Demo inválida
 
 Join blue
 == Unirse ao azul
@@ -298,9 +280,6 @@ Remove
 Remove friend
 == Eliminar amigo
 
-Rename demo
-== Renombrar demo
-
 Reset filter
 == Restablecer filtro
 
@@ -397,9 +376,6 @@ Try again
 Type
 == Tipo
 
-Unable to rename the demo
-== Non se puido renombrar a demo
-
 Use sounds
 == Usar sons
 
@@ -451,9 +427,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Número máximo de demos
-
 News
 == Noticias
 
@@ -474,9 +447,6 @@ Laser
 
 Hue
 == Matiz
-
-Record demo
-== Grabar demo
 
 Your skin
 == O teu skin
@@ -525,9 +495,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Reconectando en %d seg
-
-Render demo
-== Renderizar demo
 
 Replace video
 == Substituír vídeo
@@ -612,9 +579,6 @@ Remove chat
 
 %.2f KiB
 == %.2f KiB
-
-Demo
-== Demo
 
 Markers
 == Marcadores
@@ -799,9 +763,6 @@ Friend message
 Normal message
 == Menxaxe normal
 
-Save the best demo of each race
-== Gardar o mellor demo de cada carreira
-
 Enable replays
 == Habilitar repeticiones
 
@@ -936,9 +897,6 @@ Theme
 
 %d player
 == %d xogador
-
-Demos directory
-== Directorio de demos
 
 Smooth Dynamic Camera
 == Cámara dinámica suave
@@ -1238,9 +1196,6 @@ Highlight Color
 Extras
 == Extras
 
-Preparing demo playback
-== Preparando a reprodución da demo
-
 Connected
 == Conectado
 
@@ -1274,29 +1229,8 @@ Requesting to join the game
 Loading menu images
 == Cargando imaxes do menú
 
-Play the current demo
-== Reproducir a demo actual
-
-Pause the current demo
-== Pausar a demo actual
-
-Stop the current demo
-== Deter a demo actual
-
-Slow down the demo
-== Retardar a demo
-
-Speed up the demo
-== Acelerar a demo
-
-Export cut as a separate demo
-== Exportar corte como unha demo diferente
-
 Toggle keyboard shortcuts
 == Alternar atallos de teclado
-
-Loading demo files
-== Cargando arquivos de demos
 
 Menu opened. Press Esc key again to close menu.
 == Menú aberto. Presiona a tecla Esc outra vez para pechalo.
@@ -1370,9 +1304,6 @@ Set all to Rifle
 Loading assets
 == Cargando recursos
 
-Loading race demo files
-== Cargando arquivos de demos de carreiras
-
 Loading sound files
 == Cargando arquivos de son
 
@@ -1399,12 +1330,6 @@ Go back one marker
 
 Go forward one marker
 == Avanzar un marcador
-
-Are you sure that you want to delete the demo '%s'?
-== Estás seguro de que queres eliminar a demo '%s'?
-
-Unable to delete the demo '%s'
-== Non se puido eliminar a demo '%s'
 
 Reset controls
 == Restablecer controis
@@ -1439,9 +1364,6 @@ Unknown error. Try to change gfx_backend to OpenGL or Vulkan in settings_ddnet.c
 [Graphics error]
 Could not initialize the given graphics backend, reverting to the default backend now.
 == Non se puido inicializar o backend de gráficos dado, volvendo ao backend predeterminado.
-
-Open the directory that contains the demo files
-== Abrir o cartafol que contén os arquivos de demo
 
 Open the settings file
 == Abrir o arquivo de configuracións
@@ -1521,9 +1443,6 @@ Press Ctrl+Shift+G to disable debug graphs.
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1533,13 +1452,7 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1701,9 +1614,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 This name cannot be used for files and folders
 == 
 
-A demo with this name already exists
-== 
-
 A folder with this name already exists
 == 
 
@@ -1815,23 +1725,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1846,13 +1740,7 @@ Mark the beginning of a cut (right click to reset)
 Mark the end of a cut (right click to reset)
 == 
 
-Close the demo player
-== 
-
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1870,9 +1758,6 @@ Please use a different filename
 All combined
 == 
 
-No demo selected
-== 
-
 Folder Link
 == 
 
@@ -1883,13 +1768,6 @@ Netversion
 == 
 
 Map size
-== 
-
-[Demo details]
-map not included
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Are you sure that you want to delete the folder '%s'?
@@ -2233,10 +2111,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2335,9 +2209,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

@@ -28,7 +28,6 @@ class CScoreboard : public CComponent
 	void RenderGoals(CUIRect Goals);
 	void RenderSpectators(CUIRect Spectators);
 	void RenderScoreboard(CUIRect Scoreboard, int Team, int CountStart, int CountEnd, CScoreboardRenderState &State);
-	void RenderRecordingNotification(float x);
 
 	static void ConKeyScoreboard(IConsole::IResult *pResult, void *pUserData);
 	static void ConToggleScoreboardCursor(IConsole::IResult *pResult, void *pUserData);

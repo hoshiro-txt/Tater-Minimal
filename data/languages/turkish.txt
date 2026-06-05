@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Çıkmak istediğinize emin misiniz?
 
-Automatically record demos
-== Demoları otomatik olarak kaydet
-
 Automatically take game over screenshot
 == Oyun bittiğinde otomatik olarak ekran görüntüsü al
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Sil
 
-Delete demo
-== Demoyu sil
-
-Demofile: %s
-== Demo dosyası: %s
-
-Demos
-== Demolar
-
 Disconnect
 == Bağlantıyı kes
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Hata
-
-Error loading demo
-== Demo yüklenirken hata oluştu
 
 Favorite
 == Favori
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Kanca
-
-Invalid Demo
-== Geçersiz Demo
 
 Join blue
 == Maviye katıl
@@ -292,9 +274,6 @@ Remove
 Remove friend
 == Arkadaşı çıkar
 
-Rename demo
-== Demonun adını değiştir
-
 Reset filter
 == Filtreleri sıfırla
 
@@ -388,9 +367,6 @@ Try again
 Type
 == Tür
 
-Unable to rename the demo
-== Demonun ismi değiştirilemiyor
-
 Use sounds
 == Sesleri kullan
 
@@ -442,9 +418,6 @@ Miscellaneous
 Internet
 == İnternet
 
-Max demos
-== Maksimum Demo Sayısı
-
 News
 == Haberler
 
@@ -465,9 +438,6 @@ Laser
 
 Hue
 == Renk
-
-Record demo
-== Demo kaydet
 
 Your skin
 == Sizin görünüşünüz
@@ -519,9 +489,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == %d saniye içinde yeniden bağlanılacak
-
-Render demo
-== Demo'yu işle
 
 Replace video
 == Video üzerine yaz
@@ -612,9 +579,6 @@ Remove chat
 
 %.2f KiB
 == %.2f KiB
-
-Demo
-== Demo
 
 Markers
 == İşaretler
@@ -805,9 +769,6 @@ Normal message
 Client message
 == İstemci mesajı
 
-Save the best demo of each race
-== Her yarış için en iyi demoyu kaydet
-
 Default length
 == Varsayılan uzunluk
 
@@ -966,9 +927,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == %s dokusunun formatı RGBA değil, bu görsel hatalara neden olacak.
 
-Preparing demo playback
-== Demo oynatmaya hazırlanıyor
-
 Connected
 == Bağlanıldı
 
@@ -1049,9 +1007,6 @@ Your nickname '%s' is already used (%d points). Do you still want to use it?
 
 Checking for existing player with your name
 == Adınıza sahip diğer oyuncular aranıyor
-
-A demo with this name already exists
-== Bu ada sahip bir demo zaten var
 
 A folder with this name already exists
 == Bu ada sahip bir klasör zaten var
@@ -1150,26 +1105,11 @@ Are you sure that you want to remove the player '%s' from your friends list?
 Are you sure that you want to remove the clan '%s' from your friends list?
 == '%s' klanını arkadaş listenizden silmek istediğinize emin misiniz?
 
-Play the current demo
-== Demoyu oynat
-
-Pause the current demo
-== Demoyu duraklat
-
-Stop the current demo
-== Demoyu durdur
-
 Go back one tick
 == Bir tık geri git
 
 Go forward one tick
 == Bir tık ileri git
-
-Slow down the demo
-== Demoyu yavaşlat
-
-Speed up the demo
-== Demoyu hızlandır
 
 Mark the beginning of a cut (right click to reset)
 == Bir kesitin başlangıcını işaretleyin (sıfırlamak için sağ tıkla)
@@ -1177,23 +1117,14 @@ Mark the beginning of a cut (right click to reset)
 Mark the end of a cut (right click to reset)
 == Bir kesitin bitişini işaretleyin (sıfırlamak için sağ tıkla)
 
-Export cut as a separate demo
-== Kesiti ayrı bir demo olarak dışarı aktar
-
 Go back one marker
 == Bir işaret geri git
 
 Go forward one marker
 == Bir işaret ileri git
 
-Close the demo player
-== Demo oynatıcısını kapat
-
 Toggle keyboard shortcuts
 == Klavye kısayollarını kullan
-
-Export demo cut
-== Kesiti dışarı aktar
 
 Cut interval
 == Kesit aralığı
@@ -1201,32 +1132,17 @@ Cut interval
 Cut length
 == Kesit uzunluğu
 
-Loading demo files
-== Demo dosyaları yükleniyor
-
 All combined
 == Hepsi birlikte
 
 Folder Link
 == Klasör Linki
 
-Demos directory
-== Demo klasörü
-
-Open the directory that contains the demo files
-== Demo dosyalarını içeren klasörü aç
-
 Are you sure that you want to delete the folder '%s'?
 == '%s' klasörünü silmek istediğine emin misin?
 
-Are you sure that you want to delete the demo '%s'?
-== '%s' demosunu silmek istediğine emin misin?
-
 Delete folder
 == Klasörü sil
-
-Unable to delete the demo '%s'
-== '%s' demosu silinemiyor
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == '%s' klasörü silinemiyor. Önce boş olduğundan emin olun.
@@ -1561,9 +1477,6 @@ Editor
 Play
 == Oyna
 
-Loading race demo files
-== Yarış demo dosyaları yükleniyor
-
 Super
 == Süper
 
@@ -1576,14 +1489,6 @@ Moved ingame
 Go back the specified duration
 == Belirtilen süre kadar geri git
 
-[Demo player duration]
-%s min.
-== %s dk.
-
-[Demo player duration]
-%s sec.
-== %s sn.
-
 Change the skip duration
 == Atlanacak süreyi değiştir
 
@@ -1592,9 +1497,6 @@ Go forward the specified duration
 
 Render cut to video
 == Kesiti videoya dönüştür
-
-Error playing demo
-== Demo oynatılırken hata oluştu
 
 Failed saving the replay!
 == Tekrar kaydedilemedi!
@@ -1680,9 +1582,6 @@ Friends
 Please use a different filename
 == Farklı bir dosya adı kullanın
 
-No demo selected
-== Demo seçilmedi
-
 Created
 == Oluşturuldu
 
@@ -1731,9 +1630,6 @@ Regular background color
 Entities background color
 == Yapı arka plan rengi
 
-Loading demo file from storage
-== Cihazdaki demo dosyası yükleniyor
-
 No login required
 == Giriş yapılmasına gerek yok
 
@@ -1760,10 +1656,6 @@ Always show own player's hook collision line
 
 Always show other players' hook collision lines
 == Diğerlerinin kanca çarpışma çizgini göster
-
-[Demo details]
-map not included
-== harita dahil edilmemiş
 
 %d/%d KiB (%.1f KiB/s)
 == %d/%d KiB (%.1f KiB/s)
@@ -2088,9 +1980,6 @@ Show spectator cursor
 Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom assets (skins, entities, etc.), especially those with high resolution.
 == VRAM bitmiş. 'cl_skins_loaded_max' değerini daha düşük bir değere ayarlamayı veya özel varlıkları (kaplamalar, varlıklar vb.), özellikle de yüksek çözünürlüklü olanları kaldırmayı deneyin.
 
-No demo with this filename exists
-== Bu isimle bir demo bulunmuyor
-
 This name cannot be used for files and folders
 == Bu isim dosya ve klasörler için kullanılamıyor
 
@@ -2195,14 +2084,6 @@ Server could not be started
 
 Could not get server list from master server
 == Ana sunucudan sunucu listesi alınamadı
-
-[Demo playback]
-Live
-== Canlı
-
-[Demo playback]
-Go to Live
-== Canlıya Geç
 
 Save all changes before turning off the editor?
 == Editör kapatılmadan önce tüm değişiklikler kaydedilsin mi?
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Rcon doğrulandı
 
 [Touch button visibilities]
-Demo Player
-== Demo Oynatıcı
-
-[Touch button visibilities]
 Extra Menu
 == Ekstra Menü
 
@@ -2476,9 +2353,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == Sunucudan bağlantınız kesilecek.
-
-Are you sure that you want to disconnect and play this demo?
-== Bağlantıyı kesip bu demoyu oynatmak istediğinizden emin misiniz?
 
 Show background quads
 == Arka plan dörtgenlerini göster
@@ -2585,9 +2459,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == Oyuncu şu anda rcon'da doğrulandı.
 
-Demo player is currently active.
-== Demo oynatıcı şu anda aktif.
-
 The extra menu with the given number is activated.
 == Belirtilen sayıda ekstra menü aktif edildi.
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

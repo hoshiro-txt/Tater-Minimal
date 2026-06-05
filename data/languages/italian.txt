@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Sicuro di voler chiudere il gioco?
 
-Automatically record demos
-== Registra automaticamente demo
-
 Automatically take game over screenshot
 == Cattura schermata alla fine di ogni partita
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Elimina
 
-Delete demo
-== Elimina demo
-
-Demofile: %s
-== Demo: %s
-
-Demos
-== Demo
-
 Disconnect
 == Disconnetti
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Errore
-
-Error loading demo
-== Errore caricamento demo
 
 Favorite
 == Preferito
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Rampino
-
-Invalid Demo
-== Demo non valida
 
 Join blue
 == Vai nei blu
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Rimuovi amico
 
-Rename demo
-== Rinomina demo
-
 Reset filter
 == Resetta filtri
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Tipo
 
-Unable to rename the demo
-== Impossibile rinominare la demo
-
 Use sounds
 == Attiva suoni
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Numero massimo di demo
-
 News
 == Novità
 
@@ -465,9 +438,6 @@ Max Screenshots
 
 Hue
 == Tinta
-
-Record demo
-== Registra demo
 
 Your skin
 == La tua skin
@@ -553,9 +523,6 @@ Loading DDNet Client
 Reconnect in %d sec
 == Riconnettiti in %d secondi
 
-Render demo
-== Renderizza demo
-
 Replace video
 == Rimpiazza video
 
@@ -637,14 +604,8 @@ Types
 Remove chat
 == Rimuovi chat
 
-Demo
-== Demo
-
 Date
 == Data
-
-Demos directory
-== Cartella delle demo
 
 Connecting dummy
 == Connettendo dummy
@@ -856,9 +817,6 @@ Normal message
 Client message
 == Messaggio del Client
 
-Save the best demo of each race
-== Salva la miglior demo di ogni partita
-
 Default length
 == Lunghezza predefinita
 
@@ -1016,9 +974,6 @@ Grabs
 9+ new mentions
 == 9+ nuove menzioni
 
-Preparing demo playback
-== Preparando la riproduzione della demo
-
 Connected
 == Connesso
 
@@ -1081,9 +1036,6 @@ Requesting to join the game
 
 Rename folder
 == Rinomina cartella
-
-A demo with this name already exists
-== Una demo con questo nome esiste giá
 
 A folder with this name already exists
 == Una cartella con questo nome esiste giá
@@ -1272,9 +1224,6 @@ Loading assets
 Open the directory to add custom assets
 == Apri la cartella per aggiungere assets custom
 
-Loading race demo files
-== Caricando i file della demo della gara
-
 Loading sound files
 == Caricando file musica
 
@@ -1336,9 +1285,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1348,9 +1294,6 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 The width of texture %s is not divisible by %d, or the height is not divisible by %d, which might cause visual bugs.
 == 
 
@@ -1358,9 +1301,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 == 
 
 The format of texture %s is not RGBA which will cause visual bugs.
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1649,32 +1589,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1695,31 +1610,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
-Close the demo player
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1734,13 +1634,7 @@ Render cut to video
 Please use a different filename
 == 
 
-Loading demo files
-== 
-
 All combined
-== 
-
-No demo selected
 == 
 
 Folder Link
@@ -1761,23 +1655,7 @@ Netversion
 Map size
 == 
 
-[Demo details]
-map not included
-== 
-
-Open the directory that contains the demo files
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Are you sure that you want to delete the folder '%s'?
-== 
-
-Are you sure that you want to delete the demo '%s'?
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -2121,10 +1999,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2223,9 +2097,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Active: Hook
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

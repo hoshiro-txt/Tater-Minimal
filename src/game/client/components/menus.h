@@ -8,7 +8,6 @@
 #include <base/vmath.h>
 
 #include <engine/console.h>
-#include <engine/demo.h>
 #include <engine/friends.h>
 #include <engine/serverbrowser.h>
 #include <engine/shared/config.h>
@@ -273,303 +272,13 @@ protected:
 	CLineInputBuffered<64> m_FilterInput;
 	bool m_ControlPageOpening;
 
-	// demo
-	enum
-	{
-		SORT_DEMONAME = 0,
-		SORT_MARKERS,
-		SORT_LENGTH,
-		SORT_DATE,
-	};
-
-	class CDemoItem
-	{
-	public:
-		char m_aFilename[IO_MAX_PATH_LENGTH];
-		char m_aName[IO_MAX_PATH_LENGTH];
-		bool m_IsDir;
-		bool m_IsLink;
-		int m_StorageType;
-		time_t m_Date;
-		int64_t m_Size;
-
-		bool m_InfosLoaded;
-		bool m_Valid;
-		CDemoHeader m_Info;
-		CTimelineMarkers m_TimelineMarkers;
-		CMapInfo m_MapInfo;
-
-		int NumMarkers() const
-		{
-			return std::clamp<int>(bytes_be_to_uint(m_TimelineMarkers.m_aNumTimelineMarkers), 0, MAX_TIMELINE_MARKERS);
-		}
-
-		int Length() const
-		{
-			return bytes_be_to_uint(m_Info.m_aLength);
-		}
-
-		unsigned MapSize() const
-		{
-			return bytes_be_to_uint(m_Info.m_aMapSize);
-		}
-
-		bool operator<(const CDemoItem &Other) const
-		{
-			if(!str_comp(m_aFilename, ".."))
-				return true;
-			if(!str_comp(Other.m_aFilename, ".."))
-				return false;
-			if(m_IsDir && !Other.m_IsDir)
-				return true;
-			if(!m_IsDir && Other.m_IsDir)
-				return false;
-
-			const CDemoItem &Left = g_Config.m_BrDemoSortOrder ? Other : *this;
-			const CDemoItem &Right = g_Config.m_BrDemoSortOrder ? *this : Other;
-
-			if(g_Config.m_BrDemoSort == SORT_DEMONAME)
-				return str_comp_filenames(Left.m_aFilename, Right.m_aFilename) < 0;
-			if(g_Config.m_BrDemoSort == SORT_DATE)
-				return Left.m_Date < Right.m_Date;
-
-			if(!Other.m_InfosLoaded)
-				return m_InfosLoaded;
-			if(!m_InfosLoaded)
-				return !Other.m_InfosLoaded;
-
-			if(g_Config.m_BrDemoSort == SORT_MARKERS)
-				return Left.NumMarkers() < Right.NumMarkers();
-			if(g_Config.m_BrDemoSort == SORT_LENGTH)
-				return Left.Length() < Right.Length();
-
-			// Unknown sort
-			return true;
-		}
-	};
-
-	char m_aCurrentDemoFolder[IO_MAX_PATH_LENGTH];
-	char m_aCurrentDemoSelectionName[IO_MAX_PATH_LENGTH];
-	CLineInputBuffered<IO_MAX_PATH_LENGTH> m_DemoRenameInput;
-	CLineInputBuffered<IO_MAX_PATH_LENGTH> m_DemoSliceInput;
-	CLineInputBuffered<IO_MAX_PATH_LENGTH> m_DemoSearchInput;
-#if defined(CONF_VIDEORECORDER)
-	CLineInputBuffered<IO_MAX_PATH_LENGTH> m_DemoRenderInput;
-#endif
-	int m_DemolistSelectedIndex;
-	bool m_DemolistSelectedReveal = false;
-	int m_DemolistStorageType;
-	bool m_DemolistMultipleStorages = false;
-	int m_Speed = 4;
-	bool m_StartPaused = false;
-
-	std::chrono::nanoseconds m_DemoPopulateStartTime{0};
-
-	void DemolistOnUpdate(bool Reset);
-	static int DemolistFetchCallback(const CFsFileInfo *pInfo, int IsDir, int StorageType, void *pUser);
-
-	// friends
-	class CFriendItem
-	{
-		char m_aName[MAX_NAME_LENGTH];
-		char m_aClan[MAX_CLAN_LENGTH];
-		const CServerInfo *m_pServerInfo;
-		int m_FriendState;
-		bool m_IsPlayer;
-		bool m_IsAfk;
-		// skin info 0.6
-		char m_aSkin[MAX_SKIN_LENGTH];
-		bool m_CustomSkinColors;
-		int m_CustomSkinColorBody;
-		int m_CustomSkinColorFeet;
-		// skin info 0.7
-		char m_aaSkin7[protocol7::NUM_SKINPARTS][protocol7::MAX_SKIN_LENGTH];
-		bool m_aUseCustomSkinColor7[protocol7::NUM_SKINPARTS];
-		int m_aCustomSkinColor7[protocol7::NUM_SKINPARTS];
-
-	public:
-		CFriendItem(const CFriendInfo *pFriendInfo) :
-			m_pServerInfo(nullptr),
-			m_IsPlayer(false),
-			m_IsAfk(false),
-			m_CustomSkinColors(false),
-			m_CustomSkinColorBody(0),
-			m_CustomSkinColorFeet(0)
-		{
-			str_copy(m_aName, pFriendInfo->m_aName);
-			str_copy(m_aClan, pFriendInfo->m_aClan);
-			m_FriendState = m_aName[0] == '\0' ? IFriends::FRIEND_CLAN : IFriends::FRIEND_PLAYER;
-			m_aSkin[0] = '\0';
-			for(int Part = 0; Part < protocol7::NUM_SKINPARTS; Part++)
-			{
-				m_aaSkin7[Part][0] = '\0';
-				m_aUseCustomSkinColor7[Part] = false;
-				m_aCustomSkinColor7[Part] = 0;
-			}
-		}
-		CFriendItem(const CServerInfo::CClient &CurrentClient, const CServerInfo *pServerInfo) :
-			m_pServerInfo(pServerInfo),
-			m_FriendState(CurrentClient.m_FriendState),
-			m_IsPlayer(CurrentClient.m_Player),
-			m_IsAfk(CurrentClient.m_Afk),
-			m_CustomSkinColors(CurrentClient.m_CustomSkinColors),
-			m_CustomSkinColorBody(CurrentClient.m_CustomSkinColorBody),
-			m_CustomSkinColorFeet(CurrentClient.m_CustomSkinColorFeet)
-		{
-			str_copy(m_aName, CurrentClient.m_aName);
-			str_copy(m_aClan, CurrentClient.m_aClan);
-			str_copy(m_aSkin, CurrentClient.m_aSkin);
-			for(int Part = 0; Part < protocol7::NUM_SKINPARTS; Part++)
-			{
-				str_copy(m_aaSkin7[Part], CurrentClient.m_aaSkin7[Part]);
-				m_aUseCustomSkinColor7[Part] = CurrentClient.m_aUseCustomSkinColor7[Part];
-				m_aCustomSkinColor7[Part] = CurrentClient.m_aCustomSkinColor7[Part];
-			}
-		}
-
-		const char *Name() const { return m_aName; }
-		const char *Clan() const { return m_aClan; }
-		const CServerInfo *ServerInfo() const { return m_pServerInfo; }
-		int FriendState() const { return m_FriendState; }
-		bool IsPlayer() const { return m_IsPlayer; }
-		bool IsAfk() const { return m_IsAfk; }
-		// 0.6 skin
-		const char *Skin() const { return m_aSkin; }
-		bool CustomSkinColors() const { return m_CustomSkinColors; }
-		int CustomSkinColorBody() const { return m_CustomSkinColorBody; }
-		int CustomSkinColorFeet() const { return m_CustomSkinColorFeet; }
-		// 0.7 skin
-		const char *Skin7(int Part) const { return m_aaSkin7[Part]; }
-		bool UseCustomSkinColor7(int Part) const { return m_aUseCustomSkinColor7[Part]; }
-		int CustomSkinColor7(int Part) const { return m_aCustomSkinColor7[Part]; }
-
-		const void *ListItemId() const { return &m_aName; }
-		const void *RemoveButtonId() const { return &m_FriendState; }
-		const void *CommunityTooltipId() const { return &m_IsPlayer; }
-		const void *SkinTooltipId() const { return &m_aSkin; }
-
-		bool operator<(const CFriendItem &Other) const
-		{
-			const int Result = str_comp_nocase(m_aName, Other.m_aName);
-			return Result < 0 || (Result == 0 && str_comp_nocase(m_aClan, Other.m_aClan) < 0);
-		}
-	};
-
-	enum
-	{
-		FRIEND_PLAYER_ON = 0,
-		FRIEND_CLAN_ON,
-		FRIEND_OFF,
-		NUM_FRIEND_TYPES
-	};
-	std::vector<CFriendItem> m_avFriends[NUM_FRIEND_TYPES];
-	const CFriendItem *m_pRemoveFriend = nullptr;
-
-	// found in menus.cpp
-	void Render();
-	void RenderPopupFullscreen(CUIRect Screen);
 	void RenderPopupConnecting(CUIRect Screen);
 	void RenderPopupLoading(CUIRect Screen);
-#if defined(CONF_VIDEORECORDER)
-	void PopupConfirmDemoReplaceVideo();
-#endif
 	void RenderMenubar(CUIRect Box, IClient::EClientState ClientState);
 	void RenderNews(CUIRect MainView);
 	static void ConchainBackgroundEntities(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainUpdateMusicState(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	void UpdateMusicState();
-
-	// found in menus_demo.cpp
-	vec2 m_DemoControlsPositionOffset = vec2(0.0f, 0.0f);
-	bool m_PausedBeforeSeeking;
-	float m_PrevSeekAmount;
-	float m_LastPauseChange = -1.0f;
-	float m_LastSpeedChange = -1.0f;
-	static constexpr int DEFAULT_SKIP_DURATION_INDEX = 3;
-	int m_SkipDurationIndex = DEFAULT_SKIP_DURATION_INDEX;
-	static bool DemoFilterChat(const void *pData, int Size, void *pUser);
-	bool FetchHeader(CDemoItem &Item);
-	void FetchAllHeaders();
-	void HandleDemoSeeking(float PositionToSeek, float TimeToSeek);
-	void RenderDemoPlayer(CUIRect MainView);
-	void RenderDemoPlayerSliceSavePopup(CUIRect MainView);
-	bool m_DemoBrowserListInitialized = false;
-	void RenderDemoBrowser(CUIRect MainView);
-	void RenderDemoBrowserList(CUIRect ListView, bool &WasListboxItemActivated);
-	void RenderDemoBrowserDetails(CUIRect DetailsView);
-	void RenderDemoBrowserButtons(CUIRect ButtonsView, bool WasListboxItemActivated);
-	void PopupConfirmPlayDemo();
-	void PopupConfirmDeleteDemo();
-	void PopupConfirmDeleteFolder();
-	static void ConchainDemoPlay(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainDemoSpeed(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-
-	// found in menus_ingame.cpp
-	STextContainerIndex m_MotdTextContainerIndex;
-	void RenderGame(CUIRect MainView);
-	void PopupConfirmDisconnect();
-	void PopupConfirmDisconnectDummy();
-	void PopupConfirmDiscardTouchControlsChanges();
-	void PopupConfirmResetTouchControls();
-	void PopupConfirmImportTouchControlsClipboard();
-	void PopupConfirmDeleteButton();
-	void PopupCancelDeselectButton();
-	void PopupConfirmSelectedNotVisible();
-	void PopupConfirmChangeSelectedButton();
-	void PopupCancelChangeSelectedButton();
-	void PopupConfirmTurnOffEditor();
-	void PopupConfirmOpenWiki();
-	void RenderPlayers(CUIRect MainView);
-	void RenderServerInfo(CUIRect MainView);
-	void RenderServerInfoMotd(CUIRect Motd);
-	void RenderServerControl(CUIRect MainView);
-	bool RenderServerControlKick(CUIRect MainView, bool FilterSpectators, bool UpdateScroll);
-	bool RenderServerControlServer(CUIRect MainView, bool UpdateScroll);
-	void RenderIngameHint();
-
-	// found in menus_browser.cpp
-	int m_SelectedIndex;
-	bool m_ServerBrowserShouldRevealSelection;
-	std::vector<CUIElement *> m_avpServerBrowserUiElements[IServerBrowser::NUM_TYPES];
-	void RenderServerbrowserServerList(CUIRect View, bool &WasListboxItemActivated);
-	void RenderServerbrowserStatusBox(CUIRect StatusBox, bool WasListboxItemActivated);
-	void Connect(const char *pAddress);
-	void PopupConfirmSwitchServer();
-	void RenderServerbrowserFilters(CUIRect View);
-	void ResetServerbrowserFilters();
-	void RenderServerbrowserDDNetFilter(CUIRect View,
-		IFilterList &Filter,
-		float ItemHeight, int MaxItems, int ItemsPerRow,
-		CScrollRegion &ScrollRegion, std::vector<unsigned char> &vItemIds,
-		bool UpdateCommunityCacheOnChange,
-		const std::function<const char *(int ItemIndex)> &GetItemName,
-		const std::function<void(int ItemIndex, CUIRect Item, const void *pItemId, bool Active)> &RenderItem);
-	void RenderServerbrowserCommunitiesFilter(CUIRect View);
-	void RenderServerbrowserCountriesFilter(CUIRect View);
-	void RenderServerbrowserTypesFilter(CUIRect View);
-	struct SPopupCountrySelectionContext
-	{
-		CMenus *m_pMenus;
-		int m_Selection;
-		bool m_New;
-	};
-	static CUi::EPopupMenuFunctionResult PopupCountrySelection(void *pContext, CUIRect View, bool Active);
-	void RenderServerbrowserInfo(CUIRect View);
-	void RenderServerbrowserInfoScoreboard(CUIRect View, const CServerInfo *pSelectedServer);
-	void RenderServerbrowserFriends(CUIRect View);
-	void FriendlistOnUpdate();
-	void PopupConfirmRemoveFriend();
-	void RenderServerbrowserTabBar(CUIRect TabBar);
-	void RenderServerbrowserToolBox(CUIRect ToolBox);
-	void RenderServerbrowser(CUIRect MainView);
-	template<typename F>
-	bool PrintHighlighted(const char *pName, F &&PrintFn);
-	CTeeRenderInfo GetTeeRenderInfo(vec2 Size, const char *pSkinName, bool CustomSkinColors, int CustomSkinColorBody, int CustomSkinColorFeet) const;
-	static void ConchainFriendlistUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainFavoritesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainCommunitiesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainUiPageUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	void UpdateCommunityCache(bool Force);
 
 	// found in menus_settings.cpp
 	void RenderLanguageSettings(CUIRect MainView);
@@ -670,7 +379,7 @@ public:
 		PAGE_FAVORITE_COMMUNITY_3,
 		PAGE_FAVORITE_COMMUNITY_4,
 		PAGE_FAVORITE_COMMUNITY_5,
-		PAGE_DEMOS,
+
 		PAGE_SETTINGS,
 		PAGE_NETWORK,
 		PAGE_GHOST,
@@ -708,7 +417,6 @@ public:
 		BIT_TAB_FAVORITE_COMMUNITY_3,
 		BIT_TAB_FAVORITE_COMMUNITY_4,
 		BIT_TAB_FAVORITE_COMMUNITY_5,
-		BIG_TAB_DEMOS,
 
 		BIG_TAB_LENGTH,
 	};
@@ -719,7 +427,6 @@ public:
 		SMALL_TAB_QUIT,
 		SMALL_TAB_SETTINGS,
 		SMALL_TAB_EDITOR,
-		SMALL_TAB_DEMOBUTTON,
 		SMALL_TAB_SERVER,
 		SMALL_TAB_BROWSER_FILTER,
 		SMALL_TAB_BROWSER_INFO,
@@ -734,15 +441,6 @@ public:
 
 	// DDRace
 	int DoButton_CheckBox_Tristate(const void *pId, const char *pText, TRISTATE Checked, const CUIRect *pRect);
-	std::vector<CDemoItem> m_vDemos;
-	std::vector<CDemoItem *> m_vpFilteredDemos;
-	void DemolistPopulate();
-	void RefreshFilteredDemos();
-	void DemoSeekTick(IDemoPlayer::ETickOffset TickOffset);
-	bool m_Dummy;
-
-	const char *GetCurrentDemoFolder() const { return m_aCurrentDemoFolder; }
-
 	// Ghost
 	struct CGhostItem
 	{
@@ -789,7 +487,7 @@ public:
 	std::chrono::nanoseconds m_PopupWarningLastTime;
 	std::chrono::nanoseconds m_PopupWarningDuration;
 
-	int m_DemoPlayerState;
+
 
 	enum
 	{
@@ -801,21 +499,12 @@ public:
 		POPUP_POINTS,
 		POPUP_DISCONNECTED,
 		POPUP_LANGUAGE,
-		POPUP_RENAME_DEMO,
-		POPUP_RENDER_DEMO,
 		POPUP_RENDER_DONE,
 		POPUP_PASSWORD,
 		POPUP_QUIT,
 		POPUP_RESTART,
 		POPUP_WARNING,
 		POPUP_SAVE_SKIN,
-	};
-
-	enum
-	{
-		// demo player states
-		DEMOPLAYER_NONE = 0,
-		DEMOPLAYER_SLICE_SAVE,
 	};
 
 	void SetMenuPage(int NewPage);

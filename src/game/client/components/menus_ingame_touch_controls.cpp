@@ -1224,7 +1224,6 @@ void CMenusIngameTouchControls::ResetCachedSettings()
 	m_vBehaviorElements.emplace_back(std::make_unique<CBehaviorElements>());
 	m_vBehaviorElements.emplace_back(std::make_unique<CBehaviorElements>());
 	m_aCachedVisibilities.fill(EVisibilityType::IGNORE); // 2 means don't have the visibility, true:1,false:0
-	m_aCachedVisibilities[(int)CTouchControls::EButtonVisibility::DEMO_PLAYER] = EVisibilityType::EXCLUDE;
 	// These things can't be empty. std::stoi can't cast empty string.
 	SetPosInputs({0, 0, CTouchControls::BUTTON_SIZE_MINIMUM, CTouchControls::BUTTON_SIZE_MINIMUM});
 	m_CachedShape = CTouchControls::EButtonShape::RECT;
@@ -1528,15 +1527,14 @@ void CMenusIngameTouchControls::CBehaviorElements::Reset()
 
 const char **CMenusIngameTouchControls::VisibilityNames() const
 {
-	static const char *s_apVisibilities[8];
+	static const char *s_apVisibilities[7];
 	s_apVisibilities[0] = Localize("Ingame", "Touch button visibilities");
 	s_apVisibilities[1] = Localize("Zoom Allowed", "Touch button visibilities");
 	s_apVisibilities[2] = Localize("Vote Active", "Touch button visibilities");
 	s_apVisibilities[3] = Localize("Dummy Allowed", "Touch button visibilities");
 	s_apVisibilities[4] = Localize("Dummy Connected", "Touch button visibilities");
 	s_apVisibilities[5] = Localize("Rcon Authed", "Touch button visibilities");
-	s_apVisibilities[6] = Localize("Demo Player", "Touch button visibilities");
-	s_apVisibilities[7] = Localize("Extra Menu", "Touch button visibilities");
+	s_apVisibilities[6] = Localize("Extra Menu", "Touch button visibilities");
 	static_assert(std::size(s_apVisibilities) == (size_t)CTouchControls::EButtonVisibility::NUM_VISIBILITIES - CTouchControls::MAX_EXTRA_MENU_NUMBER + 1, "Insufficient visibility names");
 	return s_apVisibilities;
 }
@@ -1599,9 +1597,8 @@ const char *CMenusIngameTouchControls::HelpMessageForVisibilityType(CTouchContro
 	case CTouchControls::EButtonVisibility::DUMMY_ALLOWED: return Localize("Dummy is allowed on this server."); break;
 	case CTouchControls::EButtonVisibility::DUMMY_CONNECTED: return Localize("Dummy is currently connected."); break;
 	case CTouchControls::EButtonVisibility::RCON_AUTHED: return Localize("Player is currently authed in rcon."); break;
-	case CTouchControls::EButtonVisibility::DEMO_PLAYER: return Localize("Demo player is currently active."); break;
 	case CTouchControls::EButtonVisibility::EXTRA_MENU_1: return Localize("The extra menu with the given number is activated."); break;
 	default: dbg_assert_failed("Unknown visibility type %d", (int)Type);
 	}
-	static_assert((int)CTouchControls::EButtonVisibility::NUM_VISIBILITIES - CTouchControls::MAX_EXTRA_MENU_NUMBER + 1 == 8, "Insufficient help messages");
+	static_assert((int)CTouchControls::EButtonVisibility::NUM_VISIBILITIES - CTouchControls::MAX_EXTRA_MENU_NUMBER + 1 == 7, "Insufficient help messages");
 }

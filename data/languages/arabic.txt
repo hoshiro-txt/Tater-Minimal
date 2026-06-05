@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == ﻪﺒﻌﻠﻟﺍ ﻕﻼﻏﻻ ﺪﻛﺎﺘﻣ ﺖﻧﺍ ﻞﻫ
 
-Automatically record demos
-== ﻲﺋﺎﻘﻠﺗ ﻮﻳﺪﻴﻓ ﻞﻴﺠﺴﺗ
-
 Blue team
 == ﻕﺭﺯﻻﺍ ﻖﻳﺮﻔﻟﺍ
 
@@ -82,15 +79,6 @@ Custom colors
 Delete
 == ﻑﺬﺣ
 
-Delete demo
-== ﻮﻳﺪﻴﻔﻟﺍ ﻑﺬﺣ
-
-Demofile: %s
-== %s :ﻮﻳﺪﻴﻔﻟﺍ ﻒﻠﻣ
-
-Demos
-== ﺕﺎﻫﻮﻳﺪﻴﻔﻟﺍ
-
 Disconnect
 == ﺝﻭﺮﺧ
 
@@ -111,9 +99,6 @@ Emoticon
 
 Error
 == ﺀﺎﻄﺧ
-
-Error loading demo
-== ﻮﻳﺪﻴﻓﻟﺍ ﻞﻴﻤﺤﺗ ﻞﺸﻓ
 
 Favorite
 == ﻞﻀﻔﻤﻟﺍ
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == ﺐﺤﺳ
-
-Invalid Demo
-== ﺢﻟﺎﺻ ﺮﻴﻏ ﻮﻳﺪﻴﻓ
 
 Join blue
 == ﻕﺭﺯﻻﺍ ﻰﻟﺍ ﻡﺎﻤﻀﻧﻻﺍ
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == ﻖﻳﺪﺻ ﻑﺬﺣ
 
-Rename demo
-== ﻮﻳﺪﻴﻓﻟﺍ ﺔﻴﻤﺴﺗ ﺓﺩﺎﻋﺍ
-
 Reset filter
 == ﺔﻴﻔﺼﺘﻟﺍ ﺓﺩﺎﻋﺍ
 
@@ -394,9 +373,6 @@ Try again
 Type
 == ﺭﻮﻃ
 
-Unable to rename the demo
-== ﻮﻳﺪﻴﻓﻟﺍ ﺔﻴﻤﺴﺗ ﺓﺩﺎﻋﺎﺑ ﻞﺸﻓ
-
 Use sounds
 == ﺕﺍﻮﺻﻻﺍ ﻡﺍﺪﺨﺘﺳﺍ
 
@@ -448,9 +424,6 @@ Miscellaneous
 Internet
 == ﺖﻧﺮﺘﻧﻻﺍ
 
-Max demos
-== ﺕﺎﻫﻮﻳﺪﻴﻔﻠﻟ ﻰﺼﻗﻻﺍ ﺪﺤﻟﺍ
-
 News
 == ﺭﺎﺒﺧﻻﺍ
 
@@ -468,9 +441,6 @@ Max Screenshots
 
 Hue
 == ﻥﻮﻟ
-
-Record demo
-== ﻮﻳﺪﻴﻓ ﺮﻳﻮﺼﺗ
 
 Your skin
 == ﻚﻨﻜﺳ
@@ -561,9 +531,6 @@ Enable gun sound
 
 Team message
 == ﻖﻳﺮﻔﻟﺍ ﺔﻟﺎﺳﺭ
-
-Save the best demo of each race
-== ﻕﺎﺒﺳ ﻞﻜﻟ ﻲﺒﻳﺮﺠﺗ ﺽﺮﻋ ﻞﻀﻓﺃ ﻆﻔﺣﺍ
 
 Are you sure that you want to disconnect?
 == ﺝﻭﺮﺨﻟﺍ ﺪﻳﺮﺗ ﻚﻧﺎﺑ ﺪﻛﺂﺘﻣ ﺖﻧﺍ ﻞﻫ
@@ -712,9 +679,6 @@ Screen
 Exclude
 == ﺩﺎﻌﺒﺘﺳﺍ
 
-Demo
-== ﺕﺎﻫﻮﻳﺪﻴﻔﻟﺍ
-
 Fat skins (DDFat)
 == ﺔﻨﻴﻤﺳ ﺕﺎﻨﻜﺳ
 
@@ -859,9 +823,6 @@ transmits your player name to info.ddnet.org
 Server best:
 == :ﺮﻓﺮﻴﺳ ﻞﻀﻓﺍ
 
-Render demo
-== ﻮﻳﺪﻴﻓﻟﺍ ﻞﻴﻤﺤﺗ
-
 Hammerfly dummy
 == ﺔﻗﺮﻄﻤﻟﺎﺑ ﻥﺍﺮﻴﻃ-ﺔﻴﻣﺪﻟﺍ
 
@@ -955,9 +916,6 @@ Play
 
 Theme
 == ﺕﺎﻤﻴﺜﻟﺍ
-
-Demos directory
-== ﺮﻳﻮﺼﺘﻟﺍ ﻒﻠﻣ ﺢﺘﻓ
 
 Themes directory
 == ﺕﺎﻤﻴﺜﻟﺍ ﻒﻠﻣ ﺢﺘﻓ
@@ -1080,9 +1038,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1090,9 +1045,6 @@ Saving settings to '%s' failed
 == 
 
 Error saving settings
-== 
-
-No demo with this filename exists
 == 
 
 The width of texture %s is not divisible by %d, or the height is not divisible by %d, which might cause visual bugs.
@@ -1104,16 +1056,10 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == 
 
-Preparing demo playback
-== 
-
 Connected
 == 
 
 Loading map file from storage
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1309,9 +1255,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 == 
 
 This name cannot be used for files and folders
-== 
-
-A demo with this name already exists
 == 
 
 A folder with this name already exists
@@ -1513,32 +1456,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1559,31 +1477,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
-Close the demo player
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1598,13 +1501,7 @@ Render cut to video
 Please use a different filename
 == 
 
-Loading demo files
-== 
-
 All combined
-== 
-
-No demo selected
 == 
 
 Folder Link
@@ -1619,26 +1516,10 @@ Netversion
 Map size
 == 
 
-[Demo details]
-map not included
-== 
-
-Open the directory that contains the demo files
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Are you sure that you want to delete the folder '%s'?
 == 
 
-Are you sure that you want to delete the demo '%s'?
-== 
-
 Delete folder
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -1985,10 +1866,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2087,9 +1964,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2581,9 +2455,6 @@ Tutorial
 Download
 == 
 
-Loading race demo files
-== 
-
 [Spectators]
 %d others…
 == 
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

@@ -5,7 +5,6 @@
 #include <base/time.h>
 
 #include <engine/console.h>
-#include <engine/demo.h>
 #include <engine/font_icons.h>
 #include <engine/graphics.h>
 #include <engine/shared/config.h>
@@ -67,7 +66,7 @@ void CScoreboard::ConToggleScoreboardCursor(IConsole::IResult *pResult, void *pU
 	if(!pSelf->IsActive() ||
 		pSelf->GameClient()->m_Menus.IsActive() ||
 		pSelf->GameClient()->m_Chat.IsActive() ||
-		pSelf->Client()->State() == IClient::STATE_DEMOPLAYBACK)
+		false)
 	{
 		return;
 	}
@@ -824,49 +823,9 @@ void CScoreboard::RenderScoreboard(CUIRect Scoreboard, int Team, int CountStart,
 	}
 }
 
-void CScoreboard::RenderRecordingNotification(float x)
-{
-	char aBuf[512] = "";
-
-	const auto &&AppendRecorderInfo = [&](int Recorder, const char *pName) {
-		if(GameClient()->DemoRecorder(Recorder)->IsRecording())
-		{
-			char aTime[32];
-			str_time((int64_t)GameClient()->DemoRecorder(Recorder)->Length() * 100, ETimeFormat::HOURS, aTime, sizeof(aTime));
-			str_append(aBuf, pName);
-			str_append(aBuf, " ");
-			str_append(aBuf, aTime);
-			str_append(aBuf, "  ");
-		}
-	};
-
-	AppendRecorderInfo(RECORDER_MANUAL, Localize("Manual"));
-	AppendRecorderInfo(RECORDER_RACE, Localize("Race"));
-	AppendRecorderInfo(RECORDER_AUTO, Localize("Auto"));
-	AppendRecorderInfo(RECORDER_REPLAYS, Localize("Replay"));
-
-	if(aBuf[0] == '\0')
-		return;
-
-	const float FontSize = 10.0f;
-
-	CUIRect Rect = {x, 0.0f, TextRender()->TextWidth(FontSize, aBuf) + 30.0f, 25.0f};
-	Rect.Draw(ColorRGBA(0.0f, 0.0f, 0.0f, 0.4f), IGraphics::CORNER_B, 7.5f);
-	Rect.VSplitLeft(10.0f, nullptr, &Rect);
-	Rect.VSplitRight(5.0f, &Rect, nullptr);
-
-	CUIRect Circle;
-	Rect.VSplitLeft(10.0f, &Circle, &Rect);
-	Circle.HMargin((Circle.h - Circle.w) / 2.0f, &Circle);
-	Circle.Draw(ColorRGBA(1.0f, 0.0f, 0.0f, 1.0f), IGraphics::CORNER_ALL, Circle.h / 2.0f);
-
-	Rect.VSplitLeft(5.0f, nullptr, &Rect);
-	Ui()->DoLabel(&Rect, aBuf, FontSize, TEXTALIGN_ML);
-}
-
 void CScoreboard::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!IsActive())
@@ -1028,7 +987,6 @@ void CScoreboard::OnRender()
 	}
 	RenderSpectators(Spectators);
 
-	RenderRecordingNotification((Screen.w / 7) * 4 + 10);
 
 	if(!GameClient()->m_Menus.IsActive() && !GameClient()->m_Chat.IsActive())
 	{

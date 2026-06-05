@@ -173,18 +173,7 @@ void CMenus::RenderSettingsGeneral(CUIRect MainView)
 		Left.HSplitTop(20.0f, nullptr, &Left);
 		RenderThemeSelection(Left);
 
-		// auto demo settings
-		{
-			Right.HSplitTop(40.0f, nullptr, &Right);
-			Right.HSplitTop(20.0f, &Button, &Right);
-			if(DoButton_CheckBox(&g_Config.m_ClAutoDemoRecord, Localize("Automatically record demos"), g_Config.m_ClAutoDemoRecord, &Button))
-				g_Config.m_ClAutoDemoRecord ^= 1;
-
-			Right.HSplitTop(2 * 20.0f, &Button, &Right);
-			if(g_Config.m_ClAutoDemoRecord)
-				Ui()->DoScrollbarOption(&g_Config.m_ClAutoDemoMax, &g_Config.m_ClAutoDemoMax, &Button, Localize("Max demos"), 1, 1000, &CUi::ms_LinearScrollbarScale, CUi::SCROLLBAR_OPTION_INFINITE | CUi::SCROLLBAR_OPTION_MULTILINE);
-
-			Right.HSplitTop(10.0f, nullptr, &Right);
+		Right.HSplitTop(10.0f, nullptr, &Right);
 			Right.HSplitTop(20.0f, &Button, &Right);
 			if(DoButton_CheckBox(&g_Config.m_ClAutoScreenshot, Localize("Automatically take game over screenshot"), g_Config.m_ClAutoScreenshot, &Button))
 				g_Config.m_ClAutoScreenshot ^= 1;
@@ -2758,37 +2747,6 @@ void CMenus::RenderSettingsDDNet(CUIRect MainView)
 	MainView.HSplitBottom(20.0f, &MainView, &UpdaterRect);
 	MainView.HSplitBottom(5.0f, &MainView, nullptr);
 #endif
-
-	// demo
-	CUIRect Demo;
-	MainView.HSplitTop(110.0f, &Demo, &MainView);
-	Demo.HSplitTop(30.0f, &Label, &Demo);
-	Ui()->DoLabel(&Label, Localize("Demo"), 20.0f, TEXTALIGN_ML);
-	Label.VSplitMid(nullptr, &Label, 20.0f);
-	Ui()->DoLabel(&Label, Localize("Ghost"), 20.0f, TEXTALIGN_ML);
-
-	Demo.HSplitTop(5.0f, nullptr, &Demo);
-	Demo.VSplitMid(&Left, &Right, 20.0f);
-
-	Left.HSplitTop(20.0f, &Button, &Left);
-	if(DoButton_CheckBox(&g_Config.m_ClAutoRaceRecord, Localize("Save the best demo of each race"), g_Config.m_ClAutoRaceRecord, &Button))
-	{
-		g_Config.m_ClAutoRaceRecord ^= 1;
-	}
-
-	Left.HSplitTop(20.0f, &Button, &Left);
-	if(DoButton_CheckBox(&g_Config.m_ClReplays, Localize("Enable replays"), g_Config.m_ClReplays, &Button))
-	{
-		g_Config.m_ClReplays ^= 1;
-		if(Client()->State() == IClient::STATE_ONLINE)
-		{
-			Client()->DemoRecorder_UpdateReplayRecorder();
-		}
-	}
-
-	Left.HSplitTop(20.0f, &Button, &Left);
-	if(g_Config.m_ClReplays)
-		Ui()->DoScrollbarOption(&g_Config.m_ClReplayLength, &g_Config.m_ClReplayLength, &Button, Localize("Default length"), 10, 600, &CUi::ms_LinearScrollbarScale, CUi::SCROLLBAR_OPTION_NOCLAMPVALUE);
 
 	Right.HSplitTop(20.0f, &Button, &Right);
 	if(DoButton_CheckBox(&g_Config.m_ClRaceGhost, Localize("Enable ghost"), g_Config.m_ClRaceGhost, &Button))

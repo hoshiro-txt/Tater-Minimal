@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == 종료하시겠습니까?
 
-Automatically record demos
-== 자동으로 데모 녹화
-
 Automatically take game over screenshot
 == 자동으로 게임 종료 스크린샷 저장
 
@@ -85,12 +82,6 @@ Custom colors
 Delete
 == 삭제
 
-Delete demo
-== 데모 삭제
-
-Demos
-== 데모
-
 Disconnect
 == 연결 해제
 
@@ -111,9 +102,6 @@ Emoticon
 
 Error
 == 오류
-
-Error loading demo
-== 데모 로딩 오류
 
 Favorite
 == 즐겨찾기
@@ -174,9 +162,6 @@ High Detail
 
 Hook
 == 갈고리
-
-Invalid Demo
-== 잘못된 데모
 
 Join blue
 == 블루팀 참가
@@ -286,9 +271,6 @@ Remove
 Remove friend
 == 친구 제거
 
-Rename demo
-== 데모 이름 변경
-
 Reset filter
 == 필터 초기화
 
@@ -376,9 +358,6 @@ Try again
 Type
 == 종류
 
-Unable to rename the demo
-== 데모의 이름을 변경할 수 없음
-
 Use sounds
 == 소리 사용
 
@@ -439,9 +418,6 @@ Spectate previous
 New name:
 == 새 이름:
 
-Max demos
-== 최대 데모 수
-
 Internet
 == 인터넷
 
@@ -462,9 +438,6 @@ LAN
 
 Sound volume
 == 음량
-
-Record demo
-== 데모 녹화
 
 Miscellaneous
 == 기타
@@ -528,9 +501,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == %d 초 후 재접속
-
-Render demo
-== 데모 렌더링
 
 Replace video
 == 동영상 변경
@@ -631,12 +601,6 @@ Leak IP
 Remove chat
 == 채팅 제거
 
-Demofile: %s
-== 데모 파일: %s
-
-Demo
-== 데모
-
 Markers
 == 마커
 
@@ -648,9 +612,6 @@ Date
 
 Fetch Info
 == 정보 불러오기
-
-Demos directory
-== 데모 폴더
 
 Connect Dummy
 == 더미 연결
@@ -885,9 +846,6 @@ Client message
 
 Preview
 == 미리보기
-
-Save the best demo of each race
-== 레이스 최고 기록의 데모를 저장
 
 Default length
 == 기본 길이
@@ -1246,9 +1204,6 @@ Highlight Color
 Extras
 == 기타
 
-Preparing demo playback
-== 데모 재생 준비 중
-
 Connected
 == 연결됨
 
@@ -1281,9 +1236,6 @@ Requesting to join the game
 
 Loading menu images
 == 메뉴 이미지 로딩 중
-
-Loading demo files
-== 데모 파일 로딩 중
 
 Loading ghost files
 == 고스트 파일 로딩 중
@@ -1324,29 +1276,8 @@ Your movements are not taken into account when calculating the line colors
 Loading assets
 == 에셋 로딩 중
 
-Loading race demo files
-== 레이스 데모 파일 로딩 중
-
 Loading sound files
 == 소리 파일 로딩 중
-
-Play the current demo
-== 재생
-
-Pause the current demo
-== 일시정지
-
-Stop the current demo
-== 정지
-
-Slow down the demo
-== 속도 낮추기
-
-Speed up the demo
-== 속도 높이기
-
-Export cut as a separate demo
-== 자른 부분을 다른 이름으로 저장
 
 Toggle keyboard shortcuts
 == 키보드 단축키 사용
@@ -1435,15 +1366,6 @@ Go back one marker
 
 Go forward one marker
 == 다음 마커로 이동
-
-Open the directory that contains the demo files
-== 데모 파일이 있는 폴더를 엽니다.
-
-Are you sure that you want to delete the demo '%s'?
-== 데모 '%s'을(를) 삭제하시겠습니까?
-
-Unable to delete the demo '%s'
-== 데모 '%s'을(를) 삭제할 수 없음
 
 Open the settings file
 == 설정 파일을 엽니다.
@@ -1557,14 +1479,6 @@ Server filter
 
 Friends
 == 친구
-
-[Demo player duration]
-%s min.
-== %s 분
-
-[Demo player duration]
-%s sec.
-== %s 초
 
 Folder Link
 == 폴더 주소
@@ -1747,9 +1661,6 @@ Connect address error
 Could not connect dummy
 == 더미 연결 불가능
 
-Error playing demo
-== 데모 재생 오류
-
 Failed saving the replay!
 == 리플레이 저장 실패!
 
@@ -1764,9 +1675,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == "%s"은(는) pnglite와 호환되지 않으므로 DDNet의 이전 버전에서는 로딩할 수 없습니다.
-
-Loading demo file from storage
-== 저장공간에서 데모 파일 로딩 중
 
 Some fonts could not be loaded. Check the local console for details.
 == 글꼴이 완전히 로딩되지 않았습니다. 세부사항은 로컬 콘솔을 확인하십시오.
@@ -1856,9 +1764,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == 그래도 계속하시겠습니까?
 
-A demo with this name already exists
-== 같은 이름의 데모가 이미 있습니다.
-
 A folder with this name already exists
 == 같은 이름의 폴더가 이미 있습니다.
 
@@ -1895,14 +1800,8 @@ Mark the beginning of a cut (right click to reset)
 Mark the end of a cut (right click to reset)
 == 자를 부분의 종료점 생성 (우클릭으로 초기화)
 
-Close the demo player
-== 데모 재생기 종료
-
 Toggle auto camera
 == 자동 카메라 사용
-
-Export demo cut
-== 데모 잘라서 저장
 
 Cut interval
 == 자른 부분 시간대
@@ -1919,18 +1818,11 @@ Please use a different filename
 All combined
 == 모두 병합됨
 
-No demo selected
-== 데모가 선택되지 않음
-
 Created
 == 생성됨
 
 Netversion
 == 네트워크 버전
-
-[Demo details]
-map not included
-== 맵이 포함되지 않음
 
 Are you sure that you want to delete the folder '%s'?
 == 폴더 '%s'을(를) 삭제하시겠습니까?
@@ -2172,19 +2064,8 @@ Preview dummy's name plate
 Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom assets (skins, entities, etc.), especially those with high resolution.
 == VRAM 용량이 부족합니다. 'cl_skins_loaded_max'를 더 낮은 값으로 설정하거나 고해상도의 사용자 정의 에셋(스킨 및 엔티티 등)을 삭제해 보십시오.
 
-No demo with this filename exists
-== 해당 이름의 데모가 존재하지 않음
-
 Could not check for existing player with your name. Check your internet connection.
 == 당신의 이름을 기존 플레이어 목록에서 검색할 수 없습니다. 인터넷 연결 상태를 확인하십시오.
-
-[Demo playback]
-Live
-== 실시간
-
-[Demo playback]
-Go to Live
-== 실시간으로 재생
 
 Save all changes before turning off the editor?
 == 편집기를 종료하기 전에 모든 변경사항을 저장하시겠습니까?
@@ -2375,10 +2256,6 @@ Rcon Authed
 == 원격 콘솔 인증됨
 
 [Touch button visibilities]
-Demo Player
-== 데모 재생기
-
-[Touch button visibilities]
 Extra Menu
 == 기타 메뉴
 
@@ -2461,9 +2338,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == 현재 서버에서 연결이 끊깁니다.
-
-Are you sure that you want to disconnect and play this demo?
-== 데모를 재생하기 위해 연결을 끊으시겠습니까?
 
 Team save in progress. You'll be able to load with '/load %s'
 == 팀 진행 상태를 저장 중입니다. 이후 '/load %s'(으)로 불러올 수 있습니다.
@@ -2585,9 +2459,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 플레이어가 현재 원격 콘솔에 인증돼 있습니다.
 
-Demo player is currently active.
-== 데모 재생기가 현재 활성 상태입니다.
-
 The extra menu with the given number is activated.
 == 지정된 번호의 기타 메뉴가 활성화됐습니다.
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

@@ -665,7 +665,7 @@ private:
 protected:
 	bool UpdateNeeded(CGameClient &This, const CNamePlateData &Data) override
 	{
-		m_Visible = (Data.m_InGame && Data.m_ShowName && This.Client()->State() != IClient::STATE_DEMOPLAYBACK && (This.m_aClients[Data.m_ClientId].m_Foe || This.m_aClients[Data.m_ClientId].m_ChatIgnore));
+		m_Visible = (Data.m_InGame && Data.m_ShowName && This.(This.m_aClients[Data.m_ClientId].m_Foe || This.m_aClients[Data.m_ClientId].m_ChatIgnore));
 		if(!m_Visible)
 			return false;
 		m_Color = ColorRGBA(1.0f, 1.0f, 1.0f, Data.m_Color.a);
@@ -928,7 +928,7 @@ void CNamePlates::RenderNamePlateGame(vec2 Position, const CNetObj_PlayerInfo *p
 	}
 	if(Data.m_ShowDirection)
 	{
-		if(Client()->State() != IClient::STATE_DEMOPLAYBACK &&
+		if(true &&
 			pPlayerInfo->m_ClientId == GameClient()->m_aLocalIds[!g_Config.m_ClDummy])
 		{
 			const auto &InputData = GameClient()->m_Controls.m_aInputData[!g_Config.m_ClDummy];
@@ -936,7 +936,7 @@ void CNamePlates::RenderNamePlateGame(vec2 Position, const CNetObj_PlayerInfo *p
 			Data.m_DirJump = InputData.m_Jump == 1;
 			Data.m_DirRight = InputData.m_Direction == 1;
 		}
-		else if(Client()->State() != IClient::STATE_DEMOPLAYBACK && pPlayerInfo->m_Local) // Always render local input when not in demo playback
+		else if(pPlayerInfo->m_Local)
 		{
 			const auto &InputData = GameClient()->m_Controls.m_aInputData[g_Config.m_ClDummy];
 			Data.m_DirLeft = InputData.m_Direction == -1;
@@ -1082,7 +1082,7 @@ void CNamePlates::ResetNamePlates()
 
 void CNamePlates::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	int ShowDirection = g_Config.m_ClShowDirection;

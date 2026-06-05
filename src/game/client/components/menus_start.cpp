@@ -133,14 +133,6 @@ void CMenusStart::RenderStartMenu(CUIRect MainView)
 
 	Menu.HSplitBottom(5.0f, &Menu, nullptr); // little space
 	Menu.HSplitBottom(40.0f, &Menu, &Button);
-	static CButtonContainer s_DemoButton;
-	if(GameClient()->m_Menus.DoButton_Menu(&s_DemoButton, Localize("Demos"), 0, &Button, BUTTONFLAG_LEFT, g_Config.m_ClShowStartMenuImages ? "demos" : nullptr, IGraphics::CORNER_ALL, Rounding, 0.5f, ColorRGBA(0.0f, 0.0f, 0.0f, 0.25f)) || CheckHotKey(KEY_D))
-	{
-		NewPage = CMenus::PAGE_DEMOS;
-	}
-
-	Menu.HSplitBottom(5.0f, &Menu, nullptr); // little space
-	Menu.HSplitBottom(40.0f, &Menu, &Button);
 	static CButtonContainer s_PlayButton;
 	if(GameClient()->m_Menus.DoButton_Menu(&s_PlayButton, Localize("Play", "Start menu"), 0, &Button, BUTTONFLAG_LEFT, g_Config.m_ClShowStartMenuImages ? "play_game" : nullptr, IGraphics::CORNER_ALL, Rounding, 0.5f, ColorRGBA(0.0f, 0.0f, 0.0f, 0.25f)) || Ui()->ConsumeHotkey(CUi::HOTKEY_ENTER) || CheckHotKey(KEY_P))
 	{

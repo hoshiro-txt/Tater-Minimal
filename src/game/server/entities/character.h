@@ -204,7 +204,6 @@ public:
 	int Team();
 	bool CanCollide(int ClientId) override;
 	bool SameTeam(int ClientId);
-	void StopRecording();
 	bool m_NinjaJetpack;
 	int m_TeamBeforeSuper;
 	int m_FreezeTime;

@@ -96,7 +96,7 @@ void CBackground::OnRender()
 	if(!m_Loaded)
 		return;
 
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(g_Config.m_ClOverlayEntities != 100)

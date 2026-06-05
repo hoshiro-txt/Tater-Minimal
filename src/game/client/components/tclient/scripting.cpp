@@ -18,7 +18,7 @@ private:
 	CScriptingCtx m_ScriptingCtx;
 	const CServerInfo *GetServerInfo()
 	{
-		if(Client()->State() == IClient::STATE_ONLINE || Client()->State() == IClient::STATE_DEMOPLAYBACK)
+		if(Client()->State() == IClient::STATE_ONLINE)
 		{
 			static CServerInfo s_ServerInfo; // Prevent use after stack return
 			Client()->GetServerInfo(&s_ServerInfo);
@@ -74,7 +74,7 @@ private:
 		}
 		if(Str == "map")
 		{
-			if(Client()->State() == IClient::STATE_ONLINE || Client()->State() == IClient::STATE_DEMOPLAYBACK)
+			if(Client()->State() == IClient::STATE_ONLINE)
 				return GameClient()->Map()->BaseName();
 			else if(GameClient()->m_ConnectServerInfo)
 				return GameClient()->m_ConnectServerInfo->m_aMap;
@@ -158,9 +158,6 @@ private:
 			case IClient::STATE_ONLINE:
 				pState = "online";
 				break;
-			case IClient::STATE_DEMOPLAYBACK:
-				pState = "demo";
-				break;
 			case IClient::STATE_QUITTING:
 				pState = "quitting";
 				break;
@@ -172,7 +169,7 @@ private:
 		}
 		else if(Str == "id")
 		{
-			if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+			if(Client()->State() != IClient::STATE_ONLINE)
 				return nullptr;
 			if(!std::holds_alternative<std::string>(Arg))
 				return nullptr;
@@ -195,7 +192,7 @@ private:
 		}
 		else if(Str == "name")
 		{
-			if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+			if(Client()->State() != IClient::STATE_ONLINE)
 				return nullptr;
 			if(!std::holds_alternative<int>(Arg))
 				return nullptr;
@@ -208,7 +205,7 @@ private:
 		}
 		else if(Str == "clan")
 		{
-			if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+			if(Client()->State() != IClient::STATE_ONLINE)
 				return nullptr;
 			if(!std::holds_alternative<int>(Arg))
 				return nullptr;

@@ -202,8 +202,7 @@
 			"h": 66667,
 			"shape": "rect",
 			"visibilities": [
-				"extra-menu",
-				"-demo-player"
+				"extra-menu"
 			],
 			"behavior": {
 				"type": "bind",
@@ -219,8 +218,7 @@
 			"h": 66667,
 			"shape": "rect",
 			"visibilities": [
-				"extra-menu",
-				"-demo-player"
+				"extra-menu"
 			],
 			"behavior": {
 				"type": "bind",
@@ -237,8 +235,7 @@
 			"shape": "rect",
 			"visibilities": [
 				"extra-menu",
-				"vote-active",
-				"-demo-player"
+				"vote-active"
 			],
 			"behavior": {
 				"type": "bind",
@@ -255,8 +252,7 @@
 			"shape": "rect",
 			"visibilities": [
 				"extra-menu",
-				"vote-active",
-				"-demo-player"
+				"vote-active"
 			],
 			"behavior": {
 				"type": "bind",

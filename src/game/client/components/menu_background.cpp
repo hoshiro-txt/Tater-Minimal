@@ -26,7 +26,6 @@ std::array<vec2, CMenuBackground::NUM_POS> GenerateMenuBackgroundPositions()
 	Positions[CMenuBackground::POS_START] = vec2(500.0f, 500.0f);
 	Positions[CMenuBackground::POS_BROWSER_INTERNET] = vec2(1000.0f, 1000.0f);
 	Positions[CMenuBackground::POS_BROWSER_LAN] = vec2(1100.0f, 1000.0f);
-	Positions[CMenuBackground::POS_DEMOS] = vec2(900.0f, 100.0f);
 	Positions[CMenuBackground::POS_NEWS] = vec2(500.0f, 750.0f);
 	Positions[CMenuBackground::POS_BROWSER_FAVORITES] = vec2(1250.0f, 500.0f);
 	Positions[CMenuBackground::POS_SETTINGS_LANGUAGE] = vec2(500.0f, 1200.0f);

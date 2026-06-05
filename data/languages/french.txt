@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Êtes-vous sûr de vouloir quitter ?
 
-Automatically record demos
-== Enregistrer les démos automatiquement
-
 Automatically take game over screenshot
 == Prendre une capture d'écran de fin de partie automatiquement
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Supprimer
 
-Delete demo
-== Supprimer la démo
-
-Demofile: %s
-== Démo : %s
-
-Demos
-== Démos
-
 Disconnect
 == Partir
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Erreur
-
-Error loading demo
-== Erreur lors du chargement de la démo
 
 Favorite
 == Favori
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Grappin
-
-Invalid Demo
-== Démo invalide
 
 Join blue
 == Rej. Bleus
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Retirer des amis
 
-Rename demo
-== Renommer la démo
-
 Reset filter
 == Filtres par défaut
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Type
 
-Unable to rename the demo
-== Impossible de renommer la démo
-
 Use sounds
 == Jouer les sons
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Nombre maximum de démos
-
 News
 == Infos
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Teinte
-
-Record demo
-== Enregist. démo
 
 Your skin
 == Votre skin
@@ -607,9 +577,6 @@ Show text entities
 Connecting dummy
 == Connexion du dummy
 
-Render demo
-== Convertir une démo
-
 Save ghost
 == Sauvegarder le fantôme
 
@@ -706,9 +673,6 @@ Normal message
 Dummy copy
 == Copiage du dummy
 
-Demo
-== Démo
-
 Map sound volume
 == Volume des sons de la carte
 
@@ -759,9 +723,6 @@ Hammerfly dummy
 
 Switch weapon when out of ammo
 == Changer d'arme lorsqu'il n'y a plus de munition
-
-Save the best demo of each race
-== Sauvegarder la meilleure démo de chaque course
 
 may cause delay
 == Peut causer du délai
@@ -924,9 +885,6 @@ Theme
 
 %d player
 == %d joueur
-
-Demos directory
-== Répertoire des enregistrements
 
 Skip the main menu
 == Passer le menu principal
@@ -1288,9 +1246,6 @@ Loading assets
 Loading sound files
 == Chargement des fichiers sonores
 
-Preparing demo playback
-== Préparation de la lecture de la demo
-
 Loading map file from storage
 == Chargement de la map depuis le stockage
 
@@ -1312,9 +1267,6 @@ Uploading map data to GPU
 Loading menu images
 == Chargement des images de menu
 
-Loading demo files
-== Chargement des fichiers de demo
-
 Loading ghost files
 == Chargement des fichiers de fantôme
 
@@ -1329,27 +1281,6 @@ Hook collision line opacity
 
 Your movements are not taken into account when calculating the line colors
 == Vos mouvements ne sont pas pris en compte lors du calcul des couleurs de la ligne
-
-Loading race demo files
-== Chargement des fichiers de demo de course
-
-Play the current demo
-== Jouer la démo en cours
-
-Pause the current demo
-== Mettre en pause la démo en cours
-
-Stop the current demo
-== Arrêter la démo en cours
-
-Slow down the demo
-== Ralentir la démo
-
-Speed up the demo
-== Accélérer la démo
-
-Export cut as a separate demo
-== Exporter la coupe comme une démo séparée
 
 Toggle keyboard shortcuts
 == Basculer les raccourcis clavier
@@ -1411,15 +1342,6 @@ Go back one marker
 
 Go forward one marker
 == Aller au marqueur suivant
-
-Open the directory that contains the demo files
-== Ouvrir le dossier contenant les fichiers démo
-
-Are you sure that you want to delete the demo '%s'?
-== Êtes-vous sûr de vouloir supprimer la démo '%s' ?
-
-Unable to delete the demo '%s'
-== Impossible de supprimer la démo '%s'
 
 Open the settings file
 == Ouvrir le fichier de configuration
@@ -1504,9 +1426,6 @@ Click to remove this clan from your friends list.
 Create a random skin
 == Créer un skin aléatoire
 
-Error playing demo
-== Erreur durant la lecture de la demo
-
 Failed saving the replay!
 == Erreur durant la sauvegarde du replay !
 
@@ -1515,9 +1434,6 @@ Saving settings to '%s' failed
 
 Error saving settings
 == Erreur de sauvegarde des paramètres
-
-Loading demo file from storage
-== Chargement du fichier de la demo à partir du stockage
 
 Quitting. Please wait…
 == En train de quitter. Veuillez patienter…
@@ -1588,9 +1504,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Continuer quand même ?
 
-A demo with this name already exists
-== Une démo avec ce nom existe déjà
-
 A folder with this name already exists
 == Un dossier avec ce nom existe déjà
 
@@ -1627,14 +1540,6 @@ Friends
 Go back the specified duration
 == Saut arrière de la durée spécifiée
 
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sec.
-
 Change the skip duration
 == Modifier la durée du saut
 
@@ -1646,12 +1551,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == Marquer la fin d'une coupe (clic droit pour réinitialiser)
-
-Close the demo player
-== Fermer le lecteur de demo
-
-Export demo cut
-== Exporter le découpage de la demo
 
 Cut interval
 == Intervale du découpage
@@ -1668,9 +1567,6 @@ Please use a different filename
 All combined
 == Tout combiné
 
-No demo selected
-== Aucune demo sélectionnée
-
 Folder Link
 == Dossier Lien
 
@@ -1679,10 +1575,6 @@ Created
 
 Netversion
 == Netversion
-
-[Demo details]
-map not included
-== carte non incluse
 
 Are you sure that you want to delete the folder '%s'?
 == Êtes-vous sûr de vouloir supprimer le dossier '%s'?
@@ -1989,9 +1881,6 @@ Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom
 Press Ctrl+Shift+G to disable debug graphs.
 == 
 
-No demo with this filename exists
-== 
-
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == 
 
@@ -2126,21 +2015,10 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Toggle auto camera
 == 
 
 Map size
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2383,10 +2261,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2485,9 +2359,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

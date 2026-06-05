@@ -23,10 +23,6 @@ bool CSpectator::CanChangeSpectatorId()
 	if(!GameClient()->m_Snap.m_SpecInfo.m_Active)
 		return false;
 
-	// stop follow mode from changing SpectatorId
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK && GameClient()->m_DemoSpecId == SPEC_FOLLOW)
-		return false;
-
 	return true;
 }
 
@@ -89,7 +85,7 @@ void CSpectator::ConKeySpectator(IConsole::IResult *pResult, void *pUserData)
 	if(pSelf->GameClient()->m_Scoreboard.IsActive())
 		return;
 
-	if(pSelf->GameClient()->m_Snap.m_SpecInfo.m_Active || pSelf->Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	if(pSelf->GameClient()->m_Snap.m_SpecInfo.m_Active || false)
 		pSelf->m_Active = pResult->GetInteger(0) != 0;
 	else
 		pSelf->m_Active = false;
@@ -208,7 +204,7 @@ void CSpectator::OnRelease()
 
 void CSpectator::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!GameClient()->m_MultiViewActivated && m_MultiViewActivateDelay != 0.0f)
@@ -247,7 +243,7 @@ void CSpectator::OnRender()
 		return;
 	}
 
-	if(!GameClient()->m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(!GameClient()->m_Snap.m_SpecInfo.m_Active)
 	{
 		m_Active = false;
 		m_WasActive = false;
@@ -343,8 +339,7 @@ void CSpectator::OnRender()
 	const bool MousePressed = Input()->KeyPress(KEY_MOUSE_1) || m_TouchState.m_PrimaryPressed;
 
 	// draw selections
-	if((Client()->State() == IClient::STATE_DEMOPLAYBACK && GameClient()->m_DemoSpecId == SPEC_FREEVIEW) ||
-		(Client()->State() != IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_SpecInfo.m_SpectatorId == SPEC_FREEVIEW))
+	if(GameClient()->m_Snap.m_SpecInfo.m_SpectatorId == SPEC_FREEVIEW)
 	{
 		Graphics()->DrawRect(Width / 2.0f - (ObjWidth - 20.0f), Height / 2.0f - 280.0f, ((ObjWidth * 2.0f) / 3.0f) - 40.0f, 60.0f, ColorRGBA(1.0f, 1.0f, 1.0f, 0.25f), IGraphics::CORNER_ALL, 20.0f);
 	}
@@ -352,11 +347,6 @@ void CSpectator::OnRender()
 	if(GameClient()->m_MultiViewActivated)
 	{
 		Graphics()->DrawRect(Width / 2.0f - (ObjWidth - 20.0f) + (ObjWidth * 2.0f / 3.0f), Height / 2.0f - 280.0f, ((ObjWidth * 2.0f) / 3.0f) - 40.0f, 60.0f, ColorRGBA(1.0f, 1.0f, 1.0f, 0.25f), IGraphics::CORNER_ALL, 20.0f);
-	}
-
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_LocalClientId >= 0 && GameClient()->m_DemoSpecId == SPEC_FOLLOW)
-	{
-		Graphics()->DrawRect(Width / 2.0f - (ObjWidth - 20.0f) + (ObjWidth * 2.0f * 2.0f / 3.0f), Height / 2.0f - 280.0f, ((ObjWidth * 2.0f) / 3.0f) - 40.0f, 60.0f, ColorRGBA(1.0f, 1.0f, 1.0f, 0.25f), IGraphics::CORNER_ALL, 20.0f);
 	}
 
 	bool FreeViewSelected = false;
@@ -386,24 +376,6 @@ void CSpectator::OnRender()
 	}
 	TextRender()->TextColor(1.0f, 1.0f, 1.0f, MultiViewSelected ? 1.0f : 0.5f);
 	TextRender()->Text(Width / 2.0f - (ObjWidth - 40.0f) + (ObjWidth * 2.0f / 3.0f), Height / 2.0f - 280.f + (60.f - BigFontSize) / 2.f, BigFontSize, Localize("Multi-View"), -1.0f);
-
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_LocalClientId >= 0)
-	{
-		bool FollowSelected = false;
-		if(m_SelectorMouse.x >= -(ObjWidth - 20.0f) + (ObjWidth * 2.0f * 2.0f / 3.0f) && m_SelectorMouse.x <= -(ObjWidth - 20.0f) + (ObjWidth * 2.0f * 2.0f / 3.0f) + ((ObjWidth * 2.0f) / 3.0f) - 40.0f &&
-			m_SelectorMouse.y >= -280.0f && m_SelectorMouse.y <= -220.0f)
-		{
-			m_SelectedSpectatorId = SPEC_FOLLOW;
-			FollowSelected = true;
-			if(MousePressed)
-			{
-				GameClient()->m_MultiViewActivated = false;
-				Spectate(m_SelectedSpectatorId);
-			}
-		}
-		TextRender()->TextColor(1.0f, 1.0f, 1.0f, FollowSelected ? 1.0f : 0.5f);
-		TextRender()->Text(Width / 2.0f - (ObjWidth - 40.0f) + (ObjWidth * 2.0f * 2.0f / 3.0f), Height / 2.0f - 280.0f + (60.f - BigFontSize) / 2.f, BigFontSize, Localize("Follow"), -1.0f);
-	}
 
 	float x = -(ObjWidth - 35.0f), y = StartY;
 
@@ -464,7 +436,7 @@ void CSpectator::OnRender()
 
 		OldDDTeam = DDTeam;
 
-		if((Client()->State() == IClient::STATE_DEMOPLAYBACK && GameClient()->m_DemoSpecId == GameClient()->m_Snap.m_apInfoByDDTeamName[i]->m_ClientId) || (Client()->State() != IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_SpecInfo.m_SpectatorId == GameClient()->m_Snap.m_apInfoByDDTeamName[i]->m_ClientId))
+		if(GameClient()->m_Snap.m_SpecInfo.m_SpectatorId == GameClient()->m_Snap.m_apInfoByDDTeamName[i]->m_ClientId)
 		{
 			Graphics()->DrawRect(Width / 2.0f + x - 10.0f + BoxOffset, Height / 2.0f + y + BoxMove, 270.0f - BoxOffset, LineHeight, ColorRGBA(1.0f, 1.0f, 1.0f, 0.25f), IGraphics::CORNER_ALL, RoundRadius);
 		}
@@ -507,7 +479,7 @@ void CSpectator::OnRender()
 			}
 		}
 		float TeeAlpha;
-		if(Client()->State() == IClient::STATE_DEMOPLAYBACK &&
+		if(false &&
 			!GameClient()->m_Snap.m_aCharacters[GameClient()->m_Snap.m_apInfoByDDTeamName[i]->m_ClientId].m_Active)
 		{
 			TextRender()->TextColor(1.0f, 1.0f, 1.0f, 0.25f);
@@ -604,16 +576,6 @@ void CSpectator::OnReset()
 
 void CSpectator::Spectate(int SpectatorId)
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		GameClient()->m_DemoSpecId = std::clamp(SpectatorId, (int)SPEC_FOLLOW, MAX_CLIENTS - 1);
-		// The tick must be rendered for the spectator mode to be updated, so we do it manually when demo playback is paused
-		// TODO: https://github.com/ddnet/ddnet/issues/11681
-		if(DemoPlayer()->BaseInfo()->m_Paused)
-			GameClient()->m_Menus.DemoSeekTick(IDemoPlayer::TICK_CURRENT);
-		return;
-	}
-
 	if(GameClient()->m_Snap.m_SpecInfo.m_SpectatorId == SpectatorId)
 		return;
 
@@ -661,7 +623,7 @@ void CSpectator::SpectateClosest()
 		if(ClientId == SpectatorId || !Snap.m_aCharacters[ClientId].m_Active || !Snap.m_apPlayerInfos[ClientId] || Snap.m_apPlayerInfos[ClientId]->m_Team == TEAM_SPECTATORS)
 			continue;
 
-		if(Client()->State() != IClient::STATE_DEMOPLAYBACK && ClientId == Snap.m_LocalClientId)
+		if(ClientId == Snap.m_LocalClientId)
 			continue;
 
 		const CNetObj_Character &MaybeClosestCharacter = Snap.m_aCharacters[ClientId].m_Cur;

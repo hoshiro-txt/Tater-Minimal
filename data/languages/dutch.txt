@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Weet je zeker dat je wilt stoppen?
 
-Automatically record demos
-== Automatisch demo's opnemen
-
 Automatically take game over screenshot
 == Automatisch schermafbeeldingen nemen bij einde spel
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Verwijder
 
-Delete demo
-== Verwijder demo
-
-Demofile: %s
-== Demobestand: %s
-
-Demos
-== Demo's
-
 Disconnect
 == loskoppelen
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Fout
-
-Error loading demo
-== Fout bij laden demo
 
 Favorite
 == Favoriet
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Haak
-
-Invalid Demo
-== Ongeldige demo
 
 Join blue
 == Ga bij blauw
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Verwijder vriend
 
-Rename demo
-== Hernoem demo
-
 Reset filter
 == Herstel filter
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Type
 
-Unable to rename the demo
-== Niet mogelijk om de demo te hernoemen
-
 Use sounds
 == Gebruik geluiden
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Maximaal aantal demo's
-
 News
 == Nieuws
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Tint
-
-Record demo
-== Neem demo op
 
 Your skin
 == Jouw skin
@@ -522,9 +492,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Opnieuw verbinden in %d sec
-
-Render demo
-== Demo renderen
 
 Replace video
 == Video vervangen
@@ -609,9 +576,6 @@ Remove chat
 
 %.2f KiB
 == %.2f KiB
-
-Demo
-== Demo
 
 Markers
 == Markeringen
@@ -799,9 +763,6 @@ Friend message
 Normal message
 == Normaal bericht
 
-Save the best demo of each race
-== Sla de beste demo op van elke race
-
 Default length
 == Standaard lengte
 
@@ -987,9 +948,6 @@ Getting server list from master server
 
 Leak IP
 == Lek IP
-
-Demos directory
-== Demo's map
 
 Smooth Dynamic Camera
 == Vloeiende Dynamische Camera
@@ -1201,9 +1159,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == Kon dummy niet verbinden
 
-Error playing demo
-== Fout bij het afspelen van de demo
-
 Failed saving the replay!
 == Opslaan van de replay is mislukt!
 
@@ -1216,17 +1171,11 @@ Error saving settings
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == "%s" is niet compatibel met pnglite en kan niet worden geladen door oude DDNet-versies:
 
-Preparing demo playback
-== Demo afspelen voorbereiden
-
 Connected
 == Verbonden
 
 Loading map file from storage
 == Mapbestand laden vanuit opslag
-
-Loading demo file from storage
-== Demobestand laden vanuit opslag
 
 Some fonts could not be loaded. Check the local console for details.
 == Sommige lettertypen konden niet worden geladen. Controleer de lokale console voor details.
@@ -1344,9 +1293,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Toch doorgaan?
 
-A demo with this name already exists
-== Er bestaat al een demo met deze naam
-
 A folder with this name already exists
 == Er bestaat al een map met deze naam
 
@@ -1450,25 +1396,8 @@ Server filter
 Friends
 == Vrienden
 
-Play the current demo
-== Huidige demo afspelen
-
-Pause the current demo
-== Huidige demo pauzeren
-
-Stop the current demo
-== Huidige demo stoppen
-
 Go back the specified duration
 == Ga terug met de opgegeven duur
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sec.
 
 Change the skip duration
 == Wijzig de skipduur
@@ -1488,32 +1417,17 @@ Go back one marker
 Go forward one marker
 == Ga naar volgende marker
 
-Slow down the demo
-== Vertraag de demo
-
-Speed up the demo
-== Versnel de demo
-
 Mark the beginning of a cut (right click to reset)
 == Markeer het begin van een knip (rechterklik om te resetten)
 
 Mark the end of a cut (right click to reset)
 == Markeer het einde van een knip (rechterklik om te resetten)
 
-Export cut as a separate demo
-== Exporteer knip als een aparte demo
-
-Close the demo player
-== Sluit de demospeler
-
 Toggle keyboard shortcuts
 == Schakel sneltoetsen in/uit
 
 Toggle auto camera
 == Schakel automatische camera in/uit
-
-Export demo cut
-== Exporteer demoknip
 
 Cut interval
 == Knipinterval
@@ -1527,14 +1441,8 @@ Render cut to video
 Please use a different filename
 == Gebruik alstublieft een andere bestandsnaam
 
-Loading demo files
-== Demobestanden laden
-
 All combined
 == Alles gecombineerd
-
-No demo selected
-== Geen demo geselecteerd
 
 Folder Link
 == Maplink
@@ -1545,24 +1453,11 @@ Created
 Netversion
 == Netversie
 
-[Demo details]
-map not included
-== kaart niet inbegrepen
-
-Open the directory that contains the demo files
-== Open de map die de demobestanden bevat
-
 Are you sure that you want to delete the folder '%s'?
 == Weet je zeker dat je de map '%s' wilt verwijderen?
 
-Are you sure that you want to delete the demo '%s'?
-== Weet je zeker dat je de demo '%s' wilt verwijderen?
-
 Delete folder
 == Map verwijderen
-
-Unable to delete the demo '%s'
-== Kan de demo '%s' niet verwijderen
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Kan de map '%s' niet verwijderen. Zorg ervoor dat deze eerst leeg is.
@@ -1950,9 +1845,6 @@ Open the directory to add custom assets
 Server could not be started. Make sure to grant the notification permission in the app settings so the server can run in the background.
 == Server kon niet worden gestart. Zorg ervoor dat de meldingsmachtiging is verleend in de app-instellingen, zodat de server op de achtergrond kan draaien.
 
-Loading race demo files
-== Race-demobestanden laden
-
 Round %d/%d
 == Ronde %d/%d
 
@@ -2116,9 +2008,6 @@ Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom
 Press Ctrl+Shift+G to disable debug graphs.
 == 
 
-No demo with this filename exists
-== 
-
 Team save in progress. You'll be able to load with '/load %s'
 == 
 
@@ -2209,17 +2098,6 @@ Click to remove this community from your favorites.
 == 
 
 Click to add this community to your favorites.
-== 
-
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2413,10 +2291,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2515,9 +2389,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

@@ -426,10 +426,7 @@ void CGameContext::CreateSoundGlobal(int Sound, int Target) const
 		Server()->SendPackMsg(&Msg, MSGFLAG_NOSEND, -1);
 	else
 	{
-		int Flag = MSGFLAG_VITAL;
-		if(Target != -1)
-			Flag |= MSGFLAG_NORECORD;
-		Server()->SendPackMsg(&Msg, Flag, Target);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, Target);
 	}
 }
 
@@ -438,7 +435,7 @@ void CGameContext::SnapSwitchers(int SnappingClient)
 	if(Switchers().empty())
 		return;
 
-	CPlayer *pPlayer = SnappingClient != SERVER_DEMO_CLIENT ? m_apPlayers[SnappingClient] : nullptr;
+	CPlayer *pPlayer = m_apPlayers[SnappingClient];
 	int Team = pPlayer && pPlayer->GetCharacter() ? pPlayer->GetCharacter()->Team() : 0;
 
 	if(pPlayer && (pPlayer->GetTeam() == TEAM_SPECTATORS || pPlayer->IsPaused()) && pPlayer->SpectatorId() != SPEC_FREEVIEW && m_apPlayers[pPlayer->SpectatorId()] && m_apPlayers[pPlayer->SpectatorId()]->GetCharacter())
@@ -603,9 +600,6 @@ void CGameContext::SendChatTarget(int To, const char *pText, int VersionFlags) c
 	Msg.m_ClientId = -1;
 	Msg.m_pMessage = pText;
 
-	if(g_Config.m_SvDemoChat)
-		Server()->SendPackMsg(&Msg, MSGFLAG_NOSEND, SERVER_DEMO_CLIENT);
-
 	if(To == -1)
 	{
 		for(int i = 0; i < Server()->MaxClients(); i++)
@@ -614,7 +608,7 @@ void CGameContext::SendChatTarget(int To, const char *pText, int VersionFlags) c
 				   (!Server()->IsSixup(i) && (VersionFlags & FLAG_SIX))))
 				continue;
 
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, i);
 		}
 	}
 	else
@@ -623,7 +617,7 @@ void CGameContext::SendChatTarget(int To, const char *pText, int VersionFlags) c
 			   (!Server()->IsSixup(To) && (VersionFlags & FLAG_SIX))))
 			return;
 
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, To);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, To);
 	}
 }
 
@@ -661,10 +655,6 @@ void CGameContext::SendChat(int ChatterClientId, int Team, const char *pText, in
 		Msg.m_ClientId = ChatterClientId;
 		Msg.m_pMessage = aText;
 
-		// pack one for the recording only
-		if(g_Config.m_SvDemoChat)
-			Server()->SendPackMsg(&Msg, MSGFLAG_NOSEND, SERVER_DEMO_CLIENT);
-
 		// send to the clients
 		for(int i = 0; i < Server()->MaxClients(); i++)
 		{
@@ -674,7 +664,7 @@ void CGameContext::SendChat(int ChatterClientId, int Team, const char *pText, in
 				    (!Server()->IsSixup(i) && (VersionFlags & FLAG_SIX));
 
 			if(!m_apPlayers[i]->m_DND && Send)
-				Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+				Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, i);
 		}
 
 		char aBuf[sizeof(aText) + 8];
@@ -689,10 +679,6 @@ void CGameContext::SendChat(int ChatterClientId, int Team, const char *pText, in
 		Msg.m_ClientId = ChatterClientId;
 		Msg.m_pMessage = aText;
 
-		// pack one for the recording only
-		if(g_Config.m_SvDemoChat)
-			Server()->SendPackMsg(&Msg, MSGFLAG_NOSEND, SERVER_DEMO_CLIENT);
-
 		// send to the clients
 		for(int i = 0; i < Server()->MaxClients(); i++)
 		{
@@ -702,14 +688,14 @@ void CGameContext::SendChat(int ChatterClientId, int Team, const char *pText, in
 				{
 					if(m_apPlayers[i]->GetTeam() == TEAM_SPECTATORS)
 					{
-						Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+						Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, i);
 					}
 				}
 				else
 				{
 					if(pTeams->Team(i) == Team && m_apPlayers[i]->GetTeam() != TEAM_SPECTATORS)
 					{
-						Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+						Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, i);
 					}
 				}
 			}
@@ -758,7 +744,7 @@ void CGameContext::SendSettings(int ClientId) const
 	Msg.m_TeamLock = 0;
 	Msg.m_TeamBalance = 0;
 	Msg.m_PlayerSlots = Server()->MaxClients() - g_Config.m_SvSpectatorSlots;
-	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 }
 
 void CGameContext::SendServerAlert(const char *pMessage)
@@ -774,7 +760,7 @@ void CGameContext::SendServerAlert(const char *pMessage)
 		{
 			CNetMsg_Sv_ServerAlert Msg;
 			Msg.m_pMessage = pMessage;
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 		}
 		else
 		{
@@ -785,12 +771,6 @@ void CGameContext::SendServerAlert(const char *pMessage)
 		}
 	}
 
-	// Record server alert to demos exactly once
-	// TODO: Workaround https://github.com/ddnet/ddnet/issues/11144 by using client ID 0,
-	//       otherwise the message is recorded multiple times.
-	CNetMsg_Sv_ServerAlert Msg;
-	Msg.m_pMessage = pMessage;
-	Server()->SendPackMsg(&Msg, MSGFLAG_NOSEND, 0);
 }
 
 void CGameContext::SendModeratorAlert(const char *pMessage, int ToClientId)
@@ -802,7 +782,7 @@ void CGameContext::SendModeratorAlert(const char *pMessage, int ToClientId)
 	{
 		CNetMsg_Sv_ModeratorAlert Msg;
 		Msg.m_pMessage = pMessage;
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ToClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ToClientId);
 	}
 	else
 	{
@@ -841,8 +821,7 @@ void CGameContext::SendBroadcast(const char *pText, int ClientId, bool IsImporta
 	if(!IsImportant && m_apPlayers[ClientId]->m_LastBroadcastImportance && m_apPlayers[ClientId]->m_LastBroadcast > Server()->Tick() - Server()->TickSpeed() * 10)
 		return;
 
-	// Broadcasts to individual players are not recorded in demos
-	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	m_apPlayers[ClientId]->m_LastBroadcast = Server()->Tick();
 	m_apPlayers[ClientId]->m_LastBroadcastImportance = IsImportant;
 }
@@ -862,7 +841,7 @@ void CGameContext::SendSkinChange7(int ClientId)
 		Msg.m_aUseCustomColors[Part] = Info.m_aUseCustomColors[Part];
 	}
 
-	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, -1);
+	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, -1);
 }
 
 void CGameContext::StartVote(const char *pDesc, const char *pCommand, const char *pReason, const char *pSixupDesc)
@@ -1396,7 +1375,7 @@ void CGameContext::OnTick()
 			str_copy(m_aMapInfoMessage, m_pLoadMapInfoResult->m_Data.m_aaMessages[0]);
 			CNetMsg_Sv_MapInfo MapInfoMsg;
 			MapInfoMsg.m_pDescription = m_aMapInfoMessage;
-			Server()->SendPackMsg(&MapInfoMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, -1);
+			Server()->SendPackMsg(&MapInfoMsg, MSGFLAG_VITAL, -1);
 		}
 		m_pLoadMapInfoResult = nullptr;
 	}
@@ -1641,7 +1620,7 @@ void CGameContext::OnClientEnter(int ClientId)
 
 	{
 		CNetMsg_Sv_CommandInfoGroupStart Msg;
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	}
 	for(const IConsole::ICommandInfo *pCmd = Console()->FirstCommandInfo(ClientId, CFGFLAG_CHAT);
 		pCmd; pCmd = Console()->NextCommandInfo(pCmd, ClientId, CFGFLAG_CHAT))
@@ -1660,7 +1639,7 @@ void CGameContext::OnClientEnter(int ClientId)
 			Msg.m_pName = pName;
 			Msg.m_pArgsFormat = pCmd->Params();
 			Msg.m_pHelpText = pCmd->Help();
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 		}
 		else
 		{
@@ -1668,12 +1647,12 @@ void CGameContext::OnClientEnter(int ClientId)
 			Msg.m_pName = pName;
 			Msg.m_pArgsFormat = pCmd->Params();
 			Msg.m_pHelpText = pCmd->Help();
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 		}
 	}
 	{
 		CNetMsg_Sv_CommandInfoGroupEnd Msg;
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	}
 
 	{
@@ -1691,7 +1670,7 @@ void CGameContext::OnClientEnter(int ClientId)
 		Msg.m_ClientId = Empty;
 		Msg.m_pMessage = "Do you know someone who uses a bot? Please report them to the moderators.";
 		m_apPlayers[ClientId]->m_EligibleForFinishCheck = time_get();
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	}
 
 	IServer::CClientInfo Info;
@@ -1727,7 +1706,7 @@ void CGameContext::OnClientEnter(int ClientId)
 	{
 		CNetMsg_Sv_MapInfo MapInfoMsg;
 		MapInfoMsg.m_pDescription = m_aMapInfoMessage;
-		Server()->SendPackMsg(&MapInfoMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&MapInfoMsg, MSGFLAG_VITAL, ClientId);
 	}
 
 	CPlayer *pNewPlayer = m_apPlayers[ClientId];
@@ -1760,7 +1739,7 @@ void CGameContext::OnClientEnter(int ClientId)
 		CPlayer *pPlayer = m_apPlayers[i];
 
 		if(Server()->IsSixup(i))
-			Server()->SendPackMsg(&NewClientInfoMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+			Server()->SendPackMsg(&NewClientInfoMsg, MSGFLAG_VITAL, i);
 
 		if(Server()->IsSixup(ClientId))
 		{
@@ -1781,7 +1760,7 @@ void CGameContext::OnClientEnter(int ClientId)
 				ClientInfoMsg.m_aSkinPartColors[p] = pPlayer->m_TeeInfos.m_aSkinPartColors[p];
 			}
 
-			Server()->SendPackMsg(&ClientInfoMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+			Server()->SendPackMsg(&ClientInfoMsg, MSGFLAG_VITAL, ClientId);
 		}
 	}
 
@@ -1789,7 +1768,7 @@ void CGameContext::OnClientEnter(int ClientId)
 	if(Server()->IsSixup(ClientId))
 	{
 		NewClientInfoMsg.m_Local = 1;
-		Server()->SendPackMsg(&NewClientInfoMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&NewClientInfoMsg, MSGFLAG_VITAL, ClientId);
 	}
 
 	// initial chat delay
@@ -1910,7 +1889,7 @@ void CGameContext::OnClientDrop(int ClientId, const char *pReason)
 	Msg.m_ClientId = ClientId;
 	Msg.m_pReason = pReason;
 	Msg.m_Silent = false;
-	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, -1);
+	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, -1);
 
 	Server()->ExpireServerInfo();
 }
@@ -2811,7 +2790,7 @@ void CGameContext::OnChangeInfoNetMessage(const CNetMsg_Cl_ChangeInfo *pMsg, int
 	{
 		CNetMsg_Sv_ChangeInfoCooldown ChangeInfoCooldownMsg;
 		ChangeInfoCooldownMsg.m_WaitUntil = Server()->Tick() + Server()->TickSpeed() * g_Config.m_SvInfoChangeDelay;
-		Server()->SendPackMsg(&ChangeInfoCooldownMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&ChangeInfoCooldownMsg, MSGFLAG_VITAL, ClientId);
 	}
 
 	// set infos
@@ -2880,8 +2859,8 @@ void CGameContext::OnChangeInfoNetMessage(const CNetMsg_Cl_ChangeInfo *pMsg, int
 		{
 			if(i != ClientId)
 			{
-				Server()->SendPackMsg(&Drop, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
-				Server()->SendPackMsg(&Info, MSGFLAG_VITAL | MSGFLAG_NORECORD, i);
+				Server()->SendPackMsg(&Drop, MSGFLAG_VITAL, i);
+				Server()->SendPackMsg(&Info, MSGFLAG_VITAL, i);
 			}
 		}
 	}
@@ -4295,8 +4274,6 @@ void CGameContext::OnInit(const void *pPersistentData)
 		m_TeeHistorian.Reset(&GameInfo, TeeHistorianWrite, this);
 	}
 
-	Server()->DemoRecorder_HandleAutoStart();
-
 	if(!m_pScore)
 	{
 		m_pScore = new CScore(this, ((CServer *)Server())->DbPool());
@@ -4577,9 +4554,6 @@ void CGameContext::OnShutdown(void *pPersistentData)
 		aio_free(m_pTeeHistorianFile);
 	}
 
-	// Stop any demos being recorded.
-	Server()->StopDemos();
-
 	DeleteTempfile();
 	ConfigManager()->ResetGameSettings();
 	Collision()->Unload();
@@ -4625,20 +4599,10 @@ void CGameContext::LoadMapSettings()
 	Console()->ExecuteFile(aBuf, IConsole::CLIENT_ID_NO_GAME);
 }
 
-void CGameContext::OnSnap(int ClientId, bool GlobalSnap, bool RecordingDemo)
+void CGameContext::OnSnap(int ClientId, bool GlobalSnap)
 {
 	// sixup should only snap during global snap
 	dbg_assert(!Server()->IsSixup(ClientId) || GlobalSnap, "sixup should only snap during global snap");
-
-	// add tuning to demo
-	if(RecordingDemo && mem_comp(&CTuningParams::DEFAULT, &m_aTuningList[0], sizeof(CTuningParams)) != 0)
-	{
-		CMsgPacker Msg(NETMSGTYPE_SV_TUNEPARAMS);
-		int *pParams = (int *)&m_aTuningList[0];
-		for(int i = 0; i < CTuningParams::Num(); i++)
-			Msg.AddInt(pParams[i]);
-		Server()->SendMsg(&Msg, MSGFLAG_NOSEND, ClientId);
-	}
 
 	m_pController->Snap(ClientId);
 
@@ -4648,8 +4612,7 @@ void CGameContext::OnSnap(int ClientId, bool GlobalSnap, bool RecordingDemo)
 			pPlayer->Snap(ClientId);
 	}
 
-	if(ClientId > -1)
-		m_apPlayers[ClientId]->FakeSnap();
+	m_apPlayers[ClientId]->FakeSnap();
 
 	m_World.Snap(ClientId);
 
@@ -4853,7 +4816,7 @@ void CGameContext::SendFinish(int ClientId, float Time, std::optional<float> Pre
 	}
 	RaceFinishMsg.m_RecordPersonal = (!PreviousBestTime.has_value() || Time < PreviousBestTime.value());
 	RaceFinishMsg.m_RecordServer = Time < m_pController->m_CurrentRecord;
-	Server()->SendPackMsg(&RaceFinishMsg, MSGFLAG_VITAL | MSGFLAG_NORECORD, g_Config.m_SvHideScore ? ClientId : -1);
+	Server()->SendPackMsg(&RaceFinishMsg, MSGFLAG_VITAL, g_Config.m_SvHideScore ? ClientId : -1);
 }
 
 void CGameContext::SendSaveCode(int Team, int TeamSize, int State, const char *pError, const char *pSaveRequester, const char *pServerName, const char *pGeneratedCode, const char *pCode)
@@ -5148,7 +5111,7 @@ void CGameContext::WhisperId(int ClientId, int VictimId, const char *pMessage)
 		Msg.m_pMessage = aCensoredMessage;
 		Msg.m_TargetId = VictimId;
 
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	}
 	else if(GetClientVersion(ClientId) >= VERSION_DDNET_WHISPER)
 	{
@@ -5156,10 +5119,7 @@ void CGameContext::WhisperId(int ClientId, int VictimId, const char *pMessage)
 		Msg.m_Team = TEAM_WHISPER_SEND;
 		Msg.m_ClientId = VictimId;
 		Msg.m_pMessage = aCensoredMessage;
-		if(g_Config.m_SvDemoChat)
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
-		else
-			Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, ClientId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, ClientId);
 	}
 	else
 	{
@@ -5181,7 +5141,7 @@ void CGameContext::WhisperId(int ClientId, int VictimId, const char *pMessage)
 		Msg.m_pMessage = aCensoredMessage;
 		Msg.m_TargetId = VictimId;
 
-		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, VictimId);
+		Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, VictimId);
 	}
 	else if(GetClientVersion(VictimId) >= VERSION_DDNET_WHISPER)
 	{
@@ -5189,10 +5149,7 @@ void CGameContext::WhisperId(int ClientId, int VictimId, const char *pMessage)
 		Msg2.m_Team = TEAM_WHISPER_RECV;
 		Msg2.m_ClientId = ClientId;
 		Msg2.m_pMessage = aCensoredMessage;
-		if(g_Config.m_SvDemoChat)
-			Server()->SendPackMsg(&Msg2, MSGFLAG_VITAL, VictimId);
-		else
-			Server()->SendPackMsg(&Msg2, MSGFLAG_VITAL | MSGFLAG_NORECORD, VictimId);
+		Server()->SendPackMsg(&Msg2, MSGFLAG_VITAL, VictimId);
 	}
 	else
 	{

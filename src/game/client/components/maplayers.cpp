@@ -48,7 +48,7 @@ void CMapLayers::OnMapLoad()
 
 void CMapLayers::OnRender()
 {
-	if(m_OnlineOnly && Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(m_OnlineOnly && Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	// dynamic parameters for ingame rendering

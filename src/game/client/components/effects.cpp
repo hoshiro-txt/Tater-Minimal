@@ -5,7 +5,6 @@
 
 #include <base/time.h>
 
-#include <engine/demo.h>
 #include <engine/shared/config.h>
 
 #include <generated/client_data.h>
@@ -412,8 +411,6 @@ void CEffects::HammerHit(vec2 Pos, float Alpha, float Volume)
 void CEffects::OnRender()
 {
 	float Speed = 1.0f;
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-		Speed = DemoPlayer()->BaseInfo()->m_Speed;
 
 	const int64_t Now = time();
 	auto UpdateClock = [&](bool &Add, int64_t &LastUpdate, int Frequency) {

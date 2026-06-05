@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Да ли сте сигурни да желите да изађете?
 
-Automatically record demos
-== Аутоматски сними видео
-
 Automatically take game over screenshot
 == Аутоматски сними екран
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Избриши
 
-Delete demo
-== Обриши снимак
-
-Demofile: %s
-== Снимак: %s
-
-Demos
-== Снимци
-
 Disconnect
 == Прекини везу
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Грешка
-
-Error loading demo
-== Грешка при учитавању снимка
 
 Favorite
 == Омиљено
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Кука
-
-Invalid Demo
-== Неисправан снимак
 
 Join blue
 == Израј за плаве
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Обриши пријатеља
 
-Rename demo
-== Преименуј снимак
-
 Reset filter
 == Поврати филтер
 
@@ -394,9 +373,6 @@ Try again
 Type
 == Тип
 
-Unable to rename the demo
-== Снимак није могуће преименовати
-
 Use sounds
 == Користи звук
 
@@ -435,9 +411,6 @@ Yes
 
 You must restart the game for all settings to take effect.
 == Морате поново покренути игру да би сва подешавања била примењена
-
-Demo
-== Снимак
 
 Editor
 == Уређивач
@@ -478,9 +451,6 @@ Miscellaneous
 Internet
 == Интернет
 
-Max demos
-== Максималан број снимака
-
 News
 == Новости
 
@@ -498,9 +468,6 @@ Max Screenshots
 
 Hue
 == Нијанса
-
-Record demo
-== Сними
 
 Your skin
 == Ваша тема
@@ -549,9 +516,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Поново повезивање за %d секунди
-
-Render demo
-== Рендеруј демо
 
 Replace video
 == Замени видео
@@ -648,9 +612,6 @@ Date
 
 Fetch Info
 == Дохвати информације
-
-Demos directory
-== Видео директоријум
 
 Connecting dummy
 == Повезујем копију
@@ -835,9 +796,6 @@ Normal message
 Client message
 == Порука клијента
 
-Save the best demo of each race
-== Сачувајте најбољи снимак сваке трке
-
 Default length
 == Подразумевана дужина
 
@@ -1007,9 +965,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == Формате текстуре %s није Ц.З.П.П.(RGBA) што ће проузроковати видљиве грешке
 
-Preparing demo playback
-== Припрема се репродукција демоа
-
 Connected
 == Повезано
 
@@ -1108,9 +1063,6 @@ Getting server list from master server
 
 Leak IP
 == Провали адресу
-
-Loading demo files
-== Учитавање демоа
 
 Loading ghost files
 == Учитавање духова
@@ -1318,9 +1270,6 @@ https://ddnet.org/discord
 Tutorial
 == Увод
 
-Loading race demo files
-== Учитавам тркачке демо фајлове
-
 Super
 == Супер
 
@@ -1385,9 +1334,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1397,13 +1343,7 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1568,9 +1508,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 This name cannot be used for files and folders
 == 
 
-A demo with this name already exists
-== 
-
 A folder with this name already exists
 == 
 
@@ -1713,32 +1650,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1759,31 +1671,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
-Close the demo player
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1801,9 +1698,6 @@ Please use a different filename
 All combined
 == 
 
-No demo selected
-== 
-
 Folder Link
 == 
 
@@ -1816,26 +1710,10 @@ Netversion
 Map size
 == 
 
-[Demo details]
-map not included
-== 
-
-Open the directory that contains the demo files
-== 
-
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Are you sure that you want to delete the folder '%s'?
 == 
 
-Are you sure that you want to delete the demo '%s'?
-== 
-
 Delete folder
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -2176,10 +2054,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2278,9 +2152,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

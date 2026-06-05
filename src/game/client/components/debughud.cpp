@@ -261,7 +261,7 @@ void CDebugHud::RenderHint()
 
 void CDebugHud::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	RenderTuning();

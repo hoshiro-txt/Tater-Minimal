@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Er du sikker på at du vil afslutte?
 
-Automatically record demos
-== Optag automatisk demoer
-
 Automatically take game over screenshot
 == Tag automatisk et game over screenshot
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Slet
 
-Delete demo
-== Slet demo
-
-Demofile: %s
-== Demo fil: %s
-
-Demos
-== Demoer
-
 Disconnect
 == Frakoble
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Fejl
-
-Error loading demo
-== Kunne ikke ikke indlæse demoen
 
 Favorite
 == Favorit
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Hook
-
-Invalid Demo
-== Ugyldig demo
 
 Join blue
 == Spil for blå
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Fjern ven
 
-Rename demo
-== Omdøb navn på demoen
-
 Reset filter
 == Nulstil filter
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Type
 
-Unable to rename the demo
-== Kunne ikke omdøbe demoen
-
 Use sounds
 == Anvend lydeffekter
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Max antal demoer
-
 News
 == Nyheder
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Farve
-
-Record demo
-== Optag demo
 
 Your skin
 == Dit udseende
@@ -525,9 +495,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Tilslut igen om %d sek
-
-Render demo
-== Gengive demo
 
 Replace video
 == Udskift video
@@ -625,9 +592,6 @@ Remove chat
 %.2f KiB
 == %.2f KiB
 
-Demo
-== Demo
-
 Markers
 == Markører
 
@@ -639,9 +603,6 @@ Date
 
 Fetch Info
 == Hent info
-
-Demos directory
-== Demoer vejviser
 
 Connecting dummy
 == Forbinder dummy
@@ -852,9 +813,6 @@ Normal message
 
 Client message
 == Klient besked
-
-Save the best demo of each race
-== Gem den bedste demo af hvert ræs
 
 Default length
 == Standardlængde
@@ -1075,9 +1033,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == Kunne ikke forbinde dummy
 
-Error playing demo
-== Fejl ved afspilning af demo
-
 Failed saving the replay!
 == Replayet kunne ikke gemmes!
 
@@ -1096,17 +1051,11 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == Formatet på tekstur %s er ikke RGBA, hvilket vil forårsage visuelle fejl.
 
-Preparing demo playback
-== Forbereder demo-afspilning
-
 Connected
 == Forbundet
 
 Loading map file from storage
 == Indlæser kortfil fra lager
-
-Loading demo file from storage
-== Indlæser demofil fra lager
 
 Some fonts could not be loaded. Check the local console for details.
 == Nogle skrifttyper kunne ikke indlæses. Tjek den lokale konsol for detaljer.
@@ -1253,9 +1202,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Forsæt alligevel?
 
-A demo with this name already exists
-== Der findes allerede en demo med dette navn
-
 A folder with this name already exists
 == Der findes allerede en mappe med dette navn
 
@@ -1395,25 +1341,8 @@ Server filter
 Friends
 == Venner
 
-Play the current demo
-== Afspil den aktuelle demo
-
-Pause the current demo
-== Sæt den aktuelle demo på pause
-
-Stop the current demo
-== Stop den aktuelle demo
-
 Go back the specified duration
 == Gå tilbage til den angivne varighed
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sec.
 
 Change the skip duration
 == Skift overspringstiden
@@ -1433,32 +1362,17 @@ Go back one marker
 Go forward one marker
 == Gå en markør frem
 
-Slow down the demo
-== Sæt farten for demoen ned
-
-Speed up the demo
-== Søt farten for demoen op
-
 Mark the beginning of a cut (right click to reset)
 == Marker begyndelsen af et klip (højreklik for at nulstille)
 
 Mark the end of a cut (right click to reset)
 == Marker slutningen af et klip (højreklik for at nulstille)
 
-Export cut as a separate demo
-== Eksportér klip som en separat demo
-
-Close the demo player
-== Luk demo-afspilleren
-
 Toggle keyboard shortcuts
 == Skift tastaturgenveje
 
 Toggle auto camera
 == Skift autokamera
-
-Export demo cut
-== Eksporter demo klip
 
 Cut interval
 == Klip interval
@@ -1472,14 +1386,8 @@ Render cut to video
 Please use a different filename
 == Brug venligst et andet filnavn
 
-Loading demo files
-== Indlæser demofiler
-
 All combined
 == Alt kombineret
-
-No demo selected
-== Ingen demo valgt
 
 Folder Link
 == Mappe link
@@ -1490,24 +1398,11 @@ Created
 Netversion
 == Netversion
 
-[Demo details]
-map not included
-== Bane ikke inkluderet
-
-Open the directory that contains the demo files
-== Åbn den mappe, der indeholder demofilerne
-
 Are you sure that you want to delete the folder '%s'?
 == Er du sikker på, at du vil slette mappen '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Er du sikker på, at du vil slette demoen '%s'?
-
 Delete folder
 == Slet mappe
-
-Unable to delete the demo '%s'
-== Kan ikke slette demoen '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Kan ikke slette mappen '%s'. Sørg for, at den er tom først.
@@ -2025,9 +1920,6 @@ Tutorial
 Server could not be started. Make sure to grant the notification permission in the app settings so the server can run in the background.
 == Serveren kunne ikke startes. Sørg for at give tilladelse i app-indstillingerne, så serveren kan køre i baggrunden.
 
-Loading race demo files
-== Indlæser race demo filer
-
 [Spectators]
 %d others…
 == %d andre…
@@ -2089,9 +1981,6 @@ Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom
 == 
 
 Press Ctrl+Shift+G to disable debug graphs.
-== 
-
-No demo with this filename exists
 == 
 
 Team save in progress. You'll be able to load with '/load %s'
@@ -2192,18 +2081,7 @@ Add clan
 Add friend
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Map size
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Save all changes before turning off the editor?
@@ -2413,10 +2291,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2515,9 +2389,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

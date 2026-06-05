@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Da li ste sigurni da želite da izađete?
 
-Automatically record demos
-== Automatski snimi video
-
 Automatically take game over screenshot
 == Automatski snimi ekran
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Izbriši
 
-Delete demo
-== Obriši snimak
-
-Demofile: %s
-== Snimak: %s
-
-Demos
-== Snimci
-
 Disconnect
 == Prekini vezu
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Greška
-
-Error loading demo
-== Greška pri učitavanju snimka
 
 Favorite
 == Omiljeno
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Kuka
-
-Invalid Demo
-== Neispravan snimak
 
 Join blue
 == Izraj za plave
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Obriši prijatelja
 
-Rename demo
-== Preimenuj snimak
-
 Reset filter
 == Povrati filter
 
@@ -394,9 +373,6 @@ Try again
 Type
 == Tip
 
-Unable to rename the demo
-== Snimak nije moguće preimenovati
-
 Use sounds
 == Koristi zvuk
 
@@ -435,9 +411,6 @@ Yes
 
 You must restart the game for all settings to take effect.
 == Morate ponovo pokrenuti igru da bi sva podešavanja bila primenjena
-
-Demo
-== Snimak
 
 Editor
 == Uređivač
@@ -478,9 +451,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Maksimalan broj snimaka
-
 News
 == Novosti
 
@@ -498,9 +468,6 @@ Max Screenshots
 
 Hue
 == Nijansa
-
-Record demo
-== Snimi
 
 Your skin
 == Vaša tema
@@ -549,9 +516,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Ponovo povezivanje za %d sekundi
-
-Render demo
-== Renderuj demo
 
 Replace video
 == Zameni video
@@ -645,9 +609,6 @@ Date
 
 Fetch Info
 == Dohvati informacije
-
-Demos directory
-== Video direktorijum
 
 Connecting dummy
 == Povezujem kopiju
@@ -832,9 +793,6 @@ Normal message
 Client message
 == Poruka klijenta
 
-Save the best demo of each race
-== Sačuvajte najbolji snimak svake trke
-
 Default length
 == Podrazumevana dužina
 
@@ -1004,9 +962,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == Formate teksture %s nije C.Z.P.P.(RGBA) što će prouzrokovati vidljive greške
 
-Preparing demo playback
-== Priprema se reprodukcija demoa
-
 Connected
 == Povezano
 
@@ -1105,9 +1060,6 @@ Getting server list from master server
 
 Leak IP
 == Provali adresu
-
-Loading demo files
-== Učitavanje demoa
 
 Loading ghost files
 == Učitavanje duhova
@@ -1315,9 +1267,6 @@ https://ddnet.org/discord
 Tutorial
 == Uvod
 
-Loading race demo files
-== Učitavam trkačke demo fajlove
-
 Super
 == Super
 
@@ -1360,9 +1309,6 @@ Multi-View
 
 Rename folder
 == Преименујте фасциклу
-
-A demo with this name already exists
-== Демо са овим именом већ постоји.
 
 A folder with this name already exists
 == Фасцикла са овим именом већ постоји.
@@ -1407,26 +1353,11 @@ Are you sure that you want to remove the player '%s' from your friends list?
 Are you sure that you want to remove the clan '%s' from your friends list?
 == Да ли сте сигурни да желите да уклоните клан '%s' са листе пријатеља?
 
-Play the current demo
-== Пусти тренутни демо запис
-
-Pause the current demo
-== Паузирај тренутни демо запис
-
-Stop the current demo
-== Заустави тренутни демо запис
-
 Go back one tick
 == Иди назад један корак
 
 Go forward one tick
 == Иди напред један корак
-
-Slow down the demo
-== Успори демо запис
-
-Speed up the demo
-== Убрзај демо запис
 
 Mark the beginning of a cut (right click to reset)
 == Обележи почетак сечења (десни клик за ресетовање)
@@ -1434,23 +1365,14 @@ Mark the beginning of a cut (right click to reset)
 Mark the end of a cut (right click to reset)
 == Обележи крај сечења (десни клик за ресетовање)
 
-Export cut as a separate demo
-== Извоз сечења као засебног демо записа
-
 Go back one marker
 == Иди назад један маркер
 
 Go forward one marker
 == Иди напред један маркер
 
-Close the demo player
-== Затвори репродуктор демо записа
-
 Toggle keyboard shortcuts
 == Пребациванје тастатурних пречица
-
-Export demo cut
-== Извоз демо сечења
 
 Cut interval
 == Интервал сечења
@@ -1464,20 +1386,11 @@ All combined
 Folder Link
 == Веза до фасцикле
 
-Open the directory that contains the demo files
-== Отвори директоријум који садржи демо фајлове
-
 Are you sure that you want to delete the folder '%s'?
 == Да ли сте сигурни да желите да обришете фасциклу '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Да ли сте сигурни да желите да обришете демо запис '%s'?
-
 Delete folder
 == Обриши фасциклу
-
-Unable to delete the demo '%s'
-== Није могуће обрисати демо запис '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Није могуће обрисати фасциклу '%s'. Проверите прво да ли је празна.
@@ -1593,9 +1506,6 @@ Press Ctrl+Shift+G to disable debug graphs.
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Failed saving the replay!
 == 
 
@@ -1605,13 +1515,7 @@ Saving settings to '%s' failed
 Error saving settings
 == 
 
-No demo with this filename exists
-== 
-
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -1860,23 +1764,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1894,9 +1782,6 @@ Render cut to video
 Please use a different filename
 == 
 
-No demo selected
-== 
-
 Created
 == 
 
@@ -1904,13 +1789,6 @@ Netversion
 == 
 
 Map size
-== 
-
-[Demo details]
-map not included
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Dummy is not allowed on this server
@@ -2245,10 +2123,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -2347,9 +2221,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2650,4 +2521,4 @@ Active: Hook
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

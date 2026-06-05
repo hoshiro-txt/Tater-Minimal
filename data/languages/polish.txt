@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Czy na pewno chcesz opuścić grę?
 
-Automatically record demos
-== Automatycznie nagrywaj dema
-
 Automatically take game over screenshot
 == Automatycznie zrób zrzut ekranu końca gry
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Usuń
 
-Delete demo
-== Usuń demo
-
-Demofile: %s
-== Plik dema: %s
-
-Demos
-== Dema
-
 Disconnect
 == Rozłącz
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Błąd
-
-Error loading demo
-== Błąd ładowania dema
 
 Favorite
 == Ulubiony
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Hak
-
-Invalid Demo
-== Nieprawidłowe demo
 
 Join blue
 == Do niebieskich
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Usuń znajomego
 
-Rename demo
-== Zmień nazwę dema
-
 Reset filter
 == Przywróć domyślne
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Typ
 
-Unable to rename the demo
-== Nie można zmienić nazwy dema
-
 Use sounds
 == Włącz dźwięki
 
@@ -433,9 +409,6 @@ Yes
 You must restart the game for all settings to take effect.
 == Uruchom ponownie grę, aby użyć nowych ustawień.
 
-Demo
-== Demo
-
 Game paused
 == Gra wstrzymana
 
@@ -463,9 +436,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Maksymalnie dem
-
 News
 == Nowości
 
@@ -483,9 +453,6 @@ Max Screenshots
 
 Hue
 == Kolor
-
-Record demo
-== Nagraj demo
 
 Your skin
 == Twój wygląd
@@ -528,9 +495,6 @@ AntiPing: predict weapons
 
 AntiPing: predict grenade paths
 == AntyPing: Przewiduj lot granatów
-
-Save the best demo of each race
-== Zapisuj najlepsze demo każdego wyścigu
 
 Ghost
 == Duszek
@@ -639,9 +603,6 @@ Remove chat
 
 Activate
 == Aktywuj
-
-Render demo
-== Renderuj demo
 
 Automatically take statboard screenshot
 == Automatyczny zrzut ekranu tabeli wyników
@@ -952,9 +913,6 @@ Theme
 %d player
 == %d gracz
 
-Demos directory
-== Folder dem
-
 Smooth Dynamic Camera
 == Płynna dynamiczna kamera
 
@@ -1176,9 +1134,6 @@ Could not initialize the given graphics backend, this is probably because you di
 Could not save downloaded map. Try manually deleting this file: %s
 == Nie udało się zapisać pobranej mapy. Spróbuj ręcznie usunąć ten plik: %s
 
-Error playing demo
-== Wystąpił błąd podczas odtwarzania dema
-
 Failed saving the replay!
 == Wystąpił błąd podczas zapisywania powtórki!
 
@@ -1188,17 +1143,11 @@ Saving settings to '%s' failed
 Error saving settings
 == Wystąpił błąd podczas zapisywania ustawień
 
-Preparing demo playback
-== Przygotowywanie do odtworzenia dema
-
 Connected
 == Połączono
 
 Loading map file from storage
 == Ładowanie pliku mapy z pamięci
-
-Loading demo file from storage
-== Ładowanie pliku demo z pamięci
 
 Why are you slowmo replaying to read this?
 == Dlaczego odtwarzasz w zwolnionym tempie, żeby to przeczytać?
@@ -1290,9 +1239,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Kontynuować mimo to?
 
-A demo with this name already exists
-== Demo z tą nazwą już istnieje
-
 A folder with this name already exists
 == Folder z tą nazwą już istnieje
 
@@ -1372,25 +1318,8 @@ Server filter
 Friends
 == Znajomi
 
-Play the current demo
-== Odtwórz bieżące demo
-
-Pause the current demo
-== Spauzuj bieżące demo
-
-Stop the current demo
-== Zatrzymaj bieżące demo
-
 Go back the specified duration
 == Cofnij o określony czas
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sek.
 
 Change the skip duration
 == Zmień długość pominięcia
@@ -1410,29 +1339,14 @@ Go back one marker
 Go forward one marker
 == Przewiń o jeden znacznik
 
-Slow down the demo
-== Spowolnij demo
-
-Speed up the demo
-== Przyśpiesz demo
-
 Mark the beginning of a cut (right click to reset)
 == Zaznacz początek cięcia (kliknij prawy aby zresetować)
 
 Mark the end of a cut (right click to reset)
 == Zaznacz koniec cięcia (kliknij prawy aby zresetować)
 
-Export cut as a separate demo
-== Wyeksportuj cięcie jako osobne demo
-
-Close the demo player
-== Zamknij odtwarzacz demo
-
 Toggle keyboard shortcuts
 == Przełącz skróty klawiszowe
-
-Export demo cut
-== Wyeksportuj demo cięcia
 
 Cut interval
 == Przedział cięcia
@@ -1443,32 +1357,17 @@ Render cut to video
 Please use a different filename
 == Użyj innej nazwy pliku
 
-Loading demo files
-== Ładowanie plików demo
-
-No demo selected
-== Nie wybrano demo
-
 Created
 == Utworzono
 
 Netversion
 == Wersja
 
-Open the directory that contains the demo files
-== Otwórz folder zawierający pliki demo
-
 Are you sure that you want to delete the folder '%s'?
 == Jesteś pewny, że chcesz usunąć folder '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Jesteś pewny, że chcesz usunąć demo '%s'?
-
 Delete folder
 == Usuń folder
-
-Unable to delete the demo '%s'
-== Nie można usunąć demo '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Nie można usunąć folderu '%s'. Upewnij się że jest pusty.
@@ -1706,9 +1605,6 @@ Loading assets
 Open the directory to add custom assets
 == Otwórz folder, aby dodać własne zasoby
 
-Loading race demo files
-== Ładowanie plików demo
-
 Loading sound files
 == Ładowanie dźwięków
 
@@ -1779,10 +1675,6 @@ All combined
 
 Folder Link
 == Link foldera
-
-[Demo details]
-map not included
-== mapa nie została dołączona
 
 Dummy is not allowed on this server
 == Kukła nie jest dozwolona na tym serwerze
@@ -2013,9 +1905,6 @@ Active: Hook
 English translation by the DDNet Team
 == Przetłumaczone przez: Łukasz D, Martin Pola, Tsin, Shymwo, CROACH, Ametic (PKP), Shkyyl i KebsCS
 
-No demo with this filename exists
-== Demo z tą nazwą nie istnieje
-
 Auto-sync player camera
 == Synchronizacja z kamerą gracza
 
@@ -2195,14 +2084,6 @@ Could not check for existing player with your name. Check your internet connecti
 
 Could not get server list from master server
 == Nie udało się pobrać listy serwerów z serwera głównego
-
-[Demo playback]
-Live
-== Na żywo
-
-[Demo playback]
-Go to Live
-== Powrót do na żywo
 
 Save all changes before turning off the editor?
 == Czy zapisać wszystkie zmiany przed wyłączeniem edytora?
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Autoryzowany rcon
 
 [Touch button visibilities]
-Demo Player
-== Odtwarzacz demo
-
-[Touch button visibilities]
 Extra Menu
 == Dodatkowe menu
 
@@ -2471,9 +2348,6 @@ Moderator alert
 You will be disconnected from the server.
 == Zostaniesz rozłączony z serwera.
 
-Are you sure that you want to disconnect and play this demo?
-== Czy na pewno chcesz rozłączyć się z serwerem i odtworzyć demo?
-
 Censor profanity
 == Cenzurowanie wulgaryzmów
 
@@ -2539,9 +2413,6 @@ Dummy is currently connected.
 
 Player is currently authed in rcon.
 == Gracz jest zalogowany do rcon.
-
-Demo player is currently active.
-== Odtwarzacz demo jest włączony.
 
 Joining Tutorial server
 == 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

@@ -31,7 +31,7 @@ void CImportantAlert::OnWindowResize()
 
 void CImportantAlert::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 	{
 		return;
 	}
@@ -143,7 +143,7 @@ void CImportantAlert::DoImportantAlert(const char *pTitle, const char *pLogGroup
 		}
 	}
 
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(true)
 	{
 		Client()->Notify(m_aTitleText, m_aMessageText);
 	}

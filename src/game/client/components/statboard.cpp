@@ -127,10 +127,10 @@ void CStatboard::OnMessage(int MsgType, void *pRawMsg)
 
 void CStatboard::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
-	if((g_Config.m_ClAutoStatboardScreenshot || g_Config.m_ClAutoCSV) && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if((g_Config.m_ClAutoStatboardScreenshot || g_Config.m_ClAutoCSV))
 	{
 		if(m_ScreenshotTime < 0 && GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_GAMEOVER)
 			m_ScreenshotTime = time_get() + time_freq() * 3;
@@ -408,13 +408,13 @@ void CStatboard::RenderGlobalStats()
 
 void CStatboard::AutoStatScreenshot()
 {
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(true)
 		Client()->AutoStatScreenshot_Start();
 }
 
 void CStatboard::AutoStatCSV()
 {
-	if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(true)
 	{
 		char aDate[20], aFilename[IO_MAX_PATH_LENGTH];
 		str_timestamp(aDate, sizeof(aDate));

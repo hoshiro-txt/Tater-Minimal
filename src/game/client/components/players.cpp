@@ -7,7 +7,6 @@
 #include <base/math.h>
 
 #include <engine/client/enums.h>
-#include <engine/demo.h>
 #include <engine/graphics.h>
 #include <engine/shared/config.h>
 
@@ -111,7 +110,7 @@ float CPlayers::GetPlayerTargetAngle(
 
 	// with dummy copy, use the same angle as local player
 	if((GameClient()->m_Snap.m_LocalClientId == ClientId || (GameClient()->PredictDummy() && g_Config.m_ClDummyCopyMoves && GameClient()->m_aLocalIds[!g_Config.m_ClDummy] == ClientId)) &&
-		!GameClient()->m_Snap.m_SpecInfo.m_Active && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		!GameClient()->m_Snap.m_SpecInfo.m_Active)
 	{
 		// TClient
 		vec2 Direction = GameClient()->m_Controls.m_aMousePos[g_Config.m_ClDummy];
@@ -210,12 +209,12 @@ void CPlayers::RenderHookCollLine(
 
 	bool AlwaysRenderHookColl = (Local ? g_Config.m_ClShowHookCollOwn : g_Config.m_ClShowHookCollOther) == 2;
 	bool RenderHookCollPlayer = Aim && (Local ? g_Config.m_ClShowHookCollOwn : g_Config.m_ClShowHookCollOther) > 0;
-	if(Local && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Local)
 		RenderHookCollPlayer = GameClient()->m_Controls.m_aShowHookColl[g_Config.m_ClDummy] && g_Config.m_ClShowHookCollOwn > 0;
 
 	if(GameClient()->PredictDummy() && g_Config.m_ClDummyCopyMoves &&
 		GameClient()->m_aLocalIds[!g_Config.m_ClDummy] == ClientId && GameClient()->m_Controls.m_aShowHookColl[g_Config.m_ClDummy] &&
-		Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		g_Config.m_ClShowHookCollOther > 0)
 	{
 		RenderHookCollPlayer = g_Config.m_ClShowHookCollOther > 0;
 	}
@@ -509,7 +508,7 @@ void CPlayers::RenderHook(
 	if(in_range(pPlayerChar->m_HookedPlayer, MAX_CLIENTS - 1))
 	{
 		HookPos = GameClient()->m_aClients[pPlayerChar->m_HookedPlayer].m_RenderPos;
-		if(g_Config.m_TcSwapGhosts && Client()->State() != IClient::STATE_DEMOPLAYBACK && GameClient()->m_Snap.m_LocalClientId == ClientId)
+		if(g_Config.m_TcSwapGhosts && GameClient()->m_Snap.m_LocalClientId == ClientId)
 		{
 			HookPos = GameClient()->GetSmoothPos(pPlayerChar->m_HookedPlayer);
 		}
@@ -629,7 +628,7 @@ void CPlayers::RenderPlayer(
 	vec2 Vel = mix(vec2(Prev.m_VelX / 256.0f, Prev.m_VelY / 256.0f), vec2(Player.m_VelX / 256.0f, Player.m_VelY / 256.0f), Intra);
 
 	// TClient
-	if(g_Config.m_TcSwapGhosts && g_Config.m_TcShowOthersGhosts && !Local && Client()->State() != IClient::STATE_DEMOPLAYBACK && ClientId >= 0)
+	if(g_Config.m_TcSwapGhosts && g_Config.m_TcShowOthersGhosts && !Local && ClientId >= 0)
 		Position = mix(
 			vec2(GameClient()->m_Snap.m_aCharacters[ClientId].m_Prev.m_X, GameClient()->m_Snap.m_aCharacters[ClientId].m_Prev.m_Y),
 			vec2(GameClient()->m_Snap.m_aCharacters[ClientId].m_Cur.m_X, GameClient()->m_Snap.m_aCharacters[ClientId].m_Cur.m_Y),
@@ -857,21 +856,10 @@ void CPlayers::RenderPlayer(
 				{
 					int IteX = rand() % g_pData->m_Weapons.m_aId[CurrentWeapon].m_NumSpriteMuzzles;
 					static int s_LastIteX = IteX;
-					if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-					{
-						const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-						if(pInfo->m_Paused)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+					if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
+						IteX = s_LastIteX;
 					else
-					{
-						if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+						s_LastIteX = IteX;
 					if(g_pData->m_Weapons.m_aId[CurrentWeapon].m_aSpriteMuzzles[IteX])
 					{
 						vec2 HadokenDirection;
@@ -930,21 +918,10 @@ void CPlayers::RenderPlayer(
 
 					int IteX = rand() % g_pData->m_Weapons.m_aId[CurrentWeapon].m_NumSpriteMuzzles;
 					static int s_LastIteX = IteX;
-					if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-					{
-						const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-						if(pInfo->m_Paused)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+					if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
+						IteX = s_LastIteX;
 					else
-					{
-						if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+						s_LastIteX = IteX;
 					if(AlphaMuzzle > 0.0f && g_pData->m_Weapons.m_aId[CurrentWeapon].m_aSpriteMuzzles[IteX])
 					{
 						float OffsetY = -g_pData->m_Weapons.m_aId[CurrentWeapon].m_Muzzleoffsety;
@@ -1120,7 +1097,7 @@ void CPlayers::RenderPlayerGhost(
 	float AttackTicksPassed = AttackTime * (float)SERVER_TICK_SPEED;
 
 	float Angle;
-	if(Local && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Local)
 	{
 		// just use the direct input if it's the local player we are rendering
 		vec2 Pos = GameClient()->m_Controls.m_aMousePos[g_Config.m_ClDummy];
@@ -1295,21 +1272,10 @@ void CPlayers::RenderPlayerGhost(
 				{
 					int IteX = rand() % g_pData->m_Weapons.m_aId[CurrentWeapon].m_NumSpriteMuzzles;
 					static int s_LastIteX = IteX;
-					if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-					{
-						const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-						if(pInfo->m_Paused)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+					if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
+						IteX = s_LastIteX;
 					else
-					{
-						if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+						s_LastIteX = IteX;
 					if(g_pData->m_Weapons.m_aId[CurrentWeapon].m_aSpriteMuzzles[IteX])
 					{
 						if(PredictLocalWeapons)
@@ -1367,21 +1333,10 @@ void CPlayers::RenderPlayerGhost(
 
 					int IteX = rand() % g_pData->m_Weapons.m_aId[CurrentWeapon].m_NumSpriteMuzzles;
 					static int s_LastIteX = IteX;
-					if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-					{
-						const IDemoPlayer::CInfo *pInfo = DemoPlayer()->BaseInfo();
-						if(pInfo->m_Paused)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+					if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
+						IteX = s_LastIteX;
 					else
-					{
-						if(GameClient()->m_Snap.m_pGameInfoObj && GameClient()->m_Snap.m_pGameInfoObj->m_GameStateFlags & GAMESTATEFLAG_PAUSED)
-							IteX = s_LastIteX;
-						else
-							s_LastIteX = IteX;
-					}
+						s_LastIteX = IteX;
 					if(AlphaMuzzle > 0.0f && g_pData->m_Weapons.m_aId[CurrentWeapon].m_aSpriteMuzzles[IteX])
 					{
 						float OffsetY = -g_pData->m_Weapons.m_aId[CurrentWeapon].m_Muzzleoffsety;
@@ -1490,7 +1445,7 @@ inline bool CPlayers::IsPlayerInfoAvailable(int ClientId) const
 
 void CPlayers::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	// update render info for ninja
@@ -1644,7 +1599,7 @@ void CPlayers::OnRender()
 		bool Spec = GameClient()->m_Snap.m_SpecInfo.m_Active;
 
 		// If we are frozen and hiding frozen ghosts and not swapping render only the regular player
-		if(RenderGhost && g_Config.m_TcShowOthersGhosts && !Spec && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+		if(RenderGhost && g_Config.m_TcShowOthersGhosts && !Spec)
 			RenderPlayerGhost(&GameClient()->m_aClients[ClientId].m_RenderPrev, &GameClient()->m_aClients[ClientId].m_RenderCur, &aRenderInfo[ClientId], ClientId);
 
 		RenderPlayer(&GameClient()->m_aClients[ClientId].m_RenderPrev, &GameClient()->m_aClients[ClientId].m_RenderCur, &aRenderInfo[ClientId], ClientId);

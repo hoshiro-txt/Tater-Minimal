@@ -292,7 +292,7 @@ void CLaser::Snap(int SnappingClient)
 	if(pOwnerChar && pOwnerChar->IsAlive())
 		TeamMask = pOwnerChar->TeamMask();
 
-	if(SnappingClient != SERVER_DEMO_CLIENT && !TeamMask.test(SnappingClient))
+	if(!TeamMask.test(SnappingClient))
 		return;
 
 	int SnappingClientVersion = GameServer()->GetClientVersion(SnappingClient);

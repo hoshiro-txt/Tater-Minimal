@@ -223,19 +223,6 @@ void CGameTeams::Tick()
 {
 	int Now = Server()->Tick();
 
-	for(int i = 0; i < MAX_CLIENTS; i++)
-	{
-		CPlayerData *pData = GameServer()->Score()->PlayerData(i);
-		if(!Server()->IsRecording(i))
-			continue;
-
-		if(Now >= pData->m_RecordStopTick && pData->m_RecordStopTick != -1)
-		{
-			Server()->SaveDemo(i, pData->m_RecordFinishTime);
-			pData->m_RecordStopTick = -1;
-		}
-	}
-
 	for(int i = 0; i < TEAM_SUPER; i++)
 	{
 		if(m_aTeamUnfinishableKillTick[i] == -1 || m_aTeamState[i] != ETeamState::STARTED_UNFINISHABLE)
@@ -786,8 +773,6 @@ void CGameTeams::OnFinish(CPlayer *pPlayer, int TimeTicks, const char *pTimestam
 	}
 	else if(pData->m_BestTime.has_value()) // tee has already finished?
 	{
-		Server()->StopRecord(ClientId);
-
 		if(Diff <= 0.005f)
 		{
 			GameServer()->SendChatTarget(ClientId,

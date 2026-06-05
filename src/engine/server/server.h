@@ -12,7 +12,6 @@
 
 #include <engine/console.h>
 #include <engine/server.h>
-#include <engine/shared/demo.h>
 #include <engine/shared/econ.h>
 #include <engine/shared/fifo.h>
 #include <engine/shared/http.h>
@@ -247,20 +246,12 @@ public:
 		NUM_MAP_TYPES
 	};
 
-	enum
-	{
-		RECORDER_MANUAL = MAX_CLIENTS,
-		RECORDER_AUTO = MAX_CLIENTS + 1,
-		NUM_RECORDERS = MAX_CLIENTS + 2,
-	};
-
 	SHA256_DIGEST m_aCurrentMapSha256[NUM_MAP_TYPES];
 	unsigned m_aCurrentMapCrc[NUM_MAP_TYPES];
 	unsigned char *m_apCurrentMapData[NUM_MAP_TYPES];
 	unsigned int m_aCurrentMapSize[NUM_MAP_TYPES];
 	char m_aMapDownloadUrl[256];
 
-	CDemoRecorder m_aDemoRecorder[NUM_RECORDERS];
 	CAuthManager m_AuthManager;
 
 	int64_t m_ServerInfoFirstRequest;
@@ -295,8 +286,6 @@ public:
 	void Ban(int ClientId, int Seconds, const char *pReason, bool VerbatimReason) override;
 	void ReconnectClient(int ClientId);
 	void RedirectClient(int ClientId, int Port) override;
-
-	void DemoRecorder_HandleAutoStart() override;
 
 	int64_t TickStartTime(int Tick);
 
@@ -419,19 +408,12 @@ public:
 	void ReloadMap() override;
 	int LoadMap(const char *pMapName);
 
-	void SaveDemo(int ClientId, float Time) override;
-	void StartRecord(int ClientId) override;
-	void StopRecord(int ClientId) override;
-	bool IsRecording(int ClientId) override;
-	void StopDemos() override;
 
 	int Run();
 
 	static void ConKick(IConsole::IResult *pResult, void *pUser);
 	static void ConStatus(IConsole::IResult *pResult, void *pUser);
 	static void ConShutdown(IConsole::IResult *pResult, void *pUser);
-	static void ConRecord(IConsole::IResult *pResult, void *pUser);
-	static void ConStopRecord(IConsole::IResult *pResult, void *pUser);
 	static void ConMapReload(IConsole::IResult *pResult, void *pUser);
 	static void ConLogout(IConsole::IResult *pResult, void *pUser);
 	static void ConShowIps(IConsole::IResult *pResult, void *pUser);
@@ -522,7 +504,7 @@ public:
 	bool ErrorShutdown() const { return m_aErrorShutdownReason[0] != 0; }
 	void SetErrorShutdown(const char *pReason) override;
 
-	bool IsSixup(int ClientId) const override { return ClientId != SERVER_DEMO_CLIENT && m_aClients[ClientId].m_Sixup; }
+	bool IsSixup(int ClientId) const override { return m_aClients[ClientId].m_Sixup; }
 
 	void SetLoggers(std::shared_ptr<ILogger> &&pFileLogger, std::shared_ptr<ILogger> &&pStdoutLogger);
 

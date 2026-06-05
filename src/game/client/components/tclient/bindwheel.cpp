@@ -22,7 +22,7 @@ void CBindWheel::ConBindwheelExecuteHover(IConsole::IResult *pResult, void *pUse
 void CBindWheel::ConOpenBindwheel(IConsole::IResult *pResult, void *pUserData)
 {
 	CBindWheel *pThis = (CBindWheel *)pUserData;
-	if(pThis->Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(pThis->true)
 	{
 		if(pThis->GameClient()->m_Emoticon.IsActive())
 			pThis->m_Active = false;
@@ -155,7 +155,7 @@ bool CBindWheel::OnInput(const IInput::CEvent &Event)
 
 void CBindWheel::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	static const auto QuadEaseInOut = [](float t) -> float {

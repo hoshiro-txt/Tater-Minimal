@@ -295,7 +295,7 @@ void CStatusBar::OnRender()
 {
 	m_PingActive = false;
 
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!g_Config.m_TcStatusBar || !GameClient()->m_Snap.m_pGameInfoObj)

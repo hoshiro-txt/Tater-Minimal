@@ -784,7 +784,7 @@ bool CTouchControls::OnTouchState(const std::vector<IInput::CTouchFingerState> &
 {
 	if(!g_Config.m_ClTouchControls)
 		return false;
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return false;
 	if(GameClient()->m_Chat.IsActive() ||
 		GameClient()->m_GameConsole.IsActive() ||
@@ -808,7 +808,7 @@ void CTouchControls::OnRender()
 {
 	if(!g_Config.m_ClTouchControls)
 		return;
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 	if(GameClient()->m_Chat.IsActive() ||
 		GameClient()->m_Emoticon.IsActive() ||
@@ -900,10 +900,6 @@ void CTouchControls::InitVisibilityFunctions()
 	m_aVisibilityFunctions[(int)EButtonVisibility::RCON_AUTHED].m_pId = "rcon-authed";
 	m_aVisibilityFunctions[(int)EButtonVisibility::RCON_AUTHED].m_Function = [&]() {
 		return Client()->RconAuthed();
-	};
-	m_aVisibilityFunctions[(int)EButtonVisibility::DEMO_PLAYER].m_pId = "demo-player";
-	m_aVisibilityFunctions[(int)EButtonVisibility::DEMO_PLAYER].m_Function = [&]() {
-		return Client()->State() == IClient::STATE_DEMOPLAYBACK;
 	};
 	m_aVisibilityFunctions[(int)EButtonVisibility::EXTRA_MENU_1].m_pId = "extra-menu";
 	m_aVisibilityFunctions[(int)EButtonVisibility::EXTRA_MENU_1].m_Function = [&]() {

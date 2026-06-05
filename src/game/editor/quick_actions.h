@@ -251,7 +251,7 @@ REGISTER_QUICK_ACTION(
 			LoadCurrentMap();
 		}
 	},
-	[&]() -> bool { return Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK; },
+	[&]() -> bool { return Client()->State() != IClient::STATE_ONLINE; },
 	ALWAYS_FALSE,
 	DEFAULT_BTN,
 	"[Ctrl+Shift+L] Open the current ingame map for editing.")

@@ -29,7 +29,6 @@ void CProofMode::InitMenuBackgroundPositionNames()
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_START] = "start";
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_BROWSER_INTERNET] = "browser(internet)";
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_BROWSER_LAN] = "browser(lan)";
-	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_DEMOS] = "demos";
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_NEWS] = "news";
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_BROWSER_FAVORITES] = "favorites";
 	m_vpMenuBackgroundPositionNames[CMenuBackground::POS_SETTINGS_LANGUAGE] = "settings(language)";

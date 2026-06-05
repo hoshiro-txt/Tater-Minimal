@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Эсир тухасшăн-и?
 
-Automatically record demos
-== Демосене автоматикăла çыр
-
 Automatically take game over screenshot
 == Вăйăн пайта çут-ӳкерчĕк ту
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Шăлса тасатма
 
-Delete demo
-== Демо шăлса тасатма
-
-Demofile: %s
-== Демо: %s
-
-Demos
-== Демосем
-
 Disconnect
 == Çыхăну чарма
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Йăнăш
-
-Error loading demo
-== Демо илĕвĕн йăнăш
 
 Favorite
 == Суйланни
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Çекĕл
-
-Invalid Demo
-== Тĕрĕс мар демо
 
 Join blue
 == Кăваксемпе!
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Юлташа тасат
 
-Rename demo
-== Демо çĕнĕ ят
-
 Reset filter
 == Фильтрсене тасат
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Тĕс
 
-Unable to rename the demo
-== Демо ячĕ улăштарма пулмасть
-
 Use sounds
 == Сасă уса курма
 
@@ -436,9 +412,6 @@ You must restart the game for all settings to take effect.
 New name:
 == Çĕн ят
 
-Max demos
-== Чи пысăк демо хисепĕ
-
 Internet
 == Интернет
 
@@ -459,9 +432,6 @@ LAN
 
 Sound volume
 == Сасă янравлăш
-
-Record demo
-== Демо çыр
 
 Miscellaneous
 == Хушнисем
@@ -548,9 +518,6 @@ Could not save downloaded map. Try manually deleting this file: %s
 Could not connect dummy
 == 
 
-Error playing demo
-== 
-
 Successfully saved the replay!
 == 
 
@@ -566,9 +533,6 @@ Error saving settings
 Replay feature is disabled!
 == 
 
-No demo with this filename exists
-== 
-
 The width of texture %s is not divisible by %d, or the height is not divisible by %d, which might cause visual bugs.
 == 
 
@@ -578,16 +542,10 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 The format of texture %s is not RGBA which will cause visual bugs.
 == 
 
-Preparing demo playback
-== 
-
 Connected
 == 
 
 Loading map file from storage
-== 
-
-Loading demo file from storage
 == 
 
 Some fonts could not be loaded. Check the local console for details.
@@ -797,9 +755,6 @@ Reconnect in %d sec
 Rename folder
 == 
 
-Render demo
-== 
-
 Render complete
 == 
 
@@ -852,9 +807,6 @@ There's an unsaved change in the touch controls editor, you might want to save i
 == 
 
 This name cannot be used for files and folders
-== 
-
-A demo with this name already exists
 == 
 
 A folder with this name already exists
@@ -1104,32 +1056,7 @@ Server filter
 Friends
 == 
 
-[Demo playback]
-Live
-== 
-
-[Demo playback]
-Go to Live
-== 
-
-Play the current demo
-== 
-
-Pause the current demo
-== 
-
-Stop the current demo
-== 
-
 Go back the specified duration
-== 
-
-[Demo player duration]
-%s min.
-== 
-
-[Demo player duration]
-%s sec.
 == 
 
 Change the skip duration
@@ -1150,31 +1077,16 @@ Go back one marker
 Go forward one marker
 == 
 
-Slow down the demo
-== 
-
-Speed up the demo
-== 
-
 Mark the beginning of a cut (right click to reset)
 == 
 
 Mark the end of a cut (right click to reset)
 == 
 
-Export cut as a separate demo
-== 
-
-Close the demo player
-== 
-
 Toggle keyboard shortcuts
 == 
 
 Toggle auto camera
-== 
-
-Export demo cut
 == 
 
 Cut interval
@@ -1195,13 +1107,7 @@ Please use a different filename
 File already exists, do you want to overwrite it?
 == 
 
-Loading demo files
-== 
-
 All combined
-== 
-
-Demo
 == 
 
 Markers
@@ -1211,9 +1117,6 @@ Length
 == 
 
 Date
-== 
-
-No demo selected
 == 
 
 Folder Link
@@ -1237,32 +1140,13 @@ Netversion
 Map size
 == 
 
-[Demo details]
-map not included
-== 
-
 Fetch Info
-== 
-
-Demos directory
-== 
-
-Open the directory that contains the demo files
-== 
-
-Are you sure that you want to disconnect and play this demo?
 == 
 
 Are you sure that you want to delete the folder '%s'?
 == 
 
-Are you sure that you want to delete the demo '%s'?
-== 
-
 Delete folder
-== 
-
-Unable to delete the demo '%s'
 == 
 
 Unable to delete the folder '%s'. Make sure it's empty first.
@@ -1642,10 +1526,6 @@ Rcon Authed
 == 
 
 [Touch button visibilities]
-Demo Player
-== 
-
-[Touch button visibilities]
 Extra Menu
 == 
 
@@ -1744,9 +1624,6 @@ Dummy is currently connected.
 == 
 
 Player is currently authed in rcon.
-== 
-
-Demo player is currently active.
 == 
 
 The extra menu with the given number is activated.
@@ -2239,9 +2116,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Save the best demo of each race
-== 
-
 Enable replays
 == 
 
@@ -2530,9 +2404,6 @@ Update failed! Check log…
 Download
 == 
 
-Loading race demo files
-== 
-
 [Spectators]
 %d others…
 == 
@@ -2650,4 +2521,4 @@ Moved ingame
 == 
 
 https://wiki.ddnet.org/wiki/Mapping
-== 
+==

@@ -117,9 +117,7 @@ public: // TODO: Maybe make protected
 
 		Arguments:
 			SnappingClient - ID of the client which snapshot is
-				being generated. Could be -1 to create a complete
-				snapshot of everything in the game for demo
-				recording.
+				being generated.
 	*/
 	virtual void Snap(int SnappingClient) {}
 
@@ -159,9 +157,7 @@ public: // TODO: Maybe make protected
 
 		Arguments:
 			SnappingClient - ID of the client which snapshot is
-				being generated. Could be -1 to create a complete
-				snapshot of everything in the game for demo
-				recording.
+				being generated.
 
 		Returns:
 			True if the entity doesn't have to be in the snapshot.

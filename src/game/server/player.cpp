@@ -328,7 +328,7 @@ void CPlayer::Snap(int SnappingClient)
 	pClientInfo->m_ColorFeet = m_TeeInfos.m_ColorFeet;
 
 	int SnappingClientVersion = GameServer()->GetClientVersion(SnappingClient);
-	int Latency = SnappingClient == SERVER_DEMO_CLIENT ? m_Latency.m_Min : GameServer()->m_apPlayers[SnappingClient]->m_aCurLatency[m_ClientId];
+	int Latency = GameServer()->m_apPlayers[SnappingClient]->m_aCurLatency[m_ClientId];
 	int Score = GameServer()->m_pController->SnapPlayerScore(SnappingClient, this);
 
 	if(!Server()->IsSixup(SnappingClient))
@@ -390,7 +390,6 @@ void CPlayer::Snap(int SnappingClient)
 
 	if(m_ClientId == SnappingClient)
 	{
-		// send extended spectator info even when playing, this allows demo to record camera settings for local player
 		const int SpectatingClient = ((m_Team != TEAM_SPECTATORS && !m_Paused) || m_SpectatorId < 0 || m_SpectatorId >= MAX_CLIENTS) ? TranslatedId : m_SpectatorId;
 		const CPlayer *pSpecPlayer = GameServer()->m_apPlayers[SpectatingClient];
 
@@ -405,7 +404,7 @@ void CPlayer::Snap(int SnappingClient)
 			pDDNetSpectatorInfo->m_Deadzone = pSpecPlayer->m_CameraInfo.m_Deadzone;
 			pDDNetSpectatorInfo->m_FollowFactor = pSpecPlayer->m_CameraInfo.m_FollowFactor;
 
-			if(pSpecPlayer->m_EnableSpectatorCount && SpectatingClient == TranslatedId && SnappingClient != SERVER_DEMO_CLIENT && m_Team != TEAM_SPECTATORS && !m_Paused)
+			if(pSpecPlayer->m_EnableSpectatorCount && SpectatingClient == TranslatedId && m_Team != TEAM_SPECTATORS && !m_Paused)
 			{
 				CNetObj_SpectatorCount *pSpectatorCount = Server()->SnapNewItem<CNetObj_SpectatorCount>(0);
 				if(!pSpectatorCount)
@@ -473,11 +472,8 @@ void CPlayer::Snap(int SnappingClient)
 
 	bool ShowSpec = m_pCharacter && m_pCharacter->IsPaused() && m_pCharacter->CanSnapCharacter(SnappingClient);
 
-	if(SnappingClient != SERVER_DEMO_CLIENT)
-	{
-		CPlayer *pSnapPlayer = GameServer()->m_apPlayers[SnappingClient];
-		ShowSpec = ShowSpec && (GameServer()->GetDDRaceTeam(m_ClientId) == GameServer()->GetDDRaceTeam(SnappingClient) || pSnapPlayer->m_ShowOthers == SHOW_OTHERS_ON || (pSnapPlayer->GetTeam() == TEAM_SPECTATORS || pSnapPlayer->IsPaused()));
-	}
+	CPlayer *pSnapPlayer = GameServer()->m_apPlayers[SnappingClient];
+	ShowSpec = ShowSpec && (GameServer()->GetDDRaceTeam(m_ClientId) == GameServer()->GetDDRaceTeam(SnappingClient) || pSnapPlayer->m_ShowOthers == SHOW_OTHERS_ON || (pSnapPlayer->GetTeam() == TEAM_SPECTATORS || pSnapPlayer->IsPaused()));
 
 	if(ShowSpec)
 	{
@@ -660,7 +656,7 @@ void CPlayer::SetTeam(int Team, bool DoChatMsg)
 	Msg.m_Team = m_Team;
 	Msg.m_Silent = !DoChatMsg;
 	Msg.m_CooldownTick = m_LastSetTeam + Server()->TickSpeed() * g_Config.m_SvTeamChangeDelay;
-	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, -1);
+	Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, -1);
 
 	if(Team == TEAM_SPECTATORS)
 	{
@@ -864,7 +860,7 @@ int CPlayer::Pause(int State, bool Force)
 		Msg.m_Silent = true;
 		Msg.m_Team = m_Paused ? protocol7::TEAM_SPECTATORS : m_Team;
 
-		GameServer()->Server()->SendPackMsg(&Msg, MSGFLAG_VITAL | MSGFLAG_NORECORD, m_ClientId);
+		GameServer()->Server()->SendPackMsg(&Msg, MSGFLAG_VITAL, m_ClientId);
 	}
 
 	return m_Paused;

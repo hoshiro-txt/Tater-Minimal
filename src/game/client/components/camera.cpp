@@ -118,18 +118,10 @@ void CCamera::UpdateCamera()
 {
 	// use hardcoded smooth camera for spectating unless player explicitly turn it off
 	bool CanUseCameraInfo = !GameClient()->m_MultiViewActivated;
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		// only follow mode have the correct camera info
-		CanUseCameraInfo = CanUseCameraInfo && GameClient()->m_DemoSpecId == SPEC_FOLLOW;
-	}
-	else
-	{
-		CanUseCameraInfo = CanUseCameraInfo && GameClient()->m_Snap.m_SpecInfo.m_Active &&
-				   GameClient()->m_Snap.m_SpecInfo.m_SpectatorId >= 0 &&
-				   GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[0] &&
-				   (!GameClient()->Client()->DummyConnected() || GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[1]);
-	}
+	CanUseCameraInfo = CanUseCameraInfo && GameClient()->m_Snap.m_SpecInfo.m_Active &&
+			   GameClient()->m_Snap.m_SpecInfo.m_SpectatorId >= 0 &&
+			   GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[0] &&
+			   (!GameClient()->Client()->DummyConnected() || GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[1]);
 
 	bool UsingAutoSpecCamera = m_AutoSpecCamera && CanUseAutoSpecCamera();
 	float CurrentZoom = m_Zooming ? m_ZoomSmoothingTarget : m_Zoom;
@@ -403,7 +395,6 @@ void CCamera::OnRender()
 	m_PrevCenter = m_Center;
 	m_PrevSpecId = SpecId;
 
-	// demo always count as spectating
 	m_WasSpectating = GameClient()->m_Snap.m_SpecInfo.m_Active;
 }
 
@@ -616,7 +607,7 @@ bool CCamera::ZoomAllowed() const
 {
 	return GameClient()->m_Snap.m_SpecInfo.m_Active ||
 	       GameClient()->m_GameInfo.m_AllowZoom ||
-	       Client()->State() == IClient::STATE_DEMOPLAYBACK;
+	       false;
 }
 
 int CCamera::Deadzone() const
@@ -631,12 +622,6 @@ int CCamera::FollowFactor() const
 
 bool CCamera::CanUseAutoSpecCamera() const
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
-	{
-		// only follow mode has the correct camera info
-		return GameClient()->m_Snap.m_SpecInfo.m_HasCameraInfo && GameClient()->m_DemoSpecId == SPEC_FOLLOW;
-	}
-
 	return g_Config.m_ClSpecAutoSync && GameClient()->m_Snap.m_SpecInfo.m_HasCameraInfo &&
 	       GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[0] &&
 	       (!GameClient()->Client()->DummyConnected() || GameClient()->m_Snap.m_SpecInfo.m_SpectatorId != GameClient()->m_aLocalIds[1]);

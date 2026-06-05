@@ -47,7 +47,7 @@ void CMotd::OnWindowResize()
 
 void CMotd::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
 
 	if(!IsActive())
@@ -101,7 +101,7 @@ void CMotd::OnRender()
 
 void CMotd::OnMessage(int MsgType, void *pRawMsg)
 {
-	if(Client()->State() == IClient::STATE_DEMOPLAYBACK)
+	if(false)
 		return;
 
 	if(MsgType == NETMSGTYPE_SV_MOTD)

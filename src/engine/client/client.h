@@ -18,7 +18,6 @@
 #include <engine/editor.h>
 #include <engine/graphics.h>
 #include <engine/shared/config.h>
-#include <engine/shared/demo.h>
 #include <engine/shared/fifo.h>
 #include <engine/shared/http.h>
 #include <engine/shared/network.h>
@@ -26,12 +25,9 @@
 #include <engine/warning.h>
 
 #include <chrono>
-#include <deque>
 #include <memory>
 #include <mutex>
 
-class CDemoEdit;
-class IDemoRecorder;
 class CMsgPacker;
 class CUnpacker;
 class IConfigManager;
@@ -56,7 +52,7 @@ public:
 	bool m_SyncWeaponInput = false;
 };
 
-class CClient : public IClient, public CDemoPlayer::IListener
+class CClient : public IClient
 {
 	// needed interfaces
 	IConfigManager *m_pConfigManager = nullptr;
@@ -78,9 +74,6 @@ class CClient : public IClient, public CDemoPlayer::IListener
 	CHttp m_Http;
 
 	CNetClient m_aNetClient[NUM_CONNS];
-	CDemoPlayer m_DemoPlayer;
-	CDemoRecorder m_aDemoRecorder[RECORDER_MAX];
-	CDemoEditor m_DemoEditor;
 	CGhostRecorder m_GhostRecorder;
 	CGhostLoader m_GhostLoader;
 	CServerBrowser m_ServerBrowser;
@@ -138,7 +131,6 @@ class CClient : public IClient, public CDemoPlayer::IListener
 	std::array<bool, NUM_DUMMIES> m_aExecuteOnJoinDone = {};
 
 	char m_aCmdConnect[256] = "";
-	char m_aCmdPlayDemo[IO_MAX_PATH_LENGTH] = "";
 	char m_aCmdEditMap[IO_MAX_PATH_LENGTH] = "";
 
 	// map download
@@ -204,12 +196,7 @@ class CClient : public IClient, public CDemoPlayer::IListener
 	char m_aaSnapshotIncomingData[NUM_DUMMIES][CSnapshot::MAX_SIZE];
 	int m_aSnapshotIncomingDataSize[NUM_DUMMIES] = {0, 0};
 
-	CSnapshotStorage::CHolder m_aDemorecSnapshotHolders[NUM_SNAPSHOT_TYPES];
-	char m_aaaDemorecSnapshotData[NUM_SNAPSHOT_TYPES][2][CSnapshot::MAX_SIZE];
-
 	CSnapshotDelta m_SnapshotDelta;
-
-	std::deque<std::shared_ptr<CDemoEdit>> m_EditJobs;
 
 	//
 	bool m_CanReceiveServerCapabilities = false;
@@ -260,7 +247,6 @@ class CClient : public IClient, public CDemoPlayer::IListener
 	int m_FavoritesGroupNum = 0;
 	NETADDR m_aFavoritesGroupAddresses[MAX_SERVER_ADDRESSES];
 
-	void UpdateDemoIntraTimers();
 	int MaxLatencyTicks() const;
 	int PredictionMargin() const;
 
@@ -406,9 +392,6 @@ public:
 
 	void PumpNetwork();
 
-	void OnDemoPlayerSnapshot(void *pData, int Size) override;
-	void OnDemoPlayerMessage(void *pData, int Size) override;
-
 	void Update();
 
 	void RegisterInterfaces();
@@ -429,19 +412,10 @@ public:
 
 	static void Con_Quit(IConsole::IResult *pResult, void *pUserData);
 	static void Con_Restart(IConsole::IResult *pResult, void *pUserData);
-	static void Con_DemoPlay(IConsole::IResult *pResult, void *pUserData);
-	static void Con_DemoSpeed(IConsole::IResult *pResult, void *pUserData);
 	static void Con_Minimize(IConsole::IResult *pResult, void *pUserData);
 	static void Con_Ping(IConsole::IResult *pResult, void *pUserData);
 	static void ConNetReset(IConsole::IResult *pResult, void *pUserData);
 	static void Con_Screenshot(IConsole::IResult *pResult, void *pUserData);
-
-#if defined(CONF_VIDEORECORDER)
-	void StartVideo(const char *pFilename, bool WithTimestamp);
-	static void Con_StartVideo(IConsole::IResult *pResult, void *pUserData);
-	static void Con_StopVideo(IConsole::IResult *pResult, void *pUserData);
-	const char *DemoPlayer_Render(const char *pFilename, int StorageType, const char *pVideoName, int SpeedIndex, bool StartPaused = false) override;
-#endif
 
 	static void Con_Rcon(IConsole::IResult *pResult, void *pUserData);
 	static void Con_RconAuth(IConsole::IResult *pResult, void *pUserData);
@@ -450,10 +424,6 @@ public:
 	static void Con_EndFavoriteGroup(IConsole::IResult *pResult, void *pUserData);
 	static void Con_AddFavorite(IConsole::IResult *pResult, void *pUserData);
 	static void Con_RemoveFavorite(IConsole::IResult *pResult, void *pUserData);
-	static void Con_Play(IConsole::IResult *pResult, void *pUserData);
-	static void Con_Record(IConsole::IResult *pResult, void *pUserData);
-	static void Con_StopRecord(IConsole::IResult *pResult, void *pUserData);
-	static void Con_AddDemoMarker(IConsole::IResult *pResult, void *pUserData);
 	static void Con_BenchmarkQuit(IConsole::IResult *pResult, void *pUserData);
 	static void ConchainServerBrowserUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainFullscreen(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
@@ -463,25 +433,12 @@ public:
 	static void ConchainWindowResize(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainTimeoutSeed(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainPassword(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainReplays(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainInputFifo(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainNetReset(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainLoglevel(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainStdoutOutputLevel(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 
-	static void Con_DemoSlice(IConsole::IResult *pResult, void *pUserData);
-	static void Con_DemoSliceBegin(IConsole::IResult *pResult, void *pUserData);
-	static void Con_DemoSliceEnd(IConsole::IResult *pResult, void *pUserData);
-	static void Con_SaveReplay(IConsole::IResult *pResult, void *pUserData);
-
 	void RegisterCommands();
-
-	const char *DemoPlayer_Play(const char *pFilename, int StorageType) override;
-	void DemoRecorder_Start(const char *pFilename, bool WithTimestamp, int Recorder) override;
-	void DemoRecorder_HandleAutoStart() override;
-	void DemoRecorder_UpdateReplayRecorder() override;
-	void DemoRecorder_AddDemoMarker(int Recorder);
-	IDemoRecorder *DemoRecorder(int Recorder) override;
 
 	void AutoScreenshot_Start() override;
 	void AutoStatScreenshot_Start() override;
@@ -495,7 +452,6 @@ public:
 
 	void HandleConnectAddress(const NETADDR *pAddr);
 	void HandleConnectLink(const char *pLink);
-	void HandleDemoPath(const char *pPath);
 	void HandleMapPath(const char *pPath);
 
 	virtual void InitChecksum();
@@ -512,15 +468,6 @@ public:
 
 	void GenerateTimeoutSeed() override;
 	void GenerateTimeoutCodes(const NETADDR *pAddrs, int NumAddrs);
-
-	void RaceRecord_Start(const char *pFilename) override;
-	void RaceRecord_Stop() override;
-	bool RaceRecord_IsRecording() override;
-
-	void DemoSliceBegin() override;
-	void DemoSliceEnd() override;
-	void DemoSlice(const char *pDstPath, CLIENTFUNC_FILTER pfnFilter, void *pUser) override;
-	virtual void SaveReplay(int Length, const char *pFilename = "");
 
 	bool EditorHasUnsavedData() const override { return m_pEditor->HasUnsavedData(); }
 

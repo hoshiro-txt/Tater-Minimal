@@ -7,10 +7,6 @@
 %.2f MiB
 == %.2f МіБ
 
-[Demo player duration]
-%s min.
-== %s хв.
-
 %d new mentions
 == Нових згадок: %d
 
@@ -29,10 +25,6 @@
 
 %d players
 == Гравці: %d
-
-[Demo player duration]
-%s sec.
-== %s с.
 
 %d/%d KiB (%.1f KiB/s)
 == %d/%d КіБ (%.1f КіБ/с)
@@ -67,9 +59,6 @@
 
 9+ new mentions
 == Нових згадок: 9+
-
-A demo with this name already exists
-== Демо з цією назвою уже існує
 
 A folder with this name already exists
 == Тека з цією назвою уже існує
@@ -175,9 +164,6 @@ Appearance
 Are you sure that you want to delete '%s'?
 == Ви дійсно бажаєте видалити '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Ви дійсно бажаєте видалити демо '%s'?
-
 Are you sure that you want to delete the folder '%s'?
 == Ви дійсно бажаєте видалити теку '%s'?
 
@@ -244,9 +230,6 @@ auto
 
 Automatically create statboard csv
 == Автоматично зберігати статистику у файл CSV
-
-Automatically record demos
-== Автоматично записувати демо
 
 Automatically take game over screenshot
 == Автоматично робити знімки екрана кінця гри
@@ -350,9 +333,6 @@ Client message
 
 Close
 == Закрити
-
-Close the demo player
-== Закрити програвач демо
 
 Communities
 == Спільноти
@@ -510,26 +490,11 @@ Default zoom
 Delete
 == Видалити
 
-Delete demo
-== Видалити демо
-
 Delete folder
 == Видалити теку
 
 Delete skin
 == Видалити скін
-
-Demo
-== Демо
-
-Demofile: %s
-== Демо-файл: %s
-
-Demos
-== Демо
-
-Demos directory
-== Тека демо
 
 Desktop fullscreen
 == Робочий стіл на весь екран
@@ -649,14 +614,8 @@ Entities background color
 Error
 == Помилка
 
-Error loading demo
-== Помилка завантаження демо
-
 Error loading touch controls
 == Помилка завантаження сенсорного керування
-
-Error playing demo
-== Помилка відтворення демо
 
 Error saving settings
 == Помилка збереження налаштувань
@@ -675,12 +634,6 @@ Exclude
 
 Existing Player
 == Гравець уже існує
-
-Export cut as a separate demo
-== Експортувати фрагмент як окреме демо
-
-Export demo cut
-== Експортувати фрагмент демо
 
 Export to clipboard
 == Експортувати до буфера обміну
@@ -949,9 +902,6 @@ Initializing map logic
 Internet
 == Інтернет
 
-Invalid Demo
-== Недійсне демо
-
 It's recommended that you check the settings to adjust them to your liking before joining a server.
 == Перед тим, як приєднатися до сервера, рекомендуємо змінити налаштування до ваших уподобань.
 
@@ -1015,12 +965,6 @@ Loading commands…
 Loading DDNet Client
 == Завантаження клієнта DDNet
 
-Loading demo file from storage
-== Завантаження демо-файлу зі сховища
-
-Loading demo files
-== Завантаження демо-файлів
-
 Loading ghost files
 == Завантаження файлів привида
 
@@ -1032,9 +976,6 @@ Loading menu images
 
 Loading menu themes
 == Завантаження тем меню
-
-Loading race demo files
-== Завантаження демо-файлів забігів
 
 Loading skin files
 == Завантаження файлів скінів
@@ -1057,10 +998,6 @@ Manual
 Map
 == Мапа
 
-[Demo details]
-map not included
-== мапу не включено
-
 Map sound volume
 == Гучність звуків мапи
 
@@ -1082,9 +1019,6 @@ Match %d of %d
 
 Max CSVs
 == Макс. кількість файлів CSV
-
-Max demos
-== Макс. кількість демо-файлів
 
 Max Screenshots
 == Макс. кількість знімків екрана
@@ -1170,9 +1104,6 @@ No answer from server yet.
 No controller found. Plug in a controller.
 == Жодного контролера не знайдено. Під’єднайте контролер.
 
-No demo selected
-== Жодного демо не вибрано
-
 No local servers found (ports %d-%d)
 == Не знайдено локальних серверів (порти %d—%d)
 
@@ -1231,9 +1162,6 @@ Opacity of freeze bars inside freeze
 Open the directory that contains the configuration and user files
 == Відкрити теку яка містить файли налаштувань і користувацькі файли
 
-Open the directory that contains the demo files
-== Відкрити теку, в якій зберігаються демо-файли
-
 Open the directory to add custom assets
 == Відкрити теку текстур, щоб додати власні
 
@@ -1258,9 +1186,6 @@ Particles
 Pause
 == Пауза
 
-Pause the current demo
-== Призупинити
-
 Password
 == Пароль
 
@@ -1282,9 +1207,6 @@ Play
 
 Play background music
 == Фонова музика
-
-Play the current demo
-== Відтворити
 
 Player
 == Гравець
@@ -1312,9 +1234,6 @@ Please wait…
 
 Position:
 == Позиція:
-
-Preparing demo playback
-== Підготовлення відтворення демо
 
 Press a key…
 == Натисніть клавішу…
@@ -1349,9 +1268,6 @@ Reason:
 Reconnect in %d sec
 == Повторне під’єднання за %dс
 
-Record demo
-== Запис демо
-
 Red team
 == Червоні
 
@@ -1380,9 +1296,6 @@ Remove chat
 Remove friend
 == Прибрати друга
 
-Rename demo
-== Перейменувати демо
-
 Rename folder
 == Перейменувати теку
 
@@ -1391,9 +1304,6 @@ Render complete
 
 Render cut to video
 == Обробити фрагмент
-
-Render demo
-== Обробити демо
 
 Renderer
 == Графічний рушій
@@ -1463,9 +1373,6 @@ Save ghost
 
 Save skin
 == Зберегти скін
-
-Save the best demo of each race
-== Зберігати найкраще демо кожного забігу
 
 Saving settings to '%s' failed
 == Не вдалося зберегти налаштування до '%s'
@@ -1665,9 +1572,6 @@ Skip the main menu
 Skip Tutorial
 == Пропустити посібник
 
-Slow down the demo
-== Сповільнити
-
 Smooth Dynamic Camera
 == Гладка динамічна камера
 
@@ -1707,9 +1611,6 @@ Spectators
 Speed
 == Швидкість
 
-Speed up the demo
-== Пришвидшити
-
 Speed:
 == Швидкість:
 
@@ -1727,9 +1628,6 @@ Stop record
 
 Stop server
 == Зупинити сервер
-
-Stop the current demo
-== Зупинити
 
 Strict gametype filter
 == Жорсткий фільтр типів гри
@@ -1858,14 +1756,8 @@ UI mouse sens.
 Unable to delete skin
 == Не вдалося видалити скін
 
-Unable to delete the demo '%s'
-== Не вдалося видалити демо '%s'
-
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Не вдалося видалити теку '%s', тому що вона не пуста.
-
-Unable to rename the demo
-== Не вдалося перейменувати демо
 
 Unable to rename the folder
 == Не вдалося перейменувати теку
@@ -2088,9 +1980,6 @@ Show spectator cursor
 Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom assets (skins, entities, etc.), especially those with high resolution.
 == Недостатньо відеопам’яті (VRAM). Спробуйте зменшити значення параметра 'cl_skins_loaded_max' або видаліть користувацькі ресурси (скіни, сутності тощо), особливо ті, що мають високу роздільну здатність.
 
-No demo with this filename exists
-== Демо з такою назвою не існує
-
 This name cannot be used for files and folders
 == Це ім’я недопустиме для файлів і папок
 
@@ -2195,14 +2084,6 @@ Server could not be started
 
 Could not get server list from master server
 == Не вдалося отримати список серверів від майстер-сервера
-
-[Demo playback]
-Live
-== Наживо
-
-[Demo playback]
-Go to Live
-== Перейти до режиму "Наживо"
 
 Save all changes before turning off the editor?
 == Зберегти всі зміни перед вимкненням редактора?
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Rcon авторизовано
 
 [Touch button visibilities]
-Demo Player
-== Перегляд демо
-
-[Touch button visibilities]
 Extra Menu
 == Додаткове меню
 
@@ -2476,9 +2353,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == Вас буде від’єднано від сервера.
-
-Are you sure that you want to disconnect and play this demo?
-== Ви впевнені, що хочете від’єднатись та відтворити це демо?
 
 Show background quads
 == Показати фонові квади
@@ -2585,9 +2459,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == Гравець наразі авторизований в rcon.
 
-Demo player is currently active.
-== Демо-плеєр наразі активний.
-
 The extra menu with the given number is activated.
 == Додаткове меню з вказаним номером активоване.
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

@@ -1640,7 +1640,6 @@ set(EXPECTED_DATA
   maps7/Tsunami.map
   maps7/Tutorial.map
   maps7/readme.txt
-  menuimages/demos.png
   menuimages/editor.png
   menuimages/local_server.png
   menuimages/play_game.png
@@ -2186,7 +2185,6 @@ set_src(ENGINE_INTERFACE GLOB src/engine
   client.h
   config.h
   console.h
-  demo.h
   discord.h
   editor.h
   engine.h
@@ -2233,8 +2231,6 @@ set_src(ENGINE_SHARED GLOB_RECURSE src/engine/shared
   csv.h
   datafile.cpp
   datafile.h
-  demo.cpp
-  demo.h
   econ.cpp
   econ.h
   engine.cpp
@@ -2468,8 +2464,6 @@ if(CLIENT)
     checksum.h
     client.cpp
     client.h
-    demoedit.cpp
-    demoedit.h
     discord.cpp
     enums.h
     favorites.cpp
@@ -2573,7 +2567,6 @@ if(CLIENT)
     components/menus.cpp
     components/menus.h
     components/menus_browser.cpp
-    components/menus_demo.cpp
     components/menus_ingame.cpp
     components/menus_ingame_touch_controls.cpp
     components/menus_ingame_touch_controls.h
@@ -2592,8 +2585,6 @@ if(CLIENT)
     components/particles.h
     components/players.cpp
     components/players.h
-    components/race_demo.cpp
-    components/race_demo.h
     components/scoreboard.cpp
     components/scoreboard.h
     components/skins.cpp
@@ -3169,7 +3160,6 @@ if(TOOLS)
     config_retrieve.cpp
     config_store.cpp
     crapnet.cpp
-    demo_extract_chat.cpp
     dilate.cpp
     dummy_map.cpp
     map_convert_07.cpp
@@ -3543,7 +3533,6 @@ if(TOOLS)
   set(TARGET_TOOLS
     config_retrieve
     config_store
-    demo_extract_chat
     dilate
     map_convert_07
     map_diff

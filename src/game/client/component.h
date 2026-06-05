@@ -94,22 +94,6 @@ protected:
 	class IConsole *Console() const;
 
 	/**
-	 * Get the demo player interface.
-	 */
-	class IDemoPlayer *DemoPlayer() const;
-
-	/**
-	 * Get the demo recorder interface.
-	 *
-	 * @param Recorder A member of the RECORDER_x enum
-	 * @see RECORDER_MANUAL
-	 * @see RECORDER_AUTO
-	 * @see RECORDER_RACE
-	 * @see RECORDER_REPLAYS
-	 */
-	class IDemoRecorder *DemoRecorder(int Recorder) const;
-
-	/**
 	 * Get the favorites interface.
 	 */
 	class IFavorites *Favorites() const;

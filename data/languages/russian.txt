@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Вы действительно желаете выйти?
 
-Automatically record demos
-== Записывать демо
-
 Automatically take game over screenshot
 == Делать снимок результатов игры
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Удалить
 
-Delete demo
-== Удалить демо
-
-Demofile: %s
-== Демо: %s
-
-Demos
-== Демо
-
 Disconnect
 == Отключиться
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Ошибка
-
-Error loading demo
-== Ошибка при загрузке демо
 
 Favorite
 == Избранный
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Крюк
-
-Invalid Demo
-== Нерабочее демо
 
 Join blue
 == За синих
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Удалить друга
 
-Rename demo
-== Переименовать демо
-
 Reset filter
 == Сбросить фильтры
 
@@ -403,9 +382,6 @@ Try again
 Type
 == Тип
 
-Unable to rename the demo
-== Невозможно переименовать демо
-
 Use sounds
 == Использовать звуки
 
@@ -505,9 +481,6 @@ Miscellaneous
 Internet
 == Интернет
 
-Max demos
-== Максимальное кол-во демо
-
 Join game
 == Играть
 
@@ -525,9 +498,6 @@ Laser
 
 Hue
 == Оттен.
-
-Record demo
-== Записать демо
 
 Your skin
 == Ваш скин
@@ -616,9 +586,6 @@ DDNet Client updated!
 Highlighted message
 == Выделенное
 
-Demo
-== Демо
-
 Successfully saved the replay!
 == Повтор сохранен!
 
@@ -636,9 +603,6 @@ Browser
 
 Reconnect in %d sec
 == Переподключение через %d сек.
-
-Render demo
-== Рендер
 
 Replace video
 == Переместить
@@ -811,9 +775,6 @@ DDNet
 Friend message
 == Дружеское
 
-Save the best demo of each race
-== Сохранять лучшее демо каждой карты
-
 Default length
 == Станд. длина
 
@@ -976,9 +937,6 @@ Checking for existing player with your name
 
 Theme
 == Тема
-
-Demos directory
-== Папка с демо
 
 Smooth Dynamic Camera
 == Плавная дин. камера
@@ -1252,9 +1210,6 @@ Super
 Team %d
 == Команда %d
 
-Preparing demo playback
-== Подготовка воспроизведения демо
-
 Connected
 == Подключено
 
@@ -1284,9 +1239,6 @@ Requesting to join the game
 
 Loading menu images
 == Загрузка изображений меню
-
-Loading demo files
-== Загрузка файлов демо
 
 Loading ghost files
 == Загрузка файлов тени
@@ -1327,32 +1279,11 @@ Your movements are not taken into account when calculating the line colors
 Loading assets
 == Загрузка ресурсов
 
-Loading race demo files
-== Загрузка демо записей
-
 Loading sound files
 == Загрузка звуковых файлов
 
 Why are you slowmo replaying to read this?
 == Ну и зачем же ты читаешь это в слоу-мо?
-
-Play the current demo
-== Включить демо
-
-Pause the current demo
-== Поставить на паузу
-
-Stop the current demo
-== Остановить демо
-
-Slow down the demo
-== Замедлить демо
-
-Speed up the demo
-== Ускорить демо
-
-Export cut as a separate demo
-== Экспортировать отрезок отдельно
 
 Toggle keyboard shortcuts
 == Включить горячие клавиши
@@ -1414,12 +1345,6 @@ Go back one marker
 Go forward one marker
 == Пройти вперед на один маркер
 
-Are you sure that you want to delete the demo '%s'?
-== Вы уверены, что хотите удалить демо '%s'?
-
-Unable to delete the demo '%s'
-== Невозможно удалить демо '%s'
-
 Reset controls
 == Сброс настроек
 
@@ -1453,9 +1378,6 @@ Unknown error. Try to change gfx_backend to OpenGL or Vulkan in settings_ddnet.c
 [Graphics error]
 Could not initialize the given graphics backend, reverting to the default backend now.
 == Не удалось инициализировать заданный графический модуль, возврат к модулю по умолчанию.
-
-Open the directory that contains the demo files
-== Открыть папку с демо записями
 
 Open the settings file
 == Открытие файла настроек
@@ -1507,9 +1429,6 @@ Click to remove this player from your friends list.
 Click to remove this clan from your friends list.
 == Нажмите, чтобы исключить клан из списка.
 
-A demo with this name already exists
-== Демо с таким именем уже существует
-
 No server selected
 == Сервер не выбран
 
@@ -1518,12 +1437,6 @@ Mark the beginning of a cut (right click to reset)
 
 Mark the end of a cut (right click to reset)
 == Отметить конец отрезка (нажмите ПКМ, чтобы сбросить)
-
-Close the demo player
-== Закрыть проигрыватель демо
-
-Export demo cut
-== Экспортировать отрезок демо
 
 Cut interval
 == Интервал отрезка
@@ -1579,14 +1492,6 @@ Moved ingame
 Go back the specified duration
 == Отмотать назад на заданное время
 
-[Demo player duration]
-%s min.
-== %s мин.
-
-[Demo player duration]
-%s sec.
-== %s сек.
-
 Change the skip duration
 == Изменить продолжительность шага
 
@@ -1595,9 +1500,6 @@ Go forward the specified duration
 
 Render cut to video
 == Рендеринг отрезка в видео
-
-Error playing demo
-== Ошибка воспроизведения демо
 
 Some map images could not be loaded. Check the local console for details.
 == Некоторые изображения на карте не удалось загрузить. Проверьте детали в локальной консоли.
@@ -1617,18 +1519,11 @@ Videos directory
 Video was saved to '%s'
 == Видео было сохранено в '%s'
 
-No demo selected
-== Демо не выбрано
-
 Created
 == Создано
 
 Netversion
 == Версия сети
-
-[Demo details]
-map not included
-== карта отсутствует
 
 Ghosts directory
 == Папка теней
@@ -1737,9 +1632,6 @@ Friends
 
 Loading…
 == Загрузка…
-
-Loading demo file from storage
-== Загрузка демо из файлового хранилища
 
 %d/%d KiB (%.1f KiB/s)
 == %d/%d КиБ (%.1f КиБ/с)
@@ -2084,9 +1976,6 @@ Size of key press icons
 Server could not be started. Make sure to grant the notification permission in the app settings so the server can run in the background.
 == Не удалось запустить сервер. Убедитесь, что вы предоставили разрешение на уведомления в настройках приложения, чтобы сервер мог работать в фоновом режиме.
 
-No demo with this filename exists
-== Демо с таким именем не существует
-
 Map size
 == Размер карты
 
@@ -2195,14 +2084,6 @@ Server could not be started
 
 Could not get server list from master server
 == Не удалось получить список серверов от мастер-сервера
-
-[Demo playback]
-Live
-== В реальном времени
-
-[Demo playback]
-Go to Live
-== Перейти к реальному времени
 
 Save all changes before turning off the editor?
 == Сохранить все изменения перед выходом из редактора?
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Rcon авторизован
 
 [Touch button visibilities]
-Demo Player
-== Проигрыватель демо
-
-[Touch button visibilities]
 Extra Menu
 == Дополнительное меню
 
@@ -2476,9 +2353,6 @@ Moderator alert
 
 You will be disconnected from the server.
 == Вы будете отключены от сервера.
-
-Are you sure that you want to disconnect and play this demo?
-== Вы уверены, что хотите отключиться и запустить демо?
 
 Show background quads
 == Показать фоновые квады
@@ -2621,9 +2495,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 
 
-Demo player is currently active.
-== 
-
 The extra menu with the given number is activated.
 == 
 
@@ -2650,4 +2521,4 @@ When a Tee is hookable
 
 [Hook collision line color]
 Hook collision line tip
-== 
+==

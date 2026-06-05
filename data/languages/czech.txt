@@ -31,9 +31,6 @@ All
 Are you sure that you want to quit?
 == Opravdu chcete ukončit hru?
 
-Automatically record demos
-== Automaticky nahrávat záznamy
-
 Automatically take game over screenshot
 == Automaticky pořídit snímek obrazovky konce hry
 
@@ -85,15 +82,6 @@ Custom colors
 Delete
 == Smazat
 
-Delete demo
-== Smazat záznam
-
-Demofile: %s
-== Soubor záznamu: %s
-
-Demos
-== Záznamy
-
 Disconnect
 == Odpojit
 
@@ -114,9 +102,6 @@ Emoticon
 
 Error
 == Chyba
-
-Error loading demo
-== Chyba při načítání záznamu
 
 Favorite
 == Oblíbený
@@ -177,9 +162,6 @@ High Detail
 
 Hook
 == Hák
-
-Invalid Demo
-== Neplatný záznam
 
 Join blue
 == Modří
@@ -295,9 +277,6 @@ Remove
 Remove friend
 == Odebrat přítele
 
-Rename demo
-== Přejmenovat záznam
-
 Reset filter
 == Resetovat filtr
 
@@ -391,9 +370,6 @@ Try again
 Type
 == Mód
 
-Unable to rename the demo
-== Záznam nelze přejmenovat
-
 Use sounds
 == Povolit zvuk
 
@@ -445,9 +421,6 @@ Miscellaneous
 Internet
 == Internet
 
-Max demos
-== Maximální počet záznamů
-
 News
 == Novinky
 
@@ -468,9 +441,6 @@ Laser
 
 Hue
 == Ods.
-
-Record demo
-== Začít záznam
 
 Your skin
 == Zvolený vzhled
@@ -522,9 +492,6 @@ Loading DDNet Client
 
 Reconnect in %d sec
 == Opětovné připojení za %d sek
-
-Render demo
-== Vykreslit záznam
 
 Replace video
 == Nahradit video
@@ -600,9 +567,6 @@ Remove chat
 
 %.2f KiB
 == %.2f KiB
-
-Demo
-== Záznam
 
 Markers
 == Markery
@@ -790,9 +754,6 @@ Friend message
 Normal message
 == Normální zpráva
 
-Save the best demo of each race
-== Ukládat nejlepší záznam každého závodu
-
 Default length
 == Výchozí délka
 
@@ -949,9 +910,6 @@ Theme
 %d player
 == %d hráč
 
-Demos directory
-== Adresář záznamů
-
 Smooth Dynamic Camera
 == Hladká pohyblivá kamera
 
@@ -1066,9 +1024,6 @@ Could not initialize the given graphics backend, this is probably because you di
 Could not save downloaded map. Try manually deleting this file: %s
 == Staženou mapu nelze uložit. Zkuste ručně smazat tento soubor: %s
 
-Error playing demo
-== Chyba přehrávání záznamu
-
 Failed saving the replay!
 == Uložení záznamu se nezdařilo!
 
@@ -1083,9 +1038,6 @@ The width of texture %s is not divisible by %d, or the height is not divisible b
 
 The format of texture %s is not RGBA which will cause visual bugs.
 == Formát textury %s není RGBA, což způsobí vizuální chyby.
-
-Preparing demo playback
-== Příprava přehrávání záznamu
 
 Connected
 == Připojeno
@@ -1213,9 +1165,6 @@ There's an unsaved map in the editor, you might want to save it.
 Continue anyway?
 == Přesto pokračovat?
 
-A demo with this name already exists
-== Záznam s tímto názvem již existuje
-
 A folder with this name already exists
 == Složka s tímto názvem již existuje
 
@@ -1310,25 +1259,8 @@ Server filter
 Friends
 == Přátelé
 
-Play the current demo
-== Přehrát aktuální záznam
-
-Pause the current demo
-== Pozastavit aktuální záznam
-
-Stop the current demo
-== Zastavit aktuální záznam
-
 Go back the specified duration
 == Vrátit se o zadanou dobu
-
-[Demo player duration]
-%s min.
-== %s min.
-
-[Demo player duration]
-%s sec.
-== %s sec.
 
 Change the skip duration
 == Změnit dobu přeskočení
@@ -1348,29 +1280,14 @@ Go back one marker
 Go forward one marker
 == Vpřed o jeden marker
 
-Slow down the demo
-== Zpomalit záznam
-
-Speed up the demo
-== Zrychlit záznam
-
 Mark the beginning of a cut (right click to reset)
 == Označit začátek řezu (pravý klik pro reset)
 
 Mark the end of a cut (right click to reset)
 == Označit konec řezu (pravý klik pro reset)
 
-Export cut as a separate demo
-== Exportovat řez jako samostatný záznam
-
-Close the demo player
-== Zavřít přehrávač záznamů
-
 Toggle keyboard shortcuts
 == Přepnout klávesové zkratky
-
-Export demo cut
-== Exportovat řez záznamu
 
 Cut interval
 == Interval řezu
@@ -1384,14 +1301,8 @@ Render cut to video
 Please use a different filename
 == Použijte prosím jiný název souboru
 
-Loading demo files
-== Načítání záznamů
-
 All combined
 == Vše dohromady
-
-No demo selected
-== Není vybrán žádný záznam
 
 Folder Link
 == Odkaz na složku
@@ -1402,24 +1313,11 @@ Created
 Netversion
 == Netversion
 
-[Demo details]
-map not included
-== mapa není součástí
-
-Open the directory that contains the demo files
-== Otevřete adresář, který obsahuje soubory se záznamy
-
 Are you sure that you want to delete the folder '%s'?
 == Opravdu chcete smazat složku '%s'?
 
-Are you sure that you want to delete the demo '%s'?
-== Opravdu chcete smazat záznam '%s'?
-
 Delete folder
 == Smazat složku
-
-Unable to delete the demo '%s'
-== Nelze smazat záznam '%s'
 
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Nelze smazat složku '%s'. Nejprve se ujistěte, že je prázdná.
@@ -1726,9 +1624,6 @@ https://ddnet.org/discord
 Tutorial
 == Výuka
 
-Loading race demo files
-== Načítání záznamů závodů
-
 Super
 == Super
 
@@ -1737,9 +1632,6 @@ Loading sound files
 
 Moved ingame
 == Přesun ve hře
-
-Loading demo file from storage
-== Načítání souboru záznamu z úložiště
 
 No login required
 == Bez přihlášení
@@ -1881,9 +1773,6 @@ English translation by the DDNet Team
 [Graphics error]
 Out of VRAM. Try setting 'cl_skins_loaded_max' to a lower value or remove custom assets (skins, entities, etc.), especially those with high resolution.
 == Nedostatek VRAM. Zkuste nastavit 'cl_skins_loaded_max' na nižší hodnotu nebo odstranit vlastní aktiva (skiny, entity, atd.), zejména ty s vysokým rozlišením.
-
-No demo with this filename exists
-== Neexistuje žádný záznam s tímto názvem
 
 "%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == "%s" není kompatibilní s pnglite a nelze jej načíst starými DDNet verzemi:
@@ -2196,14 +2085,6 @@ Server could not be started
 Could not get server list from master server
 == Nepodařilo se získat seznam serverů z hlavního serveru
 
-[Demo playback]
-Live
-== Živě
-
-[Demo playback]
-Go to Live
-== Přejít na živý přenos
-
 Save all changes before turning off the editor?
 == Uložit všechny změny před vypnutím editoru?
 
@@ -2393,10 +2274,6 @@ Rcon Authed
 == Rcon autorizován
 
 [Touch button visibilities]
-Demo Player
-== Přehrávač záznamů
-
-[Touch button visibilities]
 Extra Menu
 == Další menu
 
@@ -2525,9 +2402,6 @@ Add clan
 Add friend
 == 
 
-Are you sure that you want to disconnect and play this demo?
-== 
-
 Info
 == 
 
@@ -2603,9 +2477,6 @@ Dummy is currently connected.
 Player is currently authed in rcon.
 == 
 
-Demo player is currently active.
-== 
-
 The extra menu with the given number is activated.
 == 
 
@@ -2650,4 +2521,4 @@ Unmute emoticons
 == 
 
 Mute emoticons
-== 
+==

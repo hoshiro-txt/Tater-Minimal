@@ -2,7 +2,6 @@
 
 #include <base/log.h>
 
-#include <engine/demo.h>
 #include <engine/sound.h>
 
 #include <game/client/components/camera.h>
@@ -133,10 +132,8 @@ void CMapSounds::OnMapLoad()
 
 void CMapSounds::OnRender()
 {
-	if(Client()->State() != IClient::STATE_ONLINE && Client()->State() != IClient::STATE_DEMOPLAYBACK)
+	if(Client()->State() != IClient::STATE_ONLINE)
 		return;
-
-	bool DemoPlayerPaused = Client()->State() == IClient::STATE_DEMOPLAYBACK && DemoPlayer()->BaseInfo()->m_Paused;
 
 	// enqueue sounds
 	for(auto &Source : m_vSourceQueue)
@@ -149,7 +146,7 @@ void CMapSounds::OnRender()
 				Client()->IntraGameTick(g_Config.m_ClDummy));
 		}
 		float Offset = s_Time - Source.m_pSource->m_TimeDelay;
-		if(!DemoPlayerPaused && Offset >= 0.0f && g_Config.m_SndEnable && (g_Config.m_GfxHighDetail || !Source.m_HighDetail))
+		if(Offset >= 0.0f && g_Config.m_SndEnable && (g_Config.m_GfxHighDetail || !Source.m_HighDetail))
 		{
 			if(Source.m_Voice.IsValid())
 			{
