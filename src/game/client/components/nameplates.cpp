@@ -665,7 +665,7 @@ private:
 protected:
 	bool UpdateNeeded(CGameClient &This, const CNamePlateData &Data) override
 	{
-		m_Visible = (Data.m_InGame && Data.m_ShowName && This.(This.m_aClients[Data.m_ClientId].m_Foe || This.m_aClients[Data.m_ClientId].m_ChatIgnore));
+		m_Visible = Data.m_InGame && Data.m_ShowName && (This.m_aClients[Data.m_ClientId].m_Foe || This.m_aClients[Data.m_ClientId].m_ChatIgnore);
 		if(!m_Visible)
 			return false;
 		m_Color = ColorRGBA(1.0f, 1.0f, 1.0f, Data.m_Color.a);

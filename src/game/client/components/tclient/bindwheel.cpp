@@ -22,13 +22,10 @@ void CBindWheel::ConBindwheelExecuteHover(IConsole::IResult *pResult, void *pUse
 void CBindWheel::ConOpenBindwheel(IConsole::IResult *pResult, void *pUserData)
 {
 	CBindWheel *pThis = (CBindWheel *)pUserData;
-	if(pThis->true)
-	{
-		if(pThis->GameClient()->m_Emoticon.IsActive())
-			pThis->m_Active = false;
-		else
-			pThis->m_Active = pResult->GetInteger(0) != 0;
-	}
+	if(pThis->GameClient()->m_Emoticon.IsActive())
+		pThis->m_Active = false;
+	else
+		pThis->m_Active = pResult->GetInteger(0) != 0;
 }
 
 void CBindWheel::ConAddBindwheelLegacy(IConsole::IResult *pResult, void *pUserData)

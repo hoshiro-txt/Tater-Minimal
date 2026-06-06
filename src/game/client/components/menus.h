@@ -27,6 +27,7 @@
 
 #include <chrono>
 #include <deque>
+#include <functional>
 #include <optional>
 #include <vector>
 
@@ -146,6 +147,7 @@ protected:
 	int m_Popup;
 	bool m_ShowStart;
 	bool m_MenuActive;
+	bool m_Dummy;
 
 	bool m_DummyNamePlatePreview = false;
 
@@ -178,6 +180,105 @@ protected:
 	bool m_ForceRefreshLanPage = false;
 
 	char m_aNextServer[256];
+	STextContainerIndex m_MotdTextContainerIndex;
+
+	int m_SelectedIndex;
+	bool m_ServerBrowserShouldRevealSelection;
+	std::vector<CUIElement *> m_avpServerBrowserUiElements[IServerBrowser::NUM_TYPES];
+
+	class CFriendItem
+	{
+		char m_aName[MAX_NAME_LENGTH] = "";
+		char m_aClan[MAX_CLAN_LENGTH] = "";
+		int m_FriendState = IFriends::FRIEND_NO;
+		bool m_Afk = false;
+		const CServerInfo *m_pServerInfo = nullptr;
+		char m_aSkin[MAX_SKIN_LENGTH] = "";
+		bool m_CustomSkinColors = false;
+		int m_CustomSkinColorBody = 0;
+		int m_CustomSkinColorFeet = 0;
+		char m_aaSkin7[protocol7::NUM_SKINPARTS][protocol7::MAX_SKIN_LENGTH] = {};
+		bool m_aUseCustomSkinColor7[protocol7::NUM_SKINPARTS] = {};
+		int m_aCustomSkinColor7[protocol7::NUM_SKINPARTS] = {};
+
+		CUIElement m_ListItemId;
+		CUIElement m_RemoveButtonId;
+		CUIElement m_CommunityTooltipId;
+		CUIElement m_SkinTooltipId;
+
+	public:
+		CFriendItem() = default;
+		CFriendItem(const CFriendInfo *pFriend)
+		{
+			str_copy(m_aName, pFriend->m_aName);
+			str_copy(m_aClan, pFriend->m_aClan);
+			m_FriendState = m_aName[0] == '\0' ? IFriends::FRIEND_CLAN : IFriends::FRIEND_PLAYER;
+		}
+		CFriendItem(const CServerInfo::CClient &Client, const CServerInfo *pServerInfo)
+		{
+			str_copy(m_aName, Client.m_aName);
+			str_copy(m_aClan, Client.m_aClan);
+			m_FriendState = Client.m_FriendState;
+			m_Afk = Client.m_Afk;
+			m_pServerInfo = pServerInfo;
+			str_copy(m_aSkin, Client.m_aSkin);
+			m_CustomSkinColors = Client.m_CustomSkinColors;
+			m_CustomSkinColorBody = Client.m_CustomSkinColorBody;
+			m_CustomSkinColorFeet = Client.m_CustomSkinColorFeet;
+			for(int Part = 0; Part < protocol7::NUM_SKINPARTS; ++Part)
+			{
+				str_copy(m_aaSkin7[Part], Client.m_aaSkin7[Part]);
+				m_aUseCustomSkinColor7[Part] = Client.m_aUseCustomSkinColor7[Part];
+				m_aCustomSkinColor7[Part] = Client.m_aCustomSkinColor7[Part];
+			}
+		}
+
+		bool operator<(const CFriendItem &Other) const
+		{
+			if(m_pServerInfo != nullptr && Other.m_pServerInfo == nullptr)
+				return true;
+			if(m_pServerInfo == nullptr && Other.m_pServerInfo != nullptr)
+				return false;
+			int Result = str_comp_nocase(m_aName, Other.m_aName);
+			if(Result != 0)
+				return Result < 0;
+			return str_comp_nocase(m_aClan, Other.m_aClan) < 0;
+		}
+
+		const char *Name() const { return m_aName; }
+		const char *Clan() const { return m_aClan; }
+		int FriendState() const { return m_FriendState; }
+		bool IsAfk() const { return m_Afk; }
+		const CServerInfo *ServerInfo() const { return m_pServerInfo; }
+		const char *Skin() const { return m_aSkin; }
+		bool CustomSkinColors() const { return m_CustomSkinColors; }
+		int CustomSkinColorBody() const { return m_CustomSkinColorBody; }
+		int CustomSkinColorFeet() const { return m_CustomSkinColorFeet; }
+		const char *Skin7(int Part) const { return m_aaSkin7[Part]; }
+		bool UseCustomSkinColor7(int Part) const { return m_aUseCustomSkinColor7[Part]; }
+		int CustomSkinColor7(int Part) const { return m_aCustomSkinColor7[Part]; }
+		const void *ListItemId() const { return &m_ListItemId; }
+		const void *RemoveButtonId() const { return &m_RemoveButtonId; }
+		const void *CommunityTooltipId() const { return &m_CommunityTooltipId; }
+		const void *SkinTooltipId() const { return &m_SkinTooltipId; }
+	};
+
+	enum
+	{
+		FRIEND_PLAYER_ON = 0,
+		FRIEND_CLAN_ON,
+		FRIEND_OFF,
+		NUM_FRIEND_TYPES,
+	};
+	std::vector<CFriendItem> m_avFriends[NUM_FRIEND_TYPES];
+	const CFriendItem *m_pRemoveFriend = nullptr;
+
+	struct SPopupCountrySelectionContext
+	{
+		CMenus *m_pMenus;
+		int m_Selection;
+		bool m_New;
+	};
 
 	// images
 	struct CMenuImage
@@ -274,8 +375,14 @@ protected:
 
 	void RenderPopupConnecting(CUIRect Screen);
 	void RenderPopupLoading(CUIRect Screen);
+	void RenderPopupFullscreen(CUIRect Screen);
 	void RenderMenubar(CUIRect Box, IClient::EClientState ClientState);
 	void RenderNews(CUIRect MainView);
+	void Render();
+	static void ConchainFriendlistUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
+	static void ConchainFavoritesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
+	static void ConchainCommunitiesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
+	static void ConchainUiPageUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainBackgroundEntities(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainUpdateMusicState(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	void UpdateMusicState();
@@ -401,7 +508,6 @@ public:
 		SETTINGS_ASSETS,
 		SETTINGS_TCLIENT,
 		SETTINGS_PROFILES,
-		SETTINGS_CONFIGS,
 
 		SETTINGS_LENGTH,
 	};
@@ -525,8 +631,60 @@ private:
 	static int GhostlistFetchCallback(const CFsFileInfo *pInfo, int IsDir, int StorageType, void *pUser);
 
 	// found in menus_ingame.cpp
+	void RenderGame(CUIRect MainView);
+	void RenderPlayers(CUIRect MainView);
+	void RenderServerInfo(CUIRect MainView);
+	void RenderServerInfoMotd(CUIRect Motd);
+	bool RenderServerControlServer(CUIRect MainView, bool UpdateScroll);
+	bool RenderServerControlKick(CUIRect MainView, bool FilterSpectators, bool UpdateScroll);
+	void RenderServerControl(CUIRect MainView);
 	void RenderInGameNetwork(CUIRect MainView);
+	void RenderIngameHint();
 	void RenderGhost(CUIRect MainView);
+	void PopupConfirmDisconnect();
+	void PopupConfirmDisconnectDummy();
+	void PopupConfirmDiscardTouchControlsChanges();
+	void PopupConfirmResetTouchControls();
+	void PopupConfirmImportTouchControlsClipboard();
+	void PopupConfirmDeleteButton();
+	void PopupCancelDeselectButton();
+	void PopupConfirmSelectedNotVisible();
+	void PopupConfirmChangeSelectedButton();
+	void PopupCancelChangeSelectedButton();
+	void PopupConfirmTurnOffEditor();
+	void PopupConfirmOpenWiki();
+
+	// found in menus_browser.cpp
+	enum
+	{
+		UI_TOOLBOX_PAGE_FILTERS = 0,
+		UI_TOOLBOX_PAGE_INFO,
+		UI_TOOLBOX_PAGE_FRIENDS,
+		NUM_UI_TOOLBOX_PAGES,
+	};
+	void Connect(const char *pAddress);
+	void ResetServerbrowserFilters();
+	void RenderServerbrowser(CUIRect MainView);
+	void RenderServerbrowserServerList(CUIRect View, bool &WasListboxItemActivated);
+	void RenderServerbrowserStatusBox(CUIRect StatusBox, bool WasListboxItemActivated);
+	void RenderServerbrowserFilters(CUIRect View);
+	void RenderServerbrowserDDNetFilter(CUIRect View, IFilterList &Filter, float ItemHeight, int MaxItems, int ItemsPerRow, CScrollRegion &ScrollRegion, std::vector<unsigned char> &vItemIds, bool UpdateCommunityCacheOnChange, const std::function<const char *(int ItemIndex)> &GetItemName, const std::function<void(int ItemIndex, CUIRect Item, const void *pItemId, bool Active)> &RenderItem);
+	void RenderServerbrowserCommunitiesFilter(CUIRect View);
+	void RenderServerbrowserCountriesFilter(CUIRect View);
+	void RenderServerbrowserTypesFilter(CUIRect View);
+	void RenderServerbrowserInfo(CUIRect View);
+	void RenderServerbrowserInfoScoreboard(CUIRect View, const CServerInfo *pSelectedServer);
+	void RenderServerbrowserFriends(CUIRect View);
+	void RenderServerbrowserTabBar(CUIRect TabBar);
+	void RenderServerbrowserToolBox(CUIRect ToolBox);
+	static CUi::EPopupMenuFunctionResult PopupCountrySelection(void *pContext, CUIRect View, bool Active);
+	void PopupConfirmSwitchServer();
+	void PopupConfirmRemoveFriend();
+	void FriendlistOnUpdate();
+	void UpdateCommunityCache(bool Force);
+	template<typename F>
+	bool PrintHighlighted(const char *pName, F &&PrintFn);
+	CTeeRenderInfo GetTeeRenderInfo(vec2 Size, const char *pSkinName, bool CustomSkinColors, int CustomSkinColorBody, int CustomSkinColorFeet) const;
 
 	// found in menus_settings.cpp
 	void RenderSettingsDDNet(CUIRect MainView);
@@ -541,7 +699,6 @@ private:
 	void RenderSettingsTClientInfo(CUIRect MainView);
 	void RenderSettingsTClientStatusBar(CUIRect MainView);
 	void RenderSettingsTClientProfiles(CUIRect MainView);
-	void RenderSettingsTClientConfigs(CUIRect MainView);
 	void RenderTeeCute(const CAnimState *pAnim, const CTeeRenderInfo *pInfo, int Emote, vec2 Dir, vec2 Pos, bool CuteEyes, float Alpha = 1.0f);
 
 	const CWarType *m_pRemoveWarType = nullptr;
@@ -552,7 +709,7 @@ private:
 	int DoButtonNoRect_FontIcon(CButtonContainer *pButtonContainer, const char *pText, int Checked, const CUIRect *pRect, int Corners = IGraphics::CORNER_ALL);
 
 	ColorHSLA RenderHSLColorPicker(const CUIRect *pRect, unsigned int *pColor, bool Alpha);
-	bool RenderHslaScrollbars(CUIRect *pRect, unsigned int *pColor, bool Alpha, float DarkestLight);
+	bool RenderHslaScrollbars(CUIRect *pRect, unsigned int *pColor, bool Alpha, float DarkestLight = ColorHSLA::DARKEST_LGT);
 	int DoButtonLineSize_Menu(CButtonContainer *pButtonContainer, const char *pText, int Checked, const CUIRect *pRect, float ButtonLineSize, bool Fake = false, const char *pImageName = nullptr, int Corners = IGraphics::CORNER_ALL, float Rounding = 5.0f, float FontFactor = 0.0f, ColorRGBA Color = ColorRGBA(1.0f, 1.0f, 1.0f, 0.5f));
 };
 #endif

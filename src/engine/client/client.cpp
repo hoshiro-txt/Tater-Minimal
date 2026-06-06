@@ -39,6 +39,7 @@
 #include <engine/shared/compression.h>
 #include <engine/shared/config.h>
 #include <engine/shared/fifo.h>
+#include <engine/shared/filecollection.h>
 #include <engine/shared/http.h>
 #include <engine/shared/masterserver.h>
 #include <engine/shared/network.h>
@@ -2630,7 +2631,8 @@ void CClient::PumpNetwork()
 
 void CClient::Update()
 {
-	PumpNetwork();\n\tif(State() == IClient::STATE_ONLINE)
+	PumpNetwork();
+	if(State() == IClient::STATE_ONLINE)
 	{
 		if(m_LastDummy != (bool)g_Config.m_ClDummy)
 		{
@@ -2845,7 +2847,7 @@ void CClient::Update()
 		}
 	}
 
-\n	// update the server browser
+	// update the server browser
 	m_ServerBrowser.Update();
 
 	// update editor/gameclient

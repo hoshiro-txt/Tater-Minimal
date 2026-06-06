@@ -174,6 +174,7 @@ void CMenus::RenderSettingsGeneral(CUIRect MainView)
 		RenderThemeSelection(Left);
 
 		Right.HSplitTop(10.0f, nullptr, &Right);
+		{
 			Right.HSplitTop(20.0f, &Button, &Right);
 			if(DoButton_CheckBox(&g_Config.m_ClAutoScreenshot, Localize("Automatically take game over screenshot"), g_Config.m_ClAutoScreenshot, &Button))
 				g_Config.m_ClAutoScreenshot ^= 1;
@@ -1460,8 +1461,7 @@ void CMenus::RenderSettings(CUIRect MainView)
 		Localize("DDNet"),
 		Localize("Assets"),
 		TCLocalize("TClient"),
-		Localize("Profiles"),
-		Localize("Configs")};
+		Localize("Profiles")};
 
 	static CButtonContainer s_aTabButtons[SETTINGS_LENGTH];
 
@@ -1535,11 +1535,6 @@ void CMenus::RenderSettings(CUIRect MainView)
 	{
 		GameClient()->m_MenuBackground.ChangePosition(14);
 		RenderSettingsTClientProfiles(MainView);
-	}
-	else if(g_Config.m_UiSettingsPage == SETTINGS_CONFIGS)
-	{
-		GameClient()->m_MenuBackground.ChangePosition(15);
-		RenderSettingsTClientConfigs(MainView);
 	}
 	else
 	{

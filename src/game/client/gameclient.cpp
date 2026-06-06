@@ -588,6 +588,7 @@ int CGameClient::OnSnapInput(int *pData, bool Dummy, bool Force)
 
 void CGameClient::OnConnected()
 {
+	const char *pConnectCaption = Localize("Connected");
 	const char *pLoadMapContent = Localize("Initializing map logic");
 	// render loading before skip is calculated
 	m_Menus.RenderLoading(Localize("Connected"), pLoadMapContent, 0);
@@ -670,8 +671,6 @@ void CGameClient::OnReset()
 	std::fill(std::begin(m_aExpectingTuningForZone), std::end(m_aExpectingTuningForZone), -1);
 	std::fill(std::begin(m_aExpectingTuningSince), std::end(m_aExpectingTuningSince), 0);
 	std::fill(std::begin(m_aTuning), std::end(m_aTuning), CTuningParams());
-
-	m_ActiveRecordings.reset();
 
 	for(auto &Client : m_aClients)
 		Client.Reset();
@@ -1350,6 +1349,265 @@ void CGameClient::RenderShutdownMessage()
 	Ui()->DoLabel(Ui()->Screen(), pMessage, 16.0f, TEXTALIGN_MC);
 	Graphics()->Swap();
 	Graphics()->Clear(0.0f, 0.0f, 0.0f);
+}
+
+void CGameClient::OnRconType(bool UsernameReq)
+{
+	m_GameConsole.RequireUsername(UsernameReq);
+}
+
+void CGameClient::OnRconLine(const char *pLine)
+{
+	m_GameConsole.PrintLine(CGameConsole::CONSOLETYPE_REMOTE, pLine);
+}
+
+void CGameClient::ProcessEvents()
+{
+	if(m_SuppressEvents)
+		return;
+
+	int SnapType = IClient::SNAP_CURRENT;
+	int Num = Client()->SnapNumItems(SnapType);
+	for(int Index = 0; Index < Num; Index++)
+	{
+		const IClient::CSnapItem Item = Client()->SnapGetItem(SnapType, Index);
+
+		const float Alpha = 1.0f;
+		const float Volume = 1.0f;
+
+		if(Item.m_Type == NETEVENTTYPE_DAMAGEIND)
+		{
+			const CNetEvent_DamageInd *pEvent = (const CNetEvent_DamageInd *)Item.m_pData;
+
+			vec2 DamageIndPos = vec2(pEvent->m_X, pEvent->m_Y);
+			if(!m_PredictedWorld.CheckPredictedEventHandled(CGameWorld::CPredictedEvent(Item.m_Type, DamageIndPos, -1, Client()->GameTick(g_Config.m_ClDummy), pEvent->m_Angle)))
+			{
+				m_Effects.DamageIndicator(vec2(pEvent->m_X, pEvent->m_Y), direction(pEvent->m_Angle / 256.0f), Alpha);
+			}
+		}
+		else if(Item.m_Type == NETEVENTTYPE_EXPLOSION)
+		{
+			const CNetEvent_Explosion *pEvent = (const CNetEvent_Explosion *)Item.m_pData;
+
+			vec2 ExplosionPos = vec2(pEvent->m_X, pEvent->m_Y);
+			if(!m_PredictedWorld.CheckPredictedEventHandled(CGameWorld::CPredictedEvent(Item.m_Type, ExplosionPos, -1, Client()->GameTick(g_Config.m_ClDummy))))
+			{
+				m_Effects.Explosion(ExplosionPos, Alpha);
+			}
+		}
+		else if(Item.m_Type == NETEVENTTYPE_HAMMERHIT)
+		{
+			const CNetEvent_HammerHit *pEvent = (const CNetEvent_HammerHit *)Item.m_pData;
+
+			vec2 HammerHitPos = vec2(pEvent->m_X, pEvent->m_Y);
+			if(!m_PredictedWorld.CheckPredictedEventHandled(CGameWorld::CPredictedEvent(Item.m_Type, HammerHitPos, -1, Client()->GameTick(g_Config.m_ClDummy))))
+			{
+				m_Effects.HammerHit(HammerHitPos, Alpha, Volume);
+			}
+		}
+		else if(Item.m_Type == NETEVENTTYPE_BIRTHDAY)
+		{
+			const CNetEvent_Birthday *pEvent = (const CNetEvent_Birthday *)Item.m_pData;
+			m_Effects.Confetti(vec2(pEvent->m_X, pEvent->m_Y), Alpha);
+		}
+		else if(Item.m_Type == NETEVENTTYPE_FINISH)
+		{
+			const CNetEvent_Finish *pEvent = (const CNetEvent_Finish *)Item.m_pData;
+			m_Effects.Confetti(vec2(pEvent->m_X, pEvent->m_Y), Alpha);
+		}
+		else if(Item.m_Type == NETEVENTTYPE_SPAWN)
+		{
+			const CNetEvent_Spawn *pEvent = (const CNetEvent_Spawn *)Item.m_pData;
+			m_Effects.PlayerSpawn(vec2(pEvent->m_X, pEvent->m_Y), Alpha, Volume);
+		}
+		else if(Item.m_Type == NETEVENTTYPE_DEATH)
+		{
+			const CNetEvent_Death *pEvent = (const CNetEvent_Death *)Item.m_pData;
+			m_Effects.PlayerDeath(vec2(pEvent->m_X, pEvent->m_Y), pEvent->m_ClientId, Alpha);
+		}
+		else if(Item.m_Type == NETEVENTTYPE_SOUNDWORLD)
+		{
+			const CNetEvent_SoundWorld *pEvent = (const CNetEvent_SoundWorld *)Item.m_pData;
+			if(!Config()->m_SndGame)
+				continue;
+
+			if(m_GameInfo.m_RaceSounds && ((pEvent->m_SoundId == SOUND_GUN_FIRE && !g_Config.m_SndGun) || (pEvent->m_SoundId == SOUND_PLAYER_PAIN_LONG && !g_Config.m_SndLongPain)))
+				continue;
+
+			vec2 SoundPos = vec2(pEvent->m_X, pEvent->m_Y);
+			if(!m_PredictedWorld.CheckPredictedEventHandled(CGameWorld::CPredictedEvent(Item.m_Type, SoundPos, -1, Client()->GameTick(g_Config.m_ClDummy), pEvent->m_SoundId)))
+			{
+				m_Sounds.PlayAt(CSounds::CHN_WORLD, pEvent->m_SoundId, 1.0f, SoundPos);
+			}
+		}
+		else if(Item.m_Type == NETEVENTTYPE_MAPSOUNDWORLD)
+		{
+			CNetEvent_MapSoundWorld *pEvent = (CNetEvent_MapSoundWorld *)Item.m_pData;
+			if(!Config()->m_SndGame)
+				continue;
+
+			m_MapSounds.PlayAt(CSounds::CHN_WORLD, pEvent->m_SoundId, vec2(pEvent->m_X, pEvent->m_Y));
+		}
+	}
+}
+
+static CGameInfo GetGameInfo(const CNetObj_GameInfoEx *pInfoEx, int InfoExSize, const CServerInfo *pFallbackServerInfo)
+{
+	int Version = -1;
+	if(InfoExSize >= 12)
+		Version = pInfoEx->m_Version;
+	else if(InfoExSize >= 8)
+		Version = minimum(pInfoEx->m_Version, 4);
+	else if(InfoExSize >= 4)
+		Version = 0;
+
+	int Flags = 0;
+	if(Version >= 0)
+		Flags = pInfoEx->m_Flags;
+	int Flags2 = 0;
+	if(Version >= 5)
+		Flags2 = pInfoEx->m_Flags2;
+
+	bool Race;
+	bool FastCap;
+	bool FNG;
+	bool DDRace;
+	bool DDNet;
+	bool BlockWorlds;
+	bool City;
+	bool Vanilla;
+	bool Plus;
+	bool FDDrace;
+	if(Version < 1)
+	{
+		const char *pGameType = pFallbackServerInfo->m_aGameType;
+		Race = str_find_nocase(pGameType, "race") || str_find_nocase(pGameType, "fastcap");
+		FastCap = str_find_nocase(pGameType, "fastcap");
+		FNG = str_find_nocase(pGameType, "fng");
+		DDRace = str_find_nocase(pGameType, "ddrace") || str_find_nocase(pGameType, "mkrace");
+		DDNet = str_find_nocase(pGameType, "ddracenet") || str_find_nocase(pGameType, "ddnet");
+		BlockWorlds = str_startswith(pGameType, "bw  ") || str_comp_nocase(pGameType, "bw") == 0;
+		City = str_find_nocase(pGameType, "city");
+		Vanilla = str_comp(pGameType, "DM") == 0 || str_comp(pGameType, "TDM") == 0 || str_comp(pGameType, "CTF") == 0;
+		Plus = str_find(pGameType, "+");
+		FDDrace = false;
+	}
+	else
+	{
+		Race = Flags & GAMEINFOFLAG_GAMETYPE_RACE;
+		FastCap = Flags & GAMEINFOFLAG_GAMETYPE_FASTCAP;
+		FNG = Flags & GAMEINFOFLAG_GAMETYPE_FNG;
+		DDRace = Flags & GAMEINFOFLAG_GAMETYPE_DDRACE;
+		DDNet = Flags & GAMEINFOFLAG_GAMETYPE_DDNET;
+		BlockWorlds = Flags & GAMEINFOFLAG_GAMETYPE_BLOCK_WORLDS;
+		Vanilla = Flags & GAMEINFOFLAG_GAMETYPE_VANILLA;
+		Plus = Flags & GAMEINFOFLAG_GAMETYPE_PLUS;
+		City = Version >= 5 && Flags2 & GAMEINFOFLAG2_GAMETYPE_CITY;
+		FDDrace = Version >= 6 && Flags2 & GAMEINFOFLAG2_GAMETYPE_FDDRACE;
+
+		DDRace = DDRace || DDNet || FDDrace;
+		Race = Race || FastCap || DDRace;
+	}
+
+	CGameInfo Info;
+	Info.m_FlagStartsRace = FastCap;
+	Info.m_TimeScore = Race;
+	Info.m_UnlimitedAmmo = Race;
+	Info.m_DDRaceRecordMessage = DDRace && !DDNet;
+	Info.m_RaceRecordMessage = DDNet || (Race && !DDRace);
+	Info.m_RaceSounds = DDRace || FNG || BlockWorlds;
+	Info.m_AllowEyeWheel = DDRace || BlockWorlds || City || Plus;
+	Info.m_AllowHookColl = DDRace;
+	Info.m_AllowZoom = Race || BlockWorlds || City;
+	Info.m_BugDDRaceGhost = DDRace;
+	Info.m_BugDDRaceInput = DDRace;
+	Info.m_BugFNGLaserRange = FNG;
+	Info.m_BugVanillaBounce = Vanilla;
+	Info.m_PredictFNG = FNG;
+	Info.m_PredictDDRace = DDRace;
+	Info.m_PredictDDRaceTiles = DDRace && !BlockWorlds;
+	Info.m_PredictVanilla = Vanilla || FastCap;
+	Info.m_EntitiesDDNet = DDNet;
+	Info.m_EntitiesDDRace = DDRace;
+	Info.m_EntitiesRace = Race;
+	Info.m_EntitiesFNG = FNG;
+	Info.m_EntitiesVanilla = Vanilla;
+	Info.m_EntitiesBW = BlockWorlds;
+	Info.m_EntitiesFDDrace = FDDrace;
+	Info.m_Race = Race;
+	Info.m_Pvp = !Race;
+	Info.m_DontMaskEntities = !DDNet;
+	Info.m_AllowXSkins = false;
+	Info.m_HudHealthArmor = true;
+	Info.m_HudAmmo = true;
+	Info.m_HudDDRace = false;
+	Info.m_NoWeakHookAndBounce = false;
+	Info.m_NoSkinChangeForFrozen = false;
+	Info.m_DDRaceTeam = false;
+	Info.m_PredictEvents = Vanilla;
+
+	if(Version >= 0)
+		Info.m_TimeScore = Flags & GAMEINFOFLAG_TIMESCORE;
+	if(Version >= 2)
+	{
+		Info.m_FlagStartsRace = Flags & GAMEINFOFLAG_FLAG_STARTS_RACE;
+		Info.m_UnlimitedAmmo = Flags & GAMEINFOFLAG_UNLIMITED_AMMO;
+		Info.m_DDRaceRecordMessage = Flags & GAMEINFOFLAG_DDRACE_RECORD_MESSAGE;
+		Info.m_RaceRecordMessage = Flags & GAMEINFOFLAG_RACE_RECORD_MESSAGE;
+		Info.m_AllowEyeWheel = Flags & GAMEINFOFLAG_ALLOW_EYE_WHEEL;
+		Info.m_AllowHookColl = Flags & GAMEINFOFLAG_ALLOW_HOOK_COLL;
+		Info.m_AllowZoom = Flags & GAMEINFOFLAG_ALLOW_ZOOM;
+		Info.m_BugDDRaceGhost = Flags & GAMEINFOFLAG_BUG_DDRACE_GHOST;
+		Info.m_BugDDRaceInput = Flags & GAMEINFOFLAG_BUG_DDRACE_INPUT;
+		Info.m_BugFNGLaserRange = Flags & GAMEINFOFLAG_BUG_FNG_LASER_RANGE;
+		Info.m_BugVanillaBounce = Flags & GAMEINFOFLAG_BUG_VANILLA_BOUNCE;
+		Info.m_PredictFNG = Flags & GAMEINFOFLAG_PREDICT_FNG;
+		Info.m_PredictDDRace = Flags & GAMEINFOFLAG_PREDICT_DDRACE;
+		Info.m_PredictDDRaceTiles = Flags & GAMEINFOFLAG_PREDICT_DDRACE_TILES;
+		Info.m_PredictVanilla = Flags & GAMEINFOFLAG_PREDICT_VANILLA;
+		Info.m_EntitiesDDNet = Flags & GAMEINFOFLAG_ENTITIES_DDNET;
+		Info.m_EntitiesDDRace = Flags & GAMEINFOFLAG_ENTITIES_DDRACE;
+		Info.m_EntitiesRace = Flags & GAMEINFOFLAG_ENTITIES_RACE;
+		Info.m_EntitiesFNG = Flags & GAMEINFOFLAG_ENTITIES_FNG;
+		Info.m_EntitiesVanilla = Flags & GAMEINFOFLAG_ENTITIES_VANILLA;
+	}
+	if(Version >= 3)
+	{
+		Info.m_Race = Flags & GAMEINFOFLAG_RACE;
+		Info.m_DontMaskEntities = Flags & GAMEINFOFLAG_DONT_MASK_ENTITIES;
+	}
+	if(Version >= 4)
+		Info.m_EntitiesBW = Flags & GAMEINFOFLAG_ENTITIES_BW;
+	if(Version >= 5)
+		Info.m_AllowXSkins = Flags2 & GAMEINFOFLAG2_ALLOW_X_SKINS;
+	if(Version >= 6)
+		Info.m_EntitiesFDDrace = Flags2 & GAMEINFOFLAG2_ENTITIES_FDDRACE;
+	if(Version >= 7)
+	{
+		Info.m_HudHealthArmor = Flags2 & GAMEINFOFLAG2_HUD_HEALTH_ARMOR;
+		Info.m_HudAmmo = Flags2 & GAMEINFOFLAG2_HUD_AMMO;
+		Info.m_HudDDRace = Flags2 & GAMEINFOFLAG2_HUD_DDRACE;
+	}
+	if(Version >= 8)
+		Info.m_NoWeakHookAndBounce = Flags2 & GAMEINFOFLAG2_NO_WEAK_HOOK;
+	if(Version >= 9)
+		Info.m_NoSkinChangeForFrozen = Flags2 & GAMEINFOFLAG2_NO_SKIN_CHANGE_FOR_FROZEN;
+	if(Version >= 10)
+		Info.m_DDRaceTeam = Flags2 & GAMEINFOFLAG2_DDRACE_TEAM;
+	if(Version >= 11)
+		Info.m_PredictEvents = Flags2 & GAMEINFOFLAG2_PREDICT_EVENTS;
+
+	str_copy(Info.m_aGameType, pFallbackServerInfo->m_aGameType);
+
+	return Info;
+}
+
+void CGameClient::InvalidateSnapshot()
+{
+	mem_zero(&m_Snap, sizeof(m_Snap));
+	m_Snap.m_SpecInfo.m_Zoom = 1.0f;
+	m_Snap.m_LocalClientId = -1;
+	SnapCollectEntities();
 }
 
 void CGameClient::OnNewSnapshot()
