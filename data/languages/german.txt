@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == Noch %ds
 
 %i minute left
@@ -490,9 +490,6 @@ Types
 Show kill messages
 == Kill-Nachrichten anzeigen
 
-Show ghost
-== Geist anzeigen
-
 No updates available
 == Keine neuen Versionen
 
@@ -546,9 +543,6 @@ Team message
 
 Are you sure that you want to disconnect?
 == Bist du sicher, dass du die Verbindung trennen möchtest?
-
-Ghost
-== Geist
 
 Check now
 == Aktualisieren
@@ -610,9 +604,6 @@ Connecting dummy
 Show clan above name plates
 == Clan über Spielernamen anzeigen
 
-Save ghost
-== Geist speichern
-
 Enable highlighted chat sound
 == Ton für Nachrichten an dich aktivieren
 
@@ -646,8 +637,6 @@ Reset
 Automatically create statboard csv
 == Automatisch Punktetafel-CSV erstellen
 
-Show tiles layers from BG map
-== Kachelebenen der Hintergrundkarte zeigen
 
 Remove chat
 == Chat entfernen
@@ -853,9 +842,6 @@ Hammerfly dummy
 Connect Dummy
 == Dummy verbinden
 
-Toggle ghost
-== Geist wechseln
-
 Statboard
 == Statstafel
 
@@ -971,8 +957,6 @@ Assets directory
 https://wiki.ddnet.org/
 == https://wiki.ddnet.org/wiki/Main_Page/de
 
-Use current map as background
-== Aktuelle Karte als Hintergrund benutzen
 
 Debug mode enabled. Press Ctrl+Shift+D to disable debug mode.
 == Debug-Modus aktiviert. Drück Strg+Shift+D, um den Debug-Modus zu deaktivieren.
@@ -1114,9 +1098,6 @@ Choose default eyes when joining a server
 
 Allows maps to render with more detail
 == Erlaubt es Karten mit mehr Detail zu rendern
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Wenn du die Startlinie überschreitest, wird ein Geist-Tee mit den Bewegungen deiner besten Zeit gezeigt
 
 Opacity
 == Deckkraft
@@ -1260,9 +1241,6 @@ Requesting to join the game
 
 Loading menu images
 == Lade Menü-Bilder
-
-Loading ghost files
-== Lade Geist-Dateien
 
 Loading skin files
 == Lade Skin-Dateien
@@ -1522,23 +1500,15 @@ Created
 Netversion
 == Netz-Version
 
-Ghosts directory
-== Geister-Ordner
-
 Activate all
 == Alle aktivieren
 
 Deactivate all
 == Alle deaktivieren
 
-Enable ghost
-== Geist aktivieren
-
 Only save improvements
 == Nur Verbesserungen speichern
 
-Regular background color
-== Normale Hintergrundfarbe
 
 Entities background color
 == Entitäten-Hintergrundfarbe

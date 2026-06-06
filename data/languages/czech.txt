@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == zbývá %ds
 
 %i minute left
@@ -484,9 +484,6 @@ Learn
 Browser
 == Prohlížeč
 
-Ghost
-== Duch
-
 Loading DDNet Client
 == Načítání DDNet Klienta
 
@@ -658,9 +655,6 @@ Toggle dyncam
 Toggle dummy
 == Přepnout dummyho
 
-Toggle ghost
-== Přepnout ducha
-
 Dummy copy
 == Dummy kopírovat
 
@@ -760,12 +754,6 @@ Default length
 Enable replays
 == Povolit záznamy
 
-Show ghost
-== Ukázat ducha
-
-Save ghost
-== Uložit ducha
-
 Gameplay
 == Hratelnost
 
@@ -796,8 +784,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Zobrazit čáru kolize háků ostatních hráčů
 
-Show tiles layers from BG map
-== Zobrazit vrstvy dlaždic z mapy BG
 
 DDNet %s is available:
 == DDNet %s je k dispozici:
@@ -946,8 +932,6 @@ Use old chat style
 Client message
 == Zpráva klienta
 
-Use current map as background
-== Použít aktuální mapu jako pozadí
 
 Entities
 == Entity
@@ -1325,12 +1309,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Loading…
 == Načítání…
 
-Loading ghost files
-== Načítání souborů duchů
-
-Ghosts directory
-== Adresář duchů
-
 Activate all
 == Aktivovat vše
 
@@ -1567,12 +1545,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Nastavit vše na Pušku
 
-Enable ghost
-== Povolit ducha
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Po překročení startovní čáry ukázat ducha, který kopíruje pohyby vašeho nejlepšího času
-
 Opacity
 == Neprůhlednost
 
@@ -1591,8 +1563,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Pozadí
 
-Regular background color
-== Běžná barva pozadí
 
 Entities background color
 == Barva pozadí entit

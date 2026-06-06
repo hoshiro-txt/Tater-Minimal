@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds rămase
 
 %i minute left
@@ -664,9 +664,6 @@ Main menu
 Browser
 == Browser
 
-Ghost
-== Fantomă
-
 Reconnect in %d sec
 == Reconectare în %d sec
 
@@ -1099,14 +1096,8 @@ Could not load touch controls from clipboard. See local console for details.
 Loading…
 == Se încarcă…
 
-Loading ghost files
-== Se încarcă fișierele fantomă
-
 Time
 == Timp
-
-Ghosts directory
-== Dosar fantome
 
 Activate all
 == Activează toate
@@ -1225,9 +1216,6 @@ Show all
 
 Toggle dyncam
 == Comutează camera dinamică
-
-Toggle ghost
-== Comutează fantoma
 
 Converse
 == Conversație
@@ -1591,20 +1579,8 @@ Enable replays
 Default length
 == Lungime implicită
 
-Enable ghost
-== Activează fantoma
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Când treci linia de start, arată un Tee fantomă care reproduce mișcările celui mai bun timp al tău
-
-Show ghost
-== Arată fantoma
-
 Opacity
 == Opacitate
-
-Save ghost
-== Salvează fantoma
 
 Only save improvements
 == Salvează doar îmbunătățirile
@@ -1645,17 +1621,11 @@ AntiPing: predict grenade paths
 Background
 == Fundal
 
-Regular background color
-== Culoare de fundal obișnuită
 
 Entities background color
 == Culoarea de fundal a entităților
 
-Use current map as background
-== Folosește harta curentă ca fundal
 
-Show tiles layers from BG map
-== Arată straturile de țigle din harta de fundal
 
 New random timeout code
 == Cod nou de timeout aleatoriu

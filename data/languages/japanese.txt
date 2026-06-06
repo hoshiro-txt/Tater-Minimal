@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == 残り %d 秒
 
 %i minute left
@@ -490,9 +490,6 @@ Reset
 Browser
 == サーバー
 
-Ghost
-== ゴースト
-
 Loading DDNet Client
 == DDNet Client 読み込み中
 
@@ -709,9 +706,6 @@ Toggle dyncam
 Toggle dummy
 == ダミー切り替え
 
-Toggle ghost
-== ゴースト切り替え
-
 Dummy copy
 == ダミーシンクロ
 
@@ -847,12 +841,6 @@ Default length
 Enable replays
 == リプレイ機能
 
-Show ghost
-== ゴーストを表示
-
-Save ghost
-== ゴーストを保存
-
 Gameplay
 == ゲーム
 
@@ -886,11 +874,7 @@ Show other players' hook collision lines
 Background
 == 背景
 
-Use current map as background
-== 現在のマップを背景にする
 
-Show tiles layers from BG map
-== 背景マップのタイル層を表示
 
 New random timeout code
 == ランダムにタイムアウト・コードを生成
@@ -1645,12 +1629,6 @@ maximum
 Loading…
 == 
 
-Loading ghost files
-== 
-
-Ghosts directory
-== 
-
 Activate all
 == 
 
@@ -2351,12 +2329,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
 Opacity
 == 
 
@@ -2378,8 +2350,6 @@ Tries to predict other entities to give a feel of low latency
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

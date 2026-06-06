@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == Pozostało %ds
 
 %i minute left
@@ -496,15 +496,6 @@ AntiPing: predict weapons
 AntiPing: predict grenade paths
 == AntyPing: Przewiduj lot granatów
 
-Ghost
-== Duszek
-
-Save ghost
-== Zapisuj duszka
-
-Show ghost
-== Pokazuj duszka
-
 Default zoom
 == Domyślny zoom
 
@@ -727,9 +718,6 @@ Time
 Learn
 == Wiki
 
-Toggle ghost
-== Przełącz duszka
-
 Replace video
 == Zamień wideo
 
@@ -766,8 +754,6 @@ Deaths
 Downloading %s:
 == Pobieranie %s:
 
-Show tiles layers from BG map
-== Pokazuj warstwy płytek razem z tłem mapy
 
 Max CSVs
 == Maksymalnie CSV
@@ -949,8 +935,6 @@ Use old chat style
 Client message
 == Wiadomość klienta
 
-Use current map as background
-== Użyj bieżącej mapy jako tło
 
 Entities
 == Entities
@@ -1075,9 +1059,6 @@ auto
 
 Preview
 == Podgląd
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Po przekroczeniu linii startu, pokaż duszka z Twoim najlepszym czasem
 
 Opacity
 == Przezroczystość
@@ -1375,12 +1356,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Loading…
 == Ładowanie…
 
-Loading ghost files
-== Ładowanie plików duszków
-
-Ghosts directory
-== Folder duszków
-
 Activate all
 == Aktywuj wszystkie
 
@@ -1581,14 +1556,9 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Ustaw wszystkie jako laser
 
-Enable ghost
-== Włącz duszka
-
 Only save improvements
 == Podmieniaj duszka z lepszym czasem
 
-Regular background color
-== Kolor tła regularny
 
 Entities background color
 == Kolor tła entities

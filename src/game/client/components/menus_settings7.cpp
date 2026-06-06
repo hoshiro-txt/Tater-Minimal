@@ -20,7 +20,6 @@
 
 #include <game/client/animstate.h>
 #include <game/client/components/chat.h>
-#include <game/client/components/menu_background.h>
 #include <game/client/components/sounds.h>
 #include <game/client/gameclient.h>
 #include <game/client/skin.h>

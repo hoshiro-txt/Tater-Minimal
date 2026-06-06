@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds restants
 
 %i minute left
@@ -496,9 +496,6 @@ Grabs
 Show kill messages
 == Mostrar missatges de mort
 
-Show ghost
-== Mostrar el fantasma
-
 DDNet
 == DDNet
 
@@ -553,17 +550,12 @@ Team message
 Automatically create statboard csv
 == Crear un fitxer csv d'estadístiques automàticament
 
-Show tiles layers from BG map
-== Mostrar les capes de rajoles del mapa de fons
 
 Are you sure that you want to disconnect?
 == Estàs segur que et vols desconnectar?
 
 Types
 == Tipus
-
-Ghost
-== Fantasma
 
 Remove chat
 == Eliminar el xat
@@ -657,9 +649,6 @@ Update now
 
 Show clan above name plates
 == Mostrar el clan a dalt dels noms
-
-Save ghost
-== Guardar el fantasma
 
 Exclude
 == Excloure
@@ -813,9 +802,6 @@ Toggle dyncam
 
 Toggle dummy
 == Commutar dummy
-
-Toggle ghost
-== Commutar fantasma
 
 Dummy copy
 == Dummy copia
@@ -982,8 +968,6 @@ Preview
 Background
 == Fons
 
-Use current map as background
-== Utilitzar el mapa actual com a fons
 
 Entities
 == Entitats
@@ -1649,12 +1633,6 @@ maximum
 == 
 
 Loading…
-== 
-
-Loading ghost files
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2336,12 +2314,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
 Opacity
 == 
 
@@ -2363,8 +2335,6 @@ Tries to predict other entities to give a feel of low latency
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

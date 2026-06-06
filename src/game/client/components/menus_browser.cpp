@@ -1864,10 +1864,8 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 	switch(g_Config.m_UiPage)
 	{
 	case PAGE_INTERNET:
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_BROWSER_INTERNET);
 		break;
 	case PAGE_LAN:
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_BROWSER_LAN);
 		if(m_ForceRefreshLanPage)
 		{
 			RefreshBrowserTab(true);
@@ -1875,14 +1873,12 @@ void CMenus::RenderServerbrowser(CUIRect MainView)
 		}
 		break;
 	case PAGE_FAVORITES:
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_BROWSER_FAVORITES);
 		break;
 	case PAGE_FAVORITE_COMMUNITY_1:
 	case PAGE_FAVORITE_COMMUNITY_2:
 	case PAGE_FAVORITE_COMMUNITY_3:
 	case PAGE_FAVORITE_COMMUNITY_4:
 	case PAGE_FAVORITE_COMMUNITY_5:
-		GameClient()->m_MenuBackground.ChangePosition(g_Config.m_UiPage - PAGE_FAVORITE_COMMUNITY_1 + CMenuBackground::POS_BROWSER_CUSTOM0);
 		break;
 	default:
 		dbg_assert_failed("ui_page invalid for RenderServerbrowser: %d", g_Config.m_UiPage);

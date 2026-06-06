@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds je preostalo
 
 %i minute left
@@ -508,9 +508,6 @@ Personal best:
 Browser
 == Pregledač
 
-Ghost
-== Duh
-
 Loading DDNet Client
 == Učitavam DDNet klijent
 
@@ -697,9 +694,6 @@ Toggle dyncam
 Toggle dummy
 == Prebaci na kopiju
 
-Toggle ghost
-== Prebaci na duha
-
 Dummy copy
 == Zajed. kret. kopije
 
@@ -799,12 +793,6 @@ Default length
 Enable replays
 == Omogući ponovljene reprodukcije
 
-Show ghost
-== Prikaži duha
-
-Save ghost
-== Sačivaj duha
-
 Gameplay
 == Igra
 
@@ -832,8 +820,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Prikaži liniju sudara kuke drugih igrača
 
-Show tiles layers from BG map
-== Prikaži slojeve pločica sa BG mape
 
 DDNet %s is available:
 == DDNet %s je dostupan:
@@ -1061,9 +1047,6 @@ Getting server list from master server
 Leak IP
 == Provali adresu
 
-Loading ghost files
-== Učitavanje duhova
-
 Smooth Dynamic Camera
 == Glatka Dinamična Kamera
 
@@ -1225,9 +1208,6 @@ Normal Color
 Highlight Color
 == Istaknuta Boja
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Kada kreneš da se trkaš, prikaži tvog najbržeg duha
-
 Opacity
 == Providnost
 
@@ -1243,8 +1223,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Pozadina
 
-Use current map as background
-== Koristi ovu mapu kao pozadinu
 
 Run on join
 == Uradi kada uđeš
@@ -1857,9 +1835,6 @@ maximum
 Loading…
 == 
 
-Ghosts directory
-== 
-
 Activate all
 == 
 
@@ -2425,9 +2400,6 @@ Dragger Outline Color
 Dragger Inner Color
 == 
 
-Enable ghost
-== 
-
 Only save improvements
 == 
 
@@ -2437,8 +2409,6 @@ Show background quads
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

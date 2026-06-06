@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds qaldı
 
 %i minute left
@@ -481,9 +481,6 @@ Learn
 Browser
 == Serverlər
 
-Ghost
-== Ruh
-
 Loading DDNet Client
 == DDNet Klient Yüklənir
 
@@ -670,9 +667,6 @@ Toggle dyncam
 Toggle dummy
 == Dummyden istifadə edin
 
-Toggle ghost
-== Ruhu göstər
-
 Dummy copy
 == Dummy kopya
 
@@ -775,12 +769,6 @@ Default length
 Enable replays
 == Təkrarları aktivləşdirin
 
-Show ghost
-== Ruhu göstər
-
-Save ghost
-== Ruhu xilas et
-
 Gameplay
 == Oyunda
 
@@ -811,8 +799,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Show other players' hook collision lines
 
-Show tiles layers from BG map
-== Show tiles layers from BG map
 
 DDNet %s is available:
 == DDNet %s Nəşr olundu:
@@ -1147,9 +1133,6 @@ Delete folder
 Unable to delete the folder '%s'. Make sure it's empty first.
 == '%s' qovluğu silinə bilmədi. Əvvəlcə boş olduğundan əmin olun.
 
-Loading ghost files
-== Ruh faylların yüklənməsi
-
 Menu opened. Press Esc key again to close menu.
 == Menyu açıqdır. Menyuyu yenidən bağlamaq üçün Esc klavişini sıxın.
 
@@ -1398,9 +1381,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Hamısını tüfəngə quraşdır
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Başlanğıc xəttini keçdiyiniz zaman ən yaxşı vaxtınızın hərəkətlərini kopyalayan bir kabus tee göstər
-
 Opacity
 == Şəffaflıq
 
@@ -1416,8 +1396,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Arxa fon
 
-Use current map as background
-== Cari xəritəni fon kimi istifadə edin
 
 Run on join
 == Qoşulduqda çalışdır
@@ -1588,9 +1566,6 @@ Created
 Loading…
 == Yüklənir…
 
-Ghosts directory
-== Ruh kataloqu
-
 Activate all
 == Tümünü etkinleştir
 
@@ -1618,14 +1593,9 @@ Same clan color in scoreboard
 Show finish messages
 == Bitirmə mesajlarını göstərin
 
-Enable ghost
-== Ruhu aktivləşdirin
-
 Only save improvements
 == Sadəcə təkmilləşdirmələri saxlayın
 
-Regular background color
-== Normal fon rəngi
 
 Entities background color
 == Struktur fon rəngi

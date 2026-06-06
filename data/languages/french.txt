@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds restantes
 
 %i minute left
@@ -523,9 +523,6 @@ Vanilla skins only
 DDNet %s is out!
 == DDNet %s est disponible!
 
-Show ghost
-== Afficher le fantôme
-
 Friend message
 == Message d'ami
 
@@ -576,9 +573,6 @@ Show text entities
 
 Connecting dummy
 == Connexion du dummy
-
-Save ghost
-== Sauvegarder le fantôme
 
 Game paused
 == Jeu en pause
@@ -694,9 +688,6 @@ Downloading %s:
 Toggle dyncam
 == Activer la dyncam
 
-Toggle ghost
-== Activer le fantôme
-
 Enable highlighted chat sound
 == Activer les sons du chat en surbrillance
 
@@ -760,9 +751,6 @@ Loading DDNet Client
 Zoom in
 == Zoomer
 
-Ghost
-== Fantôme
-
 Show kill messages
 == Afficher les messages d'élimination
 
@@ -781,8 +769,6 @@ Show score
 Replace video
 == Remplacer la vidéo
 
-Show tiles layers from BG map
-== Utiliser les tuiles de la carte de fond
 
 Show votes window after voting
 == Afficher la fenêtre de vote après avoir voté
@@ -913,8 +899,6 @@ Client message
 Show others (own team only)
 == Montrer les autres (de sa propre équipe uniquement)
 
-Use current map as background
-== Utiliser la carte actuelle en tant qu'arrière-plan
 
 Entities
 == Entités
@@ -1091,9 +1075,6 @@ custom
 auto
 == Automatique
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Lorsque vous franchissez la ligne de départ, montre un fantôme reproduisant les mouvements de votre meilleur temps
-
 Opacity
 == Opacité
 
@@ -1266,9 +1247,6 @@ Uploading map data to GPU
 
 Loading menu images
 == Chargement des images de menu
-
-Loading ghost files
-== Chargement des fichiers de fantôme
 
 Name Plate
 == Plaque de nom
@@ -1588,9 +1566,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Loading…
 == Chargement…
 
-Ghosts directory
-== Dossier des fantômes
-
 Activate all
 == Tout activer
 
@@ -1651,14 +1626,9 @@ Always show other players' hook collision lines
 Show finish messages
 == Afficher les messages de fin de course
 
-Enable ghost
-== Activer le fantôme
-
 Only save improvements
 == Enregistrer uniquement les améliorations
 
-Regular background color
-== Couleur de fond
 
 Entities background color
 == Couleur de fond des entités

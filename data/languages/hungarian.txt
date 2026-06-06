@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds van hátra
 
 %i minute left
@@ -469,9 +469,6 @@ Grabs
 Show kill messages
 == Halálüzenetek mutatása
 
-Show ghost
-== Szellem mutatása
-
 DDNet
 == DDNet
 
@@ -544,17 +541,12 @@ Team message
 Automatically create statboard csv
 == Magától készítsen CSV pontszámtáblát
 
-Show tiles layers from BG map
-== Blokkok mutatása a háttérben
 
 Are you sure that you want to disconnect?
 == Biztos, hogy le akarsz csatlakozni?
 
 Types
 == Típusok
-
-Ghost
-== Szellem
 
 Remove chat
 == Chat eltüntetése
@@ -657,9 +649,6 @@ Update now
 
 Show clan above name plates
 == Klán mutatása a nevek fölött
-
-Save ghost
-== Szellem mentése
 
 Exclude
 == Kizárás
@@ -844,9 +833,6 @@ Lock team
 Hook collisions
 == Horog pontossága
 
-Toggle ghost
-== Szellem mutatása
-
 Markers
 == Jelölések
 
@@ -937,8 +923,6 @@ Client message
 Show others (own team only)
 == Mások mutatása (csak csapatok)
 
-Use current map as background
-== Jelenlegi map használta háttérként
 
 Entities
 == Entitások
@@ -1088,9 +1072,6 @@ custom
 auto
 == automatikus
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Amikor elkezdesz egy versenyt, rekordjaid alapján replikál egy szellemet, ami a legjobb időd alapján mozdul.
-
 Opacity
 == Átlátszóság
 
@@ -1224,9 +1205,6 @@ Requesting to join the game
 
 Loading menu images
 == Menü képek betöltése
-
-Loading ghost files
-== Szellem fájlok betöltése
 
 Loading skin files
 == Karakter fájlok betöltése
@@ -1848,9 +1826,6 @@ maximum
 Loading…
 == 
 
-Ghosts directory
-== 
-
 Activate all
 == 
 
@@ -2419,9 +2394,6 @@ Dragger Outline Color
 Dragger Inner Color
 == 
 
-Enable ghost
-== 
-
 Only save improvements
 == 
 
@@ -2431,8 +2403,6 @@ Show background quads
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

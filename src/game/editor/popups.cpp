@@ -3007,15 +3007,6 @@ CUi::EPopupMenuFunctionResult CEditor::PopupProofMode(void *pContext, CUIRect Vi
 		return CUi::POPUP_CLOSE_CURRENT;
 	}
 
-	View.HSplitTop(2.0f, nullptr, &View);
-	View.HSplitTop(12.0f, &Button, &View);
-	static int s_ButtonMenu;
-	if(pEditor->DoButton_MenuItem(&s_ButtonMenu, "Menu", pEditor->MapView()->ProofMode()->IsModeMenu(), &Button, BUTTONFLAG_LEFT, "These borders represent what will be shown in the menu."))
-	{
-		pEditor->MapView()->ProofMode()->SetModeMenu();
-		return CUi::POPUP_CLOSE_CURRENT;
-	}
-
 	return CUi::POPUP_KEEP_OPEN;
 }
 

@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == Još %ds
 
 %i minute left
@@ -484,9 +484,6 @@ Learn
 Browser
 == Pretraživač
 
-Ghost
-== Duh
-
 Loading DDNet Client
 == Učitavanje DDNet Klijenta
 
@@ -661,9 +658,6 @@ Toggle dyncam
 Toggle dummy
 == Promijeni dummy-a
 
-Toggle ghost
-== Promijeni duha
-
 Dummy copy
 == Dummy kopiranje
 
@@ -760,12 +754,6 @@ Default length
 Enable replays
 == Omogući replay
 
-Show ghost
-== Prikaži duha
-
-Save ghost
-== Sačuvaj duha
-
 Gameplay
 == Igra
 
@@ -790,8 +778,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Prikaži linije sudaranja lanca od ostalih igrača
 
-Show tiles layers from BG map
-== Prikaži slojeve od pozadinske mape
 
 DDNet %s is available:
 == DDNet %s je dostupan:
@@ -1492,12 +1478,6 @@ maximum
 == 
 
 Loading…
-== 
-
-Loading ghost files
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2260,12 +2240,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
 Opacity
 == 
 
@@ -2296,14 +2270,10 @@ AntiPing: prediction margin
 Background
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 
 
-Use current map as background
-== 
 
 Run on join
 == 

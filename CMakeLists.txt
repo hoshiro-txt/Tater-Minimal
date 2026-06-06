@@ -1711,8 +1711,6 @@ set(EXPECTED_DATA
   skins/dragon.png
   skins/evil.png
   skins/evilwolfe.png
-  skins/ghost.png
-  skins/ghostjtj.png
   skins/giraffe.png
   skins/glow_mermyfox.png
   skins/greensward.png
@@ -2191,7 +2189,6 @@ set_src(ENGINE_INTERFACE GLOB src/engine
   favorites.h
   font_icons.h
   friends.h
-  ghost.h
   graphics.cpp
   graphics.h
   http.h
@@ -2469,8 +2466,6 @@ if(CLIENT)
     favorites.cpp
     friends.cpp
     friends.h
-    ghost.cpp
-    ghost.h
     graph.cpp
     graph.h
     graphics_defines.h
@@ -2508,8 +2503,6 @@ if(CLIENT)
     animstate.h
     component.cpp
     component.h
-    components/background.cpp
-    components/background.h
     components/binds.cpp
     components/binds.h
     components/broadcast.cpp
@@ -2542,8 +2535,6 @@ if(CLIENT)
     components/flow.h
     components/freezebars.cpp
     components/freezebars.h
-    components/ghost.cpp
-    components/ghost.h
     components/hud.cpp
     components/hud.h
     components/important_alert.cpp
@@ -2562,8 +2553,6 @@ if(CLIENT)
     components/maplayers.h
     components/mapsounds.cpp
     components/mapsounds.h
-    components/menu_background.cpp
-    components/menu_background.h
     components/menus.cpp
     components/menus.h
     components/menus_browser.cpp

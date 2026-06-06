@@ -30,7 +30,6 @@
 #include <game/client/components/binds.h>
 #include <game/client/components/console.h>
 #include <game/client/components/key_binder.h>
-#include <game/client/components/menu_background.h>
 #include <game/client/components/sounds.h>
 #include <game/client/gameclient.h>
 #include <game/client/ui_listbox.h>
@@ -685,14 +684,6 @@ void CMenus::RenderMenubar(CUIRect Box, IClient::EClientState ClientState)
 		if(DoButton_MenuTab(&s_NetworkButton, Localize("Browser"), ActivePage == PAGE_NETWORK, &Button, IGraphics::CORNER_NONE))
 			NewPage = PAGE_NETWORK;
 
-		if(GameClient()->m_GameInfo.m_Race)
-		{
-			Box.VSplitLeft(90.0f, &Button, &Box);
-			static CButtonContainer s_GhostButton;
-			if(DoButton_MenuTab(&s_GhostButton, Localize("Ghost"), ActivePage == PAGE_GHOST, &Button, IGraphics::CORNER_NONE))
-				NewPage = PAGE_GHOST;
-		}
-
 		Box.VSplitLeft(100.0f, &Button, &Box);
 		Box.VSplitLeft(4.0f, nullptr, &Box);
 		static CButtonContainer s_CallVoteButton;
@@ -744,17 +735,7 @@ void CMenus::RenderLoading(const char *pCaption, const char *pContent, int Incre
 
 	Ui()->MapScreen();
 
-	if(GameClient()->m_MenuBackground.IsLoading())
-	{
-		// Avoid rendering while loading the menu background as this would otherwise
-		// cause the regular menu background to be rendered for a few frames while
-		// the menu background is not loaded yet.
-		return;
-	}
-	if(!GameClient()->m_MenuBackground.Render())
-	{
-		RenderBackground();
-	}
+	RenderBackground();
 
 	m_LoadingState.m_LastRender = Now;
 
@@ -796,8 +777,6 @@ void CMenus::FinishLoading()
 
 void CMenus::RenderNews(CUIRect MainView)
 {
-	GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_NEWS);
-
 	g_Config.m_UiUnreadNews = false;
 
 	MainView.Draw(ms_ColorTabbarActive, IGraphics::CORNER_B, 10.0f);
@@ -875,7 +854,6 @@ void CMenus::OnInit()
 
 	Console()->Chain("snd_enable", ConchainUpdateMusicState, this);
 	Console()->Chain("snd_enable_music", ConchainUpdateMusicState, this);
-	Console()->Chain("cl_background_entities", ConchainBackgroundEntities, this);
 
 	Console()->Chain("cl_assets_entities", ConchainAssetsEntities, this);
 	Console()->Chain("cl_asset_game", ConchainAssetGame, this);
@@ -904,17 +882,6 @@ void CMenus::OnInit()
 	m_DirectionQuadContainerIndex = Graphics()->CreateQuadContainer(false);
 	Graphics()->QuadContainerAddSprite(m_DirectionQuadContainerIndex, 0.f, 0.f, 22.f);
 	Graphics()->QuadContainerUpload(m_DirectionQuadContainerIndex);
-}
-
-void CMenus::ConchainBackgroundEntities(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
-{
-	pfnCallback(pResult, pCallbackUserData);
-	if(pResult->NumArguments())
-	{
-		CMenus *pSelf = (CMenus *)pUserData;
-		if(str_comp(g_Config.m_ClBackgroundEntities, pSelf->GameClient()->m_Background.MapName()) != 0)
-			pSelf->GameClient()->m_Background.LoadBackground();
-	}
 }
 
 void CMenus::ConchainUpdateMusicState(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
@@ -1049,10 +1016,7 @@ void CMenus::Render()
 	}
 	else
 	{
-		if(!GameClient()->m_MenuBackground.Render())
-		{
-			RenderBackground();
-		}
+		RenderBackground();
 		ms_ColorTabbarInactive = ms_ColorTabbarInactiveOutgame;
 		ms_ColorTabbarActive = ms_ColorTabbarActiveOutgame;
 		ms_ColorTabbarHover = ms_ColorTabbarHoverOutgame;
@@ -1068,7 +1032,7 @@ void CMenus::Render()
 	{
 	case IClient::STATE_QUITTING:
 	case IClient::STATE_RESTARTING:
-		// Render nothing except menu background. This should not happen for more than one frame.
+		// Render nothing while the client is leaving this state.
 		return;
 
 	case IClient::STATE_CONNECTING:
@@ -1140,10 +1104,6 @@ void CMenus::Render()
 			else if(m_GamePage == PAGE_NETWORK)
 			{
 				RenderInGameNetwork(MainView);
-			}
-			else if(m_GamePage == PAGE_GHOST)
-			{
-				RenderGhost(MainView);
 			}
 			else if(m_GamePage == PAGE_CALLVOTE)
 			{
@@ -2007,78 +1967,6 @@ void CMenus::RenderPopupLoading(CUIRect Screen)
 		Client()->Disconnect();
 		Ui()->SetActiveItem(nullptr);
 		RefreshBrowserTab(true);
-	}
-}
-
-void CMenus::RenderThemeSelection(CUIRect MainView)
-{
-	const std::vector<CTheme> &vThemes = GameClient()->m_MenuBackground.GetThemes();
-
-	int SelectedTheme = -1;
-	for(int i = 0; i < (int)vThemes.size(); i++)
-	{
-		if(str_comp(vThemes[i].m_Name.c_str(), g_Config.m_ClMenuMap) == 0)
-		{
-			SelectedTheme = i;
-			break;
-		}
-	}
-	const int OldSelected = SelectedTheme;
-
-	static CListBox s_ListBox;
-	s_ListBox.DoHeader(&MainView, Localize("Theme"), 20.0f);
-	s_ListBox.DoStart(20.0f, vThemes.size(), 1, 3, SelectedTheme);
-
-	for(int i = 0; i < (int)vThemes.size(); i++)
-	{
-		const CTheme &Theme = vThemes[i];
-		const CListboxItem Item = s_ListBox.DoNextItem(&Theme.m_Name, i == SelectedTheme);
-
-		if(!Item.m_Visible)
-			continue;
-
-		CUIRect Icon, Label;
-		Item.m_Rect.VSplitLeft(Item.m_Rect.h * 2.0f, &Icon, &Label);
-
-		// draw icon if it exists
-		if(Theme.m_IconTexture.IsValid())
-		{
-			Icon.VMargin(6.0f, &Icon);
-			Icon.HMargin(3.0f, &Icon);
-			Graphics()->TextureSet(Theme.m_IconTexture);
-			Graphics()->QuadsBegin();
-			Graphics()->SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-			IGraphics::CQuadItem QuadItem(Icon.x, Icon.y, Icon.w, Icon.h);
-			Graphics()->QuadsDrawTL(&QuadItem, 1);
-			Graphics()->QuadsEnd();
-		}
-
-		char aName[128];
-		if(Theme.m_Name.empty())
-			str_copy(aName, "(none)");
-		else if(str_comp(Theme.m_Name.c_str(), "auto") == 0)
-			str_copy(aName, "(seasons)");
-		else if(str_comp(Theme.m_Name.c_str(), "rand") == 0)
-			str_copy(aName, "(random)");
-		else if(Theme.m_HasDay && Theme.m_HasNight)
-			str_copy(aName, Theme.m_Name.c_str());
-		else if(Theme.m_HasDay && !Theme.m_HasNight)
-			str_format(aName, sizeof(aName), "%s (day)", Theme.m_Name.c_str());
-		else if(!Theme.m_HasDay && Theme.m_HasNight)
-			str_format(aName, sizeof(aName), "%s (night)", Theme.m_Name.c_str());
-		else // generic
-			str_copy(aName, Theme.m_Name.c_str());
-
-		Ui()->DoLabel(&Label, aName, 16.0f * CUi::ms_FontmodHeight, TEXTALIGN_ML);
-	}
-
-	SelectedTheme = s_ListBox.DoEnd();
-
-	if(OldSelected != SelectedTheme)
-	{
-		const CTheme &Theme = vThemes[SelectedTheme];
-		str_copy(g_Config.m_ClMenuMap, Theme.m_Name.c_str());
-		GameClient()->m_MenuBackground.LoadMenuBackground(Theme.m_HasDay, Theme.m_HasNight);
 	}
 }
 

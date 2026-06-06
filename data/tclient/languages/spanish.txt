@@ -311,26 +311,11 @@ Unfreeze outline color
 Kill outline color
 == Color de borde de muerte
 
-Ghost Tools
-== Herramientas de fantasma
-
-Show unpredicted ghosts for other players
-== Mostrar fantasmas sin predecir de otros jugadores
-
-Swap ghosts and normal players
-== Intercambiar fantasmas y jugadores
-
 Predicted alpha
 == Opacidad predicha
 
 Unpredicted alpha
 == Opacidad no predicha
-
-Hide ghosts of frozen players
-== Ocultar fantasmas de jugadores congelados
-
-Render ghosts as circles
-== Mostrar fantasmas como círculos
 
 Rainbow
 == Arcoíris
@@ -812,9 +797,6 @@ Kill
 == 
 
 Tele
-== 
-
-Toggle ghosts key
 == 
 
 Background Draw

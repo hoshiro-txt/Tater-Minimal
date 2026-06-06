@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %d sekunder kvar
 
 %i minute left
@@ -478,8 +478,6 @@ Default zoom
 Dummy copy
 == Dummy kopiering
 
-Show tiles layers from BG map
-== Visa tiles lager från BG bana
 
 Statboard
 == Poänglista
@@ -522,9 +520,6 @@ Reconnect in %d sec
 
 Successfully saved the replay!
 == Lyckades med att spara repris!
-
-Save ghost
-== Spara spöken
 
 Browser
 == Bläddraren
@@ -585,9 +580,6 @@ Are you sure that you want to disconnect?
 
 Grabs
 == Grabs
-
-Ghost
-== Spöke
 
 Zoom out
 == Zooma ut
@@ -660,9 +652,6 @@ AntiPing: predict other players
 
 Show text entities
 == Visa text entities
-
-Show ghost
-== Visa spöke
 
 1 new mention
 == 1 ny nämning
@@ -846,9 +835,6 @@ Show names in chat in team colors
 
 Update now
 == Uppdatera nu
-
-Toggle ghost
-== Växla spöke
 
 Team message
 == Lag meddelande
@@ -1037,8 +1023,6 @@ Preview
 Background
 == Bakgrund
 
-Use current map as background
-== Använd nuvarande bana som bakgrund
 
 Run on join
 == Kör på join
@@ -1259,9 +1243,6 @@ Delete folder
 Unable to delete the folder '%s'. Make sure it's empty first.
 == Misslyckades att ta bort mappen '%s'. Den måste vara tom först.
 
-Loading ghost files
-== Laddar spök filer
-
 Menu opened. Press Esc key again to close menu.
 == Meny öppnad. Klicka Esc igen för att stänga menyn.
 
@@ -1447,9 +1428,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Sätt alla till Gevär
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== När du passera start linjen, visa en spök tee som visar rörelsen av din bästa tid
-
 Opacity
 == Opacitet
 
@@ -1522,23 +1500,15 @@ Created
 Netversion
 == Netversion
 
-Ghosts directory
-== Spök mapp
-
 Activate all
 == Aktivera alla
 
 Deactivate all
 == Deaktivera alla
 
-Enable ghost
-== Aktivera spöken
-
 Only save improvements
 == Spara bara förbättringar
 
-Regular background color
-== Vanlig bakgrunds färg
 
 Entities background color
 == Entities bakgrunds färg

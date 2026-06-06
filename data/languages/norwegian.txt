@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %d sekunder igjen
 
 %i minute left
@@ -484,9 +484,6 @@ Learn
 Browser
 == Servere
 
-Ghost
-== Skygge
-
 Loading DDNet Client
 == Laster DDNet-klient
 
@@ -667,9 +664,6 @@ Toggle dyncam
 Toggle dummy
 == Bytt dummy
 
-Toggle ghost
-== Skygge av/på
-
 Dummy copy
 == Dummy-kopi
 
@@ -769,12 +763,6 @@ Default length
 Enable replays
 == Aktiver opptak
 
-Show ghost
-== Vis skygge
-
-Save ghost
-== Lagre skygge
-
 Gameplay
 == Spillet
 
@@ -805,8 +793,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Vis andre spilleres krok-siktelinje
 
-Show tiles layers from BG map
-== Vis tile-lag fra BG-bane
 
 DDNet %s is available:
 == DDNet %s er tilgjengelig:
@@ -949,8 +935,6 @@ Use old chat style
 Client message
 == Klientmelding
 
-Use current map as background
-== Bruk nåværende bane som bakgrunn
 
 Entities
 == Entities
@@ -1592,12 +1576,6 @@ maximum
 == 
 
 Loading…
-== 
-
-Loading ghost files
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2315,12 +2293,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
 Opacity
 == 
 
@@ -2345,8 +2317,6 @@ AntiPing: prediction margin
 Background
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

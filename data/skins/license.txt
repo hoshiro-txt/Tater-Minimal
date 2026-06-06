@@ -4,7 +4,7 @@ warpaint:
 Copyright Magnus Auvinen
 zlib license
 
-antiantey, beast, chinese_by_whis, dino, evil, evilwolfe, ghostjtj, ghost,
+antiantey, beast, chinese_by_whis, dino, evil, evilwolfe,
 giraffe, greensward, greyfox, hammie-chew, hammie-whis, jeet, kintaro_2,
 mermydon-coala, mermydon, mouse, musmann, nanami, oldman, oldschool, PaladiN,
 penguin, random, veteran, voodoo_tee, whis:

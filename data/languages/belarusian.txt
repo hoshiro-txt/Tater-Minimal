@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == засталося %d сек.
 
 %i minute left
@@ -551,9 +551,6 @@ Reset
 Browser
 == Браўзэр
 
-Ghost
-== Прывід
-
 Trying to determine UDP connectivity…
 == Спроба вызначыць UDP падлучэнне…
 
@@ -767,9 +764,6 @@ Kill
 Pause
 == Паўза
 
-Loading ghost files
-== Загрузка файлаў прывідаў
-
 Time
 == Час
 
@@ -880,9 +874,6 @@ Toggle dyncam
 
 Toggle dummy
 == Пераключыць даммі
-
-Toggle ghost
-== Пераключыць прывід
 
 Dummy copy
 == Даммі капіруе
@@ -1183,15 +1174,6 @@ Enable replays
 Default length
 == Станд. працягласць
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Пры перасячэнні стартавай лініі, паказваць прывід Tee, які паўтарае ваш лепшы час
-
-Show ghost
-== Паказваць прывід
-
-Save ghost
-== Захоўваць прывід
-
 Gameplay
 == Гульнявы працэс
 
@@ -1234,11 +1216,7 @@ AntiPing: predict grenade paths
 Background
 == Фон
 
-Use current map as background
-== Выкарыстоўваць бягучую карту як фон
 
-Show tiles layers from BG map
-== Таксама выкарыстоўваць фонавыя тэкстуры карты
 
 New random timeout code
 == Новы выпадковы таймаўт код
@@ -1509,23 +1487,15 @@ Created
 Netversion
 == Сеткавая версія
 
-Ghosts directory
-== Тэчка прывідаў
-
 Activate all
 == Актываваць усе
 
 Deactivate all
 == Дэактываваць усе
 
-Enable ghost
-== Уключыць прывід
-
 Only save improvements
 == Захоўваць толькі паляпшэнні
 
-Regular background color
-== Колер звычайнага фону
 
 Entities background color
 == Колер фону энтыты

@@ -12,8 +12,6 @@
 
 class CCamera : public CComponent
 {
-	friend class CMenuBackground;
-
 public:
 	enum
 	{

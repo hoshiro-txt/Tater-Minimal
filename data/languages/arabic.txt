@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == ﺖﻀﻣ %ds
 
 %i minute left
@@ -481,9 +481,6 @@ Types
 Show kill messages
 == ﻞﺘﻘﻟﺍ ﻞﺋﺎﺳﺭ ﺭﺎﻬﻇﺍ
 
-Show ghost
-== ﺢﺒﺸﻟﺍ ﺭﺎﻬﻇﺍ
-
 No updates available
 == ﺕﺎﺜﻳﺪﺤﺗ ﺪﺟﻮﻳﻻ
 
@@ -534,9 +531,6 @@ Team message
 
 Are you sure that you want to disconnect?
 == ﺝﻭﺮﺨﻟﺍ ﺪﻳﺮﺗ ﻚﻧﺎﺑ ﺪﻛﺂﺘﻣ ﺖﻧﺍ ﻞﻫ
-
-Ghost
-== ﺢﺒﺸﻟﺍ
 
 Check now
 == ﻥﻻﺍ ﺪﻛﺄﺗ
@@ -595,9 +589,6 @@ Connecting dummy
 Show clan above name plates
 == ﻢﻬﻴﻣﺎﺳﺍ ﻕﻮﻓ ﻥﻼﻜﻟﺍ ﺭﺎﻬﻇﺍ
 
-Save ghost
-== ﺢﺒﺸﻟﺍ ﻆﻔﺣ
-
 Enable highlighted chat sound
 == ﻪﻴﺒﻨﺘﻟﺍ ﺕﻮﺻ ﻞﻴﻌﻔﺗ
 
@@ -631,8 +622,6 @@ Reset
 Automatically create statboard csv
 == statboard ﻞﻤﻋ ﻲﺋﺎﻘﻠﺗ
 
-Show tiles layers from BG map
-== ﺔﻴﻔﻠﺨﻟﺍ ﺏﺎﻤﻠﻟ ﺐﻧﺎﺠﺘﻟﺍ ﺕﺎﻘﺒﻃ ﺭﺎﻬﻇﺇ
 
 Remove chat
 == ﺕﺎﺸﻟﺍ ﻑﺬﺣ
@@ -829,9 +818,6 @@ Hammerfly dummy
 Connect Dummy
 == ﺔﻴﻣﺪﻟﺍ ﻝﺎﺧﺩﺍ
 
-Toggle ghost
-== ﺢﺒﺸﻟﺍ ﻊﺿﻭ
-
 Statboard
 == ﺩﺭﻮﺑ ﺕﺎﺘﺳ
 
@@ -947,8 +933,6 @@ Assets directory
 https://wiki.ddnet.org/
 == https://wiki.ddnet.org/
 
-Use current map as background
-== ﺔﻴﻔﻠﺨﻛ ﻲﻟﺎﺤﻟﺍ ﺏﺎﻤﻟﺍ ﻡﺍﺪﺨﺘﺳﺍ
 
 Debug mode enabled. Press Ctrl+Shift+D to disable debug mode.
 == ﺔﻓﺎﻘﻳﻻ Ctrl+Shift+D ﻂﻐﺿﺍ .ﻝﺎﻐﺷ ﻖﻴﻗﺪﺘﻟﺍ ﻊﺿﻭ
@@ -1589,12 +1573,6 @@ maximum
 == 
 
 Loading…
-== 
-
-Loading ghost files
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2312,12 +2290,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
 Opacity
 == 
 
@@ -2342,8 +2314,6 @@ AntiPing: prediction margin
 Background
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

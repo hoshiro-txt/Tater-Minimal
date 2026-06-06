@@ -1,4 +1,4 @@
-"%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
+﻿"%s" is not compatible with pnglite and cannot be loaded by old DDNet versions:
 == "%s" не сумісний з pnglite і не може бути завантажений на старих версіях DDNet:
 
 %.2f KiB
@@ -575,9 +575,6 @@ Enable controller
 Enable game sounds
 == Ігрові звуки
 
-Enable ghost
-== Увімкнути привида
-
 Enable gun sound
 == Звуки пострілів
 
@@ -770,12 +767,6 @@ Getting game info
 Getting server list from master server
 == Отримання списку серверів з головного сервера
 
-Ghost
-== Привид
-
-Ghosts directory
-== Тека привидів
-
 Go back one marker
 == Перемотати до попередньої мітки
 
@@ -964,9 +955,6 @@ Loading commands…
 
 Loading DDNet Client
 == Завантаження клієнта DDNet
-
-Loading ghost files
-== Завантаження файлів привида
 
 Loading map file from storage
 == Завантаження файлу мапи зі сховища
@@ -1277,8 +1265,6 @@ Red team wins!
 Refresh Rate
 == Частота кадрів
 
-Regular background color
-== Колір звичайного тла
 
 [Ingame controller mode]
 Relative
@@ -1367,9 +1353,6 @@ Save
 
 Save changes
 == Зберегти зміни
-
-Save ghost
-== Зберігати привида
 
 Save skin
 == Зберегти скін
@@ -1476,9 +1459,6 @@ Show freeze bars
 Show friends only
 == Показувати лише з друзями
 
-Show ghost
-== Показувати привида
-
 Show health, shields and ammo
 == Показувати здоров’я, захист і набої
 
@@ -1542,8 +1522,6 @@ Show score
 Show text entities
 == Текстові сутності
 
-Show tiles layers from BG map
-== Показувати плитки з мапи фону
 
 Show votes window after voting
 == Показувати голосування навіть після голосу
@@ -1711,9 +1689,6 @@ Toggle dummy
 Toggle dyncam
 == Рухома камера
 
-Toggle ghost
-== Привид
-
 Toggle keyboard shortcuts
 == Перемкнути сполучення
 
@@ -1793,8 +1768,6 @@ Updating…
 Uploading map data to GPU
 == Вивантаження даних мапи до відеокарти
 
-Use current map as background
-== Використовувати поточну мапу як тло
 
 Use k key to kill (restart), q to pause and watch other players. See settings for other key binds.
 == Натисніть «k», щоб умерти (почати спочатку), «q», щоб спостерігати за іншими гравцями. Інші призначення клавіш дивіться у налаштуваннях.
@@ -1858,9 +1831,6 @@ Website
 
 Welcome to DDNet
 == Ласкаво просимо до DDNet
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Коли ви перетинаєте лінію старту, показувати привида, який повторює рухи вашого найкращого забігу
 
 Why are you slowmo replaying to read this?
 == Чому ви переглядаєте це у повторі?

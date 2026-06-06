@@ -3,7 +3,6 @@
 
 #include "gameclient.h"
 
-#include "components/background.h"
 #include "components/binds.h"
 #include "components/broadcast.h"
 #include "components/camera.h"
@@ -16,14 +15,12 @@
 #include "components/effects.h"
 #include "components/emoticon.h"
 #include "components/freezebars.h"
-#include "components/ghost.h"
 #include "components/hud.h"
 #include "components/infomessages.h"
 #include "components/items.h"
 #include "components/mapimages.h"
 #include "components/maplayers.h"
 #include "components/mapsounds.h"
-#include "components/menu_background.h"
 #include "components/menus.h"
 #include "components/motd.h"
 #include "components/nameplates.h"
@@ -129,15 +126,12 @@ void CGameClient::OnConsoleInit()
 					      &m_Rainbow, // TClient
 					      &m_MapSounds,
 					      &m_Censor,
-					      &m_Background, // render instead of m_MapLayersBackground when g_Config.m_ClOverlayEntities == 100
-					      &m_MapLayersBackground, // first to render
 					      &m_BgDraw, // TClient
 					      &m_Particles.m_RenderTrail,
 					      &m_Particles.m_RenderTrailExtra,
 					      &m_Items,
 					      &m_Trails, // TClient
 					      &m_Translate, // TClient
-					      &m_Ghost,
 					      &m_TClient, // TClient (Must be before chat and players)
 					      &m_Players,
 						  &m_MovingTilesBackground, // TClient
@@ -175,8 +169,7 @@ void CGameClient::OnConsoleInit()
 					      &m_Tooltips,
 					      &m_Scripting, // TClient
 					      &m_KeyBinder,
-					      &m_GameConsole,
-					      &m_MenuBackground});
+					      &m_GameConsole});
 
 	// build the input stack
 	m_vpInput.insert(m_vpInput.end(), {&m_KeyBinder, // this will take over all input when we want to bind a key
@@ -288,8 +281,6 @@ void CGameClient::OnConsoleInit()
 	Console()->Chain("events", ConchainRefreshEventSkins, this);
 
 	Console()->Chain("cl_dummy", ConchainSpecialDummy, this);
-
-	Console()->Chain("cl_menu_map", ConchainMenuMap, this);
 }
 
 static void GenerateTimeoutCode(char *pTimeoutCode)
@@ -794,7 +785,7 @@ void CGameClient::UpdatePositions()
 
 void CGameClient::OnRender()
 {
-	const ColorRGBA ClearColor = color_cast<ColorRGBA>(ColorHSLA(g_Config.m_ClOverlayEntities ? g_Config.m_ClBackgroundEntitiesColor : g_Config.m_ClBackgroundColor));
+	const ColorRGBA ClearColor = color_cast<ColorRGBA>(ColorHSLA(g_Config.m_ClBackgroundEntitiesColor));
 	Graphics()->Clear(ClearColor.r, ClearColor.g, ClearColor.b);
 
 	// check if multi view got activated
@@ -1142,7 +1133,6 @@ void CGameClient::OnMessage(int MsgId, CUnpacker *pUnpacker, int Conn, bool Dumm
 		if(i <= 16)
 			m_Teams.m_IsDDRace16 = true;
 
-		m_Ghost.m_AllowRestart = true;
 	}
 	else if(MsgId == NETMSGTYPE_SV_KILLMSG)
 	{
@@ -3075,8 +3065,6 @@ void CGameClient::OnPredict()
 
 	m_PredictedTick = FinalTickRegular;
 
-	if(m_NewPredictedTick)
-		m_Ghost.OnNewPredictedSnapshot();
 }
 
 void CGameClient::OnActivateEditor()
@@ -4024,9 +4012,6 @@ void CGameClient::UpdateRenderedCharacters()
 					Pos = GetFreezePos(i);
 				else if(g_Config.m_TcFastInput && g_Config.m_TcFastInputOthers && !g_Config.m_TcAntiPingImproved)
 					Pos = GetFastInputPos(i);
-
-				if(g_Config.m_TcShowOthersGhosts && g_Config.m_TcSwapGhosts && !(m_aClients[i].m_FreezeEnd > 0 && g_Config.m_TcHideFrozenGhosts))
-					Pos = UnpredPos;
 
 				if(g_Config.m_TcUnpredOthersInFreeze && Client()->m_IsLocalFrozen)
 					Pos = UnpredPos;
@@ -5144,21 +5129,6 @@ void CGameClient::ConMapbug(IConsole::IResult *pResult, void *pUserData)
 	default:
 		dbg_assert_failed("unreachable");
 	}
-}
-
-void CGameClient::ConchainMenuMap(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
-{
-	CGameClient *pSelf = (CGameClient *)pUserData;
-	if(pResult->NumArguments())
-	{
-		if(str_comp(g_Config.m_ClMenuMap, pResult->GetString(0)) != 0)
-		{
-			str_copy(g_Config.m_ClMenuMap, pResult->GetString(0));
-			pSelf->m_MenuBackground.LoadMenuBackground();
-		}
-	}
-	else
-		pfnCallback(pResult, pCallbackUserData);
 }
 
 void CGameClient::DummyResetInput()

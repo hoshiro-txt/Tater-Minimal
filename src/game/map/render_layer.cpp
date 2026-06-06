@@ -546,10 +546,6 @@ void CRenderLayerTile::Render(const CRenderLayerParams &Params)
 
 bool CRenderLayerTile::DoRender(const CRenderLayerParams &Params)
 {
-	// skip rendering if we render background force, but deactivated tile layer and want to render a tilelayer
-	if(!g_Config.m_ClBackgroundShowTilesLayers && Params.m_RenderType == ERenderType::RENDERTYPE_BACKGROUND_FORCE)
-		return false;
-
 	// skip rendering anything but entities if we only want to render entities
 	if(Params.m_EntityOverlayVal == 100 && Params.m_RenderType != ERenderType::RENDERTYPE_BACKGROUND_FORCE)
 		return false;

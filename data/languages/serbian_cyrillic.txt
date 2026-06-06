@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds је преостало
 
 %i minute left
@@ -508,9 +508,6 @@ Personal best:
 Browser
 == Прегледач
 
-Ghost
-== Дух
-
 Loading DDNet Client
 == Учитавам DDNet клијент
 
@@ -700,9 +697,6 @@ Toggle dyncam
 Toggle dummy
 == Пребаци на копију
 
-Toggle ghost
-== Пребаци на духа
-
 Dummy copy
 == Зајед. крет. копије
 
@@ -802,12 +796,6 @@ Default length
 Enable replays
 == Омогући поновљене репродукције
 
-Show ghost
-== Прикажи духа
-
-Save ghost
-== Сачивај духа
-
 Gameplay
 == Игра
 
@@ -835,8 +823,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Прикажи линију судара куке других играча
 
-Show tiles layers from BG map
-== Прикажи слојеве плочица са BG мапе
 
 DDNet %s is available:
 == DDNet %s је доступан:
@@ -1064,9 +1050,6 @@ Getting server list from master server
 Leak IP
 == Провали адресу
 
-Loading ghost files
-== Учитавање духова
-
 Smooth Dynamic Camera
 == Глатка Динамична Камера
 
@@ -1228,9 +1211,6 @@ Normal Color
 Highlight Color
 == Истакнута Боја
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Када кренеш да се тркаш, прикажи твог најбржег духа
-
 Opacity
 == Провидност
 
@@ -1246,8 +1226,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Позадина
 
-Use current map as background
-== Користи ову мапу као позадину
 
 Run on join
 == Уради када уђеш
@@ -1783,9 +1761,6 @@ maximum
 == 
 
 Loading…
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2404,9 +2379,6 @@ Dragger Inner Color
 Set all to Rifle
 == 
 
-Enable ghost
-== 
-
 Only save improvements
 == 
 
@@ -2416,8 +2388,6 @@ Show background quads
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

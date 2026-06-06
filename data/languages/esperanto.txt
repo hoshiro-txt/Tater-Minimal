@@ -1,4 +1,4 @@
-Connected
+﻿Connected
 == Konektita
 
 Loading map file from storage
@@ -75,9 +75,6 @@ Server info
 
 Browser
 == Retumilo
-
-Ghost
-== Fantomo
 
 Call vote
 == Baloti
@@ -888,12 +885,6 @@ Loading…
 Remove
 == Forigi
 
-Loading ghost files
-== Ŝargado de fantomo-dosieroj
-
-Ghosts directory
-== Dosierujo de fantomoj
-
 Activate all
 == Aktivigi ĉiujn
 
@@ -1417,14 +1408,10 @@ Default zoom
 Background
 == Fono
 
-Regular background color
-== Ordinara fona koloro
 
 Entities background color
 == Fona koloro de entoj
 
-Use current map as background
-== Uzi nunan mapon kiel fono
 
 Miscellaneous
 == Aliaj
@@ -1470,9 +1457,6 @@ Zoom in
 
 Zoom out
 == Malzomi
-
-Toggle ghost
-== Baskuligi fantomon
 
 Shotgun
 == Kartoĉa fusilo
@@ -2403,19 +2387,7 @@ Enable replays
 Default length
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
-Show ghost
-== 
-
 Opacity
-== 
-
-Save ghost
 == 
 
 Only save improvements
@@ -2451,8 +2423,6 @@ AntiPing: predict grenade paths
 AntiPing: prediction margin
 == 
 
-Show tiles layers from BG map
-== 
 
 Run on join
 == 

@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %d 초 남음
 
 %i minute left
@@ -493,9 +493,6 @@ Reset
 Browser
 == 브라우저
 
-Ghost
-== 고스트
-
 Loading DDNet Client
 == DDNet 클라이언트 로딩 중
 
@@ -715,9 +712,6 @@ Toggle dyncam
 Toggle dummy
 == 더미 전환
 
-Toggle ghost
-== 고스트 표시
-
 Dummy copy
 == 더미 동시동작
 
@@ -853,12 +847,6 @@ Default length
 Enable replays
 == 리플레이 활성화
 
-Show ghost
-== 고스트 표시
-
-Save ghost
-== 고스트 저장
-
 Gameplay
 == 게임 플레이
 
@@ -892,11 +880,7 @@ Show other players' hook collision lines
 Background
 == 배경
 
-Use current map as background
-== 현재 맵을 배경으로 사용
 
-Show tiles layers from BG map
-== 배경 맵의 타일 레이어 표시
 
 New random timeout code
 == 새로운 무작위 타임아웃 코드 생성
@@ -1091,9 +1075,6 @@ Choose default eyes when joining a server
 Allows maps to render with more detail
 == 맵의 세부사항을 렌더링합니다.
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 출발선을 넘으면 당신의 최고 기록을 재현하는 고스트 Tee가 표시됩니다.
-
 Opacity
 == 불투명도
 
@@ -1236,9 +1217,6 @@ Requesting to join the game
 
 Loading menu images
 == 메뉴 이미지 로딩 중
-
-Loading ghost files
-== 고스트 파일 로딩 중
 
 Loading skin files
 == 스킨 파일 로딩 중
@@ -1504,9 +1482,6 @@ Discard changes
 Loading…
 == 로딩 중…
 
-Ghosts directory
-== 고스트 폴더
-
 [Hertz]
 Hz
 == Hz
@@ -1586,14 +1561,9 @@ Preview 'Hook collisions' being pressed
 Show finish messages
 == 완주 메시지 표시
 
-Enable ghost
-== 고스트 활성화
-
 Only save improvements
 == 향상된 기록만 저장
 
-Regular background color
-== 일반 배경 색상
 
 Entities background color
 == 엔티티 배경 색상

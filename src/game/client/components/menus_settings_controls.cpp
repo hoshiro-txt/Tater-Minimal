@@ -76,7 +76,6 @@ void CMenusSettingsControls::OnInterfacesInit(CGameClient *pClient)
 		{EBindOptionGroup::MOVEMENT, Localizable("Show others"), "say /showothers"},
 		{EBindOptionGroup::MOVEMENT, Localizable("Show all"), "say /showall"},
 		{EBindOptionGroup::MOVEMENT, Localizable("Toggle dyncam"), "toggle cl_dyncam 0 1"},
-		{EBindOptionGroup::MOVEMENT, Localizable("Toggle ghost"), "toggle cl_race_show_ghost 0 1"},
 		{EBindOptionGroup::WEAPON, Localizable("Hammer"), "+weapon1"},
 		{EBindOptionGroup::WEAPON, Localizable("Pistol"), "+weapon2"},
 		{EBindOptionGroup::WEAPON, Localizable("Shotgun"), "+weapon3"},

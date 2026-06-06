@@ -27,7 +27,6 @@
 #include <game/teamscore.h>
 
 // components
-#include "components/background.h"
 #include "components/binds.h"
 #include "components/broadcast.h"
 #include "components/camera.h"
@@ -42,7 +41,6 @@
 #include "components/emoticon.h"
 #include "components/flow.h"
 #include "components/freezebars.h"
-#include "components/ghost.h"
 #include "components/hud.h"
 #include "components/important_alert.h"
 #include "components/infomessages.h"
@@ -52,7 +50,6 @@
 #include "components/mapimages.h"
 #include "components/maplayers.h"
 #include "components/mapsounds.h"
-#include "components/menu_background.h"
 #include "components/menus.h"
 #include "components/motd.h"
 #include "components/nameplates.h"
@@ -199,14 +196,9 @@ public:
 	CItems m_Items;
 	CMapImages m_MapImages;
 
-	CMapLayers m_MapLayersBackground = CMapLayers{ERenderType::RENDERTYPE_BACKGROUND};
 	CMapLayers m_MapLayersForeground = CMapLayers{ERenderType::RENDERTYPE_FOREGROUND};
-	CBackground m_Background;
-	CMenuBackground m_MenuBackground;
 
 	CMapSounds m_MapSounds;
-
-	CGhost m_Ghost;
 
 	CTooltips m_Tooltips;
 
@@ -297,8 +289,6 @@ private:
 	static void ConTuneParam(IConsole::IResult *pResult, void *pUserData);
 	static void ConTuneZone(IConsole::IResult *pResult, void *pUserData);
 	static void ConMapbug(IConsole::IResult *pResult, void *pUserData);
-
-	static void ConchainMenuMap(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 
 	static std::function<bool(int, int, int, int)> GetScoreComparator(bool TimeScore, bool ReceivedMillisecondFinishTimes, bool Race7);
 

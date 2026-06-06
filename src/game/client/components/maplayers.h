@@ -18,9 +18,6 @@ class CMapLayers : public CComponent
 	friend class CScriptRunner;
 	friend class COutlines;
 
-	friend class CBackground;
-	friend class CMenuBackground;
-
 	CLayers *m_pLayers;
 	CMapImages *m_pImages;
 	ERenderType m_Type;

@@ -9,8 +9,6 @@
 
 class CPlayers : public CComponent
 {
-	friend class CGhost;
-
 	void RenderHand6(const CTeeRenderInfo *pInfo, vec2 HandPos, float HandAngle, float Alpha);
 	void RenderHand7(const CTeeRenderInfo *pInfo, vec2 HandPos, float HandAngle, float Alpha);
 
@@ -21,13 +19,6 @@ class CPlayers : public CComponent
 		const CTeeRenderInfo *pRenderInfo,
 		int ClientId,
 		float Intra = 0.f);
-	void RenderPlayerGhost(
-		const CNetObj_Character *pPrevChar,
-		const CNetObj_Character *pPlayerChar,
-		const CTeeRenderInfo *pRenderInfo,
-		int ClientId,
-		float Intra = 0.f);
-
 	void RenderHook(
 		const CNetObj_Character *pPrevChar,
 		const CNetObj_Character *pPlayerChar,

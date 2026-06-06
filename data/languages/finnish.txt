@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds jäljellä
 
 %i minute left
@@ -493,9 +493,6 @@ Reset
 Browser
 == Selain
 
-Ghost
-== Haamu
-
 Loading DDNet Client
 == Ladataan DDNet-asiakasta
 
@@ -721,9 +718,6 @@ Toggle dyncam
 Toggle dummy
 == Vaihda nukkeen
 
-Toggle ghost
-== Vaihda haamu
-
 Lock team
 == Lukitse joukkue
 
@@ -835,12 +829,6 @@ Default length
 Enable replays
 == Luo uudelleentoistoja
 
-Show ghost
-== Näytä haamu
-
-Save ghost
-== Tallenna haamu
-
 Gameplay
 == Peli
 
@@ -868,8 +856,6 @@ Show other players' hook collision lines
 Background
 == Tausta
 
-Use current map as background
-== Käytä nykyistä kenttää taustana
 
 DDNet %s is available:
 == DDNet %s on saatavilla:
@@ -1286,12 +1272,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Loading…
 == Ladataan…
 
-Loading ghost files
-== Ladataan aave-tiedostoja
-
-Ghosts directory
-== Aaveitten kansio
-
 Activate all
 == Aktivoi kaikki
 
@@ -1567,12 +1547,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Aseta kaikki kivääriksi
 
-Enable ghost
-== Ota käyttöön aave
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Kun ylität maaliviivan, näytä aave-tee, joka toistaa parhaan aikasi liikkeet
-
 Opacity
 == Peittävyys
 
@@ -1594,14 +1568,10 @@ Quads are used for background decoration
 Tries to predict other entities to give a feel of low latency
 == Yrittää ennustaa muiden entiteettien liikkeitä antamaan tuntuman pienestä viiveestä
 
-Regular background color
-== Tavallinen taustaväri
 
 Entities background color
 == Entiteettien taustaväri
 
-Show tiles layers from BG map
-== Näytä kartan taustakartan kerrokset
 
 New random timeout code
 == Uusi satunnainen timeout koodi

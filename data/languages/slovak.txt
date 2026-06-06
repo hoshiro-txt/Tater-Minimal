@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == zostáva %ds
 
 %i minute left
@@ -636,9 +636,6 @@ Main menu
 Browser
 == Prehliadač
 
-Ghost
-== Duch
-
 Settings
 == Nastavenie
 
@@ -967,14 +964,8 @@ Pause
 Loading…
 == Načítanie…
 
-Loading ghost files
-== Načítanie súborov duchov
-
 Time
 == Čas
-
-Ghosts directory
-== Adresár duchov
 
 Activate all
 == Aktivovať všetko
@@ -1086,9 +1077,6 @@ Show all
 
 Toggle dyncam
 == Prepnúť dyncam
-
-Toggle ghost
-== Prepnúť ducha
 
 Converse
 == Konverzovať
@@ -1419,20 +1407,8 @@ Enable replays
 Default length
 == Predvolená dĺžka
 
-Enable ghost
-== Povoliť ducha
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Po prekročení štartovej čiary ukázať ducha, ktorý kopíruje pohyby vášho najlepšieho času
-
-Show ghost
-== Ukázať ducha
-
 Opacity
 == Nepriehľadnosť
-
-Save ghost
-== Uložiť ducha
 
 Only save improvements
 == Ukladať iba vylepšenia
@@ -1473,17 +1449,11 @@ AntiPing: predict grenade paths
 Background
 == Pozadie
 
-Regular background color
-== Bežná farba pozadia
 
 Entities background color
 == Farba pozadia entít
 
-Use current map as background
-== Použiť aktuálnu mapu ako pozadie
 
-Show tiles layers from BG map
-== Zobraziť vrstvy dlaždíc z BG mapy
 
 New random timeout code
 == Nový náhodný timeout kód

@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds restantes
 
 %i minute left
@@ -487,9 +487,6 @@ Learn
 Browser
 == Navegador
 
-Ghost
-== Fantasma
-
 Loading DDNet Client
 == Cargando el cliente DDNet
 
@@ -667,9 +664,6 @@ Toggle dyncam
 Toggle dummy
 == Alternar dummy
 
-Toggle ghost
-== Alternar fantasma
-
 Dummy copy
 == Copiar dummy
 
@@ -769,12 +763,6 @@ Default length
 Enable replays
 == Habilitar repeticiones
 
-Show ghost
-== Mostrar fantasma
-
-Save ghost
-== Guardar fantasma
-
 Gameplay
 == Gameplay
 
@@ -805,8 +793,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Mostrar las líneas de colisión de gancho de otros jugadores
 
-Show tiles layers from BG map
-== Mostrar capas de tiles del mapa de fondo
 
 DDNet %s is available:
 == DDNet %s está disponible:
@@ -937,8 +923,6 @@ Use old chat style
 Client message
 == Mensaje de cliente
 
-Use current map as background
-== Usar mapa actual como fondo
 
 Entities
 == Entidades
@@ -1094,9 +1078,6 @@ Choose default eyes when joining a server
 Allows maps to render with more detail
 == Permite que los mapas tengan más detalles
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Cuando cruzas la línea de inicio, se muestra un tee fantasma replicando los movimientos de tu mejor tiempo
-
 Opacity
 == Opacidad
 
@@ -1245,9 +1226,6 @@ Toggle keyboard shortcuts
 
 Menu opened. Press Esc key again to close menu.
 == Menú abierto. Presiona la tecla Esc otra vez para cerrarlo.
-
-Loading ghost files
-== Cargando archivos de fantasma
 
 Loading skin files
 == Cargando archivos de skins
@@ -1522,23 +1500,15 @@ Created
 Netversion
 == Netversion
 
-Ghosts directory
-== Carpeta de Fantasmas
-
 Activate all
 == Activar todo
 
 Deactivate all
 == Desactivar todo
 
-Enable ghost
-== Habilitar fantasma
-
 Only save improvements
 == Solo guardar las mejoras
 
-Regular background color
-== Color del fondo normal
 
 Entities background color
 == Color del fondo de entidades

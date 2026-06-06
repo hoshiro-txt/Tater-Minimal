@@ -12,7 +12,6 @@
 #include <engine/client.h>
 #include <engine/client/checksum.h>
 #include <engine/client/friends.h>
-#include <engine/client/ghost.h>
 #include <engine/client/serverbrowser.h>
 #include <engine/client/updater.h>
 #include <engine/editor.h>
@@ -75,8 +74,6 @@ class CClient : public IClient
 	CHttp m_Http;
 
 	CNetClient m_aNetClient[NUM_CONNS];
-	CGhostRecorder m_GhostRecorder;
-	CGhostLoader m_GhostLoader;
 	CServerBrowser m_ServerBrowser;
 	CUpdater m_Updater;
 	CFriends m_Friends;

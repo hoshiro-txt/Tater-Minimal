@@ -35,12 +35,12 @@ void CMapView::OnMapLoad()
 
 bool CMapView::IsFocused()
 {
-	return GetWorldOffset() == (m_ProofMode.IsModeMenu() ? m_ProofMode.CurrentMenuBackgroundPosition() : vec2(0.0f, 0.0f));
+	return GetWorldOffset() == vec2(0.0f, 0.0f);
 }
 
 void CMapView::Focus()
 {
-	SetWorldOffset(m_ProofMode.IsModeMenu() ? m_ProofMode.CurrentMenuBackgroundPosition() : vec2(0.0f, 0.0f));
+	SetWorldOffset(vec2(0.0f, 0.0f));
 }
 
 void CMapView::RenderGroupBorder()

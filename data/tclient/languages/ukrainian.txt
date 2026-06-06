@@ -183,26 +183,11 @@ Uncertainty duration
 Other
 == Інше
 
-Ghost Tools
-== Інструменти привидів
-
-Show unpredicted ghosts for other players
-== Показувати непередбачуваних привидів для інших гравців
-
-Swap ghosts and normal players
-== Поміняти місцями привидів і гравців
-
 Predicted alpha
 == Прозор. передбач.
 
 Unpredicted alpha
 == Прозор. непередбач.
-
-Hide ghosts of frozen players
-== Прибрати привидів заморожених гравців
-
-Render ghosts as circles
-== Показувати привидів як кола
 
 Player Indicator
 == Індикатор гравців
@@ -781,9 +766,6 @@ Screen center line color
 
 Screen center line width
 == Ширина центральної лінії екрану
-
-Toggle ghosts key
-== Клавіша перемикання привидів
 
 Background Draw
 == Фонове малювання

@@ -1,4 +1,4 @@
-﻿##### authors #####
+##### authors #####
 
 ##### /authors #####
 
@@ -468,28 +468,10 @@ Unfreeze outline color
 Kill outline color
 == 
 
-Ghost Tools
-== 
-
-Show unpredicted ghosts for other players
-== 
-
-Swap ghosts and normal players
-== 
-
 Predicted alpha
 == 
 
 Unpredicted alpha
-== 
-
-Hide ghosts of frozen players
-== 
-
-Render ghosts as circles
-== 
-
-Toggle ghosts key
 == 
 
 Rainbow

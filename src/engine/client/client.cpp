@@ -2876,8 +2876,6 @@ void CClient::Update()
 
 void CClient::RegisterInterfaces()
 {
-	Kernel()->RegisterInterface(static_cast<IGhostRecorder *>(&m_GhostRecorder), false);
-	Kernel()->RegisterInterface(static_cast<IGhostLoader *>(&m_GhostLoader), false);
 	Kernel()->RegisterInterface(static_cast<IServerBrowser *>(&m_ServerBrowser), false);
 #if defined(CONF_AUTOUPDATE)
 	Kernel()->RegisterInterface(static_cast<IUpdater *>(&m_Updater), false);
@@ -2916,8 +2914,6 @@ void CClient::InitInterfaces()
 	m_Friends.Init();
 	m_Foes.Init(true);
 
-	m_GhostRecorder.Init();
-	m_GhostLoader.Init();
 }
 
 void CClient::Run()

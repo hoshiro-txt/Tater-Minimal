@@ -105,7 +105,6 @@ public:
 		static constexpr const char *COMMON_DIRS[] = {
 			"dumps",
 			"editor",
-			"ghosts",
 			"teehistorian"};
 
 		for(const char *pDir : COMMON_DIRS)

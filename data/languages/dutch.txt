@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds over
 
 %i minute left
@@ -484,9 +484,6 @@ Learn
 Browser
 == Verkenner
 
-Ghost
-== Spook
-
 Loading DDNet Client
 == DDNet Client laden
 
@@ -667,9 +664,6 @@ Toggle dyncam
 Toggle dummy
 == Wissel naar dummy
 
-Toggle ghost
-== Spook in/uit
-
 Dummy copy
 == Dummy kopiëren
 
@@ -769,12 +763,6 @@ Default length
 Enable replays
 == Replays aanzetten
 
-Show ghost
-== Laat spook zien
-
-Save ghost
-== Sla spook op
-
 Gameplay
 == Gameplay
 
@@ -805,8 +793,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Laat de hookraaklijn van andere spelers zien
 
-Show tiles layers from BG map
-== Laat tegellagen van achtergrondmap zien
 
 DDNet %s is available:
 == DDNet %s is beschikbaar
@@ -1030,9 +1016,6 @@ Client message
 Preview
 == Voorbeschouwing
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Wanneer je over de startlijn gaat, laat een spook tee zien die jouw beste tijd repliceert
-
 Opacity
 == Opaciteit
 
@@ -1048,8 +1031,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Achtergrond
 
-Use current map as background
-== Gebruik de huidige map als achtergrond
 
 Run on join
 == Loop bij deelnemen
@@ -1548,12 +1529,6 @@ Could not load touch controls from clipboard. See local console for details.
 Loading…
 == Laden…
 
-Loading ghost files
-== Spook-bestanden laden
-
-Ghosts directory
-== Spook-map
-
 Activate all
 == Alles activeren
 
@@ -1803,14 +1778,9 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Stel alles in op Rifle
 
-Enable ghost
-== Spook inschakelen
-
 Only save improvements
 == Alleen verbeteringen opslaan
 
-Regular background color
-== Normale achtergrondkleur
 
 Entities background color
 == Entities-achtergrondkleur

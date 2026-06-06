@@ -1,4 +1,4 @@
-##### language indices #####
+﻿##### language indices #####
 # Format for each language entry:
 # 1. filename (in english)
 # 2. name (in native language)

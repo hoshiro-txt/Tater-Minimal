@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds kaldı
 
 %i minute left
@@ -481,9 +481,6 @@ Learn
 Browser
 == Sunucular
 
-Ghost
-== Hayalet
-
 Loading DDNet Client
 == DDNet İstemcisi Yükleniyor
 
@@ -670,9 +667,6 @@ Toggle dyncam
 Toggle dummy
 == Dummy kullan
 
-Toggle ghost
-== Hayaleti göster
-
 Dummy copy
 == Dummy kopyala
 
@@ -775,12 +769,6 @@ Default length
 Enable replays
 == Tekrar oynatmaları etkinleştir
 
-Show ghost
-== Hayaleti göster
-
-Save ghost
-== Hayaleti kaydet
-
 Gameplay
 == Oyun içi
 
@@ -811,8 +799,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Diğer oyuncuların kanca çizgisini göster
 
-Show tiles layers from BG map
-== Yapı katmanlarını göster
 
 DDNet %s is available:
 == DDNet %s yayınlandı:
@@ -1147,9 +1133,6 @@ Delete folder
 Unable to delete the folder '%s'. Make sure it's empty first.
 == '%s' klasörü silinemiyor. Önce boş olduğundan emin olun.
 
-Loading ghost files
-== Hayalet dosyaları yükleniyor
-
 Menu opened. Press Esc key again to close menu.
 == Menü açıldı. Menüyü kapatmak için Esc tuşuna tekrar basın.
 
@@ -1398,9 +1381,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Hepsini tüfeğe göre ayarla
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Başlangıç çizgisini geçtiğinizde, en iyi sürenizin hareketlerini tekrarlayan bir hayalet tee göster
-
 Opacity
 == Opaklık
 
@@ -1416,8 +1396,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Arka plan
 
-Use current map as background
-== Mevcut haritayı arka plan olarak kullan
 
 Run on join
 == Katılınca çalıştır
@@ -1588,9 +1566,6 @@ Created
 Loading…
 == Yükleniyor…
 
-Ghosts directory
-== Hayalet dizini
-
 Activate all
 == Tümünü etkinleştir
 
@@ -1618,14 +1593,9 @@ Same clan color in scoreboard
 Show finish messages
 == Bitirme mesajlarını göster
 
-Enable ghost
-== Hayaleti etkinleştir
-
 Only save improvements
 == Sadece iyileştirmeleri kaydet
 
-Regular background color
-== Normal arka plan rengi
 
 Entities background color
 == Yapı arka plan rengi

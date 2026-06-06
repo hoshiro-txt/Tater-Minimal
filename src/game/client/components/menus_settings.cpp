@@ -21,7 +21,6 @@
 
 #include <game/client/animstate.h>
 #include <game/client/components/chat.h>
-#include <game/client/components/menu_background.h>
 #include <game/client/components/sounds.h>
 #include <game/client/gameclient.h>
 #include <game/client/skin.h>
@@ -157,21 +156,6 @@ void CMenus::RenderSettingsGeneral(CUIRect MainView)
 			Client()->ViewFile(aBuf);
 		}
 		GameClient()->m_Tooltips.DoToolTip(&s_ConfigButtonId, &ConfigButton, Localize("Open the directory that contains the configuration and user files"));
-
-		CUIRect DirectoryButton;
-		Left.HSplitBottom(20.0f, &Left, &DirectoryButton);
-		Left.HSplitBottom(5.0f, &Left, nullptr);
-		static CButtonContainer s_ThemesButtonId;
-		if(DoButton_Menu(&s_ThemesButtonId, Localize("Themes directory"), 0, &DirectoryButton))
-		{
-			Storage()->GetCompletePath(IStorage::TYPE_SAVE, "themes", aBuf, sizeof(aBuf));
-			Storage()->CreateFolder("themes", IStorage::TYPE_SAVE);
-			Client()->ViewFile(aBuf);
-		}
-		GameClient()->m_Tooltips.DoToolTip(&s_ThemesButtonId, &DirectoryButton, Localize("Open the directory to add custom themes"));
-
-		Left.HSplitTop(20.0f, nullptr, &Left);
-		RenderThemeSelection(Left);
 
 		Right.HSplitTop(10.0f, nullptr, &Right);
 		{
@@ -1475,22 +1459,18 @@ void CMenus::RenderSettings(CUIRect MainView)
 
 	if(g_Config.m_UiSettingsPage == SETTINGS_LANGUAGE)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_LANGUAGE);
 		RenderLanguageSettings(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_GENERAL)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_GENERAL);
 		RenderSettingsGeneral(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_PLAYER)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_PLAYER);
 		RenderSettingsPlayer(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_TEE)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_TEE);
 		if(Client()->IsSixup())
 			RenderSettingsTee7(MainView);
 		else
@@ -1498,42 +1478,34 @@ void CMenus::RenderSettings(CUIRect MainView)
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_APPEARANCE)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_APPEARANCE);
 		RenderSettingsAppearance(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_CONTROLS)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_CONTROLS);
 		m_MenusSettingsControls.Render(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_GRAPHICS)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_GRAPHICS);
 		RenderSettingsGraphics(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_SOUND)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_SOUND);
 		RenderSettingsSound(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_DDNET)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_DDNET);
 		RenderSettingsDDNet(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_ASSETS)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(CMenuBackground::POS_SETTINGS_ASSETS);
 		RenderSettingsCustom(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_TCLIENT)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(13);
 		RenderSettingsTClient(MainView);
 	}
 	else if(g_Config.m_UiSettingsPage == SETTINGS_PROFILES)
 	{
-		GameClient()->m_MenuBackground.ChangePosition(14);
 		RenderSettingsTClientProfiles(MainView);
 	}
 	else
@@ -2743,39 +2715,6 @@ void CMenus::RenderSettingsDDNet(CUIRect MainView)
 	MainView.HSplitBottom(5.0f, &MainView, nullptr);
 #endif
 
-	Right.HSplitTop(20.0f, &Button, &Right);
-	if(DoButton_CheckBox(&g_Config.m_ClRaceGhost, Localize("Enable ghost"), g_Config.m_ClRaceGhost, &Button))
-	{
-		g_Config.m_ClRaceGhost ^= 1;
-	}
-	GameClient()->m_Tooltips.DoToolTip(&g_Config.m_ClRaceGhost, &Button, Localize("When you cross the start line, show a ghost tee replicating the movements of your best time"));
-
-	if(g_Config.m_ClRaceGhost)
-	{
-		Right.HSplitTop(20.0f, &Button, &Right);
-		Button.VSplitMid(&LeftLeft, &Button);
-		if(DoButton_CheckBox(&g_Config.m_ClRaceShowGhost, Localize("Show ghost"), g_Config.m_ClRaceShowGhost, &LeftLeft))
-		{
-			g_Config.m_ClRaceShowGhost ^= 1;
-		}
-		Ui()->DoScrollbarOption(&g_Config.m_ClRaceGhostAlpha, &g_Config.m_ClRaceGhostAlpha, &Button, Localize("Opacity"), 0, 100, &CUi::ms_LinearScrollbarScale, 0u, "%");
-
-		Right.HSplitTop(20.0f, &Button, &Right);
-		if(DoButton_CheckBox(&g_Config.m_ClRaceSaveGhost, Localize("Save ghost"), g_Config.m_ClRaceSaveGhost, &Button))
-		{
-			g_Config.m_ClRaceSaveGhost ^= 1;
-		}
-
-		if(g_Config.m_ClRaceSaveGhost)
-		{
-			Right.HSplitTop(20.0f, &Button, &Right);
-			if(DoButton_CheckBox(&g_Config.m_ClRaceGhostSaveBest, Localize("Only save improvements"), g_Config.m_ClRaceGhostSaveBest, &Button))
-			{
-				g_Config.m_ClRaceGhostSaveBest ^= 1;
-			}
-		}
-	}
-
 	// gameplay
 	CUIRect Gameplay;
 	MainView.HSplitTop(170.0f, &Gameplay, &MainView);
@@ -2874,56 +2813,8 @@ void CMenus::RenderSettingsDDNet(CUIRect MainView)
 
 	ColorRGBA GreyDefault(0.5f, 0.5f, 0.5f, 1);
 
-	static CButtonContainer s_ResetId1;
-	DoLine_ColorPicker(&s_ResetId1, 25.0f, 13.0f, 5.0f, &Background, Localize("Regular background color"), &g_Config.m_ClBackgroundColor, GreyDefault, false);
-
-	static CButtonContainer s_ResetId2;
-	DoLine_ColorPicker(&s_ResetId2, 25.0f, 13.0f, 5.0f, &Background, Localize("Entities background color"), &g_Config.m_ClBackgroundEntitiesColor, GreyDefault, false);
-
-	CUIRect EditBox, ReloadButton;
-	Background.HSplitTop(20.0f, &Label, &Background);
-	Background.HSplitTop(2.0f, nullptr, &Background);
-	Label.VSplitLeft(100.0f, &Label, &EditBox);
-	EditBox.VSplitRight(60.0f, &EditBox, &Button);
-	Button.VSplitMid(&ReloadButton, &Button, 5.0f);
-	EditBox.VSplitRight(5.0f, &EditBox, nullptr);
-
-	Ui()->DoLabel(&Label, Localize("Map"), 14.0f, TEXTALIGN_ML);
-
-	static CLineInput s_BackgroundEntitiesInput(g_Config.m_ClBackgroundEntities, sizeof(g_Config.m_ClBackgroundEntities));
-	Ui()->DoEditBox(&s_BackgroundEntitiesInput, &EditBox, 14.0f);
-
-	static CButtonContainer s_BackgroundEntitiesMapPicker, s_BackgroundEntitiesReload;
-
-	if(Ui()->DoButton_FontIcon(&s_BackgroundEntitiesReload, FontIcon::ARROW_ROTATE_RIGHT, 0, &ReloadButton, BUTTONFLAG_LEFT))
-	{
-		GameClient()->m_Background.LoadBackground();
-	}
-
-	if(Ui()->DoButton_FontIcon(&s_BackgroundEntitiesMapPicker, FontIcon::FOLDER, 0, &Button, BUTTONFLAG_LEFT))
-	{
-		static SPopupMenuId s_PopupMapPickerId;
-		static CPopupMapPickerContext s_PopupMapPickerContext;
-		s_PopupMapPickerContext.m_pMenus = this;
-		s_PopupMapPickerContext.MapListPopulate();
-		Ui()->DoPopupMenu(&s_PopupMapPickerId, Ui()->MouseX(), Ui()->MouseY(), 300.0f, 250.0f, &s_PopupMapPickerContext, PopupMapPicker);
-	}
-
-	Background.HSplitTop(20.0f, &Button, &Background);
-	const bool UseCurrentMap = str_comp(g_Config.m_ClBackgroundEntities, CURRENT_MAP) == 0;
-	static int s_UseCurrentMapId = 0;
-	if(DoButton_CheckBox(&s_UseCurrentMapId, Localize("Use current map as background"), UseCurrentMap, &Button))
-	{
-		if(UseCurrentMap)
-			g_Config.m_ClBackgroundEntities[0] = '\0';
-		else
-			str_copy(g_Config.m_ClBackgroundEntities, CURRENT_MAP);
-		GameClient()->m_Background.LoadBackground();
-	}
-
-	Background.HSplitTop(20.0f, &Button, &Background);
-	if(DoButton_CheckBox(&g_Config.m_ClBackgroundShowTilesLayers, Localize("Show tiles layers from BG map"), g_Config.m_ClBackgroundShowTilesLayers, &Button))
-		g_Config.m_ClBackgroundShowTilesLayers ^= 1;
+	static CButtonContainer s_ResetId;
+	DoLine_ColorPicker(&s_ResetId, 25.0f, 13.0f, 5.0f, &Background, Localize("Entities background color"), &g_Config.m_ClBackgroundEntitiesColor, GreyDefault, false);
 
 	// miscellaneous
 	Miscellaneous.HSplitTop(30.0f, &Label, &Miscellaneous);
@@ -2998,106 +2889,4 @@ void CMenus::RenderSettingsDDNet(CUIRect MainView)
 		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 #endif
-}
-
-CUi::EPopupMenuFunctionResult CMenus::PopupMapPicker(void *pContext, CUIRect View, bool Active)
-{
-	CPopupMapPickerContext *pPopupContext = static_cast<CPopupMapPickerContext *>(pContext);
-	CMenus *pMenus = pPopupContext->m_pMenus;
-
-	static CListBox s_ListBox;
-	s_ListBox.SetActive(Active);
-	s_ListBox.DoStart(20.0f, pPopupContext->m_vMaps.size(), 1, 3, -1, &View, false);
-
-	int MapIndex = 0;
-	for(auto &Map : pPopupContext->m_vMaps)
-	{
-		MapIndex++;
-		const CListboxItem Item = s_ListBox.DoNextItem(&Map, MapIndex == pPopupContext->m_Selection);
-		if(!Item.m_Visible)
-			continue;
-
-		CUIRect Label, Icon;
-		Item.m_Rect.VSplitLeft(20.0f, &Icon, &Label);
-
-		char aLabelText[IO_MAX_PATH_LENGTH];
-		str_copy(aLabelText, Map.m_aFilename);
-		if(Map.m_IsDirectory)
-			str_append(aLabelText, "/", sizeof(aLabelText));
-
-		const char *pIconType;
-		if(!Map.m_IsDirectory)
-		{
-			pIconType = FontIcon::MAP;
-		}
-		else
-		{
-			if(!str_comp(Map.m_aFilename, ".."))
-				pIconType = FontIcon::FOLDER_TREE;
-			else
-				pIconType = FontIcon::FOLDER;
-		}
-
-		pMenus->TextRender()->SetFontPreset(EFontPreset::ICON_FONT);
-		pMenus->TextRender()->SetRenderFlags(ETextRenderFlags::TEXT_RENDER_FLAG_ONLY_ADVANCE_WIDTH | ETextRenderFlags::TEXT_RENDER_FLAG_NO_X_BEARING | ETextRenderFlags::TEXT_RENDER_FLAG_NO_Y_BEARING);
-		pMenus->Ui()->DoLabel(&Icon, pIconType, 12.0f, TEXTALIGN_ML);
-		pMenus->TextRender()->SetRenderFlags(0);
-		pMenus->TextRender()->SetFontPreset(EFontPreset::DEFAULT_FONT);
-
-		pMenus->Ui()->DoLabel(&Label, aLabelText, 10.0f, TEXTALIGN_ML);
-	}
-
-	const int NewSelected = s_ListBox.DoEnd();
-	pPopupContext->m_Selection = NewSelected >= 0 ? NewSelected : -1;
-	if(s_ListBox.WasItemSelected() || s_ListBox.WasItemActivated())
-	{
-		const CMapListItem &SelectedItem = pPopupContext->m_vMaps[pPopupContext->m_Selection];
-
-		if(SelectedItem.m_IsDirectory)
-		{
-			if(!str_comp(SelectedItem.m_aFilename, ".."))
-			{
-				fs_parent_dir(pPopupContext->m_aCurrentMapFolder);
-			}
-			else
-			{
-				str_append(pPopupContext->m_aCurrentMapFolder, "/", sizeof(pPopupContext->m_aCurrentMapFolder));
-				str_append(pPopupContext->m_aCurrentMapFolder, SelectedItem.m_aFilename, sizeof(pPopupContext->m_aCurrentMapFolder));
-			}
-			pPopupContext->MapListPopulate();
-		}
-		else
-		{
-			str_format(g_Config.m_ClBackgroundEntities, sizeof(g_Config.m_ClBackgroundEntities), "%s/%s", pPopupContext->m_aCurrentMapFolder, SelectedItem.m_aFilename);
-			pMenus->GameClient()->m_Background.LoadBackground();
-			return CUi::POPUP_CLOSE_CURRENT;
-		}
-	}
-
-	return CUi::POPUP_KEEP_OPEN;
-}
-
-void CMenus::CPopupMapPickerContext::MapListPopulate()
-{
-	m_vMaps.clear();
-	char aTemp[IO_MAX_PATH_LENGTH];
-	str_format(aTemp, sizeof(aTemp), "maps/%s", m_aCurrentMapFolder);
-	m_pMenus->Storage()->ListDirectoryInfo(IStorage::TYPE_ALL, aTemp, MapListFetchCallback, this);
-	std::stable_sort(m_vMaps.begin(), m_vMaps.end(), CompareFilenameAscending);
-	m_Selection = -1;
-}
-
-int CMenus::CPopupMapPickerContext::MapListFetchCallback(const CFsFileInfo *pInfo, int IsDir, int StorageType, void *pUser)
-{
-	CPopupMapPickerContext *pRealUser = (CPopupMapPickerContext *)pUser;
-	if((!IsDir && !str_endswith(pInfo->m_pName, ".map")) || !str_comp(pInfo->m_pName, ".") || (!str_comp(pInfo->m_pName, "..") && (!str_comp(pRealUser->m_aCurrentMapFolder, ""))))
-		return 0;
-
-	CMapListItem Item;
-	str_copy(Item.m_aFilename, pInfo->m_pName);
-	Item.m_IsDirectory = IsDir;
-
-	pRealUser->m_vMaps.emplace_back(Item);
-
-	return 0;
 }

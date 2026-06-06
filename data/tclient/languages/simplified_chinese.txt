@@ -186,26 +186,11 @@ Uncertainty duration
 Other
 == 其他
 
-Ghost Tools
-== 影子工具
-
-Show unpredicted ghosts for other players
-== 显示其他玩家未预测的影子
-
-Swap ghosts and normal players
-== 切换影子和玩家显示的优先级
-
 Predicted alpha
 == 预测透明度
 
 Unpredicted alpha
 == 未预测透明度
-
-Hide ghosts of frozen players
-== 隐藏被冻结玩家的影子
-
-Render ghosts as circles
-== 将影子显示为圆圈
 
 Player Indicator
 == 玩家指示器
@@ -703,9 +688,6 @@ Writing item %d failed
 [bgdraw]
 Written %d items
 == 写入了 %d 项
-
-Toggle ghosts key
-== 切换影子键
 
 Bind Wheel Key
 == 唤出滚轮绑键

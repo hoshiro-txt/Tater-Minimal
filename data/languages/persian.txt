@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds ﻩﺪﻧﺎﻣ ﯽﻗﺎﺑ
 
 %i minute left
@@ -297,9 +297,6 @@ Server info
 
 Browser
 == ﻮﺠﺘﺴﺟ
-
-Ghost
-== ﺡﻭﺭ ﺖﻟﺎﺣ
 
 Loading DDNet Client
 == ﺖﻨﯾﺪﯾﺩ ﺖﻨﯾﻼﮐ ﻥﺩﺮﮐ ﻩﺩﺎﻣﺁ ﻝﺎﺣﺭﺩ
@@ -902,9 +899,6 @@ Toggle keyboard shortcuts
 Fetch Info
 == ﺕﺎﻋﻼﻃﺍ ﯽﺸﮐﺍﻭ
 
-Loading ghost files
-== ﺡﻭﺭ ﯼﺎﻫ ﻞﯾﺎﻓ ﻥﺩﺮﮐ ﻩﺩﺎﻣﺁ ﻝﺎﺣ ﺭﺩ
-
 Menu opened. Press Esc key again to close menu.
 == .ﺩﻮﺷ ﻪﺘﺴﺑ ﻮﻨﻣ ﺎﺗ ﺪﯿﻫﺩ ﺭﺎﺸﻓ ﺍﺭ Esc ﺪﯿﻠﮐ ﻩﺭﺎﺑﻭﺩ ﺪﺷ ﺯﺎﺑ ﻮﻨﻣ
 
@@ -955,9 +949,6 @@ Open the directory to add custom skins
 
 Hook collisions
 == ﺏﻼﻗ ﯼﺎﻫ ﺩﺭﻮﺧﺮﺑ
-
-Toggle ghost
-== ﺡﻭﺭ ﺖﻟﺎﺣ ﻥﺩﺮﮐ ﻦﺷﻭﺭ
 
 Dummy copy
 == ﯽﭙﮐ ﯽﻣﺍﺩ
@@ -1231,15 +1222,6 @@ Set all to Rifle
 Default length
 == ﺽﺮﻓ‌ﺶﯿﭘ ﻝﻮﻃ
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== ﺪﻨﮐ ﯽﻣ ﺭﺍﺮﮑﺗ ﺍﺭ ﺎﻤﺷ ﻥﺎﻣﺯ ﻦﯾﺮﺘﻬﺑ ﺕﺎﮐﺮﺣ ﻪﮐ ﻩﺪﺑ ﺶﯾﺎﻤﻧ ﺍﺭ ﺡﻭﺭ ،ﺪﯿﻨﮐ ﯽﻣ ﺭﻮﺒﻋ ﻉﻭﺮﺷ ﻂﺧ ﺯﺍ ﻪﮐ ﯽﻣﺎﮕﻨﻫ
-
-Show ghost
-== ﺡﻭﺭ ﺶﯾﺎﻤﻧ
-
-Save ghost
-== ﺡﻭﺭ ﯼ ﻩﺮﯿﺧﺫ
-
 Overlay entities
 == ﺎﻫ ﺖﯾﺩﻮﺟﻮﻣ ﯽﻧﺎﺷﻮﭙﻤﻫ
 
@@ -1270,11 +1252,7 @@ AntiPing: predict weapons
 AntiPing: predict grenade paths
 == ﺎﻫ ﮏﺠﻧﺭﺎﻧ ﺮﯿﺴﻣ ﯽﻨﯿﺑ‌ﺶﯿﭘ AntiPing:
 
-Use current map as background
-== ﺪﯿﻨﮐ ﻩﺩﺎﻔﺘﺳﺍ ﻪﻨﯿﻣﺯ ﺲﭘ ﻥﺍﻮﻨﻋ ﻪﺑ ﯽﻠﻌﻓ ﻪﺸﻘﻧ ﺯﺍ
 
-Show tiles layers from BG map
-== BG ﭗﻣ ﺯﺍﺎﻫ ﯽﺷﺎﮐ ﯼﺎﻫ ﻪﯾﻻ ﺶﯾﺎﻤﻧ
 
 New random timeout code
 == ﺪﯾﺪﺟ ﯽﻓﺩﺎﺼﺗ ﺕﻭﺍﻢﯾﺎﺗ ﺪﮐ
@@ -1607,9 +1585,6 @@ Please wait…
 Loading…
 == ىﺮﯿﮔﺭﺎﺑ ﻝﺎﺣ ﺭﺩ…
 
-Ghosts directory
-== ﯽﻠﺒﻗ ىﺎﻫ ﻥﺍﺭ ﺖﺴﯿﻟ ىﺭﻮﺘﻛﺮﯾﺍﺩﯽﻠﺒﻗ ىﺎﻫ ﻥﺍﺭ ﺖﺴﯿﻟ ىﺭﻮﺘﻛﺮﯾﺍﺩ
-
 Activate all
 == ﻪﻤﻫ ىﺯﺎﺳ ﻝﺎﻌﻓ
 
@@ -1680,14 +1655,9 @@ Always show other players' hook collision lines
 Show finish messages
 == ﭗﻣ ﻥﺎﯾﺎﭘ ىﺎﻫ ﻡﺎﯿﭘ ﺶﯾﺎﻤﻧ
 
-Enable ghost
-== ﺡﻭﺭ ﺖﻟﺎﺣ ىﺯﺎﺳ ﻝﺎﻌﻓ
-
 Only save improvements
 == ﺩﻮﺷ ﻩﺮﯿﺧﺫ ﺎﻫ ﺩﻮﺒﻬﺑ ﻂﻘﻓ
 
-Regular background color
-== ﻢﻈﻨﻣ ﻪﻨﯿﻣﺯ ﺲﭘ ﮓﻧﺭ
 
 Entities background color
 == ﺎﻫ ﺖﯾﺩﻮﺟﻮﻣ ﻪﻨﯿﻣﺯ ﺲﭘ ﮓﻧﺭ

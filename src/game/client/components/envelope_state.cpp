@@ -39,7 +39,7 @@ void CEnvelopeState::EnvelopeEval(int TimeOffsetMillis, int EnvelopeIndex, Color
 
 	nanoseconds Time;
 
-	// offline rendering (like menu background) relies on local time
+	// offline rendering relies on local time
 	if(!m_OnlineOnly)
 	{
 		Time = time_get_nanoseconds();

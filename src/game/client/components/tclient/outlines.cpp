@@ -136,8 +136,6 @@ void COutlines::OnRender()
 {
 	if(!m_pMapData)
 		return;
-	if(GameClient()->m_MapLayersBackground.m_OnlineOnly && Client()->State() != IClient::STATE_ONLINE)
-		return;
 	if(!g_Config.m_ClOverlayEntities && g_Config.m_TcOutlineEntities)
 		return;
 	if(!g_Config.m_TcOutline)

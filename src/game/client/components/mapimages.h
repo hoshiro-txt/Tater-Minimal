@@ -35,9 +35,6 @@ constexpr const char *const gs_apModEntitiesNames[] = {
 
 class CMapImages : public CComponent, public IMapImages
 {
-	friend class CBackground;
-	friend class CMenuBackground;
-
 	IGraphics::CTextureHandle m_aTextures[MAX_MAPIMAGES];
 	int m_Count;
 

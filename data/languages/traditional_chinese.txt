@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == 還剩 %d 秒
 
 %i minute left
@@ -550,15 +550,6 @@ Normal message
 Friend message
 == 好友訊息
 
-Ghost
-== 影子
-
-Show ghost
-== 顯示影子
-
-Save ghost
-== 儲存影子
-
 Gameplay
 == 遊戲
 
@@ -583,8 +574,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == 顯示其他玩家的鉤索輔助線
 
-Show tiles layers from BG map
-== 顯示實體層背景地圖的圖塊層
 
 DDNet %s is available:
 == DDNet %s 現已可用：
@@ -823,9 +812,6 @@ Hammerfly dummy
 Default length
 == 預設長度
 
-Toggle ghost
-== 影子記錄開關
-
 Kill
 == 自殺
 
@@ -980,8 +966,6 @@ Assets
 Use old chat style
 == 原始聊天框
 
-Use current map as background
-== 使用當前地圖作爲實體層背景地圖
 
 Entities
 == 實體層
@@ -1099,9 +1083,6 @@ Choose default eyes when joining a server
 
 Allows maps to render with more detail
 == 允許地圖渲染更多細節
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 當越過起跑線時，游戲裏將有影子回放你的最佳成績
 
 Opacity
 == 不透明度
@@ -1245,9 +1226,6 @@ Requesting to join the game
 
 Loading menu images
 == 正在載入主選單圖片
-
-Loading ghost files
-== 正在載入影子檔案
 
 Loading skin files
 == 正在載入外觀檔案
@@ -1531,23 +1509,15 @@ Created
 Netversion
 == Netversion
 
-Ghosts directory
-== 影子目錄
-
 Activate all
 == 全部啟用
 
 Deactivate all
 == 全部停用
 
-Enable ghost
-== 啟用影子
-
 Only save improvements
 == 只儲存更佳記錄
 
-Regular background color
-== 原圖層背景顏色
 
 Entities background color
 == 實體層背景顏色

@@ -383,14 +383,12 @@ protected:
 	static void ConchainFavoritesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainCommunitiesUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainUiPageUpdate(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
-	static void ConchainBackgroundEntities(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	static void ConchainUpdateMusicState(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData);
 	void UpdateMusicState();
 
 	// found in menus_settings.cpp
 	void RenderLanguageSettings(CUIRect MainView);
 	bool RenderLanguageSelection(CUIRect MainView);
-	void RenderThemeSelection(CUIRect MainView);
 	void RenderSettingsGeneral(CUIRect MainView);
 	void RenderSettingsPlayer(CUIRect MainView);
 	void RenderSettingsTee(CUIRect MainView);
@@ -410,36 +408,6 @@ protected:
 
 	std::vector<CButtonContainer> m_vButtonContainersNamePlateShow = {{}, {}, {}, {}};
 	std::vector<CButtonContainer> m_vButtonContainersNamePlateKeyPresses = {{}, {}, {}, {}};
-
-	class CMapListItem
-	{
-	public:
-		char m_aFilename[IO_MAX_PATH_LENGTH];
-		bool m_IsDirectory;
-	};
-	class CPopupMapPickerContext
-	{
-	public:
-		std::vector<CMapListItem> m_vMaps;
-		char m_aCurrentMapFolder[IO_MAX_PATH_LENGTH] = "";
-		static int MapListFetchCallback(const CFsFileInfo *pInfo, int IsDir, int StorageType, void *pUser);
-		void MapListPopulate();
-		CMenus *m_pMenus;
-		int m_Selection;
-	};
-
-	static bool CompareFilenameAscending(const CMapListItem Lhs, const CMapListItem Rhs)
-	{
-		if(str_comp(Lhs.m_aFilename, "..") == 0)
-			return true;
-		if(str_comp(Rhs.m_aFilename, "..") == 0)
-			return false;
-		if(Lhs.m_IsDirectory != Rhs.m_IsDirectory)
-			return Lhs.m_IsDirectory;
-		return str_comp_filenames(Lhs.m_aFilename, Rhs.m_aFilename) < 0;
-	}
-
-	static CUi::EPopupMenuFunctionResult PopupMapPicker(void *pContext, CUIRect View, bool Active);
 
 	void SetNeedSendInfo();
 	void UpdateColors();
@@ -489,7 +457,6 @@ public:
 
 		PAGE_SETTINGS,
 		PAGE_NETWORK,
-		PAGE_GHOST,
 
 		PAGE_LENGTH,
 	};
@@ -547,45 +514,6 @@ public:
 
 	// DDRace
 	int DoButton_CheckBox_Tristate(const void *pId, const char *pText, TRISTATE Checked, const CUIRect *pRect);
-	// Ghost
-	struct CGhostItem
-	{
-		char m_aFilename[IO_MAX_PATH_LENGTH];
-		char m_aPlayer[MAX_NAME_LENGTH];
-
-		bool m_Failed;
-		int m_Time;
-		int m_Slot;
-		bool m_Own;
-		time_t m_Date;
-
-		CGhostItem() :
-			m_Slot(-1), m_Own(false) { m_aFilename[0] = 0; }
-
-		bool operator<(const CGhostItem &Other) const { return m_Time < Other.m_Time; }
-
-		bool Active() const { return m_Slot != -1; }
-		bool HasFile() const { return m_aFilename[0]; }
-	};
-
-	enum
-	{
-		GHOST_SORT_NONE = -1,
-		GHOST_SORT_NAME,
-		GHOST_SORT_TIME,
-		GHOST_SORT_DATE,
-	};
-
-	std::vector<CGhostItem> m_vGhosts;
-
-	std::chrono::nanoseconds m_GhostPopulateStartTime{0};
-
-	void GhostlistPopulate();
-	CGhostItem *GetOwnGhost();
-	void UpdateOwnGhost(CGhostItem Item);
-	void DeleteGhostItem(int Index);
-	void SortGhostlist();
-
 	bool CanDisplayWarning() const;
 
 	void PopupWarning(const char *pTopic, const char *pBody, const char *pButton, std::chrono::nanoseconds Duration);
@@ -628,8 +556,6 @@ private:
 	friend CMenusSettingsControls;
 	CMenusStart m_MenusStart;
 
-	static int GhostlistFetchCallback(const CFsFileInfo *pInfo, int IsDir, int StorageType, void *pUser);
-
 	// found in menus_ingame.cpp
 	void RenderGame(CUIRect MainView);
 	void RenderPlayers(CUIRect MainView);
@@ -640,7 +566,6 @@ private:
 	void RenderServerControl(CUIRect MainView);
 	void RenderInGameNetwork(CUIRect MainView);
 	void RenderIngameHint();
-	void RenderGhost(CUIRect MainView);
 	void PopupConfirmDisconnect();
 	void PopupConfirmDisconnectDummy();
 	void PopupConfirmDiscardTouchControlsChanges();

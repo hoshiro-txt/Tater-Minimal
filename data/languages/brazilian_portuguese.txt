@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == Faltam %ds
 
 %i minute left
@@ -448,14 +448,8 @@ FSAA samples
 Reconnect in %d sec
 == Reconectar em %d segundos
 
-Save ghost
-== Salvar fantasma
-
 Show kill messages
 == Mostrar mensagens de kill
-
-Show ghost
-== Mostrar fantasma
 
 Clan plates size
 == Tamanho da placa do clã
@@ -529,17 +523,12 @@ Enable gun sound
 Team message
 == Mensagem do time
 
-Show tiles layers from BG map
-== Mostrar camadas de tiles de mapas
 
 Are you sure that you want to disconnect?
 == Tem certeza que deseja se desconectar?
 
 Types
 == Tipos
-
-Ghost
-== Fantasma
 
 Remove chat
 == Remover chat
@@ -811,9 +800,6 @@ Size
 Statboard
 == Statboard
 
-Toggle ghost
-== Ativar fantasma
-
 Pause
 == Pausar
 
@@ -938,8 +924,6 @@ Background music volume
 Assets
 == Recursos
 
-Use current map as background
-== Usar o mapa atual como plano de fundo
 
 Entities
 == Entidades
@@ -1094,9 +1078,6 @@ Choose default eyes when joining a server
 Allows maps to render with more detail
 == Permite que os mapas renderizem com mais detalhes
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Ao cruzar a linha de partida, mostra um tee fantasma replicando os movimentos do seu melhor tempo
-
 Opacity
 == Opacidade
 
@@ -1239,9 +1220,6 @@ Requesting to join the game
 
 Loading menu images
 == Carregando imagens de menu
-
-Loading ghost files
-== Carregando arquivos de fantasma
 
 Loading skin files
 == Carregando arquivos de skins
@@ -1522,23 +1500,15 @@ Created
 Netversion
 == Netversion
 
-Ghosts directory
-== Diretório de fantasmas
-
 Activate all
 == Ativar tudo
 
 Deactivate all
 == Desativar tudo
 
-Enable ghost
-== Habilitar fantasma
-
 Only save improvements
 == Salvar somente melhorias
 
-Regular background color
-== Cor de fundo regular
 
 Entities background color
 == Cor de fundo de entidades

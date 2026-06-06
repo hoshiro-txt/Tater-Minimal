@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds restantes
 
 %i minute left
@@ -487,9 +487,6 @@ Learn
 Browser
 == Navegador
 
-Ghost
-== Pantasma
-
 Loading DDNet Client
 == Cargando o cliente DDNet
 
@@ -667,9 +664,6 @@ Toggle dyncam
 Toggle dummy
 == Alternar dummy
 
-Toggle ghost
-== Alternar pantasma
-
 Dummy copy
 == Copiar dummy
 
@@ -766,12 +760,6 @@ Normal message
 Enable replays
 == Habilitar repeticiones
 
-Show ghost
-== Mostrar pantasma
-
-Save ghost
-== Guardar pantasma
-
 Gameplay
 == Gameplay
 
@@ -802,8 +790,6 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Mostrar as liñas de colisión de gancho doutros xogadores
 
-Show tiles layers from BG map
-== Mostrar capas de tiles do mapa de fondo
 
 DDNet %s is available:
 == DDNet %s está dispoñible:
@@ -934,8 +920,6 @@ Use old chat style
 Client message
 == Mensaxe do cliente
 
-Use current map as background
-== Usar mapa actual como fondo
 
 Entities
 == Entidades
@@ -1091,9 +1075,6 @@ Choose default eyes when joining a server
 Allows maps to render with more detail
 == Permite que os mapas teñan máis detalles
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Cando cruzas a liña de inicio, móstrase un tee pantasma replicando os movementos do teu mellor tempo
-
 Opacity
 == Opacidade
 
@@ -1234,9 +1215,6 @@ Toggle keyboard shortcuts
 
 Menu opened. Press Esc key again to close menu.
 == Menú aberto. Presiona a tecla Esc outra vez para pechalo.
-
-Loading ghost files
-== Cargando arquivos de pantasma
 
 Loading skin files
 == Cargando arquivos de skins
@@ -1845,9 +1823,6 @@ maximum
 Loading…
 == 
 
-Ghosts directory
-== 
-
 Activate all
 == 
 
@@ -2419,9 +2394,6 @@ Dragger Inner Color
 Default length
 == 
 
-Enable ghost
-== 
-
 Only save improvements
 == 
 
@@ -2431,8 +2403,6 @@ Show background quads
 AntiPing: prediction margin
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 

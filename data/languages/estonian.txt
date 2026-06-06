@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %ds jäänud
 
 %i minute left
@@ -493,9 +493,6 @@ Reset
 Browser
 == Brauser
 
-Ghost
-== Kummitus
-
 Loading DDNet Client
 == DDNet Kliendi laadimine
 
@@ -721,9 +718,6 @@ Toggle dyncam
 Toggle dummy
 == Lülita dummy
 
-Toggle ghost
-== Lülita kummitus
-
 Lock team
 == Lukusta tiim
 
@@ -835,12 +829,6 @@ Default length
 Enable replays
 == Kasuta kordusi
 
-Show ghost
-== Näita kummitust
-
-Save ghost
-== Salvesta kummitus
-
 Gameplay
 == Mäng
 
@@ -868,8 +856,6 @@ Show other players' hook collision lines
 Background
 == Tagataust
 
-Use current map as background
-== Kasuta praegust kaarti tagataustana
 
 DDNet %s is available:
 == DDNet %s on saadaval:
@@ -1283,12 +1269,6 @@ Unable to delete the folder '%s'. Make sure it's empty first.
 Loading…
 == Laadimine…
 
-Loading ghost files
-== Kummitus failide laadimine
-
-Ghosts directory
-== Kummituse asukoht
-
 Activate all
 == Aktiveeri kõik
 
@@ -1543,12 +1523,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Seadke Kõik Laserpüssiks
 
-Enable ghost
-== Kasuta kummitust
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Kui ületate stardijoone, näidake kummitus-teed, mis kordab teie parima aja liigutusi
-
 Opacity
 == Läbipaistvus
 
@@ -1570,14 +1544,10 @@ Quads are used for background decoration
 Tries to predict other entities to give a feel of low latency
 == Üritab ennustada teisi üksuseid, et anda madala latentsuse tunne
 
-Regular background color
-== Normaalne tagatausta värv
 
 Entities background color
 == Üksuste tagatausta värv
 
-Show tiles layers from BG map
-== Näita plaate tausta kaardist
 
 New random timeout code
 == Uus suvaline timeout kood

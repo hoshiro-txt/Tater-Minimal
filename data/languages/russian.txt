@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == осталось %d сек
 
 %i minute left
@@ -460,9 +460,6 @@ Reset
 Search
 == Поиск
 
-Ghost
-== Тень
-
 Countries
 == Страны
 
@@ -520,9 +517,6 @@ LAN
 Name plates size
 == Размер имён
 
-Show ghost
-== Показывать тень
-
 No updates available
 == Нет доступных обновлений
 
@@ -576,9 +570,6 @@ Connecting dummy
 
 Update now
 == Обновить сейчас
-
-Save ghost
-== Сохранять тень
 
 DDNet Client updated!
 == DDNet клиент обновлён!
@@ -733,9 +724,6 @@ Toggle dyncam
 Toggle dummy
 == Переключение дамми
 
-Toggle ghost
-== Переключить тень
-
 Dummy copy
 == Повт. движений
 
@@ -808,8 +796,6 @@ AntiPing: predict weapons
 AntiPing: predict grenade paths
 == Предсказывать траекторию гранат
 
-Show tiles layers from BG map
-== Показывать тайловые слои фона
 
 DDNet %s is available:
 == Доступен DDNet %s:
@@ -965,8 +951,6 @@ Assets
 Use old chat style
 == Использовать старый чат
 
-Use current map as background
-== Использовать данную карту как фон
 
 Emoticons
 == Эмоции
@@ -1186,9 +1170,6 @@ Normal Color
 Highlight Color
 == Цвет выделения
 
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Показывать тень, повторяющую лучшее прохождение, при пересечении стартовой линии
-
 Opacity
 == Прозр.
 
@@ -1239,9 +1220,6 @@ Requesting to join the game
 
 Loading menu images
 == Загрузка изображений меню
-
-Loading ghost files
-== Загрузка файлов тени
 
 Loading skin files
 == Загрузка файлов скинов
@@ -1525,23 +1503,15 @@ Created
 Netversion
 == Версия сети
 
-Ghosts directory
-== Папка теней
-
 Activate all
 == Активировать все
 
 Deactivate all
 == Отключить все
 
-Enable ghost
-== Включить тень
-
 Only save improvements
 == Сохранять только лучшее
 
-Regular background color
-== Обычный цвет фона
 
 Entities background color
 == Цвет фона при наложении

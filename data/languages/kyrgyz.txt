@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %d сек. калды
 
 %i minute left
@@ -749,9 +749,6 @@ Main menu
 Browser
 == 
 
-Ghost
-== 
-
 Reconnect in %d sec
 == 
 
@@ -1245,13 +1242,7 @@ maximum
 Loading…
 == 
 
-Loading ghost files
-== 
-
 Time
-== 
-
-Ghosts directory
 == 
 
 Activate all
@@ -2122,19 +2113,7 @@ Enable replays
 Default length
 == 
 
-Enable ghost
-== 
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== 
-
-Show ghost
-== 
-
 Opacity
-== 
-
-Save ghost
 == 
 
 Only save improvements
@@ -2188,17 +2167,11 @@ AntiPing: prediction margin
 Background
 == 
 
-Regular background color
-== 
 
 Entities background color
 == 
 
-Use current map as background
-== 
 
-Show tiles layers from BG map
-== 
 
 New random timeout code
 == 
@@ -2276,9 +2249,6 @@ Show all
 == 
 
 Toggle dyncam
-== 
-
-Toggle ghost
 == 
 
 Converse

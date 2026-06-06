@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == faltam %ds
 
 %i minute left
@@ -487,9 +487,6 @@ Countries
 Show kill messages
 == Mostrar mensagens de morte
 
-Show ghost
-== Mostrar fantasma
-
 DDNet
 == DDNet
 
@@ -549,9 +546,6 @@ Are you sure that you want to disconnect?
 
 Types
 == Tipos
-
-Ghost
-== Fantasma
 
 Remove chat
 == Remover o chat
@@ -621,9 +615,6 @@ Update now
 
 Show clan above name plates
 == Mostrar o nome do clã por cima dos nomes
-
-Save ghost
-== Guardar fantasma
 
 Exclude
 == Excluir
@@ -1322,12 +1313,6 @@ Could not load touch controls from clipboard. See local console for details.
 Loading…
 == A carregar…
 
-Loading ghost files
-== A carregar ficheiros de fantasma
-
-Ghosts directory
-== Diretório de fantasmas
-
 Activate all
 == Ativar todos
 
@@ -1403,9 +1388,6 @@ Show all
 
 Toggle dyncam
 == Câmara dinâmica
-
-Toggle ghost
-== Fantasma
 
 Converse
 == Conversar
@@ -1694,12 +1676,6 @@ Enable replays
 Default length
 == Duração predefinida
 
-Enable ghost
-== Ativar fantasma
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Quando cruzares a linha de partida, mostra um tee fantasma a replicar os movimentos do teu melhor tempo
-
 Opacity
 == Opacidade
 
@@ -1724,17 +1700,11 @@ Quads are used for background decoration
 Tries to predict other entities to give a feel of low latency
 == Tenta prever outras entidades para dar a sensação de baixa latência
 
-Regular background color
-== Cor de fundo regular
 
 Entities background color
 == Cor de fundo das entidades
 
-Use current map as background
-== Usar o mapa atual como fundo
 
-Show tiles layers from BG map
-== Mostar camadas de blocos do mapa de fundo
 
 Run on join
 == Correr ao entrar

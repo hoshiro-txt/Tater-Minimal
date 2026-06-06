@@ -1,4 +1,4 @@
-%ds left
+﻿%ds left
 == %d sekunder tilbage
 
 %i minute left
@@ -487,9 +487,6 @@ Personal best:
 Browser
 == Browser
 
-Ghost
-== Spøgelse
-
 Loading DDNet Client
 == Indlæser DDNet Klient
 
@@ -700,9 +697,6 @@ Toggle dyncam
 Toggle dummy
 == Skift dummy
 
-Toggle ghost
-== Skift spøgelse
-
 Dummy copy
 == Skift kopi
 
@@ -820,12 +814,6 @@ Default length
 Enable replays
 == Aktivér gentagelser
 
-Show ghost
-== Vis spøgelse
-
-Save ghost
-== Gem spøgelse
-
 Gameplay
 == Gameplay
 
@@ -856,11 +844,7 @@ AntiPing: predict grenade paths
 Show other players' hook collision lines
 == Vis andre spillers hook kollisionslinjer
 
-Use current map as background
-== Brug den aktuelle bane som baggrund
 
-Show tiles layers from BG map
-== Vis fliselag fra baggrundsbanen
 
 DDNet %s is available:
 == DDNet %s er tilgængelig:
@@ -1526,12 +1510,6 @@ maximum
 Loading…
 == Indlæser…
 
-Loading ghost files
-== Indlæser spøgelsesfiler
-
-Ghosts directory
-== Spøgelses bibliotek
-
 Activate all
 == Aktiver alle
 
@@ -1845,12 +1823,6 @@ Freeze Laser Inner Color
 Set all to Rifle
 == Indstil alt til Riffel
 
-Enable ghost
-== Aktiver spøgelse
-
-When you cross the start line, show a ghost tee replicating the movements of your best time
-== Når du krydser startlinjen, vis en spøgelses tee, der gentager bevægelserne fra din bedste tid
-
 Opacity
 == Opacitet
 
@@ -1869,8 +1841,6 @@ Tries to predict other entities to give a feel of low latency
 Background
 == Baggrund
 
-Regular background color
-== Normal baggrundsfarve
 
 Entities background color
 == Enheders baggrundsfarve
